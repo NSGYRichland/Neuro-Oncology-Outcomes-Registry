@@ -1,0 +1,69 @@
+﻿@model IEnumerable<TumorTaskforce_Research.patient>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Last_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sex_Male)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Diagnosis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.record.Record_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.record1.Record_ID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.First_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Last_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sex_Male)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Diagnosis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.record.Record_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.record1.Record_ID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.patients_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.patients_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.patients_ID })
+        </td>
+    </tr>
+}
+
+</table>

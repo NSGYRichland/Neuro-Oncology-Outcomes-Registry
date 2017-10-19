@@ -1,0 +1,26 @@
+﻿@model TumorTaskforce_Research.record
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>record</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.record_type1.RecordType_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.record_type1.RecordType_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Record_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

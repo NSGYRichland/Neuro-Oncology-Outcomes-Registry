@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="healthModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="applied_treatments">
+          <Key>
+            <PropertyRef Name="AppliedTreatments_ID" />
+          </Key>
+          <Property Name="AppliedTreatments_ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Patient_ID" Type="uint" Nullable="false" />
+          <Property Name="GlobalTreatment_ID" Type="uint" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Effect" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patients">
+          <Key>
+            <PropertyRef Name="patients_ID" />
+          </Key>
+          <Property Name="patients_ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="Sex_Male" Type="tinyint" Nullable="false" />
+          <Property Name="Diagnosis" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Medical_Record" Type="uint" Nullable="false" />
+          <Property Name="Family_History" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="record">
+          <Key>
+            <PropertyRef Name="Record_ID" />
+          </Key>
+          <Property Name="Record_ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Record_Type" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="record_type">
+          <Key>
+            <PropertyRef Name="RecordType_ID" />
+          </Key>
+          <Property Name="RecordType_ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RecordType_Name" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="record-entry">
+          <Key>
+            <PropertyRef Name="RecordEntry_ID" />
+          </Key>
+          <Property Name="RecordEntry_ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Record_ID" Type="uint" Nullable="false" />
+          <Property Name="Entry" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Notes" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="treatments">
+          <Key>
+            <PropertyRef Name="GlobalTreatment_ID" />
+          </Key>
+          <Property Name="GlobalTreatment_ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Treatment_Name" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <Association Name="Family History">
+          <End Role="record" Type="Self.record" Multiplicity="1" />
+          <End Role="patients" Type="Self.patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="record">
+              <PropertyRef Name="Record_ID" />
+            </Principal>
+            <Dependent Role="patients">
+              <PropertyRef Name="Family_History" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Global Treatment ID">
+          <End Role="treatments" Type="Self.treatments" Multiplicity="1" />
+          <End Role="applied_treatments" Type="Self.applied_treatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treatments">
+              <PropertyRef Name="GlobalTreatment_ID" />
+            </Principal>
+            <Dependent Role="applied_treatments">
+              <PropertyRef Name="GlobalTreatment_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Medical Record">
+          <End Role="record" Type="Self.record" Multiplicity="1" />
+          <End Role="patients" Type="Self.patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="record">
+              <PropertyRef Name="Record_ID" />
+            </Principal>
+            <Dependent Role="patients">
+              <PropertyRef Name="Medical_Record" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Patient ID">
+          <End Role="patients" Type="Self.patients" Multiplicity="1" />
+          <End Role="applied_treatments" Type="Self.applied_treatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_ID" />
+            </Principal>
+            <Dependent Role="applied_treatments">
+              <PropertyRef Name="Patient_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Record ID">
+          <End Role="record" Type="Self.record" Multiplicity="1" />
+          <End Role="record-entry" Type="Self.record-entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="record">
+              <PropertyRef Name="Record_ID" />
+            </Principal>
+            <Dependent Role="record-entry">
+              <PropertyRef Name="Record_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Record Type">
+          <End Role="record_type" Type="Self.record_type" Multiplicity="1" />
+          <End Role="record" Type="Self.record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="record_type">
+              <PropertyRef Name="RecordType_ID" />
+            </Principal>
+            <Dependent Role="record">
+              <PropertyRef Name="Record_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="healthModelStoreContainer">
+          <EntitySet Name="applied_treatments" EntityType="Self.applied_treatments" Schema="health" store:Type="Tables" />
+          <EntitySet Name="patients" EntityType="Self.patients" Schema="health" store:Type="Tables" />
+          <EntitySet Name="record" EntityType="Self.record" Schema="health" store:Type="Tables" />
+          <EntitySet Name="record_type" EntityType="Self.record_type" Schema="health" store:Type="Tables" />
+          <EntitySet Name="record-entry" EntityType="Self.record-entry" Schema="health" store:Type="Tables" />
+          <EntitySet Name="treatments" EntityType="Self.treatments" Schema="health" store:Type="Tables" />
+          <AssociationSet Name="Family History" Association="Self.Family History">
+            <End Role="record" EntitySet="record" />
+            <End Role="patients" EntitySet="patients" />
+          </AssociationSet>
+          <AssociationSet Name="Global Treatment ID" Association="Self.Global Treatment ID">
+            <End Role="treatments" EntitySet="treatments" />
+            <End Role="applied_treatments" EntitySet="applied_treatments" />
+          </AssociationSet>
+          <AssociationSet Name="Medical Record" Association="Self.Medical Record">
+            <End Role="record" EntitySet="record" />
+            <End Role="patients" EntitySet="patients" />
+          </AssociationSet>
+          <AssociationSet Name="Patient ID" Association="Self.Patient ID">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="applied_treatments" EntitySet="applied_treatments" />
+          </AssociationSet>
+          <AssociationSet Name="Record ID" Association="Self.Record ID">
+            <End Role="record" EntitySet="record" />
+            <End Role="record-entry" EntitySet="record-entry" />
+          </AssociationSet>
+          <AssociationSet Name="Record Type" Association="Self.Record Type">
+            <End Role="record_type" EntitySet="record_type" />
+            <End Role="record" EntitySet="record" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="healthModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="applied_treatments">
+          <Key>
+            <PropertyRef Name="AppliedTreatments_ID" />
+          </Key>
+          <Property Name="AppliedTreatments_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Patient_ID" Type="Int64" Nullable="false" />
+          <Property Name="GlobalTreatment_ID" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Effect" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="treatment" Relationship="Self.Global_Treatment_ID" FromRole="applied_treatments" ToRole="treatments" />
+          <NavigationProperty Name="patient" Relationship="Self.Patient_ID" FromRole="applied_treatments" ToRole="patients" />
+        </EntityType>
+        <EntityType Name="patient">
+          <Key>
+            <PropertyRef Name="patients_ID" />
+          </Key>
+          <Property Name="patients_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" />
+          <Property Name="Sex_Male" Type="SByte" Nullable="false" />
+          <Property Name="Diagnosis" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Medical_Record" Type="Int64" Nullable="false" />
+          <Property Name="Family_History" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="applied_treatments" Relationship="Self.Patient_ID" FromRole="patients" ToRole="applied_treatments" />
+          <NavigationProperty Name="record" Relationship="Self.Family_History" FromRole="patients" ToRole="record" />
+          <NavigationProperty Name="record1" Relationship="Self.Medical_Record" FromRole="patients" ToRole="record" />
+        </EntityType>
+        <EntityType Name="record">
+          <Key>
+            <PropertyRef Name="Record_ID" />
+          </Key>
+          <Property Name="Record_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Record_Type" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="patients" Relationship="Self.Family_History" FromRole="record" ToRole="patients" />
+          <NavigationProperty Name="patients1" Relationship="Self.Medical_Record" FromRole="record" ToRole="patients" />
+          <NavigationProperty Name="record_entry" Relationship="Self.Record_ID" FromRole="record" ToRole="record_entry" />
+          <NavigationProperty Name="record_type1" Relationship="Self.Record_Type1" FromRole="record" ToRole="record_type" />
+        </EntityType>
+        <EntityType Name="record_type">
+          <Key>
+            <PropertyRef Name="RecordType_ID" />
+          </Key>
+          <Property Name="RecordType_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RecordType_Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="records" Relationship="Self.Record_Type1" FromRole="record_type" ToRole="record" />
+        </EntityType>
+        <EntityType Name="record_entry">
+          <Key>
+            <PropertyRef Name="RecordEntry_ID" />
+          </Key>
+          <Property Name="RecordEntry_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Record_ID" Type="Int64" Nullable="false" />
+          <Property Name="Entry" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="record" Relationship="Self.Record_ID" FromRole="record_entry" ToRole="record" />
+        </EntityType>
+        <EntityType Name="treatment">
+          <Key>
+            <PropertyRef Name="GlobalTreatment_ID" />
+          </Key>
+          <Property Name="GlobalTreatment_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Treatment_Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="applied_treatments" Relationship="Self.Global_Treatment_ID" FromRole="treatments" ToRole="applied_treatments" />
+        </EntityType>
+        <Association Name="Global_Treatment_ID">
+          <End Role="treatments" Type="Self.treatment" Multiplicity="1" />
+          <End Role="applied_treatments" Type="Self.applied_treatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="treatments">
+              <PropertyRef Name="GlobalTreatment_ID" />
+            </Principal>
+            <Dependent Role="applied_treatments">
+              <PropertyRef Name="GlobalTreatment_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Patient_ID">
+          <End Role="patients" Type="Self.patient" Multiplicity="1" />
+          <End Role="applied_treatments" Type="Self.applied_treatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="patients_ID" />
+            </Principal>
+            <Dependent Role="applied_treatments">
+              <PropertyRef Name="Patient_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Family_History">
+          <End Role="record" Type="Self.record" Multiplicity="1" />
+          <End Role="patients" Type="Self.patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="record">
+              <PropertyRef Name="Record_ID" />
+            </Principal>
+            <Dependent Role="patients">
+              <PropertyRef Name="Family_History" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Medical_Record">
+          <End Role="record" Type="Self.record" Multiplicity="1" />
+          <End Role="patients" Type="Self.patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="record">
+              <PropertyRef Name="Record_ID" />
+            </Principal>
+            <Dependent Role="patients">
+              <PropertyRef Name="Medical_Record" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Record_ID">
+          <End Role="record" Type="Self.record" Multiplicity="1" />
+          <End Role="record_entry" Type="Self.record_entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="record">
+              <PropertyRef Name="Record_ID" />
+            </Principal>
+            <Dependent Role="record_entry">
+              <PropertyRef Name="Record_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Record_Type1">
+          <End Role="record_type" Type="Self.record_type" Multiplicity="1" />
+          <End Role="record" Type="Self.record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="record_type">
+              <PropertyRef Name="RecordType_ID" />
+            </Principal>
+            <Dependent Role="record">
+              <PropertyRef Name="Record_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="healthEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="applied_treatments" EntityType="Self.applied_treatments" />
+          <EntitySet Name="patients" EntityType="Self.patient" />
+          <EntitySet Name="records" EntityType="Self.record" />
+          <EntitySet Name="record_type" EntityType="Self.record_type" />
+          <EntitySet Name="record_entry" EntityType="Self.record_entry" />
+          <EntitySet Name="treatments" EntityType="Self.treatment" />
+          <AssociationSet Name="Global_Treatment_ID" Association="Self.Global_Treatment_ID">
+            <End Role="treatments" EntitySet="treatments" />
+            <End Role="applied_treatments" EntitySet="applied_treatments" />
+          </AssociationSet>
+          <AssociationSet Name="Patient_ID" Association="Self.Patient_ID">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="applied_treatments" EntitySet="applied_treatments" />
+          </AssociationSet>
+          <AssociationSet Name="Family_History" Association="Self.Family_History">
+            <End Role="record" EntitySet="records" />
+            <End Role="patients" EntitySet="patients" />
+          </AssociationSet>
+          <AssociationSet Name="Medical_Record" Association="Self.Medical_Record">
+            <End Role="record" EntitySet="records" />
+            <End Role="patients" EntitySet="patients" />
+          </AssociationSet>
+          <AssociationSet Name="Record_ID" Association="Self.Record_ID">
+            <End Role="record" EntitySet="records" />
+            <End Role="record_entry" EntitySet="record_entry" />
+          </AssociationSet>
+          <AssociationSet Name="Record_Type1" Association="Self.Record_Type1">
+            <End Role="record_type" EntitySet="record_type" />
+            <End Role="record" EntitySet="records" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="healthModelStoreContainer" CdmEntityContainer="healthEntities">
+          <EntitySetMapping Name="applied_treatments">
+            <EntityTypeMapping TypeName="healthModel.applied_treatments">
+              <MappingFragment StoreEntitySet="applied_treatments">
+                <ScalarProperty Name="AppliedTreatments_ID" ColumnName="AppliedTreatments_ID" />
+                <ScalarProperty Name="Patient_ID" ColumnName="Patient_ID" />
+                <ScalarProperty Name="GlobalTreatment_ID" ColumnName="GlobalTreatment_ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Effect" ColumnName="Effect" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patients">
+            <EntityTypeMapping TypeName="healthModel.patient">
+              <MappingFragment StoreEntitySet="patients">
+                <ScalarProperty Name="patients_ID" ColumnName="patients_ID" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Sex_Male" ColumnName="Sex_Male" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="Medical_Record" ColumnName="Medical_Record" />
+                <ScalarProperty Name="Family_History" ColumnName="Family_History" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="records">
+            <EntityTypeMapping TypeName="healthModel.record">
+              <MappingFragment StoreEntitySet="record">
+                <ScalarProperty Name="Record_ID" ColumnName="Record_ID" />
+                <ScalarProperty Name="Record_Type" ColumnName="Record_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="record_type">
+            <EntityTypeMapping TypeName="healthModel.record_type">
+              <MappingFragment StoreEntitySet="record_type">
+                <ScalarProperty Name="RecordType_ID" ColumnName="RecordType_ID" />
+                <ScalarProperty Name="RecordType_Name" ColumnName="RecordType_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="record_entry">
+            <EntityTypeMapping TypeName="healthModel.record_entry">
+              <MappingFragment StoreEntitySet="record-entry">
+                <ScalarProperty Name="RecordEntry_ID" ColumnName="RecordEntry_ID" />
+                <ScalarProperty Name="Record_ID" ColumnName="Record_ID" />
+                <ScalarProperty Name="Entry" ColumnName="Entry" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="treatments">
+            <EntityTypeMapping TypeName="healthModel.treatment">
+              <MappingFragment StoreEntitySet="treatments">
+                <ScalarProperty Name="GlobalTreatment_ID" ColumnName="GlobalTreatment_ID" />
+                <ScalarProperty Name="Treatment_Name" ColumnName="Treatment_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

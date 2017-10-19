@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="96bae74e32064c2e82a9f4200b638c7d" Name="Diagram1">
+        <EntityTypeShape EntityType="healthModel.applied_treatments" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="healthModel.patient" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="healthModel.record" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="healthModel.record_type" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="healthModel.record_entry" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="healthModel.treatment" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <AssociationConnector Association="healthModel.Global_Treatment_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="healthModel.Patient_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="healthModel.Family_History" ManuallyRouted="false" />
+        <AssociationConnector Association="healthModel.Medical_Record" ManuallyRouted="false" />
+        <AssociationConnector Association="healthModel.Record_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="healthModel.Record_Type1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

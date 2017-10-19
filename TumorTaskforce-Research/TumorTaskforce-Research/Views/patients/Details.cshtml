@@ -1,0 +1,74 @@
+﻿@model TumorTaskforce_Research.patient
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>patient</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.First_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.First_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Last_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Last_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sex_Male)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sex_Male)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Diagnosis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Diagnosis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.record.Record_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.record.Record_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.record1.Record_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.record1.Record_ID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.patients_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
