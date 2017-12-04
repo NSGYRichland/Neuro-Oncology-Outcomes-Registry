@@ -1,0 +1,764 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="tumorDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FamilyHistoryPivot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patientID" Type="int" Nullable="false" />
+          <Property Name="datapieceID" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" />
+          <Property Name="frequency" Type="varchar" MaxLength="50" />
+          <Property Name="notes" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="HealthFactorsPivot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patientID" Type="int" Nullable="false" />
+          <Property Name="datapieceID" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" />
+          <Property Name="frequency" Type="varchar" MaxLength="50" />
+          <Property Name="notes" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="OtherMedsPivot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patientID" Type="int" Nullable="false" />
+          <Property Name="datapieceID" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" />
+          <Property Name="frequency" Type="varchar" MaxLength="50" />
+          <Property Name="notes" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="patientID" />
+          </Key>
+          <Property Name="patientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sex" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Married" Type="bit" Nullable="false" />
+          <Property Name="Age" Type="tinyint" Nullable="false" />
+          <Property Name="HistologicalClassification" Type="varchar" MaxLength="150" />
+          <Property Name="HistologicalGrade" Type="tinyint" />
+          <Property Name="TumorWidth" Type="smallint" />
+          <Property Name="TumorHeight" Type="smallint" />
+          <Property Name="TumorLength" Type="smallint" />
+          <Property Name="TumorLocation" Type="varchar" MaxLength="150" />
+          <Property Name="Constitutional" Type="char" MaxLength="1" />
+          <Property Name="Respiratory" Type="char" MaxLength="1" />
+          <Property Name="Cardiovascular" Type="char" MaxLength="1" />
+          <Property Name="Gastrointestinal" Type="char" MaxLength="1" />
+          <Property Name="Musculoskeletal" Type="char" MaxLength="1" />
+          <Property Name="Integumentary" Type="char" MaxLength="1" />
+          <Property Name="Neurologic" Type="char" MaxLength="1" />
+          <Property Name="Exercize" Type="char" MaxLength="1" />
+          <Property Name="Diet" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="PossibleFamilyHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PossibleHealthFactors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PossibleOtherMeds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PossibleSymptoms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PercentShowing" Type="tinyint" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PossibleTreatments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SymptomsPivot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patientID" Type="int" Nullable="false" />
+          <Property Name="datapieceID" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" />
+          <Property Name="frequency" Type="varchar" MaxLength="50" />
+          <Property Name="notes" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="TreatmentsPivot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patientID" Type="int" Nullable="false" />
+          <Property Name="datapieceID" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" />
+          <Property Name="frequency" Type="varchar" MaxLength="50" />
+          <Property Name="notes" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_FamilyHistoryPivot_ToPatients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="FamilyHistoryPivot" Type="Self.FamilyHistoryPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="FamilyHistoryPivot">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FamilyHistoryPivot_ToPossibleFamilyHistory">
+          <End Role="PossibleFamilyHistory" Type="Self.PossibleFamilyHistory" Multiplicity="1" />
+          <End Role="FamilyHistoryPivot" Type="Self.FamilyHistoryPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PossibleFamilyHistory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FamilyHistoryPivot">
+              <PropertyRef Name="datapieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HealthFactorsPivot_ToPatients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="HealthFactorsPivot" Type="Self.HealthFactorsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="HealthFactorsPivot">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HealthFactorsPivot_ToPossibleHealthFactors">
+          <End Role="PossibleHealthFactors" Type="Self.PossibleHealthFactors" Multiplicity="1" />
+          <End Role="HealthFactorsPivot" Type="Self.HealthFactorsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PossibleHealthFactors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HealthFactorsPivot">
+              <PropertyRef Name="datapieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtherMedsPivot_ToPatients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="OtherMedsPivot" Type="Self.OtherMedsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="OtherMedsPivot">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtherMedsPivot_ToPossibleOtherMeds">
+          <End Role="PossibleOtherMeds" Type="Self.PossibleOtherMeds" Multiplicity="1" />
+          <End Role="OtherMedsPivot" Type="Self.OtherMedsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PossibleOtherMeds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtherMedsPivot">
+              <PropertyRef Name="datapieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SymptomsPivot_ToPatients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="SymptomsPivot" Type="Self.SymptomsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="SymptomsPivot">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SymptomsPivot_ToPossibleSymptoms">
+          <End Role="PossibleSymptoms" Type="Self.PossibleSymptoms" Multiplicity="1" />
+          <End Role="SymptomsPivot" Type="Self.SymptomsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PossibleSymptoms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SymptomsPivot">
+              <PropertyRef Name="datapieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TreatmentsPivot_ToPatients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="TreatmentsPivot" Type="Self.TreatmentsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="TreatmentsPivot">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TreatmentsPivot_ToPossibleTreatments">
+          <End Role="PossibleTreatments" Type="Self.PossibleTreatments" Multiplicity="1" />
+          <End Role="TreatmentsPivot" Type="Self.TreatmentsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PossibleTreatments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TreatmentsPivot">
+              <PropertyRef Name="datapieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tumorDBModelStoreContainer">
+          <EntitySet Name="FamilyHistoryPivot" EntityType="Self.FamilyHistoryPivot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HealthFactorsPivot" EntityType="Self.HealthFactorsPivot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OtherMedsPivot" EntityType="Self.OtherMedsPivot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PossibleFamilyHistory" EntityType="Self.PossibleFamilyHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PossibleHealthFactors" EntityType="Self.PossibleHealthFactors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PossibleOtherMeds" EntityType="Self.PossibleOtherMeds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PossibleSymptoms" EntityType="Self.PossibleSymptoms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PossibleTreatments" EntityType="Self.PossibleTreatments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SymptomsPivot" EntityType="Self.SymptomsPivot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TreatmentsPivot" EntityType="Self.TreatmentsPivot" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FamilyHistoryPivot_ToPatients" Association="Self.FK_FamilyHistoryPivot_ToPatients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="FamilyHistoryPivot" EntitySet="FamilyHistoryPivot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FamilyHistoryPivot_ToPossibleFamilyHistory" Association="Self.FK_FamilyHistoryPivot_ToPossibleFamilyHistory">
+            <End Role="PossibleFamilyHistory" EntitySet="PossibleFamilyHistory" />
+            <End Role="FamilyHistoryPivot" EntitySet="FamilyHistoryPivot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HealthFactorsPivot_ToPatients" Association="Self.FK_HealthFactorsPivot_ToPatients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="HealthFactorsPivot" EntitySet="HealthFactorsPivot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HealthFactorsPivot_ToPossibleHealthFactors" Association="Self.FK_HealthFactorsPivot_ToPossibleHealthFactors">
+            <End Role="PossibleHealthFactors" EntitySet="PossibleHealthFactors" />
+            <End Role="HealthFactorsPivot" EntitySet="HealthFactorsPivot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtherMedsPivot_ToPatients" Association="Self.FK_OtherMedsPivot_ToPatients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="OtherMedsPivot" EntitySet="OtherMedsPivot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtherMedsPivot_ToPossibleOtherMeds" Association="Self.FK_OtherMedsPivot_ToPossibleOtherMeds">
+            <End Role="PossibleOtherMeds" EntitySet="PossibleOtherMeds" />
+            <End Role="OtherMedsPivot" EntitySet="OtherMedsPivot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SymptomsPivot_ToPatients" Association="Self.FK_SymptomsPivot_ToPatients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="SymptomsPivot" EntitySet="SymptomsPivot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SymptomsPivot_ToPossibleSymptoms" Association="Self.FK_SymptomsPivot_ToPossibleSymptoms">
+            <End Role="PossibleSymptoms" EntitySet="PossibleSymptoms" />
+            <End Role="SymptomsPivot" EntitySet="SymptomsPivot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TreatmentsPivot_ToPatients" Association="Self.FK_TreatmentsPivot_ToPatients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="TreatmentsPivot" EntitySet="TreatmentsPivot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TreatmentsPivot_ToPossibleTreatments" Association="Self.FK_TreatmentsPivot_ToPossibleTreatments">
+            <End Role="PossibleTreatments" EntitySet="PossibleTreatments" />
+            <End Role="TreatmentsPivot" EntitySet="TreatmentsPivot" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tumorDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FamilyHistoryPivot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patientID" Type="Int32" Nullable="false" />
+          <Property Name="datapieceID" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="frequency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_FamilyHistoryPivot_ToPatients" FromRole="FamilyHistoryPivot" ToRole="Patients" />
+          <NavigationProperty Name="PossibleFamilyHistory" Relationship="Self.FK_FamilyHistoryPivot_ToPossibleFamilyHistory" FromRole="FamilyHistoryPivot" ToRole="PossibleFamilyHistory" />
+        </EntityType>
+        <EntityType Name="HealthFactorsPivot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patientID" Type="Int32" Nullable="false" />
+          <Property Name="datapieceID" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="frequency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_HealthFactorsPivot_ToPatients" FromRole="HealthFactorsPivot" ToRole="Patients" />
+          <NavigationProperty Name="PossibleHealthFactor" Relationship="Self.FK_HealthFactorsPivot_ToPossibleHealthFactors" FromRole="HealthFactorsPivot" ToRole="PossibleHealthFactors" />
+        </EntityType>
+        <EntityType Name="OtherMedsPivot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patientID" Type="Int32" Nullable="false" />
+          <Property Name="datapieceID" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="frequency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_OtherMedsPivot_ToPatients" FromRole="OtherMedsPivot" ToRole="Patients" />
+          <NavigationProperty Name="PossibleOtherMed" Relationship="Self.FK_OtherMedsPivot_ToPossibleOtherMeds" FromRole="OtherMedsPivot" ToRole="PossibleOtherMeds" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="patientID" />
+          </Key>
+          <Property Name="patientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Married" Type="Boolean" Nullable="false" />
+          <Property Name="Age" Type="Byte" Nullable="false" />
+          <Property Name="HistologicalClassification" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="HistologicalGrade" Type="Byte" />
+          <Property Name="TumorWidth" Type="Int16" />
+          <Property Name="TumorHeight" Type="Int16" />
+          <Property Name="TumorLength" Type="Int16" />
+          <Property Name="TumorLocation" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Constitutional" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Respiratory" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Cardiovascular" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Gastrointestinal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Musculoskeletal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Integumentary" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Neurologic" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Exercize" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Diet" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="FamilyHistoryPivots" Relationship="Self.FK_FamilyHistoryPivot_ToPatients" FromRole="Patients" ToRole="FamilyHistoryPivot" />
+          <NavigationProperty Name="HealthFactorsPivots" Relationship="Self.FK_HealthFactorsPivot_ToPatients" FromRole="Patients" ToRole="HealthFactorsPivot" />
+          <NavigationProperty Name="OtherMedsPivots" Relationship="Self.FK_OtherMedsPivot_ToPatients" FromRole="Patients" ToRole="OtherMedsPivot" />
+          <NavigationProperty Name="SymptomsPivots" Relationship="Self.FK_SymptomsPivot_ToPatients" FromRole="Patients" ToRole="SymptomsPivot" />
+          <NavigationProperty Name="TreatmentsPivots" Relationship="Self.FK_TreatmentsPivot_ToPatients" FromRole="Patients" ToRole="TreatmentsPivot" />
+        </EntityType>
+        <EntityType Name="PossibleFamilyHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FamilyHistoryPivots" Relationship="Self.FK_FamilyHistoryPivot_ToPossibleFamilyHistory" FromRole="PossibleFamilyHistory" ToRole="FamilyHistoryPivot" />
+        </EntityType>
+        <EntityType Name="PossibleHealthFactor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HealthFactorsPivots" Relationship="Self.FK_HealthFactorsPivot_ToPossibleHealthFactors" FromRole="PossibleHealthFactors" ToRole="HealthFactorsPivot" />
+        </EntityType>
+        <EntityType Name="PossibleOtherMed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="OtherMedsPivots" Relationship="Self.FK_OtherMedsPivot_ToPossibleOtherMeds" FromRole="PossibleOtherMeds" ToRole="OtherMedsPivot" />
+        </EntityType>
+        <EntityType Name="PossibleSymptom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PercentShowing" Type="Byte" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SymptomsPivots" Relationship="Self.FK_SymptomsPivot_ToPossibleSymptoms" FromRole="PossibleSymptoms" ToRole="SymptomsPivot" />
+        </EntityType>
+        <EntityType Name="PossibleTreatment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TreatmentsPivots" Relationship="Self.FK_TreatmentsPivot_ToPossibleTreatments" FromRole="PossibleTreatments" ToRole="TreatmentsPivot" />
+        </EntityType>
+        <EntityType Name="SymptomsPivot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patientID" Type="Int32" Nullable="false" />
+          <Property Name="datapieceID" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="frequency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_SymptomsPivot_ToPatients" FromRole="SymptomsPivot" ToRole="Patients" />
+          <NavigationProperty Name="PossibleSymptom" Relationship="Self.FK_SymptomsPivot_ToPossibleSymptoms" FromRole="SymptomsPivot" ToRole="PossibleSymptoms" />
+        </EntityType>
+        <EntityType Name="TreatmentsPivot">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patientID" Type="Int32" Nullable="false" />
+          <Property Name="datapieceID" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="frequency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_TreatmentsPivot_ToPatients" FromRole="TreatmentsPivot" ToRole="Patients" />
+          <NavigationProperty Name="PossibleTreatment" Relationship="Self.FK_TreatmentsPivot_ToPossibleTreatments" FromRole="TreatmentsPivot" ToRole="PossibleTreatments" />
+        </EntityType>
+        <Association Name="FK_FamilyHistoryPivot_ToPatients">
+          <End Role="Patients" Type="Self.Patient" Multiplicity="1" />
+          <End Role="FamilyHistoryPivot" Type="Self.FamilyHistoryPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="FamilyHistoryPivot">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FamilyHistoryPivot_ToPossibleFamilyHistory">
+          <End Role="PossibleFamilyHistory" Type="Self.PossibleFamilyHistory" Multiplicity="1" />
+          <End Role="FamilyHistoryPivot" Type="Self.FamilyHistoryPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PossibleFamilyHistory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FamilyHistoryPivot">
+              <PropertyRef Name="datapieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HealthFactorsPivot_ToPatients">
+          <End Role="Patients" Type="Self.Patient" Multiplicity="1" />
+          <End Role="HealthFactorsPivot" Type="Self.HealthFactorsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="HealthFactorsPivot">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HealthFactorsPivot_ToPossibleHealthFactors">
+          <End Role="PossibleHealthFactors" Type="Self.PossibleHealthFactor" Multiplicity="1" />
+          <End Role="HealthFactorsPivot" Type="Self.HealthFactorsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PossibleHealthFactors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HealthFactorsPivot">
+              <PropertyRef Name="datapieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtherMedsPivot_ToPatients">
+          <End Role="Patients" Type="Self.Patient" Multiplicity="1" />
+          <End Role="OtherMedsPivot" Type="Self.OtherMedsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="OtherMedsPivot">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OtherMedsPivot_ToPossibleOtherMeds">
+          <End Role="PossibleOtherMeds" Type="Self.PossibleOtherMed" Multiplicity="1" />
+          <End Role="OtherMedsPivot" Type="Self.OtherMedsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PossibleOtherMeds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OtherMedsPivot">
+              <PropertyRef Name="datapieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SymptomsPivot_ToPatients">
+          <End Role="Patients" Type="Self.Patient" Multiplicity="1" />
+          <End Role="SymptomsPivot" Type="Self.SymptomsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="SymptomsPivot">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TreatmentsPivot_ToPatients">
+          <End Role="Patients" Type="Self.Patient" Multiplicity="1" />
+          <End Role="TreatmentsPivot" Type="Self.TreatmentsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="TreatmentsPivot">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SymptomsPivot_ToPossibleSymptoms">
+          <End Role="PossibleSymptoms" Type="Self.PossibleSymptom" Multiplicity="1" />
+          <End Role="SymptomsPivot" Type="Self.SymptomsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PossibleSymptoms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SymptomsPivot">
+              <PropertyRef Name="datapieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TreatmentsPivot_ToPossibleTreatments">
+          <End Role="PossibleTreatments" Type="Self.PossibleTreatment" Multiplicity="1" />
+          <End Role="TreatmentsPivot" Type="Self.TreatmentsPivot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PossibleTreatments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TreatmentsPivot">
+              <PropertyRef Name="datapieceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tumorDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FamilyHistoryPivots" EntityType="Self.FamilyHistoryPivot" />
+          <EntitySet Name="HealthFactorsPivots" EntityType="Self.HealthFactorsPivot" />
+          <EntitySet Name="OtherMedsPivots" EntityType="Self.OtherMedsPivot" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="PossibleFamilyHistories" EntityType="Self.PossibleFamilyHistory" />
+          <EntitySet Name="PossibleHealthFactors" EntityType="Self.PossibleHealthFactor" />
+          <EntitySet Name="PossibleOtherMeds" EntityType="Self.PossibleOtherMed" />
+          <EntitySet Name="PossibleSymptoms" EntityType="Self.PossibleSymptom" />
+          <EntitySet Name="PossibleTreatments" EntityType="Self.PossibleTreatment" />
+          <EntitySet Name="SymptomsPivots" EntityType="Self.SymptomsPivot" />
+          <EntitySet Name="TreatmentsPivots" EntityType="Self.TreatmentsPivot" />
+          <AssociationSet Name="FK_FamilyHistoryPivot_ToPatients" Association="Self.FK_FamilyHistoryPivot_ToPatients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="FamilyHistoryPivot" EntitySet="FamilyHistoryPivots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FamilyHistoryPivot_ToPossibleFamilyHistory" Association="Self.FK_FamilyHistoryPivot_ToPossibleFamilyHistory">
+            <End Role="PossibleFamilyHistory" EntitySet="PossibleFamilyHistories" />
+            <End Role="FamilyHistoryPivot" EntitySet="FamilyHistoryPivots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HealthFactorsPivot_ToPatients" Association="Self.FK_HealthFactorsPivot_ToPatients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="HealthFactorsPivot" EntitySet="HealthFactorsPivots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HealthFactorsPivot_ToPossibleHealthFactors" Association="Self.FK_HealthFactorsPivot_ToPossibleHealthFactors">
+            <End Role="PossibleHealthFactors" EntitySet="PossibleHealthFactors" />
+            <End Role="HealthFactorsPivot" EntitySet="HealthFactorsPivots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtherMedsPivot_ToPatients" Association="Self.FK_OtherMedsPivot_ToPatients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="OtherMedsPivot" EntitySet="OtherMedsPivots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OtherMedsPivot_ToPossibleOtherMeds" Association="Self.FK_OtherMedsPivot_ToPossibleOtherMeds">
+            <End Role="PossibleOtherMeds" EntitySet="PossibleOtherMeds" />
+            <End Role="OtherMedsPivot" EntitySet="OtherMedsPivots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SymptomsPivot_ToPatients" Association="Self.FK_SymptomsPivot_ToPatients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="SymptomsPivot" EntitySet="SymptomsPivots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TreatmentsPivot_ToPatients" Association="Self.FK_TreatmentsPivot_ToPatients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="TreatmentsPivot" EntitySet="TreatmentsPivots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SymptomsPivot_ToPossibleSymptoms" Association="Self.FK_SymptomsPivot_ToPossibleSymptoms">
+            <End Role="PossibleSymptoms" EntitySet="PossibleSymptoms" />
+            <End Role="SymptomsPivot" EntitySet="SymptomsPivots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TreatmentsPivot_ToPossibleTreatments" Association="Self.FK_TreatmentsPivot_ToPossibleTreatments">
+            <End Role="PossibleTreatments" EntitySet="PossibleTreatments" />
+            <End Role="TreatmentsPivot" EntitySet="TreatmentsPivots" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tumorDBModelStoreContainer" CdmEntityContainer="tumorDBEntities">
+          <EntitySetMapping Name="FamilyHistoryPivots">
+            <EntityTypeMapping TypeName="tumorDBModel.FamilyHistoryPivot">
+              <MappingFragment StoreEntitySet="FamilyHistoryPivot">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="datapieceID" ColumnName="datapieceID" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="frequency" ColumnName="frequency" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HealthFactorsPivots">
+            <EntityTypeMapping TypeName="tumorDBModel.HealthFactorsPivot">
+              <MappingFragment StoreEntitySet="HealthFactorsPivot">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="datapieceID" ColumnName="datapieceID" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="frequency" ColumnName="frequency" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtherMedsPivots">
+            <EntityTypeMapping TypeName="tumorDBModel.OtherMedsPivot">
+              <MappingFragment StoreEntitySet="OtherMedsPivot">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="datapieceID" ColumnName="datapieceID" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="frequency" ColumnName="frequency" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="tumorDBModel.Patient">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Married" ColumnName="Married" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="HistologicalClassification" ColumnName="HistologicalClassification" />
+                <ScalarProperty Name="HistologicalGrade" ColumnName="HistologicalGrade" />
+                <ScalarProperty Name="TumorWidth" ColumnName="TumorWidth" />
+                <ScalarProperty Name="TumorHeight" ColumnName="TumorHeight" />
+                <ScalarProperty Name="TumorLength" ColumnName="TumorLength" />
+                <ScalarProperty Name="TumorLocation" ColumnName="TumorLocation" />
+                <ScalarProperty Name="Constitutional" ColumnName="Constitutional" />
+                <ScalarProperty Name="Respiratory" ColumnName="Respiratory" />
+                <ScalarProperty Name="Cardiovascular" ColumnName="Cardiovascular" />
+                <ScalarProperty Name="Gastrointestinal" ColumnName="Gastrointestinal" />
+                <ScalarProperty Name="Musculoskeletal" ColumnName="Musculoskeletal" />
+                <ScalarProperty Name="Integumentary" ColumnName="Integumentary" />
+                <ScalarProperty Name="Neurologic" ColumnName="Neurologic" />
+                <ScalarProperty Name="Exercize" ColumnName="Exercize" />
+                <ScalarProperty Name="Diet" ColumnName="Diet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PossibleFamilyHistories">
+            <EntityTypeMapping TypeName="tumorDBModel.PossibleFamilyHistory">
+              <MappingFragment StoreEntitySet="PossibleFamilyHistory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PossibleHealthFactors">
+            <EntityTypeMapping TypeName="tumorDBModel.PossibleHealthFactor">
+              <MappingFragment StoreEntitySet="PossibleHealthFactors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PossibleOtherMeds">
+            <EntityTypeMapping TypeName="tumorDBModel.PossibleOtherMed">
+              <MappingFragment StoreEntitySet="PossibleOtherMeds">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PossibleSymptoms">
+            <EntityTypeMapping TypeName="tumorDBModel.PossibleSymptom">
+              <MappingFragment StoreEntitySet="PossibleSymptoms">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PercentShowing" ColumnName="PercentShowing" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PossibleTreatments">
+            <EntityTypeMapping TypeName="tumorDBModel.PossibleTreatment">
+              <MappingFragment StoreEntitySet="PossibleTreatments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SymptomsPivots">
+            <EntityTypeMapping TypeName="tumorDBModel.SymptomsPivot">
+              <MappingFragment StoreEntitySet="SymptomsPivot">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="datapieceID" ColumnName="datapieceID" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="frequency" ColumnName="frequency" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TreatmentsPivots">
+            <EntityTypeMapping TypeName="tumorDBModel.TreatmentsPivot">
+              <MappingFragment StoreEntitySet="TreatmentsPivot">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="datapieceID" ColumnName="datapieceID" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="frequency" ColumnName="frequency" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
