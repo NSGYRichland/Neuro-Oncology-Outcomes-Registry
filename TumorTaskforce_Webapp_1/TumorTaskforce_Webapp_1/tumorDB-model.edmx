@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="tumorDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="tumorDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="FamilyHistoryPivot">
           <Key>
             <PropertyRef Name="Id" />
@@ -52,15 +52,15 @@
           <Property Name="TumorHeight" Type="smallint" />
           <Property Name="TumorLength" Type="smallint" />
           <Property Name="TumorLocation" Type="varchar" MaxLength="150" />
-          <Property Name="Constitutional" Type="char" MaxLength="1" />
-          <Property Name="Respiratory" Type="char" MaxLength="1" />
-          <Property Name="Cardiovascular" Type="char" MaxLength="1" />
-          <Property Name="Gastrointestinal" Type="char" MaxLength="1" />
-          <Property Name="Musculoskeletal" Type="char" MaxLength="1" />
-          <Property Name="Integumentary" Type="char" MaxLength="1" />
-          <Property Name="Neurologic" Type="char" MaxLength="1" />
-          <Property Name="Exercize" Type="char" MaxLength="1" />
-          <Property Name="Diet" Type="char" MaxLength="1" />
+          <Property Name="Constitutional" Type="varchar" MaxLength="50" />
+          <Property Name="Respiratory" Type="varchar" MaxLength="50" />
+          <Property Name="Cardiovascular" Type="varchar" MaxLength="50" />
+          <Property Name="Gastrointestinal" Type="varchar" MaxLength="50" />
+          <Property Name="Musculoskeletal" Type="varchar" MaxLength="50" />
+          <Property Name="Integumentary" Type="varchar" MaxLength="50" />
+          <Property Name="Neurologic" Type="varchar" MaxLength="50" />
+          <Property Name="Exercize" Type="varchar" MaxLength="50" />
+          <Property Name="Diet" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PossibleFamilyHistory">
           <Key>
@@ -293,8 +293,7 @@
             <End Role="TreatmentsPivot" EntitySet="TreatmentsPivot" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="tumorDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -351,15 +350,15 @@
           <Property Name="TumorHeight" Type="Int16" />
           <Property Name="TumorLength" Type="Int16" />
           <Property Name="TumorLocation" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Constitutional" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Respiratory" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Cardiovascular" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Gastrointestinal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Musculoskeletal" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Integumentary" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Neurologic" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Exercize" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="Diet" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Constitutional" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Respiratory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cardiovascular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gastrointestinal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Musculoskeletal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Integumentary" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Neurologic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Exercize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Diet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="FamilyHistoryPivots" Relationship="Self.FK_FamilyHistoryPivot_ToPatients" FromRole="Patients" ToRole="FamilyHistoryPivot" />
           <NavigationProperty Name="HealthFactorsPivots" Relationship="Self.FK_HealthFactorsPivot_ToPatients" FromRole="Patients" ToRole="HealthFactorsPivot" />
           <NavigationProperty Name="OtherMedsPivots" Relationship="Self.FK_OtherMedsPivot_ToPatients" FromRole="Patients" ToRole="OtherMedsPivot" />
