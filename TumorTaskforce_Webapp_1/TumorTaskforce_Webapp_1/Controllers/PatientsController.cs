@@ -18,6 +18,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
         public ActionResult Index()
         {
             return View(db.Patients.ToList());
+
         }
 
         // GET: Patients/Details/5
