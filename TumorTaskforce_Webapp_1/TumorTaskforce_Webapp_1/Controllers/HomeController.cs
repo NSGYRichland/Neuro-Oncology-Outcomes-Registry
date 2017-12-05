@@ -27,5 +27,12 @@ namespace TumorTaskforce_Webapp_1.Controllers
 
             return View();
         }
+
+        public ActionResult Compare()
+        {
+            ViewBag.Message = "Compare Page.";
+
+            return View();
+        }
     }
 }

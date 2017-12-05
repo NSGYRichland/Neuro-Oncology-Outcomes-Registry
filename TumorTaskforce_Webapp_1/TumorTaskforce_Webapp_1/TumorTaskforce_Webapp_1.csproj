@@ -325,6 +325,8 @@
     <Content Include="Views\OtherMedsPivots\Details.cshtml" />
     <Content Include="Views\OtherMedsPivots\Edit.cshtml" />
     <Content Include="Views\OtherMedsPivots\Index.cshtml" />
+    <Content Include="Views\Patients\Compare.cshtml" />
+    <Content Include="Views\Patients\Results.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

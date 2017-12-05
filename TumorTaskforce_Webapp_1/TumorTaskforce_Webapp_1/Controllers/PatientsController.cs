@@ -21,7 +21,26 @@ namespace TumorTaskforce_Webapp_1.Controllers
             return View(db.Patients.ToList());
 
         }
-
+        
+        public ActionResult Compare()
+        {
+            return View(db.Patients.ToList());
+        }
+        
+        public ActionResult Results(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Patient patient = db.Patients.Find(id);
+            if (patient == null)
+            {
+                return HttpNotFound();
+            }
+            return View(patient);
+        }
+        
         // GET: Patients/Details/5
         public ActionResult Details(int? id)
         {
@@ -36,6 +55,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             }
             return View(patient);
         }
+       
 
         // GET: Patients/Create
         public ActionResult Create()
