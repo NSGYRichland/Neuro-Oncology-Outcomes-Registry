@@ -49,7 +49,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,patientID,datapieceID,date,frequency,notes")] TreatmentsPivot treatmentsPivot)
+        public ActionResult Create([Bind(Include = "Id,patientID,datapieceID,date,frequency,notes,effectiveness")] TreatmentsPivot treatmentsPivot)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,patientID,datapieceID,date,frequency,notes")] TreatmentsPivot treatmentsPivot)
+        public ActionResult Edit([Bind(Include = "Id,patientID,datapieceID,date,frequency,notes,effectiveness")] TreatmentsPivot treatmentsPivot)
         {
             if (ModelState.IsValid)
             {

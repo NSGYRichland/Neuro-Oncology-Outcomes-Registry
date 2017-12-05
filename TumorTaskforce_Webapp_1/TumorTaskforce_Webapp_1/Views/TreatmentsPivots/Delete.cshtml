@@ -36,11 +36,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Patient.Sex)
+            @Html.DisplayNameFor(model => model.Patient.patientID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Patient.Sex)
+            @Html.DisplayFor(model => model.Patient.patientID)
         </dd>
 
         <dt>
@@ -51,6 +51,9 @@
             @Html.DisplayFor(model => model.PossibleTreatment.Name)
         </dd>
 
+        <dd>
+            @Html.DisplayFor(model => model.effectiveness)
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {

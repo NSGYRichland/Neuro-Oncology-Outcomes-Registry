@@ -20,6 +20,7 @@ namespace TumorTaskforce_Webapp_1
         public Nullable<System.DateTime> date { get; set; }
         public string frequency { get; set; }
         public string notes { get; set; }
+        public byte effectiveness { get; set; }
     
         public virtual Patient Patient { get; set; }
         public virtual PossibleTreatment PossibleTreatment { get; set; }
