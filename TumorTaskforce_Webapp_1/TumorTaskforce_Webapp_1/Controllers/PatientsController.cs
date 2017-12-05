@@ -60,7 +60,53 @@ namespace TumorTaskforce_Webapp_1.Controllers
         // GET: Patients/Create
         public ActionResult Create()
         {
+            ViewBag.Sex = new SelectList(getSexes(), "Value", "Text");
+            ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text");
             return View();
+        }
+
+        public SelectListItem[] getSexes()
+        {
+            SelectListItem[] sex = new SelectListItem[3];
+            SelectListItem male = new SelectListItem();
+            male.Text = "Male";
+            male.Value = "M";
+            sex[0] = male;
+            SelectListItem female = new SelectListItem();
+            female.Text = "Female";
+            female.Value = "F";
+            sex[1] = female;
+            SelectListItem other = new SelectListItem();
+            other.Text = "Other";
+            other.Value = "O";
+            sex[2] = other;
+            return sex;
+        }
+
+        public SelectListItem[] getGrades()
+        {
+            SelectListItem[] grade = new SelectListItem[5];
+            SelectListItem zero = new SelectListItem();
+            zero.Text = "0";
+            zero.Value = "0";
+            grade[0] = zero;
+            SelectListItem one = new SelectListItem();
+            one.Text = "1";
+            one.Value = "1";
+            grade[1] = one;
+            SelectListItem two = new SelectListItem();
+            two.Text = "2";
+            two.Value = "2";
+            grade[2] = two;
+            SelectListItem three = new SelectListItem();
+            three.Text = "3";
+            three.Value = "3";
+            grade[3] = three;
+            SelectListItem four = new SelectListItem();
+            four.Text = "4";
+            four.Value = "4";
+            grade[4] = four;
+            return grade;
         }
 
         // POST: Patients/Create
@@ -76,7 +122,8 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Sex = new SelectList(getSexes(), "Value", "Text", patient.Sex);
+            ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text", patient.HistologicalGrade);
             return View(patient);
         }
 
@@ -92,6 +139,8 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Sex = new SelectList(getSexes(), "Value", "Text", patient.Sex);
+            ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text", patient.HistologicalGrade);
             return View(patient);
         }
 
@@ -108,6 +157,8 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Sex =new SelectList(getSexes(), "Value", "Text", patient.Sex);
+            ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text", patient.HistologicalGrade);
             return View(patient);
         }
 
@@ -132,6 +183,41 @@ namespace TumorTaskforce_Webapp_1.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Patient patient = db.Patients.Find(id);
+            foreach( SymptomsPivot sp in db.SymptomsPivots){
+                if (sp.patientID == id)
+                {
+                    db.SymptomsPivots.Remove(sp);
+                }
+            }
+            foreach (TreatmentsPivot tp in db.TreatmentsPivots)
+            {
+                if (tp.patientID == id)
+                {
+                    db.TreatmentsPivots.Remove(tp);
+                }
+            }
+            foreach (HealthFactorsPivot hp in db.HealthFactorsPivots)
+            {
+                if (hp.patientID == id)
+                {
+                    db.HealthFactorsPivots.Remove(hp);
+                }
+            }
+            foreach (OtherMedsPivot op in db.OtherMedsPivots)
+            {
+                if (op.patientID == id)
+                {
+                    db.OtherMedsPivots.Remove(op);
+                }
+            }
+            foreach (FamilyHistoryPivot fp in db.FamilyHistoryPivots)
+            {
+                if (fp.patientID == id)
+                {
+                    db.FamilyHistoryPivots.Remove(fp);
+                }
+            }
+            db.SaveChanges();
             db.Patients.Remove(patient);
             db.SaveChanges();
             return RedirectToAction("Index");
