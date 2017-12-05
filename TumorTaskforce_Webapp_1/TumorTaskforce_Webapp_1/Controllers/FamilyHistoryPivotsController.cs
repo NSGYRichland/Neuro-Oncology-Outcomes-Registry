@@ -39,7 +39,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
         // GET: FamilyHistoryPivots/Create
         public ActionResult Create()
         {
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "Sex");
+            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleFamilyHistories, "Id", "Name");
             return View();
         }
@@ -58,7 +58,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "Sex", familyHistoryPivot.patientID);
+            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID", familyHistoryPivot.patientID);
             ViewBag.datapieceID = new SelectList(db.PossibleFamilyHistories, "Id", "Name", familyHistoryPivot.datapieceID);
             return View(familyHistoryPivot);
         }
@@ -75,7 +75,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "Sex", familyHistoryPivot.patientID);
+            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID", familyHistoryPivot.patientID);
             ViewBag.datapieceID = new SelectList(db.PossibleFamilyHistories, "Id", "Name", familyHistoryPivot.datapieceID);
             return View(familyHistoryPivot);
         }
@@ -93,7 +93,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "Sex", familyHistoryPivot.patientID);
+            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID", familyHistoryPivot.patientID);
             ViewBag.datapieceID = new SelectList(db.PossibleFamilyHistories, "Id", "Name", familyHistoryPivot.datapieceID);
             return View(familyHistoryPivot);
         }

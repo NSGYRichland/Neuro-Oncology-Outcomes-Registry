@@ -39,7 +39,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
         // GET: HealthFactorsPivots/Create
         public ActionResult Create()
         {
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "Sex");
+            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleHealthFactors, "Id", "Name");
             return View();
         }
@@ -58,7 +58,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "Sex", healthFactorsPivot.patientID);
+            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID", healthFactorsPivot.patientID);
             ViewBag.datapieceID = new SelectList(db.PossibleHealthFactors, "Id", "Name", healthFactorsPivot.datapieceID);
             return View(healthFactorsPivot);
         }
@@ -75,7 +75,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "Sex", healthFactorsPivot.patientID);
+            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID", healthFactorsPivot.patientID);
             ViewBag.datapieceID = new SelectList(db.PossibleHealthFactors, "Id", "Name", healthFactorsPivot.datapieceID);
             return View(healthFactorsPivot);
         }
@@ -93,7 +93,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "Sex", healthFactorsPivot.patientID);
+            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID", healthFactorsPivot.patientID);
             ViewBag.datapieceID = new SelectList(db.PossibleHealthFactors, "Id", "Name", healthFactorsPivot.datapieceID);
             return View(healthFactorsPivot);
         }
