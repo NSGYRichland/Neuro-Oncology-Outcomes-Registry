@@ -26,6 +26,9 @@
         <th>
             @Html.DisplayNameFor(model => model.PossibleTreatment.Name)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.effectiveness)
+        </th>
         <th></th>
     </tr>
 
@@ -45,6 +48,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PossibleTreatment.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.effectiveness)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

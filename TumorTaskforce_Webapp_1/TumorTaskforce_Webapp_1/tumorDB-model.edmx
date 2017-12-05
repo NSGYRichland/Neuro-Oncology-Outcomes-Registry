@@ -119,6 +119,7 @@
           <Property Name="date" Type="date" />
           <Property Name="frequency" Type="varchar" MaxLength="50" />
           <Property Name="notes" Type="varchar(max)" />
+          <Property Name="effectiveness" Type="tinyint" Nullable="false" />
         </EntityType>
         <Association Name="FK_FamilyHistoryPivot_ToPatients">
           <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
@@ -431,6 +432,7 @@
           <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Patient" Relationship="Self.FK_TreatmentsPivot_ToPatients" FromRole="TreatmentsPivot" ToRole="Patients" />
           <NavigationProperty Name="PossibleTreatment" Relationship="Self.FK_TreatmentsPivot_ToPossibleTreatments" FromRole="TreatmentsPivot" ToRole="PossibleTreatments" />
+          <Property Name="effectiveness" Type="Byte" Nullable="false" />
         </EntityType>
         <Association Name="FK_FamilyHistoryPivot_ToPatients">
           <End Role="Patients" Type="Self.Patient" Multiplicity="1" />
@@ -728,6 +730,7 @@
           <EntitySetMapping Name="TreatmentsPivots">
             <EntityTypeMapping TypeName="tumorDBModel.TreatmentsPivot">
               <MappingFragment StoreEntitySet="TreatmentsPivot">
+                <ScalarProperty Name="effectiveness" ColumnName="effectiveness" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="patientID" ColumnName="patientID" />
                 <ScalarProperty Name="datapieceID" ColumnName="datapieceID" />
