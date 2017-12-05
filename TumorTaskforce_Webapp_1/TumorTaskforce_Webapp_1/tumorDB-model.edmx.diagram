@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="18ee342ece8645c08a8aa8b9ea97f4dc" Name="Diagram1">
+        <EntityTypeShape EntityType="tumorDBModel.FamilyHistoryPivot" Width="1.5" PointX="0.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tumorDBModel.HealthFactorsPivot" Width="1.5" PointX="6.625" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tumorDBModel.OtherMedsPivot" Width="1.5" PointX="0.5" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="tumorDBModel.Patient" Width="1.5" PointX="4.375" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tumorDBModel.PossibleFamilyHistory" Width="1.5" PointX="0.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tumorDBModel.PossibleHealthFactor" Width="1.5" PointX="9.125" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tumorDBModel.PossibleOtherMed" Width="1.5" PointX="0.5" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="tumorDBModel.PossibleSymptom" Width="1.5" PointX="9" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="tumorDBModel.PossibleTreatment" Width="1.5" PointX="6.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tumorDBModel.SymptomsPivot" Width="1.5" PointX="6.625" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tumorDBModel.TreatmentsPivot" Width="1.5" PointX="4.375" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="tumorDBModel.FK_FamilyHistoryPivot_ToPatients" ManuallyRouted="false" />
+        <AssociationConnector Association="tumorDBModel.FK_FamilyHistoryPivot_ToPossibleFamilyHistory" ManuallyRouted="false" />
+        <AssociationConnector Association="tumorDBModel.FK_HealthFactorsPivot_ToPatients" ManuallyRouted="false" />
+        <AssociationConnector Association="tumorDBModel.FK_HealthFactorsPivot_ToPossibleHealthFactors" ManuallyRouted="false" />
+        <AssociationConnector Association="tumorDBModel.FK_OtherMedsPivot_ToPatients" ManuallyRouted="false" />
+        <AssociationConnector Association="tumorDBModel.FK_OtherMedsPivot_ToPossibleOtherMeds" ManuallyRouted="false" />
+        <AssociationConnector Association="tumorDBModel.FK_SymptomsPivot_ToPatients" ManuallyRouted="false" />
+        <AssociationConnector Association="tumorDBModel.FK_TreatmentsPivot_ToPatients" ManuallyRouted="false" />
+        <AssociationConnector Association="tumorDBModel.FK_SymptomsPivot_ToPossibleSymptoms" ManuallyRouted="false" />
+        <AssociationConnector Association="tumorDBModel.FK_TreatmentsPivot_ToPossibleTreatments" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,162 @@
+﻿@model TumorTaskforce_Webapp_1.Patient
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Patient</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Sex)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sex)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Married)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Married)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HistologicalClassification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HistologicalClassification)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HistologicalGrade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HistologicalGrade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TumorWidth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TumorWidth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TumorHeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TumorHeight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TumorLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TumorLength)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TumorLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TumorLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Constitutional)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Constitutional)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Respiratory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Respiratory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cardiovascular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cardiovascular)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gastrointestinal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gastrointestinal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Musculoskeletal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Musculoskeletal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Integumentary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Integumentary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Neurologic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Neurologic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Exercize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Exercize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Diet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Diet)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.patientID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Tumor Taskforce </h1>
+    <p class="lead">Unreleased. Use the links below to navigate</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            @Html.ActionLink("Patients", "Index", "Patients") <br />
+            @Html.ActionLink("Possible Health Factors", "Index", "PossibleHealthFactors") <br />
+            @Html.ActionLink("Possible Other Meds", "Index", "PossibleOtherMeds") <br />
+            @Html.ActionLink("Possible Family History", "Index", "PossibleFamilyHistories") <br />
+            @Html.ActionLink("Possible Treatments", "Index", "PossibleTreatments") <br />
+            @Html.ActionLink("Possible Symptoms", "Index", "PossibleSymptoms") <br />
+            @Html.ActionLink("Linked Health Factors", "Index", "HealthFactorsPivots") <br />
+            @Html.ActionLink("Linked Other Meds", "Index", "OtherMedsPivots") <br />
+            @Html.ActionLink("Linked Family History", "Index", "FamilyHistoryPivots") <br />
+            @Html.ActionLink("Linked Treatments", "Index", "TreatmentsPivots") <br />
+            @Html.ActionLink("Linked Symptoms", "Index", "SymptomsPivots") 
+        </p>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>
