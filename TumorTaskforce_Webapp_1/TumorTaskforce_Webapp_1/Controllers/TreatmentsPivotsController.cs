@@ -37,11 +37,25 @@ namespace TumorTaskforce_Webapp_1.Controllers
         }
 
         // GET: TreatmentsPivots/Create
-        public ActionResult Create()
+        public ActionResult Create(int patientID)
         {
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID");
+            Patient[] sel = new Patient[1];
+            sel[0] = db.Patients.Find(patientID);
+            ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleTreatments, "Id", "Name");
+            ViewBag.effectiveness = new SelectList(getEffectiveness());
             return View();
+        }
+        public int[] getEffectiveness()
+        {
+            int[] ret = new int[11];
+            int a = 0;
+            while (a < 11)
+            {
+                ret[a] = a;
+                a++;
+            }
+            return ret;
         }
 
         // POST: TreatmentsPivots/Create
@@ -55,11 +69,13 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 db.TreatmentsPivots.Add(treatmentsPivot);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Patients", new { id = treatmentsPivot.patientID });
             }
-
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID", treatmentsPivot.patientID);
+            Patient[] sel = new Patient[1];
+            sel[0] = db.Patients.Find(treatmentsPivot.patientID);
+            ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleTreatments, "Id", "Name", treatmentsPivot.datapieceID);
+            ViewBag.effectiveness = new SelectList(getEffectiveness());
             return View(treatmentsPivot);
         }
 

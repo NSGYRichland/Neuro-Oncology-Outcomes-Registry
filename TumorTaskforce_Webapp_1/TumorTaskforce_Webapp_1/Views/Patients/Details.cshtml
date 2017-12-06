@@ -195,6 +195,8 @@
 
                 <br />
             }
+            @Html.ActionLink("New Symptom", "Create", "SymptomsPivots", new { patientId = Model.patientID }, null)
+            <br />
         </dd>
 
         <dt>
@@ -304,9 +306,11 @@
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.effectiveness)
                 }
-
+                
                 <br />
             }
+            @Html.ActionLink("New Treatment", "Create", "TreatmentsPivots", new { patientId = Model.patientID }, null)
+            <br />
         </dd>
 
     </dl>
