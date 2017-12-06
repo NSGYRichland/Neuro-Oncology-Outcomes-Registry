@@ -192,7 +192,10 @@
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.notes)
                 }
-
+                <tag> --- </tag>
+                @Html.ActionLink("Edit", "Edit", "SymptomsPivots", new { id = sp.Id }, null)
+                <tag> | </tag>
+                @Html.ActionLink("Delete", "Delete", "SymptomsPivots", new { id = sp.Id }, null)
                 <br />
             }
             @Html.ActionLink("New Symptom", "Create", "SymptomsPivots", new { patientId = Model.patientID }, null)
@@ -231,6 +234,10 @@
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.notes)
                 }
+                <tag> --- </tag>
+                @Html.ActionLink("Edit", "Edit", "OtherMedsPivots", new { id = sp.Id }, null)
+                <tag> | </tag>
+                @Html.ActionLink("Delete", "Delete", "OtherMedsPivots", new { id = sp.Id }, null)
                 <br />
             }
             @Html.ActionLink("New Other Medication", "Create", "OtherMedsPivots", new { patientId = Model.patientID }, null)
@@ -268,6 +275,10 @@
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.notes)
                 }
+                <tag> --- </tag>
+                @Html.ActionLink("Edit", "Edit", "HealthFactorsPivots", new { id = sp.Id }, null)
+                <tag> | </tag>
+                @Html.ActionLink("Delete", "Delete", "HealthFactorsPivots", new { id = sp.Id }, null)
                 <br />
             }
             @Html.ActionLink("New Health Factor", "Create", "HealthFactorsPivots", new { patientId = Model.patientID }, null)
@@ -312,7 +323,10 @@
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.effectiveness)
                 }
-                
+                <tag> --- </tag>
+                @Html.ActionLink("Edit", "Edit", "TreatmentsPivots", new { id = sp.Id }, null)
+                <tag> | </tag>
+                @Html.ActionLink("Delete", "Delete", "TreatmentsPivots", new { id = sp.Id }, null)
                 <br />
             }
             @Html.ActionLink("New Treatment", "Create", "TreatmentsPivots", new { patientId = Model.patientID }, null)

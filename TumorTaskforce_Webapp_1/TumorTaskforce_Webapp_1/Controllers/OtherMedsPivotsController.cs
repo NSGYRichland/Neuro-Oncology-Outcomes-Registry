@@ -87,7 +87,9 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID", otherMedsPivot.patientID);
+            Patient[] sel = new Patient[1];
+            sel[0] = db.Patients.Find(otherMedsPivot.patientID);
+            ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleOtherMeds, "Id", "Name", otherMedsPivot.datapieceID);
             return View(otherMedsPivot);
         }
@@ -103,9 +105,11 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 db.Entry(otherMedsPivot).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Patients", new { id = otherMedsPivot.patientID });
             }
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID", otherMedsPivot.patientID);
+            Patient[] sel = new Patient[1];
+            sel[0] = db.Patients.Find(otherMedsPivot.patientID);
+            ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleOtherMeds, "Id", "Name", otherMedsPivot.datapieceID);
             return View(otherMedsPivot);
         }
@@ -133,7 +137,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             OtherMedsPivot otherMedsPivot = db.OtherMedsPivots.Find(id);
             db.OtherMedsPivots.Remove(otherMedsPivot);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Patients", new { id = otherMedsPivot.patientID });
         }
 
         protected override void Dispose(bool disposing)

@@ -84,7 +84,8 @@ namespace TumorTaskforce_Webapp_1.Controllers
             sel[0] = db.Patients.Find(treatmentsPivot.patientID);
             ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleTreatments, "Id", "Name", treatmentsPivot.datapieceID);
-            ViewBag.effectiveness = new SelectList(getEffectiveness());
+            int[] list = getEffectiveness();
+            ViewBag.effectiveness = new SelectList(list, list[treatmentsPivot.effectiveness]);
             return View(treatmentsPivot);
         }
 
@@ -100,8 +101,12 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID", treatmentsPivot.patientID);
+            Patient[] sel = new Patient[1];
+            sel[0] = db.Patients.Find(treatmentsPivot.patientID);
+            ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleTreatments, "Id", "Name", treatmentsPivot.datapieceID);
+            int[] list = getEffectiveness();
+            ViewBag.effectiveness = new SelectList(list, list[treatmentsPivot.effectiveness]);
             return View(treatmentsPivot);
         }
 
@@ -116,10 +121,14 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 db.Entry(treatmentsPivot).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Patients", new { id = treatmentsPivot.patientID });
             }
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID", treatmentsPivot.patientID);
+            Patient[] sel = new Patient[1];
+            sel[0] = db.Patients.Find(treatmentsPivot.patientID);
+            ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleTreatments, "Id", "Name", treatmentsPivot.datapieceID);
+            int[] list = getEffectiveness();
+            ViewBag.effectiveness = new SelectList(list, list[treatmentsPivot.effectiveness]);
             return View(treatmentsPivot);
         }
 
@@ -146,7 +155,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             TreatmentsPivot treatmentsPivot = db.TreatmentsPivots.Find(id);
             db.TreatmentsPivots.Remove(treatmentsPivot);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Patients", new { id = treatmentsPivot.patientID });
         }
 
         protected override void Dispose(bool disposing)

@@ -8,35 +8,11 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>OtherMedsPivot</h4>
+    <h4>Other Medication</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.frequency)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.frequency)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.notes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.notes)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Patient.patientID)
+            Patient
         </dt>
 
         <dd>
@@ -44,12 +20,38 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PossibleOtherMed.Name)
+            Medication
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.PossibleOtherMed.Name)
         </dd>
+
+        <dt>
+            Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            Frequency
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.frequency)
+        </dd>
+
+        <dt>
+            Notes
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.notes)
+        </dd>
+
+        
 
     </dl>
 
@@ -58,7 +60,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to Patient", "Details", "Patients", new { id = Int32.Parse(Html.ValueFor(model => model.patientID).ToString()) }, null)
         </div>
     }
 </div>
