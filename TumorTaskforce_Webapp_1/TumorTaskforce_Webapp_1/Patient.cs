@@ -43,7 +43,7 @@ namespace TumorTaskforce_Webapp_1
         public string Neurologic { get; set; }
         public string Exercize { get; set; }
         public string Diet { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FamilyHistoryPivot> FamilyHistoryPivots { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

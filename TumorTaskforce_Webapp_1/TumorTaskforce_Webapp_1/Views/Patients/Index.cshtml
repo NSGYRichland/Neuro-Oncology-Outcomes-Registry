@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.patientID)
+            Patient
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Sex)
@@ -24,49 +24,16 @@
             @Html.DisplayNameFor(model => model.Age)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HistologicalClassification)
+            Classification
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HistologicalGrade)
+            Grade (WHO)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TumorWidth)
+            Tumor Size
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TumorHeight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TumorLength)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TumorLocation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Constitutional)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Respiratory)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cardiovascular)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gastrointestinal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Musculoskeletal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Integumentary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Neurologic)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Exercize)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Diet)
+            Location
         </th>
         <th></th>
     </tr>
@@ -93,46 +60,17 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TumorWidth)
-        </td>
-        <td>
+            x
             @Html.DisplayFor(modelItem => item.TumorHeight)
-        </td>
-        <td>
+            x
             @Html.DisplayFor(modelItem => item.TumorLength)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TumorLocation)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Constitutional)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Respiratory)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cardiovascular)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gastrointestinal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Musculoskeletal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Integumentary)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Neurologic)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Exercize)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Diet)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.patientID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.patientID }) |
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.patientID }) |*@
+            @Html.ActionLink("View Patient", "Details", new { id=item.patientID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.patientID })
         </td>
     </tr>
