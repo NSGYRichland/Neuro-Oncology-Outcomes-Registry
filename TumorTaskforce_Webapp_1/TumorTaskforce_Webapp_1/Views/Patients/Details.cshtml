@@ -208,6 +208,8 @@
             <br />
             @foreach (OtherMedsPivot sp in Model.OtherMedsPivots)
             {
+                @Html.DisplayFor(spitem => sp.PossibleOtherMed.Name)
+
                 if (sp.date != null)
                 {
                     <tag> - </tag>
@@ -231,6 +233,8 @@
                 }
                 <br />
             }
+            @Html.ActionLink("New Other Medication", "Create", "OtherMedsPivots", new { patientId = Model.patientID }, null)
+            <br />
         </dd>
 
         <dt>
@@ -266,6 +270,8 @@
                 }
                 <br />
             }
+            @Html.ActionLink("New Health Factor", "Create", "HealthFactorsPivots", new { patientId = Model.patientID }, null)
+            <br />
         </dd>
 
         <dt>

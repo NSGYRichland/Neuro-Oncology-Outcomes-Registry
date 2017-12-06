@@ -44,10 +44,19 @@ namespace TumorTaskforce_Webapp_1.Controllers
         //    return View();
         //}
 
-        public ActionResult Create(int patientID)
+        public ActionResult Create(int? patientID)
         {
+            if (patientID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Patient p = db.Patients.Find(patientID);
+            if (p == null)
+            {
+                return HttpNotFound();
+            }
             Patient[] sel = new Patient[1];
-            sel[0]=db.Patients.Find(patientID);
+            sel[0] = p;
             ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleSymptoms, "Id", "Name");
             return View();

@@ -37,10 +37,19 @@ namespace TumorTaskforce_Webapp_1.Controllers
         }
 
         // GET: TreatmentsPivots/Create
-        public ActionResult Create(int patientID)
+        public ActionResult Create(int? patientID)
         {
+            if (patientID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Patient p = db.Patients.Find(patientID);
+            if (p == null)
+            {
+                return HttpNotFound();
+            }
             Patient[] sel = new Patient[1];
-            sel[0] = db.Patients.Find(patientID);
+            sel[0] = p;
             ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleTreatments, "Id", "Name");
             ViewBag.effectiveness = new SelectList(getEffectiveness());
