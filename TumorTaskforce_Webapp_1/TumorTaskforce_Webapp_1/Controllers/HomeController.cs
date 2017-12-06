@@ -13,6 +13,11 @@ namespace TumorTaskforce_Webapp_1.Controllers
         {
             return View();
         }
+        public ActionResult Manage()
+        {
+            ViewBag.Message = "Manage possible data entries for patients.";
+            return View();
+        }
 
         public ActionResult About()
         {

@@ -11,6 +11,13 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            General Info
+        </dt>
+
+        <dd>
+            ------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Sex)
         </dt>
 
@@ -92,7 +99,7 @@
         </dt>
 
         <dd>
-            <br /><br />
+            <br />------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })<br />
             @Html.DisplayFor(model => model.Constitutional)
         </dd>
 
@@ -336,6 +343,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.patientID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Delete Patient", "Delete", new { id = Model.patientID }) |
+    @Html.ActionLink("Back to Patient Directory", "Index")
 </p>
