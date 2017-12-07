@@ -1,6 +1,7 @@
 # TumorTaskforce
 
-This is just an example project to see how to use MySQL and Visual Studio to complete our tasks and upload them to gitHub.
+This repo holds both our Research project, whose code is not important as it is old and unused, and the project housing our actual Web App.
 
-The code is only functional on Laura's computer, as it connects to and is based on her local database. Once we have a remote database
-established, we will create a new 'official' project which will connect to and be based on that database. Then it will be functional.
+The code for the Web App is .NET MVC based and connects to a SQL database hosted on Microsoft Azure. 
+The Web App is also deployed via Microsoft Azure.
+Simply go to tumor.azurewebsites.net to access the latest version of the web app.
