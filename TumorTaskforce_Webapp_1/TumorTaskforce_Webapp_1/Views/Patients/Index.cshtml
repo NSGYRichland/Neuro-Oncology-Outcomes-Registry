@@ -10,9 +10,61 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<p>
-    @Html.ActionLink("Search For Patient", "Search")    @*this is what i added*@
-</p>
+@using (Html.BeginForm("Index", "Patients", FormMethod.Get, 
+    new { @class = "Search-form"}))
+{
+    <div id="txtBox">
+        @Html.Label("Search for Patients")
+        <input type="text" name="q"/>
+    </div>
+    <div id="radioList">
+        @Html.RadioButton("SearchType","0", true)
+        @Html.Label("ID")
+        @*@Html.RadioButton("SearchType", "1")
+        @Html.Label("Age")*@
+        @*@Html.RadioButton("SearchType", "2", true)
+        @Html.Label("Sex")*@
+        @Html.RadioButton("SearchType", "3")
+        @Html.Label("HistologicalClassification")
+        
+    </div>
+    <div id="buttonSearch">
+        <input type="submit" value="Search" id="buttonSubmit"/>
+    </div>
+}
+<br/>
+@*<div id="DivGrid">
+    @{
+        var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 4, defaultSort: "ID");
+        if (Model.Count() > 0)
+        {
+            <div><strong> @ViewBag.SearchParameter</strong> | @grid.TotalRowCount @Html.Label("Patients(s) found")</div>
+            @grid.GetHtml(tableStyle: "PGrid", headerStyle: "Header", alternatingRowStyle: "altRow", htmlAttributes: new { id = "DataTable" }, columns: grid.Columns(
+        grid.Column("ID"),
+        grid.Column("Age", "Age"),
+        grid.Column("Sex", "Sex"),
+        grid.Column("Histological Classification", "Classification")));
+        }
+        else
+        {
+            <hr />@Html.Label("No, Patient(s) not found")<hr />
+        }
+    }
+</div>*@
+
+
+@*<div id="DivGrid">
+    @{
+        var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 4, defaultSort: "ID");
+        @grid.GetHtml(tableStyle: "PGrid", headerStyle: "Header", alternatingRowStyle: "altRow", htmlAttributes: new { id = "DataTable" }, columns: grid.Columns(
+        grid.Column("Patient"),
+        grid.Column("HistologicalClassification", "Classification"),
+        grid.Column("TumorLocation", "Location"),
+        grid.Column("", header: "ToEdit", format: @<text>@Html.ActionLink("Edit", "Edit", "patientID", new { id = item.ID }, new { target = "_blank" })</text>)));
+    }
+
+</div>*@
+
 
 <div class="table-responsive">
     <table class="table table-striped">
@@ -86,3 +138,5 @@
 
     </table>
 </div>
+
+
