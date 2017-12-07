@@ -10,6 +10,27 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+@*<table class=" table">
+    <tr>
+        <th>
+            @Html.ActionLink("Patient", "Index", new { sortingMethod = ViewBag.IDSortParm})
+        </th>
+        <th>PatientID</th>
+        <th>@Html.ActionLink("Age", "Index", new { sortingMethod = ViewBag.AgeSortParm }) </th>
+    </tr>*@
+
+    @*@foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @Html.ActionLink("Patient", "Index", new { sortingMethod = ViewBag.IDSortParm })
+            </th>
+            <th>PatientID</th>
+            <th>@Html.ActionLink("Age", "Index", new { sortingMethod = ViewBag.AgeSortParm }) </th>
+        </tr>
+
+    }*@
+@*</table>*@
 @*<p>
     @Html.ActionLink("Search For Patient", "Search")    @*this is what i added
 </p>*@
@@ -86,3 +107,5 @@
 
     </table>
 </div>
+
+
