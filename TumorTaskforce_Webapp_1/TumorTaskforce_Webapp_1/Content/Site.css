@@ -1,8 +1,6 @@
 ﻿body {
-    /*padding-top: 50px;
-    padding-bottom: 20px;*/
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding-top: 50px;
+    padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -23,44 +21,4 @@ input,
 select,
 textarea {
     max-width: 280px;
-}
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-    padding-right: 1rem;
-    padding-left: 1rem;
-}
-
-/* Customize container */
-@media (min-width: 48em) {
-    .container {
-        max-width: 46rem;
-    }
-}
-
-.container-narrow > hr {
-    margin: 2rem 0;
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 48em) {
-    /* Remove the padding we set earlier */
-    .header,
-    .marketing,
-    .footer {
-        padding-right: 0;
-        padding-left: 0;
-    }
-
-    /* Space out the masthead */
-    .header {
-        margin-bottom: 2rem;
-    }
-
-    /* Remove the bottom border on the jumbotron for visual effect */
-    .jumbotron {
-        border-bottom: 0;
-    }
 }
