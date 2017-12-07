@@ -17,7 +17,7 @@ namespace TumorTaskforce_Webapp_1
         public int Id { get; set; }
         public int patientID { get; set; }
         public int datapieceID { get; set; }
-
+        [System.ComponentModel.DataAnnotations.DisplayFormat(DataFormatString = "{0:d}")]
         public Nullable<System.DateTime> date { get; set; }
         public string frequency { get; set; }
         public string notes { get; set; }
