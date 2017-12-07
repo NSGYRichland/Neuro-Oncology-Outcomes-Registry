@@ -16,13 +16,45 @@ namespace TumorTaskforce_Webapp_1.Controllers
         private tumorDBEntities db = new tumorDBEntities();
 
         // GET: Patients
-        public ActionResult Index(string sortingMethod)
+        public ActionResult Index(/*string sortingMethod*/string q)
         {
+            var patients = from p in db.Patients select p;
+            int id = Convert.ToInt32(Request["SearchType"]);
+            var searchParam = "Searching";
+
+            if (!string.IsNullOrWhiteSpace(q))
+            {
+               switch (id)
+                {
+                    case 0:
+                        int pID = int.Parse(q);
+                        patients = patients.Where(p => p.patientID.Equals(pID));
+                        searchParam += " ID for ' " + q + " ' ";
+                        break;
+                   /* case 1:
+                        int A = Int32.Parse(q);
+                        patients = patients.Where(p => p.Age.Equals(A));
+                        searchParam += " Age for ' " + q + " ' ";
+                        break; */
+                    /*case 2:
+                        patients = patients.Where(p => p.Sex.Contains(q));
+                        searchParam += " Sex for ' " + q + " ' ";
+                        break;*/
+                    case 3:
+                        patients = patients.Where(p => p.HistologicalClassification.Contains(q));
+                        searchParam += " HistologicalClassification for ' " + q + " ' ";
+                        break; 
+                }
+            } else
+            {
+                searchParam += "ALL";
+            }
+            ViewBag.SearchParameter = searchParam;
+            return View(patients);
+
             //ViewBag.IDSortParm = String.IsNullOrEmpty(sortingMethod) ? "idNum" : "";
             //ViewBag.AgeSortParm = sortingMethod == "Age" ? "age_desc" : "Age";
 
-            //var patients = from p in db.Patients
-            //               select p;
             //switch (sortingMethod)
             //{
             //    case "idNum":
@@ -37,9 +69,10 @@ namespace TumorTaskforce_Webapp_1.Controllers
             //    default:
             //        patients = patients.OrderBy(p => p.patientID);
             //        break;
-   
+
             //}
-            return View(db.Patients.ToList());
+            //return View(db.Patients.ToList());
+            //return View(patients);
         }
         
         public ActionResult Compare()
