@@ -68,72 +68,71 @@
         similarity += 3;
         record = record.Insert(8, "1");
     }
+    try {
 
-    if (!Model.Item1.Constitutional.IsEmpty()
-        & !Model.Item1.Constitutional.Equals("normal"))
-    {
-        if (Model.Item1.Constitutional.Equals(curr.Constitutional))
+        if (!Model.Item1.Constitutional.IsEmpty()
+            & !Model.Item1.Constitutional.Equals("normal"))
         {
-            similarity++;
-            record = record.Insert(9, "1");
+            if (Model.Item1.Constitutional.Equals(curr.Constitutional))
+            {
+                similarity++;
+                record = record.Insert(9, "1");
+            }
         }
-    }
-    if (!Model.Item1.Respiratory.IsEmpty()
-        & !Model.Item1.Respiratory.Equals("normal"))
-    {
-        if (Model.Item1.Respiratory.Equals(curr.Respiratory))
+        if (!Model.Item1.Respiratory.IsEmpty()
+            & !Model.Item1.Respiratory.Equals("normal"))
         {
-            similarity++;
-            record = record.Insert(10, "1");
+            if (Model.Item1.Respiratory.Equals(curr.Respiratory))
+            {
+                similarity++;
+                record = record.Insert(10, "1");
+            }
         }
-    }
-    if (!Model.Item1.Cardiovascular.IsEmpty()
-        & !Model.Item1.Cardiovascular.Equals("normal"))
-    {
-        if (Model.Item1.Cardiovascular.Equals(curr.Cardiovascular))
+        if (!Model.Item1.Cardiovascular.IsEmpty()
+            & !Model.Item1.Cardiovascular.Equals("normal"))
         {
-            similarity++;
-            record = record.Insert(11, "1");
+            if (Model.Item1.Cardiovascular.Equals(curr.Cardiovascular))
+            {
+                similarity++;
+                record = record.Insert(11, "1");
+            }
         }
-    }
-    if (!Model.Item1.Gastrointestinal.IsEmpty()
-        & !Model.Item1.Gastrointestinal.Equals("normal"))
-    {
-        if (Model.Item1.Gastrointestinal.Equals(curr.Gastrointestinal))
+        if (!Model.Item1.Gastrointestinal.IsEmpty()
+            & !Model.Item1.Gastrointestinal.Equals("normal"))
         {
-            similarity++;
-            record = record.Insert(12, "1");
+            if (Model.Item1.Gastrointestinal.Equals(curr.Gastrointestinal))
+            {
+                similarity++;
+                record = record.Insert(12, "1");
+            }
         }
-    }
-    if (!Model.Item1.Musculoskeletal.IsEmpty()
-        & !Model.Item1.Musculoskeletal.Equals("normal"))
-    {
-        if (Model.Item1.Musculoskeletal.Equals(curr.Musculoskeletal))
+        if (!Model.Item1.Musculoskeletal.IsEmpty()
+            & !Model.Item1.Musculoskeletal.Equals("normal"))
         {
-            similarity++;
-            record = record.Insert(13, "1");
+            if (Model.Item1.Musculoskeletal.Equals(curr.Musculoskeletal))
+            {
+                similarity++;
+                record = record.Insert(13, "1");
+            }
         }
-    }
-    if (!Model.Item1.Integumentary.IsEmpty()
-        & !Model.Item1.Integumentary.Equals("normal"))
-    {
-        if (Model.Item1.Integumentary.Equals(curr.Integumentary))
+        if (!Model.Item1.Integumentary.IsEmpty()
+            & !Model.Item1.Integumentary.Equals("normal"))
         {
-            similarity++;
-            record = record.Insert(14, "1");
+            if (Model.Item1.Integumentary.Equals(curr.Integumentary))
+            {
+                similarity++;
+                record = record.Insert(14, "1");
+            }
         }
-    }
-    if (!Model.Item1.Neurologic.IsEmpty()
-        & !Model.Item1.Neurologic.Equals("normal"))
-    {
-        if (Model.Item1.Neurologic.Equals(curr.Neurologic))
+        if (!Model.Item1.Neurologic.IsEmpty()
+            & !Model.Item1.Neurologic.Equals("normal"))
         {
-            similarity++;
-            record = record.Insert(15, "1");
+            if (Model.Item1.Neurologic.Equals(curr.Neurologic))
+            {
+                similarity++;
+                record = record.Insert(15, "1");
+            }
         }
-    }
-    try
-    {
         if (!Model.Item1.Exercize.IsEmpty()
             & !Model.Item1.Exercize.Equals("normal"))
         {

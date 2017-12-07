@@ -79,12 +79,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
         {
             return View(db.Patients.ToList());
         }
-
-        public ActionResult Search()
-        {
-            return View(db.Patients.ToList());
-        }
-        
+                
         public ActionResult Results(int? id)
         {
             if (id == null)
@@ -215,7 +210,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 db.Entry(patient).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = patient.patientID });
             }
             ViewBag.Sex =new SelectList(getSexes(), "Value", "Text", patient.Sex);
             ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text", patient.HistologicalGrade);
