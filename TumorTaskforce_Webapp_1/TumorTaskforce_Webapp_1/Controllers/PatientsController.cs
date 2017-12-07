@@ -26,6 +26,11 @@ namespace TumorTaskforce_Webapp_1.Controllers
         {
             return View(db.Patients.ToList());
         }
+
+        public ActionResult Search()
+        {
+            return View(db.Patients.ToList());
+        }
         
         public ActionResult Results(int? id)
         {
@@ -65,6 +70,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             return View();
         }
 
+        
         public SelectListItem[] getSexes()
         {
             SelectListItem[] sex = new SelectListItem[3];

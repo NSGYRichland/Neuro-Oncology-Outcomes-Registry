@@ -9,6 +9,11 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<p>
+    @Html.ActionLink("Search For Patient", "Search")    @*this is what i added*@
+</p>
+
 <table class="table">
     <tr>
         <th>
@@ -72,6 +77,7 @@
             @*@Html.ActionLink("Edit", "Edit", new { id=item.patientID }) |*@
             @Html.ActionLink("View Patient", "Details", new { id=item.patientID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.patientID })
+            
         </td>
     </tr>
 }
