@@ -193,80 +193,109 @@ else if (similarity == targetSimilarity)
 
 
 <div>
-    <h4>Patient @Html.DisplayFor(model => model.Item1.patientID)</h4>
+    <h2>Patient @Model.Item1.patientID</h2>
     <hr />
-    <dl class="dl-horizontal">
-        <dt></dt>
-        Target Information:
-        <dd>
-            ID: @target.patientID
-            <br /><br />
-            targetSimilarity = @targetSimilarity
-            <br /><br />
-            targetEfficency = @targetEffect
-            <br /><br /><br />
-        </dd>
+    <h4>
+        Results:
+    </h4>
+    We recommend the following treatments:
+        <dl class="dl-horizontal">
+                @foreach (TreatmentsPivot sp in target.TreatmentsPivots)
+                {
+                    @Html.DisplayFor(spitem => sp.PossibleTreatment.Name)
+                    if (sp.date != null)
+                    {
+                        <tag> // </tag>
+                        @Html.DisplayNameFor(spitem => sp.date)
+                        <tag>: </tag>
+                        @Html.DisplayFor(spitem => sp.date)
+                    }
+                    if (sp.frequency != null)
+                    {
+                        <tag> // </tag>
+                        @Html.DisplayNameFor(spitem => sp.frequency)
+                        <tag>: </tag>
+                         @Html.DisplayFor(spitem => sp.frequency)
+                    }
+                    if (sp.notes != null)
+                    {
+                        <tag> // </tag>
+                        @Html.DisplayNameFor(spitem => sp.notes)
+                        <tag>: </tag>
+                         @Html.DisplayFor(spitem => sp.notes)
+                    }
+                    if (sp.effectiveness != null)
+                    {
+                        <tag> // </tag>
+                        @Html.DisplayNameFor(spitem => sp.effectiveness)
+                        <tag>: </tag>
+                        @Html.DisplayFor(spitem => sp.effectiveness)
+                    } 
+                    <br />
 
-        <dt>
-            General Info
-        </dt>
+                 }<br />
+            <dt></dt>
+            Data is based on a statistical correlation with: Patient @target.patientID | @targetSimilarity | @targetEffect
+            <hr />
+            <dt>
+                General Info
+            </dt>
+            <dd>
+                ------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.Item1.patientID })
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Item1.Sex)
+            </dt>
 
-        <dd>
-            ------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.Item1.patientID })
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.Sex)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Item1.Sex)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.Sex)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Item1.Married)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.Married)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Item1.Married)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.Married)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Item1.Age)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.Age)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Item1.Age)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.Age)
-        </dd>
+            <dt>
+                Classification
+            </dt>
 
-        <dt>
-            Classification
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Item1.HistologicalClassification)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.HistologicalClassification)
-        </dd>
+            <dt>
+                Grade (WHO)
+            </dt>
 
-        <dt>
-            Grade (WHO)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Item1.HistologicalGrade)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.HistologicalGrade)
-        </dd>
+            <dt>
+                Tumor Size (WxHxL)
+            </dt>
 
-        <dt>
-            Tumor Size (WxHxL)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Item1.TumorWidth)
+                x
+                @Html.DisplayFor(model => model.Item1.TumorHeight)
+                x
+                @Html.DisplayFor(model => model.Item1.TumorLength)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.TumorWidth)
-            x
-            @Html.DisplayFor(model => model.Item1.TumorHeight)
-            x
-            @Html.DisplayFor(model => model.Item1.TumorLength)
-        </dd>
-
-        @*<dt>
+            @*<dt>
                 @Html.DisplayNameFor(model => model.Item1.TumorHeight)
             </dt>
 
@@ -282,265 +311,265 @@ else if (similarity == targetSimilarity)
                 @Html.DisplayFor(model => model.Item1.TumorLength)
             </dd>*@
 
-        <dt>
-            Location
-        </dt>
+            <dt>
+                Location
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.TumorLocation)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Item1.TumorLocation)
+            </dd>
 
-        <dt>
-            <br />Review of Systems<br />
-            @Html.DisplayNameFor(model => model.Item1.Constitutional)
-        </dt>
+            <dt>
+                <br />Review of Systems<br />
+                @Html.DisplayNameFor(model => model.Item1.Constitutional)
+            </dt>
 
-        <dd>
-            <br />------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.Item1.patientID })<br />
-            @Html.DisplayFor(model => model.Item1.Constitutional)
-        </dd>
+            <dd>
+                <br />------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.Item1.patientID })<br />
+                @Html.DisplayFor(model => model.Item1.Constitutional)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.Respiratory)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Item1.Respiratory)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.Respiratory)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Item1.Respiratory)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.Cardiovascular)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Item1.Cardiovascular)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.Cardiovascular)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Item1.Cardiovascular)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.Gastrointestinal)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Item1.Gastrointestinal)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.Gastrointestinal)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Item1.Gastrointestinal)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.Musculoskeletal)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Item1.Musculoskeletal)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.Musculoskeletal)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Item1.Musculoskeletal)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.Integumentary)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Item1.Integumentary)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.Integumentary)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Item1.Integumentary)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.Neurologic)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Item1.Neurologic)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.Neurologic)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Item1.Neurologic)
+            </dd>
 
-        <dt>
-            Exercise
-        </dt>
+            <dt>
+                Exercise
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.Exercize)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Item1.Exercize)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Item1.Diet)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Item1.Diet)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Item1.Diet)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Item1.Diet)
+            </dd>
 
-        <dt>
-            <br />
-            Symptoms
-        </dt>
+            <dt>
+                <br />
+                Symptoms
+            </dt>
 
-        <dd>
-            <br />
-            @foreach (SymptomsPivot sp in Model.Item1.SymptomsPivots)
+            <dd>
+                <br />
+                @foreach (SymptomsPivot sp in Model.Item1.SymptomsPivots)
             {
                 @Html.DisplayFor(spitem => sp.PossibleSymptom.Name)
 
-                if (sp.date != null)
-                {
-                    <tag> // </tag>
-                    @Html.DisplayNameFor(spitem => sp.date)
-                    <tag>: </tag>
-                    @Html.DisplayFor(spitem => sp.date)
-                }
-                if (sp.frequency != null)
-                {
-                    <tag> // </tag>
-                    @Html.DisplayNameFor(spitem => sp.frequency)
-                    <tag>: </tag>
-                    @Html.DisplayFor(spitem => sp.frequency)
-                }
-                if (sp.notes != null)
-                {
-                    <tag> // </tag>
-                    @Html.DisplayNameFor(spitem => sp.notes)
-                    <tag>: </tag>
-                    @Html.DisplayFor(spitem => sp.notes)
-                }
-                <tag> --- </tag>
-                @Html.ActionLink("Edit", "Edit", "SymptomsPivots", new { id = sp.Id }, null)
-                <tag> | </tag>
-                @Html.ActionLink("Remove", "Delete", "SymptomsPivots", new { id = sp.Id }, null)
+            if (sp.date != null)
+            {
+                <tag> // </tag>
+                @Html.DisplayNameFor(spitem => sp.date)
+                <tag>: </tag>
+                @Html.DisplayFor(spitem => sp.date)
+        }
+        if (sp.frequency != null)
+        {
+            <tag> // </tag>
+            @Html.DisplayNameFor(spitem => sp.frequency)
+            <tag>: </tag>
+            @Html.DisplayFor(spitem => sp.frequency)
+    }
+    if (sp.notes != null)
+    {
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.notes)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.notes)
+}
+    <tag> --- </tag>
+    @Html.ActionLink("Edit", "Edit", "SymptomsPivots", new { id = sp.Id }, null)
+    <tag> | </tag>
+    @Html.ActionLink("Remove", "Delete", "SymptomsPivots", new { id = sp.Id }, null)
+    <br />
+}
+                @Html.ActionLink("Add Symptom", "Create", "SymptomsPivots", new { patientId = Model.Item1.patientID }, null)
                 <br />
-            }
-            @Html.ActionLink("Add Symptom", "Create", "SymptomsPivots", new { patientId = Model.Item1.patientID }, null)
-            <br />
-        </dd>
+            </dd>
 
-        <dt>
-            <br />
-            Other Medications
-        </dt>
+            <dt>
+                <br />
+                Other Medications
+            </dt>
 
-        <dd>
-            <br />
-            @foreach (OtherMedsPivot sp in Model.Item1.OtherMedsPivots)
+            <dd>
+                <br />
+                @foreach (OtherMedsPivot sp in Model.Item1.OtherMedsPivots)
             {
                 @Html.DisplayFor(spitem => sp.PossibleOtherMed.Name)
 
-                if (sp.date != null)
-                {
-                    <tag> // </tag>
-                    @Html.DisplayNameFor(spitem => sp.date)
-                    <tag>: </tag>
-                    @Html.DisplayFor(spitem => sp.date)
-                }
-                if (sp.frequency != null)
-                {
-                    <tag> // </tag>
-                    @Html.DisplayNameFor(spitem => sp.frequency)
-                    <tag>: </tag>
-                    @Html.DisplayFor(spitem => sp.frequency)
-                }
-                if (sp.notes != null)
-                {
-                    <tag> // </tag>
-                    @Html.DisplayNameFor(spitem => sp.notes)
-                    <tag>: </tag>
-                    @Html.DisplayFor(spitem => sp.notes)
-                }
-                <tag> --- </tag>
-                @Html.ActionLink("Edit", "Edit", "OtherMedsPivots", new { id = sp.Id }, null)
-                <tag> | </tag>
-                @Html.ActionLink("Remove", "Delete", "OtherMedsPivots", new { id = sp.Id }, null)
+            if (sp.date != null)
+            {
+                <tag> // </tag>
+                @Html.DisplayNameFor(spitem => sp.date)
+                <tag>: </tag>
+                @Html.DisplayFor(spitem => sp.date)
+        }
+        if (sp.frequency != null)
+        {
+            <tag> // </tag>
+            @Html.DisplayNameFor(spitem => sp.frequency)
+            <tag>: </tag>
+            @Html.DisplayFor(spitem => sp.frequency)
+    }
+    if (sp.notes != null)
+    {
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.notes)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.notes)
+}
+    <tag> --- </tag>
+    @Html.ActionLink("Edit", "Edit", "OtherMedsPivots", new { id = sp.Id }, null)
+    <tag> | </tag>
+    @Html.ActionLink("Remove", "Delete", "OtherMedsPivots", new { id = sp.Id }, null)
+    <br />
+}
+                @Html.ActionLink("Add Other Medication", "Create", "OtherMedsPivots", new { patientId = Model.Item1.patientID }, null)
                 <br />
-            }
-            @Html.ActionLink("Add Other Medication", "Create", "OtherMedsPivots", new { patientId = Model.Item1.patientID }, null)
-            <br />
-        </dd>
+            </dd>
 
-        <dt>
-            <br />
-            Health Factors
-        </dt>
+            <dt>
+                <br />
+                Health Factors
+            </dt>
 
-        <dd>
-            <br />
-            @foreach (HealthFactorsPivot sp in Model.Item1.HealthFactorsPivots)
+            <dd>
+                <br />
+                @foreach (HealthFactorsPivot sp in Model.Item1.HealthFactorsPivots)
             {
                 @Html.DisplayFor(spitem => sp.PossibleHealthFactor.Name)
-                if (sp.date != null)
-                {
-                    <tag> // </tag>
-                    @Html.DisplayNameFor(spitem => sp.date)
-                    <tag>: </tag>
-                    @Html.DisplayFor(spitem => sp.date)
-                }
-                if (sp.frequency != null)
-                {
-                    <tag> // </tag>
-                    @Html.DisplayNameFor(spitem => sp.frequency)
-                    <tag>: </tag>
-                    @Html.DisplayFor(spitem => sp.frequency)
-                }
-                if (sp.notes != null)
-                {
-                    <tag> // </tag>
-                    @Html.DisplayNameFor(spitem => sp.notes)
-                    <tag>: </tag>
-                    @Html.DisplayFor(spitem => sp.notes)
-                }
-                <tag> --- </tag>
-                @Html.ActionLink("Edit", "Edit", "HealthFactorsPivots", new { id = sp.Id }, null)
-                <tag> | </tag>
-                @Html.ActionLink("Remove", "Delete", "HealthFactorsPivots", new { id = sp.Id }, null)
+            if (sp.date != null)
+            {
+                <tag> // </tag>
+                @Html.DisplayNameFor(spitem => sp.date)
+                <tag>: </tag>
+                @Html.DisplayFor(spitem => sp.date)
+        }
+        if (sp.frequency != null)
+        {
+            <tag> // </tag>
+            @Html.DisplayNameFor(spitem => sp.frequency)
+            <tag>: </tag>
+            @Html.DisplayFor(spitem => sp.frequency)
+    }
+    if (sp.notes != null)
+    {
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.notes)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.notes)
+}
+    <tag> --- </tag>
+    @Html.ActionLink("Edit", "Edit", "HealthFactorsPivots", new { id = sp.Id }, null)
+    <tag> | </tag>
+    @Html.ActionLink("Remove", "Delete", "HealthFactorsPivots", new { id = sp.Id }, null)
+    <br />
+}
+                @Html.ActionLink("Add Health Factor", "Create", "HealthFactorsPivots", new { patientId = Model.Item1.patientID }, null)
                 <br />
-            }
-            @Html.ActionLink("Add Health Factor", "Create", "HealthFactorsPivots", new { patientId = Model.Item1.patientID }, null)
-            <br />
-        </dd>
+            </dd>
 
-        <dt>
-            <br />
-            Treatments Given
-        </dt>
+            <dt>
+                <br />
+                Treatments Given
+            </dt>
 
-        <dd>
-            <br />
-            @foreach (TreatmentsPivot sp in Model.Item1.TreatmentsPivots)
+            <dd>
+                <br />
+                @foreach (TreatmentsPivot sp in Model.Item1.TreatmentsPivots)
             {
                 @Html.DisplayFor(spitem => sp.PossibleTreatment.Name)
-                if (sp.date != null)
-                {
-                    <tag> // </tag>
-                    @Html.DisplayNameFor(spitem => sp.date)
-                    <tag>: </tag>
-                    @Html.DisplayFor(spitem => sp.date)
-                }
-                if (sp.frequency != null)
-                {
-                    <tag> // </tag>
-                    @Html.DisplayNameFor(spitem => sp.frequency)
-                    <tag>: </tag>
-                    @Html.DisplayFor(spitem => sp.frequency)
-                }
-                if (sp.notes != null)
-                {
-                    <tag> // </tag>
-                    @Html.DisplayNameFor(spitem => sp.notes)
-                    <tag>: </tag>
-                    @Html.DisplayFor(spitem => sp.notes)
-                }
-                if (sp.effectiveness != null)
-                {
-                    <tag> // </tag>
-                    @Html.DisplayNameFor(spitem => sp.effectiveness)
-                    <tag>: </tag>
-                    @Html.DisplayFor(spitem => sp.effectiveness)
-                }
-                <tag> --- </tag>
-                @Html.ActionLink("Edit", "Edit", "TreatmentsPivots", new { id = sp.Id }, null)
-                <tag> | </tag>
-                @Html.ActionLink("Remove", "Delete", "TreatmentsPivots", new { id = sp.Id }, null)
+            if (sp.date != null)
+            {
+                <tag> // </tag>
+                @Html.DisplayNameFor(spitem => sp.date)
+                <tag>: </tag>
+                @Html.DisplayFor(spitem => sp.date)
+        }
+        if (sp.frequency != null)
+        {
+            <tag> // </tag>
+            @Html.DisplayNameFor(spitem => sp.frequency)
+            <tag>: </tag>
+            @Html.DisplayFor(spitem => sp.frequency)
+    }
+    if (sp.notes != null)
+    {
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.notes)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.notes)
+}
+if (sp.effectiveness != null)
+{
+    <tag> // </tag>
+    @Html.DisplayNameFor(spitem => sp.effectiveness)
+    <tag>: </tag>
+    @Html.DisplayFor(spitem => sp.effectiveness)
+}
+    <tag> --- </tag>
+    @Html.ActionLink("Edit", "Edit", "TreatmentsPivots", new { id = sp.Id }, null)
+    <tag> | </tag>
+    @Html.ActionLink("Remove", "Delete", "TreatmentsPivots", new { id = sp.Id }, null)
+    <br />
+}
+                @Html.ActionLink("Add Treatment", "Create", "TreatmentsPivots", new { patientId = Model.Item1.patientID }, null)
                 <br />
-            }
-            @Html.ActionLink("Add Treatment", "Create", "TreatmentsPivots", new { patientId = Model.Item1.patientID }, null)
-            <br />
-        </dd>
+            </dd>
 
-    </dl>
+        </dl>
 </div>
 <p>
-    @Html.ActionLink("Select Another?", "Compare")
+    @Html.ActionLink("Back to Compare", "Compare")
 </p>
 
 
