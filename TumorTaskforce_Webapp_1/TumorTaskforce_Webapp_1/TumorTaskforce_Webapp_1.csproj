@@ -326,13 +326,13 @@
     <Content Include="Views\OtherMedsPivots\Edit.cshtml" />
     <Content Include="Views\OtherMedsPivots\Index.cshtml" />
     <Content Include="Views\Patients\Compare.cshtml" />
-    <Content Include="Views\Patients\Results.cshtml" />
     <Content Include="Views\Home\Manage.cshtml" />
     <Content Include="Views\PossibleSymptoms\CreateFromPatient.cshtml" />
     <Content Include="Views\PossibleTreatments\CreateFromPatient.cshtml" />
     <Content Include="Views\PossibleHealthFactors\CreateFromPatient.cshtml" />
     <Content Include="Views\PossibleOtherMeds\CreateFromPatient.cshtml" />
     <Content Include="Views\Home\FK_Error.cshtml" />
+    <Content Include="Views\Patients\Results.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
