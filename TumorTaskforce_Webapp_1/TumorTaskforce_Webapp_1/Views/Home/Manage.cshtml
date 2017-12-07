@@ -13,13 +13,14 @@
 
         <div class="col-lg-5">
             <p>
-                @Html.ActionLink("Possible Health Factors", "Index", "PossibleHealthFactors") <br />
-                @Html.ActionLink("Possible Treatments", "Index", "PossibleTreatments") <br />
+                
+                @Html.ActionLink("Possible Health Factors", "Index", "PossibleHealthFactors", null, new { @class = "btn btn-primary btn-large" }) <br />
+                @Html.ActionLink("Possible Treatments", "Index", "PossibleTreatments", null, new { @class = "btn btn-primary btn-large" }) <br />
             </p>
         </div>
         <div class="col-lg-5">
-            @Html.ActionLink("Possible Other Meds", "Index", "PossibleOtherMeds") <br />
-            @Html.ActionLink("Possible Symptoms", "Index", "PossibleSymptoms")<br />
+            @Html.ActionLink("Possible Other Meds", "Index", "PossibleOtherMeds", null, new { @class = "btn btn-primary btn-large" }) <br />
+            @Html.ActionLink("Possible Symptoms", "Index", "PossibleSymptoms", null, new { @class = "btn btn-primary btn-large" })<br />
 
         </div>
 
