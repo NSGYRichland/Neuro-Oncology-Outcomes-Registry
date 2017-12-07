@@ -40,7 +40,19 @@ namespace TumorTaskforce_Webapp_1.Controllers
         {
             return View();
         }
-
+        public ActionResult CreateFromPatient(int? TempPatientID)
+        {
+            if (TempPatientID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Patient p = db.Patients.Find(TempPatientID);
+            if (p == null)
+            {
+                return HttpNotFound();
+            }
+            return View();
+        }
         // POST: PossibleHealthFactors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -53,6 +65,20 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 db.PossibleHealthFactors.Add(possibleHealthFactor);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+
+            return View(possibleHealthFactor);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateFromPatient([Bind(Include = "Id,PercentShowing,Name,TempPatientID")] PossibleHealthFactor possibleHealthFactor)
+        {
+            if (ModelState.IsValid)
+            {
+                db.PossibleHealthFactors.Add(possibleHealthFactor);
+                db.SaveChanges();
+                return RedirectToAction("Create", "HealthFactorsPivots", new { patientID = possibleHealthFactor.TempPatientID });
             }
 
             return View(possibleHealthFactor);
@@ -100,6 +126,16 @@ namespace TumorTaskforce_Webapp_1.Controllers
             if (possibleHealthFactor == null)
             {
                 return HttpNotFound();
+            }
+            int a = 0;
+            HealthFactorsPivot[] tp = db.HealthFactorsPivots.ToArray();
+            while (a < db.HealthFactorsPivots.Count())
+            {
+                if (tp[a].datapieceID == id)
+                {
+                    return RedirectToAction("FK_Error", "Home");
+                }
+                a++;
             }
             return View(possibleHealthFactor);
         }

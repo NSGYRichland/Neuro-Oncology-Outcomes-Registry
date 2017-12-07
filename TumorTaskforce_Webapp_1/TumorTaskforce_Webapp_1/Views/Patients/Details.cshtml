@@ -11,6 +11,13 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            General Info
+        </dt>
+
+        <dd>
+            ------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Sex)
         </dt>
 
@@ -92,7 +99,7 @@
         </dt>
 
         <dd>
-            <br /><br />
+            <br />------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })<br />
             @Html.DisplayFor(model => model.Constitutional)
         </dd>
 
@@ -173,28 +180,33 @@
                 
                 if (sp.date != null)
                 {
-                    <tag> - </tag>
+                    <tag> // </tag>
                     @Html.DisplayNameFor(spitem => sp.date)
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.date)
                 }
                 if (sp.frequency != null)
                 {
-                    <tag> - </tag>
+                    <tag> // </tag>
                     @Html.DisplayNameFor(spitem => sp.frequency)
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.frequency)
                 }
                 if (sp.notes != null)
                 {
-                    <tag> - </tag>
+                    <tag> // </tag>
                     @Html.DisplayNameFor(spitem => sp.notes)
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.notes)
                 }
-
+                <tag> --- </tag>
+                @Html.ActionLink("Edit", "Edit", "SymptomsPivots", new { id = sp.Id }, null)
+                <tag> | </tag>
+                @Html.ActionLink("Remove", "Delete", "SymptomsPivots", new { id = sp.Id }, null)
                 <br />
             }
+            @Html.ActionLink("Add Symptom", "Create", "SymptomsPivots", new { patientId = Model.patientID }, null)
+            <br />
         </dd>
 
         <dt>
@@ -206,29 +218,37 @@
             <br />
             @foreach (OtherMedsPivot sp in Model.OtherMedsPivots)
             {
+                @Html.DisplayFor(spitem => sp.PossibleOtherMed.Name)
+
                 if (sp.date != null)
                 {
-                    <tag> - </tag>
+                    <tag> // </tag>
                     @Html.DisplayNameFor(spitem => sp.date)
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.date)
                 }
                 if (sp.frequency != null)
                 {
-                    <tag> - </tag>
+                    <tag> // </tag>
                     @Html.DisplayNameFor(spitem => sp.frequency)
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.frequency)
                 }
                 if (sp.notes != null)
                 {
-                    <tag> - </tag>
+                    <tag> // </tag>
                     @Html.DisplayNameFor(spitem => sp.notes)
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.notes)
                 }
+                <tag> --- </tag>
+                @Html.ActionLink("Edit", "Edit", "OtherMedsPivots", new { id = sp.Id }, null)
+                <tag> | </tag>
+                @Html.ActionLink("Remove", "Delete", "OtherMedsPivots", new { id = sp.Id }, null)
                 <br />
             }
+            @Html.ActionLink("Add Other Medication", "Create", "OtherMedsPivots", new { patientId = Model.patientID }, null)
+            <br />
         </dd>
 
         <dt>
@@ -243,27 +263,33 @@
                 @Html.DisplayFor(spitem => sp.PossibleHealthFactor.Name)
                 if (sp.date != null)
                 {
-                    <tag> - </tag>
+                    <tag> // </tag>
                     @Html.DisplayNameFor(spitem => sp.date)
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.date)
                 }
                 if (sp.frequency != null)
                 {
-                    <tag> - </tag>
+                    <tag> // </tag>
                     @Html.DisplayNameFor(spitem => sp.frequency)
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.frequency)
                 }
                 if (sp.notes != null)
                 {
-                    <tag> - </tag>
+                    <tag> // </tag>
                     @Html.DisplayNameFor(spitem => sp.notes)
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.notes)
                 }
+                <tag> --- </tag>
+                @Html.ActionLink("Edit", "Edit", "HealthFactorsPivots", new { id = sp.Id }, null)
+                <tag> | </tag>
+                @Html.ActionLink("Remove", "Delete", "HealthFactorsPivots", new { id = sp.Id }, null)
                 <br />
             }
+            @Html.ActionLink("Add Health Factor", "Create", "HealthFactorsPivots", new { patientId = Model.patientID }, null)
+            <br />
         </dd>
 
         <dt>
@@ -278,40 +304,45 @@
                 @Html.DisplayFor(spitem => sp.PossibleTreatment.Name)
                 if (sp.date != null)
                 {
-                    <tag> - </tag>
+                    <tag> // </tag>
                     @Html.DisplayNameFor(spitem => sp.date)
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.date)
                 }
                 if (sp.frequency != null)
                 {
-                    <tag> - </tag>
+                    <tag> // </tag>
                     @Html.DisplayNameFor(spitem => sp.frequency)
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.frequency)
                 }
                 if (sp.notes != null)
                 {
-                    <tag> - </tag>
+                    <tag> // </tag>
                     @Html.DisplayNameFor(spitem => sp.notes)
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.notes)
                 }
                 if (sp.effectiveness != null)
                 {
-                    <tag> - </tag>
+                    <tag> // </tag>
                     @Html.DisplayNameFor(spitem => sp.effectiveness)
                     <tag>: </tag>
                     @Html.DisplayFor(spitem => sp.effectiveness)
                 }
-
+                <tag> --- </tag>
+                @Html.ActionLink("Edit", "Edit", "TreatmentsPivots", new { id = sp.Id }, null)
+                <tag> | </tag>
+                @Html.ActionLink("Remove", "Delete", "TreatmentsPivots", new { id = sp.Id }, null)
                 <br />
             }
+            @Html.ActionLink("Add Treatment", "Create", "TreatmentsPivots", new { patientId = Model.patientID }, null)
+            <br />
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.patientID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Delete Patient", "Delete", new { id = Model.patientID }) |
+    @Html.ActionLink("Back to Patient Directory", "Index")
 </p>

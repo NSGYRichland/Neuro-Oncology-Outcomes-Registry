@@ -37,9 +37,27 @@ namespace TumorTaskforce_Webapp_1.Controllers
         }
 
         // GET: SymptomsPivots/Create
-        public ActionResult Create()
+        //public ActionResult Create()
+        //{
+        //    ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID");
+        //    ViewBag.datapieceID = new SelectList(db.PossibleSymptoms, "Id", "Name");
+        //    return View();
+        //}
+
+        public ActionResult Create(int? patientID)
         {
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID");
+            if (patientID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Patient p = db.Patients.Find(patientID);
+            if (p == null)
+            {
+                return HttpNotFound();
+            }
+            Patient[] sel = new Patient[1];
+            sel[0] = p;
+            ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleSymptoms, "Id", "Name");
             return View();
         }
@@ -55,10 +73,12 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 db.SymptomsPivots.Add(symptomsPivot);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Patients", new { id = symptomsPivot.patientID });
             }
 
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID", symptomsPivot.patientID);
+            Patient[] sel = new Patient[1];
+            sel[0] = db.Patients.Find(symptomsPivot.patientID);
+            ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleSymptoms, "Id", "Name", symptomsPivot.datapieceID);
             return View(symptomsPivot);
         }
@@ -75,7 +95,9 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID", symptomsPivot.patientID);
+            Patient[] sel = new Patient[1];
+            sel[0] = db.Patients.Find(symptomsPivot.patientID);
+            ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleSymptoms, "Id", "Name", symptomsPivot.datapieceID);
             return View(symptomsPivot);
         }
@@ -91,9 +113,11 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 db.Entry(symptomsPivot).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Patients", new { id = symptomsPivot.patientID });
             }
-            ViewBag.patientID = new SelectList(db.Patients, "patientID", "patientID", symptomsPivot.patientID);
+            Patient[] sel = new Patient[1];
+            sel[0] = db.Patients.Find(symptomsPivot.patientID);
+            ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleSymptoms, "Id", "Name", symptomsPivot.datapieceID);
             return View(symptomsPivot);
         }
@@ -121,7 +145,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             SymptomsPivot symptomsPivot = db.SymptomsPivots.Find(id);
             db.SymptomsPivots.Remove(symptomsPivot);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Patients", new { id = symptomsPivot.patientID });
         }
 
         protected override void Dispose(bool disposing)

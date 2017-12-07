@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Tumor App </h1>
+    <p class="lead">Use the links above to navigate.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Could Not Delete</h2>
+        <p>
+            The delete operation could not be performed. <br />
+            Check to see if the data you are trying to delete is currently applied to a patient.<br />
+            If so, remove the data from the patient and try again.<br />
+        </p>
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+Click @Html.ActionLink("Here", "Manage") to manage possible data entries for patients.<br />
