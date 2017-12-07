@@ -1,0 +1,38 @@
+<?php
+	include 'header.php.htm';
+?>
+
+<form action=" search.php.htm" method= "POST"> 
+	<input type="text" name="search" placeholder="Search" />
+	<button type="submit" name="submit search"></button>
+</form>
+
+<h1>Search Page</h1>
+<h2>All Patients</h2>
+
+<div class="patients-container">
+	<?php
+		$sql = "SELECT * FROM Patients";
+		$result = mysqli_query($conn, $sql);
+		$queryResults = mysqli_num_rows($result);
+
+		if($queryResults > 0){
+			while($row = mysqli_fetch_assoc($result)) {
+				echo "<div>
+					<h3>". $row['patientID']."</h3>
+				</div>";
+			}
+		}
+	?>	
+</div>
+
+		
+				
+
+
+
+
+
+
+</body>
+</html>

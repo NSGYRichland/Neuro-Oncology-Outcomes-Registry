@@ -9,74 +9,134 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-    <div class="table-responsive">
-        <table class="table table-striped">
+
+@using (Html.BeginForm("Index", "Patients", FormMethod.Get, 
+    new { @class = "Search-form"}))
+{
+    <div id="txtBox">
+        @Html.Label("Search for Patients")
+        <input type="text" name="q"/>
+    </div>
+    <div id="radioList">
+        @Html.RadioButton("SearchType","0", true)
+        @Html.Label("ID")
+        @*@Html.RadioButton("SearchType", "1")
+        @Html.Label("Age")*@
+        @*@Html.RadioButton("SearchType", "2", true)
+        @Html.Label("Sex")*@
+        @Html.RadioButton("SearchType", "3")
+        @Html.Label("HistologicalClassification")
+        
+    </div>
+    <div id="buttonSearch">
+        <input type="submit" value="Search" id="buttonSubmit"/>
+    </div>
+}
+<br/>
+@*<div id="DivGrid">
+    @{
+        var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 4, defaultSort: "ID");
+        if (Model.Count() > 0)
+        {
+            <div><strong> @ViewBag.SearchParameter</strong> | @grid.TotalRowCount @Html.Label("Patients(s) found")</div>
+            @grid.GetHtml(tableStyle: "PGrid", headerStyle: "Header", alternatingRowStyle: "altRow", htmlAttributes: new { id = "DataTable" }, columns: grid.Columns(
+        grid.Column("ID"),
+        grid.Column("Age", "Age"),
+        grid.Column("Sex", "Sex"),
+        grid.Column("Histological Classification", "Classification")));
+        }
+        else
+        {
+            <hr />@Html.Label("No, Patient(s) not found")<hr />
+        }
+    }
+</div>*@
+
+
+@*<div id="DivGrid">
+    @{
+        var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 4, defaultSort: "ID");
+        @grid.GetHtml(tableStyle: "PGrid", headerStyle: "Header", alternatingRowStyle: "altRow", htmlAttributes: new { id = "DataTable" }, columns: grid.Columns(
+        grid.Column("Patient"),
+        grid.Column("HistologicalClassification", "Classification"),
+        grid.Column("TumorLocation", "Location"),
+        grid.Column("", header: "ToEdit", format: @<text>@Html.ActionLink("Edit", "Edit", "patientID", new { id = item.ID }, new { target = "_blank" })</text>)));
+    }
+
+</div>*@
+
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Patient
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Married)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                Classification
+            </th>
+            <th>
+                Grade (WHO)
+            </th>
+            <th>
+                Tumor Size
+            </th>
+            <th>
+                Location
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>
-                    Patient
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Sex)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Married)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Age)
-                </th>
-                <th>
-                    Classification
-                </th>
-                <th>
-                    Grade (WHO)
-                </th>
-                <th>
-                    Tumor Size
-                </th>
-                <th>
-                    Location
-                </th>
-                <th></th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.patientID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sex)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Married)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HistologicalClassification)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HistologicalGrade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TumorWidth)
+                    x
+                    @Html.DisplayFor(modelItem => item.TumorHeight)
+                    x
+                    @Html.DisplayFor(modelItem => item.TumorLength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TumorLocation)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id=item.patientID }) |*@
+                    @Html.ActionLink("View Patient", "Details", new { id = item.patientID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.patientID })
+
+                </td>
             </tr>
+        }
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.patientID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Sex)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Married)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Age)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HistologicalClassification)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HistologicalGrade)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TumorWidth)
-                        x
-                        @Html.DisplayFor(modelItem => item.TumorHeight)
-                        x
-                        @Html.DisplayFor(modelItem => item.TumorLength)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TumorLocation)
-                    </td>
-                    <td>
-                        @*@Html.ActionLink("Edit", "Edit", new { id=item.patientID }) |*@
-                        @Html.ActionLink("View Patient", "Details", new { id = item.patientID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.patientID })
-                    </td>
-                </tr>
-            }
+    </table>
+</div>
 
-        </table>
-        </div>
+
