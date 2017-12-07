@@ -14,72 +14,75 @@
     @Html.ActionLink("Search For Patient", "Search")    @*this is what i added
 </p>*@
 
-<table class="table">
-    <tr>
-        <th>
-            Patient
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sex)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Married)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Age)
-        </th>
-        <th>
-            Classification
-        </th>
-        <th>
-            Grade (WHO)
-        </th>
-        <th>
-            Tumor Size
-        </th>
-        <th>
-            Location
-        </th>
-        <th></th>
-    </tr>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Patient
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Married)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                Classification
+            </th>
+            <th>
+                Grade (WHO)
+            </th>
+            <th>
+                Tumor Size
+            </th>
+            <th>
+                Location
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.patientID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sex)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Married)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Age)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HistologicalClassification)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HistologicalGrade)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TumorWidth)
-            x
-            @Html.DisplayFor(modelItem => item.TumorHeight)
-            x
-            @Html.DisplayFor(modelItem => item.TumorLength)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TumorLocation)
-        </td>
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.patientID }) |*@
-            @Html.ActionLink("View Patient", "Details", new { id=item.patientID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.patientID })
-            
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.patientID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sex)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Married)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HistologicalClassification)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HistologicalGrade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TumorWidth)
+                    x
+                    @Html.DisplayFor(modelItem => item.TumorHeight)
+                    x
+                    @Html.DisplayFor(modelItem => item.TumorLength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TumorLocation)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id=item.patientID }) |*@
+                    @Html.ActionLink("View Patient", "Details", new { id = item.patientID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.patientID })
 
-</table>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
