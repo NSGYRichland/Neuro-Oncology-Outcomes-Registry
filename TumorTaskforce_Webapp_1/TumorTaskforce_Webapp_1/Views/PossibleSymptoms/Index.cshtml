@@ -1,21 +1,24 @@
 ﻿@model IEnumerable<TumorTaskforce_Webapp_1.PossibleSymptom>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All Symptoms";
 }
 
-<h2>Index</h2>
+<h2>All Symptoms</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Symptom", "Create") -
+    Or create it from the @Html.ActionLink("Create Patient", "Create", "Patients") page!
 </p>
+
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PercentShowing)
+            Symptom
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            % of Patients with Symptom
         </th>
         <th></th>
     </tr>
@@ -30,7 +33,6 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>

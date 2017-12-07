@@ -41,6 +41,19 @@ namespace TumorTaskforce_Webapp_1.Controllers
         {
             return View();
         }
+        public ActionResult CreateFromPatient(int? TempPatientID)
+        {
+            if (TempPatientID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Patient p = db.Patients.Find(TempPatientID);
+            if (p == null)
+            {
+                return HttpNotFound();
+            }
+            return View();
+        }
 
         // POST: PossibleSymptoms/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -54,6 +67,20 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 db.PossibleSymptoms.Add(possibleSymptom);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+
+            return View(possibleSymptom);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateFromPatient([Bind(Include = "Id,PercentShowing,Name,TempPatientID")] PossibleSymptom possibleSymptom)
+        {
+            if (ModelState.IsValid)
+            {
+                db.PossibleSymptoms.Add(possibleSymptom);
+                db.SaveChanges();
+                return RedirectToAction("Create", "SymptomsPivots", new { patientID = possibleSymptom.TempPatientID });
             }
 
             return View(possibleSymptom);
@@ -101,6 +128,16 @@ namespace TumorTaskforce_Webapp_1.Controllers
             if (possibleSymptom == null)
             {
                 return HttpNotFound();
+            }
+            int a = 0;
+            SymptomsPivot[] tp = db.SymptomsPivots.ToArray();
+            while (a < db.SymptomsPivots.Count())
+            {
+                if (tp[a].datapieceID == id)
+                {
+                    return RedirectToAction("FK_Error", "Home");
+                }
+                a++;
             }
             return View(possibleSymptom);
         }

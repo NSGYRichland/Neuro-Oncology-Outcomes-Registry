@@ -40,7 +40,19 @@ namespace TumorTaskforce_Webapp_1.Controllers
         {
             return View();
         }
-
+        public ActionResult CreateFromPatient(int? TempPatientID)
+        {
+            if (TempPatientID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Patient p = db.Patients.Find(TempPatientID);
+            if (p == null)
+            {
+                return HttpNotFound();
+            }
+            return View();
+        }
         // POST: PossibleTreatments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -53,6 +65,20 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 db.PossibleTreatments.Add(possibleTreatment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+
+            return View(possibleTreatment);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateFromPatient([Bind(Include = "Id,PercentShowing,Name,TempPatientID")] PossibleTreatment possibleTreatment)
+        {
+            if (ModelState.IsValid)
+            {
+                db.PossibleTreatments.Add(possibleTreatment);
+                db.SaveChanges();
+                return RedirectToAction("Create", "TreatmentsPivots", new { patientID = possibleTreatment.TempPatientID });
             }
 
             return View(possibleTreatment);
@@ -100,6 +126,16 @@ namespace TumorTaskforce_Webapp_1.Controllers
             if (possibleTreatment == null)
             {
                 return HttpNotFound();
+            }
+            int a = 0;
+            TreatmentsPivot[] tp = db.TreatmentsPivots.ToArray();
+            while (a < db.TreatmentsPivots.Count())
+            {
+                if (tp[a].datapieceID == id)
+                {
+                    return RedirectToAction("FK_Error", "Home");
+                }
+                a++;
             }
             return View(possibleTreatment);
         }

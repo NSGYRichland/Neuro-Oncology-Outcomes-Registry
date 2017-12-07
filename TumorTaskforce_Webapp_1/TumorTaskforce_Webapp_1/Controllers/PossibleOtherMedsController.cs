@@ -40,7 +40,19 @@ namespace TumorTaskforce_Webapp_1.Controllers
         {
             return View();
         }
-
+        public ActionResult CreateFromPatient(int? TempPatientID)
+        {
+            if (TempPatientID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Patient p = db.Patients.Find(TempPatientID);
+            if (p == null)
+            {
+                return HttpNotFound();
+            }
+            return View();
+        }
         // POST: PossibleOtherMeds/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -53,6 +65,20 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 db.PossibleOtherMeds.Add(possibleOtherMed);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+
+            return View(possibleOtherMed);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateFromPatient([Bind(Include = "Id,PercentShowing,Name,TempPatientID")] PossibleOtherMed possibleOtherMed)
+        {
+            if (ModelState.IsValid)
+            {
+                db.PossibleOtherMeds.Add(possibleOtherMed);
+                db.SaveChanges();
+                return RedirectToAction("Create", "OtherMedsPivots", new { patientID = possibleOtherMed.TempPatientID });
             }
 
             return View(possibleOtherMed);
@@ -100,6 +126,16 @@ namespace TumorTaskforce_Webapp_1.Controllers
             if (possibleOtherMed == null)
             {
                 return HttpNotFound();
+            }
+            int a = 0;
+            OtherMedsPivot[] tp = db.OtherMedsPivots.ToArray();
+            while (a < db.OtherMedsPivots.Count())
+            {
+                if (tp[a].datapieceID == id)
+                {
+                    return RedirectToAction("FK_Error", "Home");
+                }
+                a++;
             }
             return View(possibleOtherMed);
         }
