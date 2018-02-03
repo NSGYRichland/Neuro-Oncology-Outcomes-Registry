@@ -12,11 +12,10 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Patient</h4>
+        <h4>Patient @Html.DisplayFor(model => model.patientID)</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.patientID)
-
         <div class="form-group">
             @Html.LabelFor(model => model.Sex, "Sex", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -44,7 +43,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HistologicalClassification, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.HistologicalClassification, "Classification", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.HistologicalClassification, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.HistologicalClassification, "", new { @class = "text-danger" })
@@ -52,7 +51,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HistologicalGrade, "Histological Grade", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.HistologicalGrade, "Grade (WHO)", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("HistologicalGrade", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.HistologicalGrade, "", new { @class = "text-danger" })
@@ -60,7 +59,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TumorWidth, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TumorWidth, "Tumor Width (mm)", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TumorWidth, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TumorWidth, "", new { @class = "text-danger" })
@@ -68,7 +67,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TumorHeight, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TumorHeight, "Tumor Height (mm)", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TumorHeight, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TumorHeight, "", new { @class = "text-danger" })
@@ -76,7 +75,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TumorLength, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TumorLength, "Tumor Length (mm)", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TumorLength, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TumorLength, "", new { @class = "text-danger" })
@@ -84,10 +83,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TumorLocation, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TumorLocation, "Tumor Location", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TumorLocation, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TumorLocation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <br />
+            @Html.LabelFor(model => model.TumorLocation, "Review of Systems", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
             </div>
         </div>
 
@@ -172,7 +179,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Discard Changes", "Details", new {id = Model.patientID})
 </div>
 
 @section Scripts {
