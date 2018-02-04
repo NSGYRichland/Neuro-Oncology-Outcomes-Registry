@@ -10,6 +10,11 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.2.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.2.0" />
+    <PackageReference Include="Selenium.Chrome.WebDriver" Version="2.35.0" />
+    <PackageReference Include="Selenium.Firefox.WebDriver" Version="0.19.1" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.8.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.35.0" />
+    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.8.0" />
   </ItemGroup>
 
   <ItemGroup>
