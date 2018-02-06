@@ -1,5 +1,7 @@
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+//trying some stuff out
+
+/*using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -11,14 +13,14 @@ namespace StringLibraryTest
     [TestClass]
     public class UnitTest1
     {
-
+        //System.Environment.SetEnvironmentVariable("webdriver.firefox.driver", @"C:\Users\bsand\OneDrive\Documents\Visual Studio 2017\geckodriver-v0.19.1-win64");
         //ChromeDriver driver = new ChromeDriver();
-        FirefoxDriver driver = new FirefoxDriver();
+        IWebDriver driver = new FirefoxDriver();
 
         [TestMethod]
         public void SearchPatient()
         {
-
+            System.Environment.SetEnvironmentVariable("webdriver.firefox.driver", @"C:\Users\bsand\OneDrive\Documents\Visual Studio 2017\geckodriver-v0.19.1-win64");
             try
             {
                 string url = "http://localhost:52612/";
@@ -42,3 +44,5 @@ namespace StringLibraryTest
 
     }
 }
+
+*/
