@@ -4,7 +4,7 @@ This solution houses all the code for Tumor Taskforce's "Tumor App."
 
 The code for the Web App is .NET MVC based and connects to a SQL database hosted on Microsoft Azure. 
 The Web App is also deployed via Microsoft Azure.
-Simply go to tumor.azurewebsites.net to access the latest version of the web app.
+Simply go to tumor1.azurewebsites.net to access the latest version of the web app.
 
 
 "TUMOR APP"
