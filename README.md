@@ -45,6 +45,6 @@ To run behavioral test:
 	3) The available tests in the project will appear
 	
 	4) You can choose to run them individually or click the "Run All" button to automatically see whether the tests pass
-	**In the future we plan on having the tests run automatically when the project is built and show errors if any portion of the 		build is unsuccessful**
+	**In the future we plan on having the tests run automatically when the project is built and show errors if any portion of the build is unsuccessful**
 	
 	
