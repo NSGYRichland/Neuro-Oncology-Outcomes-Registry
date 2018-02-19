@@ -34,10 +34,15 @@ TESTING:
 To run behavioral test:
 	1) Download the necessary Selenium Nuget packages from Visual Studios and include their corresponding headers
 	**This is the most friendly method**
+		
 		-Selenium.WebDriver
+		
 		-Selenium.Firfox.WebDriver
+		
 	2) Build the solution inside Visual Studios and this will activate the built in Test Explorer
+	
 	3) The available tests in the project will appear
+	
 	4) You can choose to run them individually or click the "Run All" button to automatically see whether the tests pass
 	**In the future we plan on having the tests run automatically when the project is built and show errors if any portion of the 		build is unsuccessful**
 	
