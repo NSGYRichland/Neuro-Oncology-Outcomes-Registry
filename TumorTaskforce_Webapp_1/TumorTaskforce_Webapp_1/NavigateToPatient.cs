@@ -7,6 +7,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
+//this a file that will house the multiple behav tests for our website
+
 namespace SeleniumTests
 {
     [TestFixture]
