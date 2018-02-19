@@ -32,6 +32,7 @@ Get a suggested treatment option
 TESTING:
 
 To run behavioral test:
+
 	1) Download the necessary Selenium Nuget packages from Visual Studios and include their corresponding headers
 	**This is the most friendly method**
 		
