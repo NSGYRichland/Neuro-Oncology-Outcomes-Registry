@@ -12,7 +12,7 @@ using OpenQA.Selenium.Support.UI;
 namespace SeleniumTests
 {
     [TestFixture]
-    public class NavigateToPatient
+    public class MoveThroughWebsite
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
@@ -46,10 +46,10 @@ namespace SeleniumTests
         public void TheNavigateToPatientTest()
         {
             driver.Navigate().GoToUrl("http://tumor1.azurewebsites.net/"); 
-            Thread.Sleep(5000);
+            Thread.Sleep(500);
             driver.FindElement(By.XPath("//button[@type='button']")).Click(); 
             driver.FindElement(By.LinkText("Patients")).Click();
-            Thread.Sleep(5000);
+            Thread.Sleep(500);
         }
 
         //go to the webpage and navigate to the "Compare" tab to bring up the list of patients
@@ -58,10 +58,10 @@ namespace SeleniumTests
         public void TheNavigateToCompareTest()
         {
             driver.Navigate().GoToUrl("http://tumor1.azurewebsites.net/");
-            Thread.Sleep(5000);
+            Thread.Sleep(500);
             driver.FindElement(By.XPath("//button[@type='button']")).Click();
             driver.FindElement(By.LinkText("Compare")).Click();
-            Thread.Sleep(5000);
+            Thread.Sleep(500);
         }
 
         private bool IsElementPresent(By by)
