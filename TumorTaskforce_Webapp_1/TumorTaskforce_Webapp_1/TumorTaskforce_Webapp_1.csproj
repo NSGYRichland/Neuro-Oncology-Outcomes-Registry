@@ -194,7 +194,7 @@
     <Compile Include="HealthFactorsPivot.cs">
       <DependentUpon>tumorDB-model.tt</DependentUpon>
     </Compile>
-    <Compile Include="NavigateToPatient.cs" />
+    <Compile Include="BehavTests.cs" />
     <Compile Include="OtherMedsPivot.cs">
       <DependentUpon>tumorDB-model.tt</DependentUpon>
     </Compile>

@@ -12,7 +12,7 @@ using OpenQA.Selenium.Support.UI;
 namespace SeleniumTests
 {
     [TestFixture]
-    public class NavigateToPatient
+    public class MoveThroughWebsite
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
@@ -43,25 +43,59 @@ namespace SeleniumTests
         
         //go to the webpage and navigate to the "Patients" tab to bring up the list of patients
         [Test]
-        public void TheNavigateToPatientTest()
+        public void NavigateToPatient()
         {
             driver.Navigate().GoToUrl("http://tumor1.azurewebsites.net/"); 
-            Thread.Sleep(5000);
-            driver.FindElement(By.XPath("//button[@type='button']")).Click(); 
+            Thread.Sleep(4500); 
             driver.FindElement(By.LinkText("Patients")).Click();
-            Thread.Sleep(5000);
+            Thread.Sleep(4500);
         }
 
         //go to the webpage and navigate to the "Compare" tab to bring up the list of patients
             //to compare to one another
         [Test]
-        public void TheNavigateToCompareTest()
+        public void NavigateToCompare()
         {
             driver.Navigate().GoToUrl("http://tumor1.azurewebsites.net/");
-            Thread.Sleep(5000);
-            driver.FindElement(By.XPath("//button[@type='button']")).Click();
+            Thread.Sleep(4500);
             driver.FindElement(By.LinkText("Compare")).Click();
-            Thread.Sleep(5000);
+            Thread.Sleep(4500);
+        }
+
+        [Test]
+        public void SearchPatientID()
+        {
+            driver.Navigate().GoToUrl("http://tumor1.azurewebsites.net/");
+            Thread.Sleep(4500);
+            driver.FindElement(By.LinkText("Patients")).Click();
+            Thread.Sleep(4500);
+            driver.FindElement(By.Name("q")).Click();
+            driver.FindElement(By.Name("q")).Clear();
+            driver.FindElement(By.Name("q")).SendKeys("3");
+            driver.FindElement(By.Name("q")).SendKeys(Keys.Enter);
+            Thread.Sleep(4500);
+            driver.FindElement(By.Name("q")).Click();
+            driver.FindElement(By.Name("q")).SendKeys(Keys.Enter);
+            driver.FindElement(By.Id("buttonSubmit")).Click();
+            driver.FindElement(By.Name("q")).Click();
+            driver.FindElement(By.Name("q")).Clear();
+            driver.FindElement(By.Name("q")).SendKeys("6");            
+            driver.FindElement(By.Name("q")).SendKeys(Keys.Enter);
+            Thread.Sleep(4500);
+            driver.FindElement(By.Name("q")).Click();
+            driver.FindElement(By.Name("q")).SendKeys(Keys.Enter);
+            driver.FindElement(By.Id("buttonSubmit")).Click();
+            driver.FindElement(By.Name("q")).Click();
+            driver.FindElement(By.Name("q")).Clear();
+            driver.FindElement(By.Name("q")).SendKeys("7");
+            driver.FindElement(By.Name("q")).SendKeys(Keys.Enter);
+            Thread.Sleep(4500);
+        }
+
+        [Test]
+        public void SearchPatientClass()
+        {
+
         }
 
         private bool IsElementPresent(By by)
