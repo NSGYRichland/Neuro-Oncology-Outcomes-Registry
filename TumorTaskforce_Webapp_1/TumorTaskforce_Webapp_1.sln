@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TumorTaskforce_Webapp_1", "TumorTaskforce_Webapp_1\TumorTaskforce_Webapp_1.csproj", "{DE6DABCE-991D-4E86-8AA5-37B81356AEF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringLibraryTest", "StringLibraryTest\StringLibraryTest.csproj", "{1056EA01-CB24-4814-A7D0-0F014D50DCAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StringLibraryTest", "StringLibraryTest\StringLibraryTest.csproj", "{1056EA01-CB24-4814-A7D0-0F014D50DCAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
