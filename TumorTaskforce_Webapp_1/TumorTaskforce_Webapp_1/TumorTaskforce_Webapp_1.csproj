@@ -241,7 +241,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="NavigateToPatient.cs" />
     <Compile Include="OtherMedsPivot.cs">
       <DependentUpon>tumorDB-model.tt</DependentUpon>
     </Compile>
