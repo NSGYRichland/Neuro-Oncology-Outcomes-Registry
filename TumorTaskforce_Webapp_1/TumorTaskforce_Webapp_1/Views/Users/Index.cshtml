@@ -1,16 +1,27 @@
 ﻿@{
-    ViewBag.Title = "Users";
+    /**/
+
+    ViewBag.Title = "Manage Users";
 }
 
+<div class="jumbotron">
+    <h1>Tumor App - Manage</h1>
+    <p class="lead">Use the links below to manage Users and Roles</p>
+</div>
 
 @if (User.Identity.IsAuthenticated)
 {
     if (ViewBag.displayMenu == "Yes")
     {
-        <h2>Welcome Admin. Here are the current users and their roles:</h2>
-        <h3>
-            LIST GOES HERE
-        </h3>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Manage Users</h2>
+            </div>
+        </div>
+        <div>
+            TABLE OF USERS GOES HERE
+        </div>
+
     }
     else
     {
@@ -27,3 +38,8 @@ else
         Please log in or register to access this page.
     </h3>
 }
+
+
+
+
+

@@ -16,23 +16,13 @@ namespace TumorTaskforce_Webapp_1.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                var user = User.Identity;
-                ViewBag.Name = user.Name;
-
                 ViewBag.displayMenu = "No";
-
                 if (isAdminUser())
                 {
                     ViewBag.displayMenu = "Yes";
                 }
-                return View();
-            }
-            else
-            {
-                ViewBag.Name = "Not Logged In";
             }
             return View();
-
         }
         public Boolean isAdminUser()
         {
