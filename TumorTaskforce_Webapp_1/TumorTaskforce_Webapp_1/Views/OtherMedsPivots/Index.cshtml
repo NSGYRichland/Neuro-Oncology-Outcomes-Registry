@@ -4,57 +4,85 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="jumbotron">
+    <h1>All Other Medications Relations</h1>
+    <p class="lead"></p>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.Identity.IsAuthenticated)
+{
+    if (ViewBag.displayMenu == "Yes")
+    {
 
-<div class=" table-responsive">
-<table class="table table-striped">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.frequency)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.notes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Patient.patientID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PossibleOtherMed.Name)
-        </th>
-        <th></th>
-    </tr>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.frequency)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.notes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Patient.patientID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PossibleOtherMed.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+        <div class=" table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.frequency)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.notes)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Patient.patientID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PossibleOtherMed.Name)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.frequency)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.notes)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Patient.patientID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PossibleOtherMed.Name)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+
+    }
+    else
+    {
+        <h2>  Unauthorized. </h2>
+        <h3>
+            You need to be an administrator to access this page.
+        </h3>
+    }
+}
+else
+{
+    <h2>  Unauthorized. </h2>
+    <h3>
+        Please log in or register to access this page.
+    </h3>
 }
 
-</table>
-</div>
