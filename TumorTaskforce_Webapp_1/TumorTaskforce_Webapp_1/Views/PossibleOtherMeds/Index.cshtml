@@ -4,34 +4,60 @@
     ViewBag.Title = "All Other Medications";
 }
 
-<h2>All Other Medications</h2>
-
-<p>
-    @Html.ActionLink("Create New Other Medication", "Create") -
-    Or create it from the @Html.ActionLink("Patient", "Index", "Patients") Details page!
-</p>
-
-<div class="table-responsive">
-    <table class="table table-striped">
-        <tr>
-            <th>
-                Medication
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
-        }
-
-    </table>
+<div class="jumbotron">
+    <h1>All Other Medications</h1>
+    <p class="lead"></p>
 </div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (ViewBag.displayMenu == "Yes")
+    {
+
+        <p>
+            @Html.ActionLink("Create New Other Medication", "Create") -
+            Or create it from the @Html.ActionLink("Patient", "Index", "Patients") Details page!
+        </p>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        Medication
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    }
+    else
+    {
+        <h2>  Unauthorized. </h2>
+        <h3>
+            You need to be an administrator to access this page.
+        </h3>
+    }
+}
+else
+{
+    <h2>  Unauthorized. </h2>
+    <h3>
+        Please log in or register to access this page.
+    </h3>
+}
+

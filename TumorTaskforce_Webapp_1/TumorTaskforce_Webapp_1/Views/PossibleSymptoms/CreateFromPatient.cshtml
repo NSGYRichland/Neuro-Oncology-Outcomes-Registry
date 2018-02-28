@@ -4,47 +4,74 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<div class="jumbotron">
+    <h1>Create New Symptom</h1>
+    <p class="lead"></p>
+</div>
 
-
-@using (Html.BeginForm()) 
+@if (User.Identity.IsAuthenticated)
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>New Symptom</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.TempPatientID)
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, "Symptom Name",htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    if (ViewBag.displayMenu == "Yes")
+    {
+
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>New Symptom</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.TempPatientID)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, "Symptom Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PercentShowing, "Percent", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PercentShowing, new { htmlAttributes = new { @class = "form-control" } })
+                        Percent of patients that exhibit this symptom.
+                        @Html.ValidationMessageFor(model => model.PercentShowing, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.PercentShowing, "Percent", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PercentShowing, new { htmlAttributes = new { @class = "form-control" } })
-                Percent of patients that exhibit this symptom.
-                @Html.ValidationMessageFor(model => model.PercentShowing, "", new { @class = "text-danger" })
-            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to Add Symptom", "Create", "SymptomsPivots", new { patientID = Int32.Parse(Html.ValueFor(model => model.TempPatientID).ToString()) }, null)
         </div>
 
-        
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+    }
+    else
+    {
+        <h2>  Unauthorized. </h2>
+        <h3>
+            You need to be an administrator to access this page.
+        </h3>
+    }
+}
+else
+{
+    <h2>  Unauthorized. </h2>
+    <h3>
+        Please log in or register to access this page.
+    </h3>
 }
 
-<div>
-    @Html.ActionLink("Back to Add Symptom", "Create", "SymptomsPivots", new { patientID = Int32.Parse(Html.ValueFor(model=>model.TempPatientID).ToString()) }, null)
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

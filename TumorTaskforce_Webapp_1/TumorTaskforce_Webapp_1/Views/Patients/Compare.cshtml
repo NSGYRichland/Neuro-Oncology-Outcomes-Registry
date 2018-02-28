@@ -4,79 +4,23 @@
     ViewBag.Title = "Compare";
 }
 
-<h2>Compare</h2>
-
-<p>
-    Select the patient to begin calculating results.
-</p>
-<div class="table-responsive">
-    <table class="table table-striped">
-        <tr>
-            <th></th>
-            <th>
-                Patient
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sex)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Married)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Age)
-            </th>
-            <th>
-                Classification
-            </th>
-            <th>
-                Grade (WHO)
-            </th>
-            <th>
-                Tumor Size (mm)
-            </th>
-            <th>
-                Location
-            </th>
-            
-        </tr>
-
-        @foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                    @Html.ActionLink("Select", "Results", new { id=item.patientID })
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.patientID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sex)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Married)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Age)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HistologicalClassification)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HistologicalGrade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TumorWidth)
-                    x
-                    @Html.DisplayFor(modelItem => item.TumorHeight)
-                    x
-                    @Html.DisplayFor(modelItem => item.TumorLength)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TumorLocation)
-                </td>
-                
-            </tr>
-        }
-
-    </table>
+<div class="jumbotron">
+    <h1>Compare</h1>
+    <p class="lead">Enter patient details below</p>
 </div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        patient details entered here...<br />
+        including related items
+    </p>
+    
+}
+else
+{
+    <h2>  Unauthorized. </h2>
+    <h3>
+        Please log in or register to access this page.
+    </h3>
+}
