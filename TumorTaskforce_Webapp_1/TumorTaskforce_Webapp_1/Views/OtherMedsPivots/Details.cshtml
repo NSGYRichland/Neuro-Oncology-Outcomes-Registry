@@ -4,55 +4,82 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>OtherMedsPivot</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.frequency)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.frequency)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.notes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.notes)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Patient.patientID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Patient.patientID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PossibleOtherMed.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PossibleOtherMed.Name)
-        </dd>
-
-    </dl>
+<div class="jumbotron">
+    <h1>Details</h1>
+    <p class="lead"></p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (ViewBag.displayMenu == "Yes")
+    {
+
+        <div>
+            <h4>OtherMedsPivot</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.date)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.date)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.frequency)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.frequency)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.notes)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.notes)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Patient.patientID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Patient.patientID)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PossibleOtherMed.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PossibleOtherMed.Name)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+
+
+    }
+    else
+    {
+        <h2>  Unauthorized. </h2>
+        <h3>
+            You need to be an administrator to access this page.
+        </h3>
+    }
+}
+else
+{
+    <h2>  Unauthorized. </h2>
+    <h3>
+        Please log in or register to access this page.
+    </h3>
+}
+

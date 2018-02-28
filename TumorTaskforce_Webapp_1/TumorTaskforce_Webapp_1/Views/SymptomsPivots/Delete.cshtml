@@ -4,63 +4,91 @@
     ViewBag.Title = "Remove Symptom";
 }
 
-<h2>Remove</h2>
-
-<h3>Are you sure you want to remove this?</h3>
-<div>
-    <h4>Symptom</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Patient
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Patient.patientID)
-        </dd>
-
-        <dt>
-            Symptom
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PossibleSymptom.Name)
-        </dd>
-
-        <dt>
-            Date
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.date)
-        </dd>
-
-        <dt>
-            Frequency
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.frequency)
-        </dd>
-
-        <dt>
-            Notes
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.notes)
-        </dd>
-
-        
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Remove" class="btn btn-default" /> |
-            @Html.ActionLink("Back to Patient", "Details", "Patients", new { id = Int32.Parse(Html.ValueFor(model => model.patientID).ToString()) }, null)
-        </div>
-    }
+<div class="jumbotron">
+    <h1>Remove Symptom</h1>
+    <p class="lead"></p>
 </div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (ViewBag.displayMenu == "Yes")
+    {
+
+        <h3>Are you sure you want to remove this?</h3>
+        <div>
+            <h4>Symptom</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    Patient
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Patient.patientID)
+                </dd>
+
+                <dt>
+                    Symptom
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PossibleSymptom.Name)
+                </dd>
+
+                <dt>
+                    Date
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.date)
+                </dd>
+
+                <dt>
+                    Frequency
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.frequency)
+                </dd>
+
+                <dt>
+                    Notes
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.notes)
+                </dd>
+
+
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Remove" class="btn btn-default" /> |
+                    @Html.ActionLink("Back to Patient", "Details", "Patients", new { id = Int32.Parse(Html.ValueFor(model => model.patientID).ToString()) }, null)
+                </div>
+            }
+        </div>
+
+
+    }
+    else
+    {
+        <h2>  Unauthorized. </h2>
+        <h3>
+            You need to be an administrator to access this page.
+        </h3>
+    }
+}
+else
+{
+    <h2>  Unauthorized. </h2>
+    <h3>
+        Please log in or register to access this page.
+    </h3>
+}
+

@@ -1,7 +1,7 @@
 ﻿@model Tuple<TumorTaskforce_Webapp_1.Patient, IEnumerable<TumorTaskforce_Webapp_1.Patient>>
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Results";
 
     Patient target = new Patient();
     int targetSimilarity = 0;
@@ -21,206 +21,211 @@
             @*double tVol = 0, currVol = 0;
                 tVol = (double)(Model.Item1.TumorHeight * Model.Item1.TumorLength * Model.Item1.TumorWidth);
                 currVol = (double)(curr.TumorHeight * curr.TumorLength * curr.TumorWidth);*@
-    if (Model.Item1.Sex.Equals(curr.Sex))
-    {
-        similarity++;
-        record = record.Insert(0, "1");
-    }
-    if (Model.Item1.Age == curr.Age)
-    {
-        similarity++;
-        record = record.Insert(1, "1");
-    }
-    if (Model.Item1.HistologicalClassification.Equals(curr.HistologicalClassification))
-    {
-        i = 3;
-        record = record.Insert(2, "1");
-        if (Model.Item1.HistologicalGrade >= curr.HistologicalGrade)
-        {
-            i++;
-            record = record.Insert(3, "1");
-            if (Model.Item1.HistologicalGrade == curr.HistologicalGrade)
-            {
-                i++;
-                record = record.Insert(4, "1");
-            }
-        }
-        similarity += i;
-        i = 0;
-    }
-    if (Model.Item1.TumorLength == curr.TumorLength)
-    {
-        similarity++;
-        record = record.Insert(5, "1");
-    }
-    if (Model.Item1.TumorWidth == curr.TumorWidth)
-    {
-        similarity++;
-        record = record.Insert(6, "1");
-    }
-    if (Model.Item1.TumorHeight == curr.TumorHeight)
-    {
-        similarity++;
-        record = record.Insert(7, "1");
-    }
-    if (Model.Item1.TumorLocation.Equals(curr.TumorLocation))
-    {
-        similarity += 3;
-        record = record.Insert(8, "1");
-    }
-    try {
-
-        if (!Model.Item1.Constitutional.IsEmpty()
-            & !Model.Item1.Constitutional.Equals("normal"))
-        {
-            if (Model.Item1.Constitutional.Equals(curr.Constitutional))
+            if (Model.Item1.Sex.Equals(curr.Sex))
             {
                 similarity++;
-                record = record.Insert(9, "1");
+                record = record.Insert(0, "1");
             }
-        }
-        if (!Model.Item1.Respiratory.IsEmpty()
-            & !Model.Item1.Respiratory.Equals("normal"))
-        {
-            if (Model.Item1.Respiratory.Equals(curr.Respiratory))
+            if (Model.Item1.Age == curr.Age)
             {
                 similarity++;
-                record = record.Insert(10, "1");
+                record = record.Insert(1, "1");
             }
-        }
-        if (!Model.Item1.Cardiovascular.IsEmpty()
-            & !Model.Item1.Cardiovascular.Equals("normal"))
-        {
-            if (Model.Item1.Cardiovascular.Equals(curr.Cardiovascular))
+            if (Model.Item1.HistologicalClassification.Equals(curr.HistologicalClassification))
             {
-                similarity++;
-                record = record.Insert(11, "1");
-            }
-        }
-        if (!Model.Item1.Gastrointestinal.IsEmpty()
-            & !Model.Item1.Gastrointestinal.Equals("normal"))
-        {
-            if (Model.Item1.Gastrointestinal.Equals(curr.Gastrointestinal))
-            {
-                similarity++;
-                record = record.Insert(12, "1");
-            }
-        }
-        if (!Model.Item1.Musculoskeletal.IsEmpty()
-            & !Model.Item1.Musculoskeletal.Equals("normal"))
-        {
-            if (Model.Item1.Musculoskeletal.Equals(curr.Musculoskeletal))
-            {
-                similarity++;
-                record = record.Insert(13, "1");
-            }
-        }
-        if (!Model.Item1.Integumentary.IsEmpty()
-            & !Model.Item1.Integumentary.Equals("normal"))
-        {
-            if (Model.Item1.Integumentary.Equals(curr.Integumentary))
-            {
-                similarity++;
-                record = record.Insert(14, "1");
-            }
-        }
-        if (!Model.Item1.Neurologic.IsEmpty()
-            & !Model.Item1.Neurologic.Equals("normal"))
-        {
-            if (Model.Item1.Neurologic.Equals(curr.Neurologic))
-            {
-                similarity++;
-                record = record.Insert(15, "1");
-            }
-        }
-        if (!Model.Item1.Exercize.IsEmpty()
-            & !Model.Item1.Exercize.Equals("normal"))
-        {
-            if (Model.Item1.Exercize.Equals(curr.Exercize))
-            {
-                similarity++;
-                record = record.Insert(16, "1");
-            }
-        }
-        if (!Model.Item1.Diet.IsEmpty()
-            & !Model.Item1.Diet.Equals("normal"))
-        {
-            if (Model.Item1.Diet.Equals(curr.Diet))
-            {
-                similarity++;
-                record = record.Insert(17, "1");
-            }
-        }
-    }
-    catch (NullReferenceException e) { }
-
-
-}
-
-if (similarity > targetSimilarity)
-{
-    target = curr;
-    targetSimilarity = similarity;
-    targetRecord = record;
-}
-else if (similarity == targetSimilarity)
-{
-    currEffect = 0;
-    targetEffect = 0;
-    foreach (TreatmentsPivot sp in curr.TreatmentsPivots)
-    {
-        currEffect += sp.effectiveness;
-    }
-    foreach (TreatmentsPivot sp in target.TreatmentsPivots)
-    {
-        targetEffect += sp.effectiveness;
-    }
-    if (currEffect > targetEffect)
-    {
-        target = curr;
-        targetRecord = record;
-    }
-}
-@*<text> Patient: </text><span>@curr.patientID</span><text> | Sim: </text><span>@similarity</span><text> | Record: </text><span>@record</span><text> | Effect: </text><span>@currEffect</span><br />*@
-       
-    }
-}
-
-
-
-
-
-
-<div>
-    <h2>Patient @Model.Item1.patientID</h2>
-    <hr />
-    <h4>
-        Results:
-    </h4>
-    We recommend the following treatments:
-        <dl class="dl-horizontal">
-                @foreach (TreatmentsPivot sp in target.TreatmentsPivots)
+                i = 3;
+                record = record.Insert(2, "1");
+                if (Model.Item1.HistologicalGrade >= curr.HistologicalGrade)
                 {
-                    @Html.DisplayFor(spitem => sp.PossibleTreatment.Name)
-                    
-                    if (sp.frequency != null)
+                    i++;
+                    record = record.Insert(3, "1");
+                    if (Model.Item1.HistologicalGrade == curr.HistologicalGrade)
                     {
-                        <tag> // </tag>
-                        @Html.DisplayNameFor(spitem => sp.frequency)
-                        <tag>: </tag>
-                         @Html.DisplayFor(spitem => sp.frequency)
+                        i++;
+                        record = record.Insert(4, "1");
                     }
-                    if (sp.notes != null)
-                    {
-                        <tag> // </tag>
-                        @Html.DisplayNameFor(spitem => sp.notes)
-                        <tag>: </tag>
-                         @Html.DisplayFor(spitem => sp.notes)
-                    }
-                    
-                    <br />
+                }
+                similarity += i;
+                i = 0;
+            }
+            if (Model.Item1.TumorLength == curr.TumorLength)
+            {
+                similarity++;
+                record = record.Insert(5, "1");
+            }
+            if (Model.Item1.TumorWidth == curr.TumorWidth)
+            {
+                similarity++;
+                record = record.Insert(6, "1");
+            }
+            if (Model.Item1.TumorHeight == curr.TumorHeight)
+            {
+                similarity++;
+                record = record.Insert(7, "1");
+            }
+            if (Model.Item1.TumorLocation.Equals(curr.TumorLocation))
+            {
+                similarity += 3;
+                record = record.Insert(8, "1");
+            }
+            try
+            {
 
-                 }<br />
+                if (!Model.Item1.Constitutional.IsEmpty()
+                    & !Model.Item1.Constitutional.Equals("normal"))
+                {
+                    if (Model.Item1.Constitutional.Equals(curr.Constitutional))
+                    {
+                        similarity++;
+                        record = record.Insert(9, "1");
+                    }
+                }
+                if (!Model.Item1.Respiratory.IsEmpty()
+                    & !Model.Item1.Respiratory.Equals("normal"))
+                {
+                    if (Model.Item1.Respiratory.Equals(curr.Respiratory))
+                    {
+                        similarity++;
+                        record = record.Insert(10, "1");
+                    }
+                }
+                if (!Model.Item1.Cardiovascular.IsEmpty()
+                    & !Model.Item1.Cardiovascular.Equals("normal"))
+                {
+                    if (Model.Item1.Cardiovascular.Equals(curr.Cardiovascular))
+                    {
+                        similarity++;
+                        record = record.Insert(11, "1");
+                    }
+                }
+                if (!Model.Item1.Gastrointestinal.IsEmpty()
+                    & !Model.Item1.Gastrointestinal.Equals("normal"))
+                {
+                    if (Model.Item1.Gastrointestinal.Equals(curr.Gastrointestinal))
+                    {
+                        similarity++;
+                        record = record.Insert(12, "1");
+                    }
+                }
+                if (!Model.Item1.Musculoskeletal.IsEmpty()
+                    & !Model.Item1.Musculoskeletal.Equals("normal"))
+                {
+                    if (Model.Item1.Musculoskeletal.Equals(curr.Musculoskeletal))
+                    {
+                        similarity++;
+                        record = record.Insert(13, "1");
+                    }
+                }
+                if (!Model.Item1.Integumentary.IsEmpty()
+                    & !Model.Item1.Integumentary.Equals("normal"))
+                {
+                    if (Model.Item1.Integumentary.Equals(curr.Integumentary))
+                    {
+                        similarity++;
+                        record = record.Insert(14, "1");
+                    }
+                }
+                if (!Model.Item1.Neurologic.IsEmpty()
+                    & !Model.Item1.Neurologic.Equals("normal"))
+                {
+                    if (Model.Item1.Neurologic.Equals(curr.Neurologic))
+                    {
+                        similarity++;
+                        record = record.Insert(15, "1");
+                    }
+                }
+                if (!Model.Item1.Exercize.IsEmpty()
+                    & !Model.Item1.Exercize.Equals("normal"))
+                {
+                    if (Model.Item1.Exercize.Equals(curr.Exercize))
+                    {
+                        similarity++;
+                        record = record.Insert(16, "1");
+                    }
+                }
+                if (!Model.Item1.Diet.IsEmpty()
+                    & !Model.Item1.Diet.Equals("normal"))
+                {
+                    if (Model.Item1.Diet.Equals(curr.Diet))
+                    {
+                        similarity++;
+                        record = record.Insert(17, "1");
+                    }
+                }
+            }
+            catch (NullReferenceException e) { }
+
+
+        }
+
+        if (similarity > targetSimilarity)
+        {
+            target = curr;
+            targetSimilarity = similarity;
+            targetRecord = record;
+        }
+        else if (similarity == targetSimilarity)
+        {
+            currEffect = 0;
+            targetEffect = 0;
+            foreach (TreatmentsPivot sp in curr.TreatmentsPivots)
+            {
+                currEffect += sp.effectiveness;
+            }
+            foreach (TreatmentsPivot sp in target.TreatmentsPivots)
+            {
+                targetEffect += sp.effectiveness;
+            }
+            if (currEffect > targetEffect)
+            {
+                target = curr;
+                targetRecord = record;
+            }
+        }
+        @*<text> Patient: </text><span>@curr.patientID</span><text> | Sim: </text><span>@similarity</span><text> | Record: </text><span>@record</span><text> | Effect: </text><span>@currEffect</span><br />*@
+
+    }
+}
+
+
+<div class="jumbotron">
+    <h1>Results</h1>
+    <p class="lead"></p>
+</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        <h2>Patient @Model.Item1.patientID</h2>
+        <hr />
+        <h4>
+            Results:
+        </h4>
+        We recommend the following treatments:
+        <dl class="dl-horizontal">
+            @foreach (TreatmentsPivot sp in target.TreatmentsPivots)
+            {
+                @Html.DisplayFor(spitem => sp.PossibleTreatment.Name)
+
+                if (sp.frequency != null)
+                {
+                    <tag> // </tag>
+                    @Html.DisplayNameFor(spitem => sp.frequency)
+                    <tag>: </tag>
+                    @Html.DisplayFor(spitem => sp.frequency)
+                }
+                if (sp.notes != null)
+                {
+                    <tag> // </tag>
+                    @Html.DisplayNameFor(spitem => sp.notes)
+                    <tag>: </tag>
+                    @Html.DisplayFor(spitem => sp.notes)
+                }
+
+                <br />
+
+            }
+            <br />
             <dt></dt>
             Data is based on a statistical correlation with: Patient @target.patientID | @targetSimilarity | @targetEffect
             <hr />
@@ -228,7 +233,7 @@ else if (similarity == targetSimilarity)
                 General Info
             </dt>
             <dd>
-                ------------------------------ 
+                ------------------------------
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.Item1.Sex)
@@ -283,20 +288,20 @@ else if (similarity == targetSimilarity)
             </dd>
 
             @*<dt>
-                @Html.DisplayNameFor(model => model.Item1.TumorHeight)
-            </dt>
+                    @Html.DisplayNameFor(model => model.Item1.TumorHeight)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Item1.TumorHeight)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.TumorHeight)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.TumorLength)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.TumorLength)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Item1.TumorLength)
-            </dd>*@
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.TumorLength)
+                </dd>*@
 
             <dt>
                 Location
@@ -412,7 +417,7 @@ else if (similarity == targetSimilarity)
                         <tag>: </tag>
                         @Html.DisplayFor(spitem => sp.notes)
                     }
-                    
+
                     <br />
                 }
                 <br />
@@ -428,7 +433,7 @@ else if (similarity == targetSimilarity)
                 @foreach (OtherMedsPivot sp in Model.Item1.OtherMedsPivots)
                 {
                     @Html.DisplayFor(spitem => sp.PossibleOtherMed.Name)
-                    
+
                     if (sp.date != null)
                     {
                         <tag> // </tag>
@@ -529,176 +534,188 @@ else if (similarity == targetSimilarity)
                         <tag>: </tag>
                         @Html.DisplayFor(spitem => sp.effectiveness)
                     }
-                    
+
                     <br />
                 }
                 <br />
             </dd>
 
         </dl>
-</div>
-<p>
-    @Html.ActionLink("Back to Compare", "Compare")
-</p>
-
-
-
-
-
-
-@*<h2>Details</h2>
-
-    <div>
-        <h4>Results</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.Sex)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.Sex)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.Married)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.Married)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.Age)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.Age)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.HistologicalClassification)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.HistologicalClassification)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.HistologicalGrade)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.HistologicalGrade)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.TumorWidth)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.TumorWidth)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.TumorHeight)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.TumorHeight)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.TumorLength)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.TumorLength)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.TumorLocation)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.TumorLocation)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.Constitutional)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.Constitutional)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.Respiratory)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.Respiratory)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.Cardiovascular)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.Cardiovascular)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.Gastrointestinal)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.Gastrointestinal)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.Musculoskeletal)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.Musculoskeletal)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.Integumentary)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.Integumentary)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.Neurologic)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.Neurologic)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.Exercize)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.Exercize)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Item1.Diet)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Item1.Diet)
-            </dd>
-
-        </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Item1.patientID }) |
-        @Html.ActionLink("Back to List", "Compare")
-    </p>*@
+        @Html.ActionLink("Back to Compare", "Compare")
+    </p>
+
+
+
+
+
+
+    @*<h2>Details</h2>
+
+        <div>
+            <h4>Results</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Sex)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Sex)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Married)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Married)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Age)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Age)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.HistologicalClassification)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.HistologicalClassification)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.HistologicalGrade)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.HistologicalGrade)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.TumorWidth)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.TumorWidth)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.TumorHeight)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.TumorHeight)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.TumorLength)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.TumorLength)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.TumorLocation)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.TumorLocation)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Constitutional)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Constitutional)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Respiratory)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Respiratory)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Cardiovascular)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Cardiovascular)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Gastrointestinal)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Gastrointestinal)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Musculoskeletal)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Musculoskeletal)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Integumentary)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Integumentary)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Neurologic)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Neurologic)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Exercize)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Exercize)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Item1.Diet)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Item1.Diet)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Item1.patientID }) |
+            @Html.ActionLink("Back to List", "Compare")
+        </p>*@
+
+}
+else
+{
+    <h2>  Unauthorized. </h2>
+    <h3>
+        Please log in or register to access this page.
+    </h3>
+}
+
+
+

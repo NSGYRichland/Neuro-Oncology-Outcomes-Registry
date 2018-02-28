@@ -1,16 +1,68 @@
 ﻿@{
-    ViewBag.Title = "Users";
+    ViewBag.Title = "Manage Users";
 }
 
+<div class="jumbotron">
+    <h1>Tumor App - Manage</h1>
+    <p class="lead">Use the links below to manage Users and Roles</p>
+</div>
 
 @if (User.Identity.IsAuthenticated)
 {
     if (ViewBag.displayMenu == "Yes")
     {
-        <h2>Welcome Admin. Here are the current users and their roles:</h2>
-        <h3>
-            LIST GOES HERE
-        </h3>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Manage Users</h2>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        UserName
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Role
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in ViewBag.userlist)
+        {
+            <tr>
+                <td>
+                    @item.UserName
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td>
+                    @ViewBag.userMGR.GetRolesAsync(item.Id).Result[0]
+                </td>
+                <td>
+                    @if (item.Id.Equals(ViewBag.currentUserID))
+                    {
+                    }
+                    else
+                    {
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </p>
+                        
+                    }
+                    
+                </td>
+            </tr>
+}
+
+            </table>
+        </div>
+
     }
     else
     {
@@ -27,3 +79,8 @@ else
         Please log in or register to access this page.
     </h3>
 }
+
+
+
+
+
