@@ -25,6 +25,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             if (!string.IsNullOrWhiteSpace(q))
             {
                switch (id)
+
                 {
                     case 0:
                         int pID = int.Parse(q);
