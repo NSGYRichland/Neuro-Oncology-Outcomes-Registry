@@ -6,7 +6,7 @@
 
 <div class="jumbotron">
     <h1>Tumor App - Manage</h1>
-    <p class="lead">Use the links below to manage possible entries</p>
+    <p class="lead">Use the links below to manage possible entries and users.</p>
 </div>
 
 @if (User.Identity.IsAuthenticated)
@@ -19,29 +19,35 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <p>
                     @Html.ActionLink("Possible Health Factors", "Index", "PossibleHealthFactors") <br />
                 </p>
             </div>
 
 
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <p>
                     @Html.ActionLink("Possible Treatments", "Index", "PossibleTreatments") <br />
                 </p>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <p>
                     @Html.ActionLink("Possible Other Meds", "Index", "PossibleOtherMeds") <br />
                 </p>
 
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <p>
                     @Html.ActionLink("Possible Symptoms", "Index", "PossibleSymptoms")<br />
+                </p>
+            </div>
+
+            <div class="col-md-2">
+                <p>
+                    @Html.ActionLink("Users", "Index", "Users")<br />
                 </p>
             </div>
         </div>
