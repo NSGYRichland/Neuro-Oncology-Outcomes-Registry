@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<TumorTaskforce_Webapp_1.Models.UserViewModel>
+
+@{
     ViewBag.Title = "Manage Users";
 }
 
@@ -31,34 +33,34 @@
                     <th></th>
                 </tr>
 
-                @foreach (var item in ViewBag.userlist)
-        {
-            <tr>
-                <td>
-                    @item.UserName
-                </td>
-                <td>
-                    @item.Email
-                </td>
-                <td>
-                    @ViewBag.userMGR.GetRolesAsync(item.Id).Result[0]
-                </td>
-                <td>
-                    @if (item.Id.Equals(ViewBag.currentUserID))
-                    {
-                    }
-                    else
-                    {
-                    <p>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                    </p>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.UserName
+                        </td>
+                        <td>
+                            @item.Email
+                        </td>
+                        <td>
+                            @item.Role
+                        </td>
+                        <td>
+                            @if (item.Id.Equals(ViewBag.currentUserID) || item.UserName.Equals("c.burdell"))
+                            {
+                            }
+                            else
+                            {
+                            <p>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </p>
                         
-                    }
+                            }
                     
-                </td>
-            </tr>
-}
+                        </td>
+                    </tr>
+                }
 
             </table>
         </div>
