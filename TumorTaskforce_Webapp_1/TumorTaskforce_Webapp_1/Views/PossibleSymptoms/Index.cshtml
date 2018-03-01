@@ -4,40 +4,68 @@
     ViewBag.Title = "All Symptoms";
 }
 
-<h2>All Symptoms</h2>
+<div class="jumbotron">
+    <h1>All Symptoms</h1>
+    <p class="lead"></p>
+</div>
 
-<p>
-    @Html.ActionLink("Create New Symptom", "Create") -
-    Or create it from the @Html.ActionLink("Patient", "Index", "Patients") Details page!
-</p>
+@if (User.Identity.IsAuthenticated)
+{
+    if (ViewBag.displayMenu == "Yes")
+    {
 
-<div class="table-responsive"></div>
-<table class="table table-striped">
-    <tr>
-        <th>
-            Symptom
-        </th>
-        <th>
-            % of Patients with Symptom
-        </th>
-        <th></th>
-    </tr>
+        <p>
+            @Html.ActionLink("Create New Symptom", "Create") -
+            Or create it from the @Html.ActionLink("Patient", "Index", "Patients") Details page!
+        </p>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PercentShowing)
-        </td>
-        
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        Symptom
+                    </th>
+                    <th>
+                        % of Patients with Symptom
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PercentShowing)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    }
+    else
+    {
+        <h2>  Unauthorized. </h2>
+        <h3>
+            You need to be an administrator to access this page.
+        </h3>
+    }
+}
+else
+{
+    <h2>  Unauthorized. </h2>
+    <h3>
+        Please log in or register to access this page.
+    </h3>
 }
 
-</table>
-</div>
+

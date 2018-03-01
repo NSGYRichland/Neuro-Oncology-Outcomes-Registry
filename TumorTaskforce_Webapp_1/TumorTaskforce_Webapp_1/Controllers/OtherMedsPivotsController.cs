@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -7,6 +9,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TumorTaskforce_Webapp_1;
+using TumorTaskforce_Webapp_1.Models;
 
 namespace TumorTaskforce_Webapp_1.Controllers
 {
@@ -18,6 +21,14 @@ namespace TumorTaskforce_Webapp_1.Controllers
         public ActionResult Index()
         {
             var otherMedsPivots = db.OtherMedsPivots.Include(o => o.Patient).Include(o => o.PossibleOtherMed);
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.displayMenu = "No";
+                if (isAdminUser())
+                {
+                    ViewBag.displayMenu = "Yes";
+                }
+            }
             return View(otherMedsPivots.ToList());
         }
 
@@ -32,6 +43,14 @@ namespace TumorTaskforce_Webapp_1.Controllers
             if (otherMedsPivot == null)
             {
                 return HttpNotFound();
+            }
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.displayMenu = "No";
+                if (isAdminUser())
+                {
+                    ViewBag.displayMenu = "Yes";
+                }
             }
             return View(otherMedsPivot);
         }
@@ -52,6 +71,14 @@ namespace TumorTaskforce_Webapp_1.Controllers
             sel[0] = p;
             ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleOtherMeds, "Id", "Name");
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.displayMenu = "No";
+                if (isAdminUser())
+                {
+                    ViewBag.displayMenu = "Yes";
+                }
+            }
             return View();
         }
 
@@ -72,6 +99,14 @@ namespace TumorTaskforce_Webapp_1.Controllers
             sel[0] = db.Patients.Find(otherMedsPivot.patientID);
             ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleOtherMeds, "Id", "Name", otherMedsPivot.datapieceID);
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.displayMenu = "No";
+                if (isAdminUser())
+                {
+                    ViewBag.displayMenu = "Yes";
+                }
+            }
             return View(otherMedsPivot);
         }
 
@@ -91,6 +126,14 @@ namespace TumorTaskforce_Webapp_1.Controllers
             sel[0] = db.Patients.Find(otherMedsPivot.patientID);
             ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleOtherMeds, "Id", "Name", otherMedsPivot.datapieceID);
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.displayMenu = "No";
+                if (isAdminUser())
+                {
+                    ViewBag.displayMenu = "Yes";
+                }
+            }
             return View(otherMedsPivot);
         }
 
@@ -111,6 +154,14 @@ namespace TumorTaskforce_Webapp_1.Controllers
             sel[0] = db.Patients.Find(otherMedsPivot.patientID);
             ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleOtherMeds, "Id", "Name", otherMedsPivot.datapieceID);
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.displayMenu = "No";
+                if (isAdminUser())
+                {
+                    ViewBag.displayMenu = "Yes";
+                }
+            }
             return View(otherMedsPivot);
         }
 
@@ -125,6 +176,14 @@ namespace TumorTaskforce_Webapp_1.Controllers
             if (otherMedsPivot == null)
             {
                 return HttpNotFound();
+            }
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.displayMenu = "No";
+                if (isAdminUser())
+                {
+                    ViewBag.displayMenu = "Yes";
+                }
             }
             return View(otherMedsPivot);
         }
@@ -147,6 +206,26 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public Boolean isAdminUser()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                ApplicationDbContext context = new ApplicationDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var s = UserManager.GetRoles(user.GetUserId());
+                if (s[0].ToString() == "Admin")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
         }
     }
 }

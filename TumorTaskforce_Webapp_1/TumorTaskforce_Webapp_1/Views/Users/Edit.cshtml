@@ -1,0 +1,82 @@
+﻿@model TumorTaskforce_Webapp_1.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Manage Users";
+}
+
+<div class="jumbotron">
+    <h1>Tumor App - Manage</h1>
+    <p class="lead">Edit User Role</p>
+</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (ViewBag.displayMenu == "Yes")
+    {
+        <div class="row">
+        </div>
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <h4>User</h4>
+                <hr />
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.patientID, "patientID", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("patientID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.patientID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    UserName
+                    <div class="col-md-10">
+                        @Html.DisplayFor(i => i.UserName)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    Email
+                    <div class="col-md-10">
+                        @Html.DisplayFor(i => i.Email)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    Role
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(i => i.Role, (SelectList)ViewBag.roles)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to Users", "Index", "Users")
+        </div>
+
+
+    }
+    else
+    {
+        <h2>  Unauthorized. </h2>
+        <h3>
+            You need to be an administrator to access this page.
+        </h3>
+    }
+}
+else
+{
+    <h2>  Unauthorized. </h2>
+    <h3>
+        Please log in or register to access this page.
+    </h3>
+}

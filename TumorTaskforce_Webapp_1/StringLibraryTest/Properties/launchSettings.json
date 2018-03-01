@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "StringLibraryTest": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\bsand\\source\\repos\\TumorTaskforce\\TumorTaskforce_Webapp_1",
+      "environmentVariables": {
+        "Path": "\"C:\\Users\\bsand\\source\\repos\\TumorTaskforce\\TumorTaskforce_Webapp_1\""
+      }
+    }
+  }
+}
