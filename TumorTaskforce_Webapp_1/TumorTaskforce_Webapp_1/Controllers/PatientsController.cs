@@ -189,7 +189,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Patient patient = db.Patients.Find(id);
+			Patient patient = db.Patients.Find(id);
             if (patient == null)
             {
                 return HttpNotFound();
