@@ -519,7 +519,6 @@
     <Content Include="Views\OtherMedsPivots\Details.cshtml" />
     <Content Include="Views\OtherMedsPivots\Edit.cshtml" />
     <Content Include="Views\OtherMedsPivots\Index.cshtml" />
-    <Content Include="Views\Patients\Compare.cshtml" />
     <Content Include="Views\Patients\Results.cshtml" />
     <Content Include="Views\Home\Manage.cshtml" />
     <Content Include="Views\PossibleSymptoms\CreateFromPatient.cshtml" />
@@ -560,6 +559,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Patients\CompIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -23,6 +23,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             var patients = from p in db.Patients select p;
             int id = Convert.ToInt32(Request["SearchType"]);
             var searchParam = "Searching";
+            patients = patients.Where(p=>p.isCompare == false);
 
             if (!string.IsNullOrWhiteSpace(q))
             {
@@ -85,9 +86,44 @@ namespace TumorTaskforce_Webapp_1.Controllers
             //return View(db.Patients.ToList());
             //return View(patients);
         }
-        
-        public ActionResult Compare()
+
+        public ActionResult CompIndex(/*string sortingMethod*/string q)
         {
+            var patients = from p in db.Patients select p;
+            int id = Convert.ToInt32(Request["SearchType"]);
+            var searchParam = "Searching";
+            patients = patients.Where(p => p.isCompare == true);
+
+            if (!string.IsNullOrWhiteSpace(q))
+            {
+                switch (id)
+
+                {
+                    case 0:
+                        int pID = int.Parse(q);
+                        patients = patients.Where(p => p.patientID.Equals(pID));
+                        searchParam += " ID for ' " + q + " ' ";
+                        break;
+                    /* case 1:
+                         int A = Int32.Parse(q);
+                         patients = patients.Where(p => p.Age.Equals(A));
+                         searchParam += " Age for ' " + q + " ' ";
+                         break; */
+                    /*case 2:
+                        patients = patients.Where(p => p.Sex.Contains(q));
+                        searchParam += " Sex for ' " + q + " ' ";
+                        break;*/
+                    case 3:
+                        patients = patients.Where(p => p.HistologicalClassification.Contains(q));
+                        searchParam += " HistologicalClassification for ' " + q + " ' ";
+                        break;
+                }
+            }
+            else
+            {
+                searchParam += "ALL";
+            }
+            ViewBag.SearchParameter = searchParam;
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
@@ -96,9 +132,44 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     ViewBag.displayMenu = "Yes";
                 }
             }
-            return View(db.Patients.ToList());
+            return View(patients);
+
+            //ViewBag.IDSortParm = String.IsNullOrEmpty(sortingMethod) ? "idNum" : "";
+            //ViewBag.AgeSortParm = sortingMethod == "Age" ? "age_desc" : "Age";
+
+            //switch (sortingMethod)
+            //{
+            //    case "idNum":
+            //        patients = patients.OrderByDescending(p => p.patientID);
+            //        break;
+            //    case "Age":
+            //        patients = patients.OrderBy(p => p.Age);
+            //        break;
+            //    case "age_desc":
+            //        patients = patients.OrderByDescending(p => p.Age);
+            //        break;
+            //    default:
+            //        patients = patients.OrderBy(p => p.patientID);
+            //        break;
+
+            //}
+            //return View(db.Patients.ToList());
+            //return View(patients);
         }
-                
+
+        //public ActionResult Compare()
+        //{
+        //    if (User.Identity.IsAuthenticated)
+        //    {
+        //        ViewBag.displayMenu = "No";
+        //        if (isAdminUser())
+        //        {
+        //            ViewBag.displayMenu = "Yes";
+        //        }
+        //    }
+        //    return View(db.Patients.ToList());
+        //}
+
         public ActionResult Results(int? id)
         {
             if (id == null)
@@ -110,7 +181,24 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 return HttpNotFound();
             }
-            var tuple = new Tuple<TumorTaskforce_Webapp_1.Patient, IEnumerable<TumorTaskforce_Webapp_1.Patient>>(patient, db.Patients.ToList());
+            if (!patient.isCompare)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Conflict);
+            }
+
+
+            //ALGORITHM SHOULD GO HERE
+            //MAKE SURE TO ONLY COMPARE AGAINST PATIENTS WHERE isCompare == false
+
+            //var tuple = new Tuple<TumorTaskforce_Webapp_1.Patient, IEnumerable<TumorTaskforce_Webapp_1.Patient>>(patient, db.Patients.ToList());
+
+            //PUT SUGGESTED TREATMENTS AS STRING INTO patient.comparisonResults
+
+
+            patient.comparisonResults = "Our Comparison Algorithm is Under Contruction! Check back soon. Sorry for any inconvenience.";
+            db.SaveChanges();
+
+
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
@@ -119,7 +207,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     ViewBag.displayMenu = "Yes";
                 }
             }
-            return View(tuple);
+            return View(patient);
         }
         
         // GET: Patients/Details/5
@@ -134,6 +222,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.isCompare = patient.isCompare;
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
@@ -147,8 +236,10 @@ namespace TumorTaskforce_Webapp_1.Controllers
        
 
         // GET: Patients/Create
-        public ActionResult Create()
+        public ActionResult Create(bool? isCompare)
         {
+            if (isCompare == null) { isCompare = false; }
+            ViewBag.isCompare = isCompare;
             ViewBag.Sex = new SelectList(getSexes(), "Value", "Text");
             ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text");
             if (User.Identity.IsAuthenticated)
@@ -212,12 +303,18 @@ namespace TumorTaskforce_Webapp_1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "patientID,Sex,Married,Age,HistologicalClassification,HistologicalGrade,TumorWidth,TumorHeight,TumorLength,TumorLocation,Constitutional,Respiratory,Cardiovascular,Gastrointestinal,Musculoskeletal,Integumentary,Neurologic,Exercize,Diet")] Patient patient)
+        public async System.Threading.Tasks.Task<ActionResult> Create([Bind(Include = "patientID,Sex,Married,Age,HistologicalClassification,HistologicalGrade,TumorWidth,TumorHeight,TumorLength,TumorLocation,Constitutional,Respiratory,Cardiovascular,Gastrointestinal,Musculoskeletal,Integumentary,Neurologic,Exercize,Diet,isCompare,comparisonResults,userName")] Patient patient)
         {
             if (ModelState.IsValid)
             {
                 db.Patients.Add(patient);
-                db.SaveChanges();
+                //db.SaveChanges();
+                int x = await db.SaveChangesAsync();
+                int id = patient.patientID;
+                if (patient.isCompare)
+                {
+                    return RedirectToAction("Details", new { id });
+                }  
                 return RedirectToAction("Index");
             }
             ViewBag.Sex = new SelectList(getSexes(), "Value", "Text", patient.Sex);
@@ -245,6 +342,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.isCompare = patient.isCompare;
             ViewBag.Sex = new SelectList(getSexes(), "Value", "Text", patient.Sex);
             ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text", patient.HistologicalGrade);
             if (User.Identity.IsAuthenticated)
@@ -263,7 +361,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "patientID,Sex,Married,Age,HistologicalClassification,HistologicalGrade,TumorWidth,TumorHeight,TumorLength,TumorLocation,Constitutional,Respiratory,Cardiovascular,Gastrointestinal,Musculoskeletal,Integumentary,Neurologic,Exercize,Diet")] Patient patient)
+        public ActionResult Edit([Bind(Include = "patientID,Sex,Married,Age,HistologicalClassification,HistologicalGrade,TumorWidth,TumorHeight,TumorLength,TumorLocation,Constitutional,Respiratory,Cardiovascular,Gastrointestinal,Musculoskeletal,Integumentary,Neurologic,Exercize,Diet,isCompare,userName,comparisonResults")] Patient patient)
         {
             if (ModelState.IsValid)
             {
@@ -313,6 +411,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Patient patient = db.Patients.Find(id);
+            bool isCompare = patient.isCompare;
             foreach( SymptomsPivot sp in db.SymptomsPivots){
                 if (sp.patientID == id)
                 {
@@ -350,6 +449,10 @@ namespace TumorTaskforce_Webapp_1.Controllers
             db.SaveChanges();
             db.Patients.Remove(patient);
             db.SaveChanges();
+            if (isCompare)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return RedirectToAction("Index");
         }
 
