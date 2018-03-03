@@ -13,6 +13,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
     [Authorize]
     public class ManageController : Controller
     {
+        private tumorDBEntities db = new tumorDBEntities();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -64,8 +65,10 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var userName = User.Identity.GetUserName();
             var model = new IndexViewModel
             {
+                MyComparePatients = db.Patients.Where(i => i.userName == userName && i.isCompare).ToList(),
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),

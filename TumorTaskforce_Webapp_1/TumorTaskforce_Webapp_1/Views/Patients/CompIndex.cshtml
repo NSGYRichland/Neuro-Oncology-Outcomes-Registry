@@ -2,12 +2,12 @@
 
 
 @{
-    ViewBag.Title = "Patients";
+    ViewBag.Title = "Comparison Patients";
 }
 
 <div class="jumbotron">
-    <h1>All Patients</h1>
-    <p class="lead"></p>
+    <h1>Comparison Patients</h1>
+    <p class="lead">Patients Created via the Comparison Tool (Not used in Comparison Algorithm)</p>
 </div>
 
 @if (User.Identity.IsAuthenticated)
@@ -15,15 +15,15 @@
     if (ViewBag.displayMenu == "Yes")
     {
 
-        <h2>Patient Directory</h2>
+        <h2>Comparison Patients created by All Users</h2>
 
-        using (Html.BeginForm("Index", "Patients", FormMethod.Get,
+        using (Html.BeginForm("CompIndex", "Patients", FormMethod.Get,
                     new { @class = "Search-form" }))
         {
             <div class="row">
                 <div class="col-md-5">
                     <p>
-                        @Html.ActionLink("Create New", "Create", new { isCompare = false })
+                        @Html.ActionLink("Compare New", "Create", new { isCompare = true })
                     </p>
                 </div>
                 <div class="col-md-4">
@@ -92,6 +92,9 @@
             <table class="table table-striped">
                 <tr>
                     <th>
+                        User
+                    </th>
+                    <th>
                         Patient
                     </th>
                     <th>
@@ -122,6 +125,9 @@
                 {
                     <tr>
                         <td>
+                            @Html.DisplayFor(modelItem => item.userName)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.patientID)
                         </td>
                         <td>
@@ -151,7 +157,7 @@
                         </td>
                         <td>
                             @*@Html.ActionLink("Edit", "Edit", new { id=item.patientID }) |*@
-                            @Html.ActionLink("View Patient", "Details", new { id = item.patientID }) |
+                            @Html.ActionLink("View", "Details", new { id = item.patientID }) |
                             @Html.ActionLink("Delete", "Delete", new { id = item.patientID })
 
                         </td>
