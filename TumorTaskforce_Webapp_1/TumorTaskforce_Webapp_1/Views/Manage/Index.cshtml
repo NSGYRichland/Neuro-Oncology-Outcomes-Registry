@@ -1,4 +1,6 @@
 ﻿@model TumorTaskforce_Webapp_1.Models.IndexViewModel
+
+
 @{
     ViewBag.Title = "Manage";
 }
@@ -24,19 +26,19 @@
             ]
         </dd>
         @*<dt>External Logins:</dt>
-        <dd>
-            @Model.Logins.Count [
-            @Html.ActionLink("Manage", "ManageLogins") ]
-        </dd>*@
+            <dd>
+                @Model.Logins.Count [
+                @Html.ActionLink("Manage", "ManageLogins") ]
+            </dd>*@
         @*
             Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-             
+
              See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
                 for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-             
+
              Uncomment the following block after you have set up two-factor authentication
         *@
-        @*  
+        @*
             <dt>Phone Number:</dt>
             <dd>
                 @(Model.PhoneNumber ?? "None")
@@ -57,31 +59,105 @@
             </dd>
         *@
         @*<dt>Two-Factor Authentication:</dt>
-        <dd>
-            <p>
-                There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication.
-            </p>*@
-            @*@if (Model.TwoFactor)
+            <dd>
+                <p>
+                    There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                    for details on setting up this ASP.NET application to support two-factor authentication.
+                </p>*@
+        @*@if (Model.TwoFactor)
+            {
+                using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Enabled
-                        <input type="submit" value="Disable" class="btn btn-link" />
-                        </text>
-                    }
+                    @Html.AntiForgeryToken()
+                    <text>Enabled
+                    <input type="submit" value="Disable" class="btn btn-link" />
+                    </text>
                 }
-                else
+            }
+            else
+            {
+                using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Disabled
-                        <input type="submit" value="Enable" class="btn btn-link" />
-                        </text>
-                    }
-                }*@
+                    @Html.AntiForgeryToken()
+                    <text>Disabled
+                    <input type="submit" value="Enable" class="btn btn-link" />
+                    </text>
+                }
+            }*@
         </dd>
+
     </dl>
+    <h2>My Comparison Patients</h2><br />
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    Patient
+                </th>
+                <th>
+                    Sex
+                </th>
+                <th>
+                    Married
+                </th>
+                <th>
+                    Age
+                </th>
+                <th>
+                    Classification
+                </th>
+                <th>
+                    Grade (WHO)
+                </th>
+                <th>
+                    Tumor Size
+                </th>
+                <th>
+                    Location
+                </th>
+                <th></th>
+            </tr>
+            
+            @foreach (var item in Model.MyComparePatients)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.patientID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sex)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Married)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HistologicalClassification)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HistologicalGrade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TumorWidth)
+                        x
+                        @Html.DisplayFor(modelItem => item.TumorHeight)
+                        x
+                        @Html.DisplayFor(modelItem => item.TumorLength)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TumorLocation)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { id=item.patientID }) |*@
+                        @Html.ActionLink("View Patient", "Details", "Patients", new { id = item.patientID }, null) |
+                        @Html.ActionLink("Delete", "Delete", "Patients", new { id = item.patientID }, null)
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
 </div>

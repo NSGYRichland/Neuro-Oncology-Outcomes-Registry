@@ -34,7 +34,10 @@
                     @Html.LabelFor(model => model.datapieceID, "Symptom", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.DropDownList("datapieceID", null, htmlAttributes: new { @class = "form-control" })
-                        Don't see it? @Html.ActionLink("Create a new one", "CreateFromPatient", "PossibleSymptoms", new { TempPatientID = Int32.Parse(Html.ValueFor(model => model.patientID).ToString()) }, null)
+                        @if (ViewBag.showLink)
+                        {
+                            <tag>Don't see it?</tag> @Html.ActionLink("Create a new one", "CreateFromPatient", "PossibleSymptoms", new { TempPatientID = Int32.Parse(Html.ValueFor(model => model.patientID).ToString()) }, null)
+                        }
                         @Html.ValidationMessageFor(model => model.datapieceID, "", new { @class = "text-danger" })
                     </div>
                 </div>

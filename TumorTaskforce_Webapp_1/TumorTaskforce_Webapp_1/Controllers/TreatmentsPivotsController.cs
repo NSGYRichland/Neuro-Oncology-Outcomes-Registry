@@ -44,10 +44,11 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 return HttpNotFound();
             }
+            Patient p = treatmentsPivot.Patient;
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
-                if (isAdminUser())
+                if(isAdminUser() || (p.isCompare && p.userName == User.Identity.GetUserName()))
                 {
                     ViewBag.displayMenu = "Yes";
                 }
@@ -69,13 +70,14 @@ namespace TumorTaskforce_Webapp_1.Controllers
             }
             Patient[] sel = new Patient[1];
             sel[0] = p;
+            ViewBag.showLink = isAdminUser();
             ViewBag.patientID = new SelectList(sel, "patientID", "patientID");
             ViewBag.datapieceID = new SelectList(db.PossibleTreatments, "Id", "Name");
             ViewBag.effectiveness = new SelectList(getEffectiveness());
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
-                if (isAdminUser())
+                if (isAdminUser() || (p.isCompare && p.userName == User.Identity.GetUserName()))
                 {
                     ViewBag.displayMenu = "Yes";
                 }
@@ -116,7 +118,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
-                if (isAdminUser())
+                if (isAdminUser() || (sel[0].isCompare && sel[0].userName == User.Identity.GetUserName()))
                 {
                     ViewBag.displayMenu = "Yes";
                 }
@@ -145,7 +147,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
-                if (isAdminUser())
+                if (isAdminUser() || (sel[0].isCompare && sel[0].userName == User.Identity.GetUserName()))
                 {
                     ViewBag.displayMenu = "Yes";
                 }
@@ -175,7 +177,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
-                if (isAdminUser())
+                if (isAdminUser() || (sel[0].isCompare && sel[0].userName == User.Identity.GetUserName()))
                 {
                     ViewBag.displayMenu = "Yes";
                 }
@@ -195,10 +197,11 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 return HttpNotFound();
             }
+            Patient p = treatmentsPivot.Patient;
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
-                if (isAdminUser())
+                if (isAdminUser() || (p.isCompare && p.userName == User.Identity.GetUserName()))
                 {
                     ViewBag.displayMenu = "Yes";
                 }

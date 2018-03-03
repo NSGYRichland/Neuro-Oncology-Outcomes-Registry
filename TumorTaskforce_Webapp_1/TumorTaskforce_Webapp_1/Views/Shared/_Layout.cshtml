@@ -40,7 +40,7 @@
                                 @Html.ActionLink("Patients", "Index", "Patients")
                             </li>
                             <li class="nav-item" style="margin-left:10px;margin-right:10px;">
-                                @Html.ActionLink("Compare", "Compare", "Patients")
+                                @Html.ActionLink("Compare", "Create", "Patients",new { isCompare = true },null)
                             </li>
                             <li class="nav-item" style="margin-left:10px;margin-right:10px;">
                                 @Html.ActionLink("Manage", "Manage", "Home")
@@ -52,7 +52,7 @@
                                 @Html.ActionLink("Home", "Index", "Home")
                             </li>
                             <li class="nav-item" style="margin-left:10px;margin-right:10px;">
-                                @Html.ActionLink("Compare", "Compare", "Patients")
+                                @Html.ActionLink("Compare", "Create", "Patients", new { isCompare = true }, null)
                             </li>
                         }
                     }
