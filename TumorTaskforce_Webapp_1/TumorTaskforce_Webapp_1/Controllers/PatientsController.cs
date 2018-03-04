@@ -23,7 +23,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             var patients = from p in db.Patients select p;
             int id = Convert.ToInt32(Request["SearchType"]);
             int who = Convert.ToInt32(Request["SearchType"]);
-
+            patients = patients.Where(p => p.isCompare == false);
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
