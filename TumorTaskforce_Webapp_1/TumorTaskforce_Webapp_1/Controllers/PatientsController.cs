@@ -18,42 +18,12 @@ namespace TumorTaskforce_Webapp_1.Controllers
         private tumorDBEntities db = new tumorDBEntities();
 
         // GET: Patients
-        public ActionResult Index(/*string sortingMethod*/string q)
+        public ActionResult Index(string q, string tumLoc, string clss, string grade, string sex)
         {
             var patients = from p in db.Patients select p;
             int id = Convert.ToInt32(Request["SearchType"]);
-            var searchParam = "Searching";
-            patients = patients.Where(p=>p.isCompare == false);
-
-            if (!string.IsNullOrWhiteSpace(q))
-            {
-               switch (id)
-
-                {
-                    case 0:
-                        int pID = int.Parse(q);
-                        patients = patients.Where(p => p.patientID.Equals(pID));
-                        searchParam += " ID for ' " + q + " ' ";
-                        break;
-                   /* case 1:
-                        int A = Int32.Parse(q);
-                        patients = patients.Where(p => p.Age.Equals(A));
-                        searchParam += " Age for ' " + q + " ' ";
-                        break; */
-                    /*case 2:
-                        patients = patients.Where(p => p.Sex.Contains(q));
-                        searchParam += " Sex for ' " + q + " ' ";
-                        break;*/
-                    case 3:
-                        patients = patients.Where(p => p.HistologicalClassification.Contains(q));
-                        searchParam += " HistologicalClassification for ' " + q + " ' ";
-                        break; 
-                }
-            } else
-            {
-                searchParam += "ALL";
-            }
-            ViewBag.SearchParameter = searchParam;
+            int who = Convert.ToInt32(Request["SearchType"]);
+            patients = patients.Where(p => p.isCompare == false);
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
@@ -62,29 +32,35 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     ViewBag.displayMenu = "Yes";
                 }
             }
-            return View(patients);
 
-            //ViewBag.IDSortParm = String.IsNullOrEmpty(sortingMethod) ? "idNum" : "";
-            //ViewBag.AgeSortParm = sortingMethod == "Age" ? "age_desc" : "Age";
+            if (!string.IsNullOrWhiteSpace(q))
+            {
+                int pID = int.Parse(q);
+                patients = patients.Where(p => p.patientID.Equals(pID));
+            }
 
-            //switch (sortingMethod)
-            //{
-            //    case "idNum":
-            //        patients = patients.OrderByDescending(p => p.patientID);
-            //        break;
-            //    case "Age":
-            //        patients = patients.OrderBy(p => p.Age);
-            //        break;
-            //    case "age_desc":
-            //        patients = patients.OrderByDescending(p => p.Age);
-            //        break;
-            //    default:
-            //        patients = patients.OrderBy(p => p.patientID);
-            //        break;
+            if (!string.IsNullOrWhiteSpace(tumLoc))
+            {
+                patients = patients.Where(r => r.TumorLocation.Contains(tumLoc));
+            }
 
-            //}
-            //return View(db.Patients.ToList());
-            //return View(patients);
+            if (!string.IsNullOrWhiteSpace(clss))
+            {
+                patients = patients.Where(s => s.HistologicalClassification.Contains(clss));
+            }
+
+            if (!string.IsNullOrWhiteSpace(grade))
+            {
+                int hisGrade = int.Parse(grade);
+                patients = patients.Where(t => t.HistologicalGrade == hisGrade);
+            }
+
+            if (!string.IsNullOrWhiteSpace(sex))
+            {
+                patients = patients.Where(u => u.Sex.Contains(sex));
+            }
+
+            return View(patients);          
         }
 
         public ActionResult CompIndex(/*string sortingMethod*/string q)
@@ -134,27 +110,6 @@ namespace TumorTaskforce_Webapp_1.Controllers
             }
             return View(patients);
 
-            //ViewBag.IDSortParm = String.IsNullOrEmpty(sortingMethod) ? "idNum" : "";
-            //ViewBag.AgeSortParm = sortingMethod == "Age" ? "age_desc" : "Age";
-
-            //switch (sortingMethod)
-            //{
-            //    case "idNum":
-            //        patients = patients.OrderByDescending(p => p.patientID);
-            //        break;
-            //    case "Age":
-            //        patients = patients.OrderBy(p => p.Age);
-            //        break;
-            //    case "age_desc":
-            //        patients = patients.OrderByDescending(p => p.Age);
-            //        break;
-            //    default:
-            //        patients = patients.OrderBy(p => p.patientID);
-            //        break;
-
-            //}
-            //return View(db.Patients.ToList());
-            //return View(patients);
         }
 
         //public ActionResult Compare()
@@ -190,12 +145,196 @@ namespace TumorTaskforce_Webapp_1.Controllers
             //ALGORITHM SHOULD GO HERE
             //MAKE SURE TO ONLY COMPARE AGAINST PATIENTS WHERE isCompare == false
 
+            Patient target = new Patient();//target variable keeps most recent "similar patient" during search
+            int targetSimilarity = 0;//updated variable that hold most "similar" variable
+            int currEffect = 0, targetEffect = 0;
+            //String targetRecord = "000000000000000000";//this is a primitive testing variable that I made to make sure its recording everything
+                                                       // correctly. im going to comment these out for now
+            foreach (var curr in db.Patients)
+            {
+                int similarity = 0, i = 0;
+                //String record = "000000000000000000";
+                if (patient.patientID == curr.patientID || curr.isCompare == true)
+                {
+                    continue;
+                }
+                else
+                {
+                    /*double tVol = 0, currVol = 0;
+                    tVol = (double)(Model.TumorHeight * Model.TumorLength * Model.TumorWidth);
+                    currVol = (double)(curr.TumorHeight * curr.TumorLength * curr.TumorWidth); */
+                    if (patient.Sex.Equals(curr.Sex))
+                    {
+                        similarity++;
+                        //record = record.Insert(0, "1");
+                    }
+                    if (patient.Age == curr.Age)
+                    {
+                        similarity++;
+                        //record = record.Insert(1, "1");
+                    }
+                    if (patient.HistologicalClassification.Equals(curr.HistologicalClassification))
+                    {
+                        i = 3;
+                        //record = record.Insert(2, "1");
+                        if (patient.HistologicalGrade >= curr.HistologicalGrade)
+                        {
+                            i++;
+                            //record = record.Insert(3, "1");
+                            if (patient.HistologicalGrade == curr.HistologicalGrade)
+                            {
+                                i++;
+                                //record = record.Insert(4, "1");
+                            }
+                        }
+                        similarity += i;
+                        i = 0;
+                    }
+                    if (patient.TumorLength == curr.TumorLength)
+                    {
+                        similarity++;
+                        //record = record.Insert(5, "1");
+                    }
+                    if (patient.TumorWidth == curr.TumorWidth)
+                    {
+                        similarity++;
+                        //record = record.Insert(6, "1");
+                    }
+                    if (patient.TumorHeight == curr.TumorHeight)
+                    {
+                        similarity++;
+                        //record = record.Insert(7, "1");
+                    }
+                    if (patient.TumorLocation.Equals(curr.TumorLocation))
+                    {
+                        similarity += 3;
+                        //record = record.Insert(8, "1");
+                    }
+                    try
+                    {
+                        if (!patient.Constitutional.Equals(null)
+                                & !patient.Constitutional.Equals("normal"))
+                        {
+                            if (patient.Constitutional.Equals(curr.Constitutional))
+                            {
+                                similarity++;
+                                //record = record.Insert(9, "1");
+                            }
+                        }
+                        if (!patient.Respiratory.Equals(null)
+                                & !patient.Respiratory.Equals("normal"))
+                        {
+                            if (patient.Respiratory.Equals(curr.Respiratory))
+                            {
+                                similarity++;
+                                //record = record.Insert(10, "1");
+                            }
+                        }
+                        if (!patient.Cardiovascular.Equals(null)
+                                & !patient.Cardiovascular.Equals("normal"))
+                        {
+                            if (patient.Cardiovascular.Equals(curr.Cardiovascular))
+                            {
+                                similarity++;
+                                //record = record.Insert(11, "1");
+                            }
+                        }
+                        if (!patient.Gastrointestinal.Equals(null)
+                                & !patient.Gastrointestinal.Equals("normal"))
+                        {
+                            if (patient.Gastrointestinal.Equals(curr.Gastrointestinal))
+                            {
+                                similarity++;
+                                //record = record.Insert(12, "1");
+                            }
+                        }
+                        if (!patient.Musculoskeletal.Equals(null)
+                                & !patient.Musculoskeletal.Equals("normal"))
+                        {
+                            if (patient.Musculoskeletal.Equals(curr.Musculoskeletal))
+                            {
+                                similarity++;
+                                //record = record.Insert(13, "1");
+                            }
+                        }
+                        if (!patient.Integumentary.Equals(null)
+                                & !patient.Integumentary.Equals("normal"))
+                        {
+                            if (patient.Integumentary.Equals(curr.Integumentary))
+                            {
+                                similarity++;
+                                //record = record.Insert(14, "1");
+                            }
+                        }
+                        if (!patient.Neurologic.Equals(null)
+                                & !patient.Neurologic.Equals("normal"))
+                        {
+                            if (patient.Neurologic.Equals(curr.Neurologic))
+                            {
+                                similarity++;
+                                //record = record.Insert(15, "1");
+                            }
+                        }
+                        if (!patient.Exercize.Equals(null)
+                                & !patient.Exercize.Equals("normal"))
+                        {
+                            if (patient.Exercize.Equals(curr.Exercize))
+                            {
+                                similarity++;
+                                //record = record.Insert(16, "1");
+                            }
+                        }
+                        if (!patient.Diet.Equals(null)
+                                & !patient.Diet.Equals("normal"))
+                        {
+                            if (patient.Diet.Equals(curr.Diet))
+                            {
+                                similarity++;
+                                //record = record.Insert(17, "1");
+                            }
+                        }
+                    }catch (NullReferenceException e) { }
+                        
+
+
+                }
+                if (similarity > targetSimilarity)
+                {
+                    target = curr;
+                    targetSimilarity = similarity;
+                    //targetRecord = record;
+                }
+                else if (similarity == targetSimilarity)
+                {
+                    currEffect = 0;
+                    targetEffect = 0;
+                    foreach (TreatmentsPivot sp in curr.TreatmentsPivots)
+                    {
+                       currEffect += sp.effectiveness;
+                    }
+                    foreach (TreatmentsPivot sp in target.TreatmentsPivots)
+                    {
+                        targetEffect += sp.effectiveness;
+                    }
+                    if (currEffect > targetEffect)
+                    {
+                        target = curr;
+                        //targetRecord = record;
+                    }
+                }
+                    /*< text > Patient: </ text >< span > @curr.patientID </ span >< text > | Sim: </ text >< span > @similarity </ span >< text > | Record: </ text >< span > @record </ span >< text > | Effect: </ text >< span > @currEffect </ span >< br /> */
+
+            }
+
+
+
+
             //var tuple = new Tuple<TumorTaskforce_Webapp_1.Patient, IEnumerable<TumorTaskforce_Webapp_1.Patient>>(patient, db.Patients.ToList());
 
             //PUT SUGGESTED TREATMENTS AS STRING INTO patient.comparisonResults
 
-
-            patient.comparisonResults = "Our Comparison Algorithm is Under Contruction! Check back soon. Sorry for any inconvenience.";
+            patient.comparisonResults = target.patientID.ToString();//omg that worked haha
+            //patient.comparisonResults = "Our Comparison Algorithm is Under Contruction! Check back soon. Sorry for any inconvenience.";
             db.SaveChanges();
 
 

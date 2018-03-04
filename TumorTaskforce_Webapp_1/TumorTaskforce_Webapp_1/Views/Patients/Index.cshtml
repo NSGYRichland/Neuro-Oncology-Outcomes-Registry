@@ -17,35 +17,48 @@
 
         <h2>Patient Directory</h2>
 
-        @Html.ActionLink("Create New", "Create", new { isCompare = false })
+        @Html.ActionLink("Create New Patient", "Create", new { isCompare = false })<hr />
         using (Html.BeginForm("Index", "Patients", FormMethod.Get,
                     new { @class = "Search-form" }))
             {
+            <h4>
+               Search for patient(s)
+            </h4>
             <div class="row">
                 <div class="col-md-2">
                     <p>
                         ID: @Html.TextBox("q")
                     </p>
+                </div>
+                <div class="col-md-2">
                     <p>
                         Sex: @Html.TextBox("sex")
                     </p>
+                </div>
+                <div class="col-md-2">
                     <p>
                         Classification: @Html.TextBox("clss")
                     </p>
+                </div>
+                <div class="col-md-2">
                     <p>
-                        Location: @Html.TextBox("tumLoc")                        
+                        Location: @Html.TextBox("tumLoc")
                     </p>
+                </div>
+                <div class="col-md-2">
                     <p>
                         Grade: @Html.TextBox("grade")
                     </p>
                 </div>
-            </div>
-
                 <div class="col-md-1">
+                    <br />
                     <div id="buttonSearch">
                         <input type="submit" value="Search" id="buttonSubmit" />
                     </div>
                 </div>
+            </div>
+
+                
 
         }
         <br />
