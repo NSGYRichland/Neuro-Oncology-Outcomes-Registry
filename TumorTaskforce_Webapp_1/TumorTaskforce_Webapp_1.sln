@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TumorTaskforce_Webapp_1", "TumorTaskforce_Webapp_1\TumorTaskforce_Webapp_1.csproj", "{DE6DABCE-991D-4E86-8AA5-37B81356AEF6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StringLibraryTest", "StringLibraryTest\StringLibraryTest.csproj", "{1056EA01-CB24-4814-A7D0-0F014D50DCAE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{42687A1C-1229-412C-B154-54704F1070D4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{DE6DABCE-991D-4E86-8AA5-37B81356AEF6} = {DE6DABCE-991D-4E86-8AA5-37B81356AEF6}
@@ -22,10 +20,6 @@ Global
 		{DE6DABCE-991D-4E86-8AA5-37B81356AEF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE6DABCE-991D-4E86-8AA5-37B81356AEF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE6DABCE-991D-4E86-8AA5-37B81356AEF6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1056EA01-CB24-4814-A7D0-0F014D50DCAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1056EA01-CB24-4814-A7D0-0F014D50DCAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1056EA01-CB24-4814-A7D0-0F014D50DCAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1056EA01-CB24-4814-A7D0-0F014D50DCAE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{42687A1C-1229-412C-B154-54704F1070D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{42687A1C-1229-412C-B154-54704F1070D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42687A1C-1229-412C-B154-54704F1070D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
