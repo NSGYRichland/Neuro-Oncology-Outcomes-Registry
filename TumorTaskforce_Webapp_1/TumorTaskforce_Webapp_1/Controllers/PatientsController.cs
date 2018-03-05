@@ -147,7 +147,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
 
             Patient target = new Patient();//target variable keeps most recent "similar patient" during search
             int targetSimilarity = 0;//updated variable that hold most "similar" variable
-            int currEffect = 0, targetEffect = 0;
+            int currEffect = 0, targetEffect = 0; bool surgery = false;
             //String targetRecord = "000000000000000000";//this is a primitive testing variable that I made to make sure its recording everything
                                                        // correctly. im going to comment these out for now
             foreach (var curr in db.Patients)
@@ -190,7 +190,25 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         similarity += i;
                         i = 0;
                     }
-                    if (patient.TumorLength == curr.TumorLength)
+
+                    if (patient.TumorLength == curr.TumorLength
+                     & patient.TumorWidth == curr.TumorWidth
+                         & patient.TumorHeight == curr.TumorHeight
+                             & patient.TumorLocation.Equals(curr.TumorLocation))
+                    {
+                        foreach (TreatmentsPivot var in curr.TreatmentsPivots)
+                        {
+                            if (var.PossibleTreatment.Name.Equals("Surgery"))
+                            {
+                                surgery = true;
+                            }
+                        }
+
+                        //similarity++;
+                        //record = record.Insert(5, "1");
+                    }
+
+                    /*if (patient.TumorLength == curr.TumorLength)
                     {
                         similarity++;
                         //record = record.Insert(5, "1");
@@ -209,7 +227,9 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     {
                         similarity += 3;
                         //record = record.Insert(8, "1");
-                    }
+                    }*/
+
+
                     try
                     {
                         if (!patient.Constitutional.Equals(null)
@@ -332,8 +352,22 @@ namespace TumorTaskforce_Webapp_1.Controllers
             //var tuple = new Tuple<TumorTaskforce_Webapp_1.Patient, IEnumerable<TumorTaskforce_Webapp_1.Patient>>(patient, db.Patients.ToList());
 
             //PUT SUGGESTED TREATMENTS AS STRING INTO patient.comparisonResults
-
-            patient.comparisonResults = target.patientID.ToString();//omg that worked haha
+            patient.comparisonResults = "";
+            if (surgery == true)
+            {
+                patient.comparisonResults = "Surgery  ";
+            }
+            foreach (TreatmentsPivot var in target.TreatmentsPivots)
+            {
+                string str;
+                if (var.PossibleTreatment.Name.Equals("Drug"))
+                {
+                    str = "Drug: " + var.notes;
+                }
+                str = var.PossibleTreatment.Name;
+                patient.comparisonResults += str + " ";
+            }
+            //patient.comparisonResults = target.patientID.ToString();//omg that worked haha
             //patient.comparisonResults = "Our Comparison Algorithm is Under Contruction! Check back soon. Sorry for any inconvenience.";
             db.SaveChanges();
 
