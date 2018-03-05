@@ -33,18 +33,30 @@ TESTING:
 
 To run behavioral test:
 
-	1) Download the necessary Selenium Nuget packages from Visual Studios and include their corresponding headers
+	1) Download Visual Studios Community 2017 from the Visual Studios website 
+	
+	2) Download the project from Github and open it in Vs
+	
+	3) Install the following nuget packages by clicking on the "UnitTestProect1" project and scrolling to "Manage Nuget Packages" in the list:
 	**This is the most friendly method**
+		
+		-NUnit
+		
+		-NUnit3TestAdapter
+		
+		-NUnitTestAdapter.WithFramework
+		
+		-Github extension for VS **makes source control easier to use**
 		
 		-Selenium.WebDriver
 		
 		-Selenium.Firfox.WebDriver
 		
-	2) Build the solution inside Visual Studios and this will activate the built in Test Explorer
+	4) Build the solution inside Visual Studios and this will activate the built in Test Explorer
 	
-	3) The available tests in the project will appear
+	5) The available tests in the project will appear in a separate window that will pop-up on the side of the screen
 	
-	4) You can choose to run them individually or click the "Run All" button to automatically see whether the tests pass
+	6) You can choose to run them individually or click the "Run All" button to automatically see whether the tests pass
 	**In the future we plan on having the tests run automatically when the project is built and show errors if any portion of the build is unsuccessful**
 	
-	
+	**You don't need any access to the database we created usign MySql because it's not necessary to run any of the tests created**
