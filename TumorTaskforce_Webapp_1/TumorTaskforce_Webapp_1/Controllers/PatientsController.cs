@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Text; //for importing StringBuilder class
 using TumorTaskforce_Webapp_1;
 using TumorTaskforce_Webapp_1.Models;
 
@@ -329,13 +330,35 @@ namespace TumorTaskforce_Webapp_1.Controllers
 
 
 
-            //var tuple = new Tuple<TumorTaskforce_Webapp_1.Patient, IEnumerable<TumorTaskforce_Webapp_1.Patient>>(patient, db.Patients.ToList());
+			//var tuple = new Tuple<TumorTaskforce_Webapp_1.Patient, IEnumerable<TumorTaskforce_Webapp_1.Patient>>(patient, db.Patients.ToList());
 
-            //PUT SUGGESTED TREATMENTS AS STRING INTO patient.comparisonResults
 
-            patient.comparisonResults = target.patientID.ToString();//omg that worked haha
-            //patient.comparisonResults = "Our Comparison Algorithm is Under Contruction! Check back soon. Sorry for any inconvenience.";
-            db.SaveChanges();
+
+			//SUGGESTED TREATMENTS AS STRING PUT INTO patient.comparisonResults
+			//StringBuilder MyStringBuilder = new StringBuilder(patient.comparisonResults);
+
+			foreach (TreatmentsPivot sp in target.TreatmentsPivots)
+			{
+				//MyStringBuilder.Append(" ");
+				//patient.comparisonResults = target.PossibleTreatment.Name;
+
+				//patient.comparisonResults.Append + " ";
+				//Console.WriteLine(MyStringBuilder);
+			}
+
+
+
+
+
+
+
+
+
+
+
+			patient.comparisonResults = target.patientID.ToString();//omg that worked haha
+			//patient.comparisonResults = "Our Comparison Algorithm is Under Contruction! Check back soon. Sorry for any inconvenience.";
+			db.SaveChanges();
 
 
             if (User.Identity.IsAuthenticated)
