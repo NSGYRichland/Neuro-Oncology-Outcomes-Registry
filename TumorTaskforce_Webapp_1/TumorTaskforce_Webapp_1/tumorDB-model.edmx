@@ -61,6 +61,9 @@
           <Property Name="Neurologic" Type="varchar" MaxLength="50" />
           <Property Name="Exercize" Type="varchar" MaxLength="50" />
           <Property Name="Diet" Type="varchar" MaxLength="50" />
+          <Property Name="isCompare" Type="bit" Nullable="false" />
+          <Property Name="userName" Type="varchar" MaxLength="30" />
+          <Property Name="comparisonResults" Type="varchar" MaxLength="8000" />
         </EntityType>
         <EntityType Name="PossibleFamilyHistory">
           <Key>
@@ -365,6 +368,9 @@
           <NavigationProperty Name="OtherMedsPivots" Relationship="Self.FK_OtherMedsPivot_ToPatients" FromRole="Patients" ToRole="OtherMedsPivot" />
           <NavigationProperty Name="SymptomsPivots" Relationship="Self.FK_SymptomsPivot_ToPatients" FromRole="Patients" ToRole="SymptomsPivot" />
           <NavigationProperty Name="TreatmentsPivots" Relationship="Self.FK_TreatmentsPivot_ToPatients" FromRole="Patients" ToRole="TreatmentsPivot" />
+          <Property Name="isCompare" Type="Boolean" Nullable="false" />
+          <Property Name="userName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="comparisonResults" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PossibleFamilyHistory">
           <Key>
@@ -652,6 +658,9 @@
           <EntitySetMapping Name="Patients">
             <EntityTypeMapping TypeName="tumorDBModel.Patient">
               <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="comparisonResults" ColumnName="comparisonResults" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="isCompare" ColumnName="isCompare" />
                 <ScalarProperty Name="patientID" ColumnName="patientID" />
                 <ScalarProperty Name="Sex" ColumnName="Sex" />
                 <ScalarProperty Name="Married" ColumnName="Married" />

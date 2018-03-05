@@ -2,12 +2,12 @@
 
 
 @{
-    ViewBag.Title = "Patients";
+    ViewBag.Title = "Comparison Patients";
 }
 
 <div class="jumbotron">
-    <h1>All Patients</h1>
-    <p class="lead"></p>
+    <h1>Comparison Patients</h1>
+    <p class="lead">Patients Created via the Comparison Tool (Not used in Comparison Algorithm)</p>
 </div>
 
 @if (User.Identity.IsAuthenticated)
@@ -15,57 +15,85 @@
     if (ViewBag.displayMenu == "Yes")
     {
 
-        <h2>Patient Directory</h2>
+        <h2>Comparison Patients created by All Users</h2>
 
-        @Html.ActionLink("Create New Patient", "Create", new { isCompare = false })<hr />
-        using (Html.BeginForm("Index", "Patients", FormMethod.Get,
+        using (Html.BeginForm("CompIndex", "Patients", FormMethod.Get,
                     new { @class = "Search-form" }))
-            {
-            <h4>
-               Search for patient(s)
-            </h4>
+        {
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-5">
                     <p>
-                        ID: @Html.TextBox("q")
+                        @Html.ActionLink("Compare New", "Create", new { isCompare = true })
                     </p>
                 </div>
-                <div class="col-md-2">
-                    <p>
-                        Sex: @Html.TextBox("sex")
-                    </p>
+                <div class="col-md-4">
+                    <div id="txtBox">
+                        @Html.Label("Search for Patients")
+                        <input type="text" name="q" />
+                    </div>
                 </div>
                 <div class="col-md-2">
-                    <p>
-                        Classification: @Html.TextBox("clss")
-                    </p>
-                </div>
-                <div class="col-md-2">
-                    <p>
-                        Location: @Html.TextBox("tumLoc")
-                    </p>
-                </div>
-                <div class="col-md-2">
-                    <p>
-                        Grade: @Html.TextBox("grade")
-                    </p>
+                    <div id="radioList">
+                        @Html.RadioButton("SearchType", "0", true)
+                        @Html.Label("ID")
+                        @*@Html.RadioButton("SearchType", "1")
+                            @Html.Label("Age")*@
+                        @*@Html.RadioButton("SearchType", "2", true)
+                            @Html.Label("Sex")*@
+                        @Html.RadioButton("SearchType", "3")
+                        @Html.Label("Classification")
+
+                    </div>
                 </div>
                 <div class="col-md-1">
-                    <br />
                     <div id="buttonSearch">
                         <input type="submit" value="Search" id="buttonSubmit" />
                     </div>
                 </div>
-            </div>
 
-                
+            </div>
 
         }
         <br />
+        @*<div id="DivGrid">
+                @{
+                    var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 4, defaultSort: "ID");
+                    if (Model.Count() > 0)
+                    {
+                        <div><strong> @ViewBag.SearchParameter</strong> | @grid.TotalRowCount @Html.Label("Patients(s) found")</div>
+                        @grid.GetHtml(tableStyle: "PGrid", headerStyle: "Header", alternatingRowStyle: "altRow", htmlAttributes: new { id = "DataTable" }, columns: grid.Columns(
+                    grid.Column("ID"),
+                    grid.Column("Age", "Age"),
+                    grid.Column("Sex", "Sex"),
+                    grid.Column("Histological Classification", "Classification")));
+                    }
+                    else
+                    {
+                        <hr />@Html.Label("No, Patient(s) not found")<hr />
+                    }
+                }
+            </div>*@
+
+
+        @*<div id="DivGrid">
+                @{
+                    var grid = new WebGrid(source: Model, canPage: true, rowsPerPage: 4, defaultSort: "ID");
+                    @grid.GetHtml(tableStyle: "PGrid", headerStyle: "Header", alternatingRowStyle: "altRow", htmlAttributes: new { id = "DataTable" }, columns: grid.Columns(
+                    grid.Column("Patient"),
+                    grid.Column("HistologicalClassification", "Classification"),
+                    grid.Column("TumorLocation", "Location"),
+                    grid.Column("", header: "ToEdit", format: @<text>@Html.ActionLink("Edit", "Edit", "patientID", new { id = item.ID }, new { target = "_blank" })</text>)));
+                }
+
+            </div>*@
+
 
         <div class="table-responsive">
             <table class="table table-striped">
                 <tr>
+                    <th>
+                        User
+                    </th>
                     <th>
                         Patient
                     </th>
@@ -97,6 +125,9 @@
                 {
                     <tr>
                         <td>
+                            @Html.DisplayFor(modelItem => item.userName)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.patientID)
                         </td>
                         <td>
@@ -126,7 +157,7 @@
                         </td>
                         <td>
                             @*@Html.ActionLink("Edit", "Edit", new { id=item.patientID }) |*@
-                            @Html.ActionLink("View Patient", "Details", new { id = item.patientID }) |
+                            @Html.ActionLink("View", "Details", new { id = item.patientID }) |
                             @Html.ActionLink("Delete", "Delete", new { id = item.patientID })
 
                         </td>

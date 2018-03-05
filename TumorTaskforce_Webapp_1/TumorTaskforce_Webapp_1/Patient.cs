@@ -48,6 +48,9 @@ namespace TumorTaskforce_Webapp_1
         public string Neurologic { get; set; }
         public string Exercize { get; set; }
         public string Diet { get; set; }
+        public bool isCompare { get; set; }
+        public string userName { get; set; }
+        public string comparisonResults { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FamilyHistoryPivot> FamilyHistoryPivots { get; set; }
