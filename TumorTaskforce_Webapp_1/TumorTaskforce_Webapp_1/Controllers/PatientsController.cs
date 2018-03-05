@@ -337,14 +337,20 @@ namespace TumorTaskforce_Webapp_1.Controllers
 			//SUGGESTED TREATMENTS AS STRING PUT INTO patient.comparisonResults
 			//StringBuilder MyStringBuilder = new StringBuilder(patient.comparisonResults);
 
-			/*foreach (TreatmentsPivot sp in target.TreatmentsPivots)
+			foreach (TreatmentsPivot sp in target.TreatmentsPivots)
 			{
 				//MyStringBuilder.Append(" ");
-				patient.comparisonResults = target.PossibleTreatment.Name;
+				//patient.comparisonResults = target.PossibleTreatment.Name;
 
 				//patient.comparisonResults.Append + " ";
 				//Console.WriteLine(MyStringBuilder);
-			}*/
+			}
+
+
+
+
+
+
 
 
 
