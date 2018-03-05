@@ -31,13 +31,13 @@ Get a suggested treatment option
 
 TESTING:
 
-To run behavioral test:
+To run behavioral and unit tests:
 
 	1) Download Visual Studios Community 2017 from the Visual Studios website 
 	
 	2) Download the project from Github and open it in Vs
 	
-	3) Install the following nuget packages by clicking on the "UnitTestProect1" project and scrolling to "Manage Nuget Packages" in the list:
+	3) Install the following nuget packages in the "UnitTestProjct1" project by right clicking on the UnitTestProject1 to select "Manage Nuget Packages" from thr dropdown menu:
 	**This is the most friendly method**
 		
 		-NUnit
@@ -52,7 +52,7 @@ To run behavioral test:
 		
 		-Selenium.Firfox.WebDriver
 		
-		-You will need the following headers in the test file:
+		-You will need the following headers in most test files:
 			
 			using System;
 			
@@ -62,6 +62,14 @@ To run behavioral test:
 			
 			using System.Threading;
 			
+			using System.Web.SessionState;
+
+			using System.IO;
+
+			using System.Reflection;
+
+			using System.Web;
+			
 			using NUnit.Framework;
 			
 			using OpenQA.Selenium;
@@ -70,7 +78,7 @@ To run behavioral test:
 			
 			using OpenQA.Selenium.Support.UI;
 		
-	4) Build the solution inside Visual Studios and this will activate the built in Test Explorer
+	4) Build the solution inside Visual Studios and this will activate the built in Test Explorer. If Test Explorer does not appear, simply use the shortcut key: Ctrl + E followed by T to open the Test Explorer.
 	
 	5) The available tests in the project will appear in a separate window that will pop-up on the side of the screen
 	
