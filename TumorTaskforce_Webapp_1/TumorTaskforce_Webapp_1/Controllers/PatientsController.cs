@@ -63,43 +63,12 @@ namespace TumorTaskforce_Webapp_1.Controllers
             return View(patients);          
         }
 
-        public ActionResult CompIndex(/*string sortingMethod*/string q)
+        public ActionResult CompIndex(string q, string tumLoc, string clss, string grade, string sex)
         {
             var patients = from p in db.Patients select p;
             int id = Convert.ToInt32(Request["SearchType"]);
-            var searchParam = "Searching";
-            patients = patients.Where(p => p.isCompare == true);
-
-            if (!string.IsNullOrWhiteSpace(q))
-            {
-                switch (id)
-
-                {
-                    case 0:
-                        int pID = int.Parse(q);
-                        patients = patients.Where(p => p.patientID.Equals(pID));
-                        searchParam += " ID for ' " + q + " ' ";
-                        break;
-                    /* case 1:
-                         int A = Int32.Parse(q);
-                         patients = patients.Where(p => p.Age.Equals(A));
-                         searchParam += " Age for ' " + q + " ' ";
-                         break; */
-                    /*case 2:
-                        patients = patients.Where(p => p.Sex.Contains(q));
-                        searchParam += " Sex for ' " + q + " ' ";
-                        break;*/
-                    case 3:
-                        patients = patients.Where(p => p.HistologicalClassification.Contains(q));
-                        searchParam += " HistologicalClassification for ' " + q + " ' ";
-                        break;
-                }
-            }
-            else
-            {
-                searchParam += "ALL";
-            }
-            ViewBag.SearchParameter = searchParam;
+            int who = Convert.ToInt32(Request["SearchType"]);
+            patients = patients.Where(p => p.isCompare);
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
@@ -108,8 +77,35 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     ViewBag.displayMenu = "Yes";
                 }
             }
-            return View(patients);
 
+            if (!string.IsNullOrWhiteSpace(q))
+            {
+                int pID = int.Parse(q);
+                patients = patients.Where(p => p.patientID.Equals(pID));
+            }
+
+            if (!string.IsNullOrWhiteSpace(tumLoc))
+            {
+                patients = patients.Where(r => r.TumorLocation.Contains(tumLoc));
+            }
+
+            if (!string.IsNullOrWhiteSpace(clss))
+            {
+                patients = patients.Where(s => s.HistologicalClassification.Contains(clss));
+            }
+
+            if (!string.IsNullOrWhiteSpace(grade))
+            {
+                int hisGrade = int.Parse(grade);
+                patients = patients.Where(t => t.HistologicalGrade == hisGrade);
+            }
+
+            if (!string.IsNullOrWhiteSpace(sex))
+            {
+                patients = patients.Where(u => u.Sex.Contains(sex));
+            }
+
+            return View(patients);
         }
 
         //public ActionResult Compare()
@@ -173,40 +169,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         similarity++;
                         //record = record.Insert(1, "1");
                     }
-                    if (patient.HistologicalClassification.Equals(curr.HistologicalClassification))
-                    {
-                        i = 3;
-                        //record = record.Insert(2, "1");
-                        if (patient.HistologicalGrade >= curr.HistologicalGrade)
-                        {
-                            i++;
-                            //record = record.Insert(3, "1");
-                            if (patient.HistologicalGrade == curr.HistologicalGrade)
-                            {
-                                i++;
-                                //record = record.Insert(4, "1");
-                            }
-                        }
-                        similarity += i;
-                        i = 0;
-                    }
-
-                    if (patient.TumorLength == curr.TumorLength
-                     & patient.TumorWidth == curr.TumorWidth
-                         & patient.TumorHeight == curr.TumorHeight
-                             & patient.TumorLocation.Equals(curr.TumorLocation))
-                    {
-                        foreach (TreatmentsPivot var in curr.TreatmentsPivots)
-                        {
-                            if (var.PossibleTreatment.Name.Equals("Surgery"))
-                            {
-                                surgery = true;
-                            }
-                        }
-
-                        //similarity++;
-                        //record = record.Insert(5, "1");
-                    }
+                    
 
                     /*if (patient.TumorLength == curr.TumorLength)
                     {
@@ -232,6 +195,40 @@ namespace TumorTaskforce_Webapp_1.Controllers
 
                     try
                     {
+                        if (patient.HistologicalClassification.Equals(curr.HistologicalClassification))
+                        {
+                            i = 3;
+                            //record = record.Insert(2, "1");
+                            if (patient.HistologicalGrade >= curr.HistologicalGrade)
+                            {
+                                i++;
+                                //record = record.Insert(3, "1");
+                                if (patient.HistologicalGrade == curr.HistologicalGrade)
+                                {
+                                    i++;
+                                    //record = record.Insert(4, "1");
+                                }
+                            }
+                            similarity += i;
+                            i = 0;
+                        }
+
+                        if (patient.TumorLength == curr.TumorLength
+                         & patient.TumorWidth == curr.TumorWidth
+                             & patient.TumorHeight == curr.TumorHeight
+                                 & patient.TumorLocation.Equals(curr.TumorLocation))
+                        {
+                            foreach (TreatmentsPivot var in curr.TreatmentsPivots)
+                            {
+                                if (var.PossibleTreatment.Name.Equals("Surgery"))
+                                {
+                                    surgery = true;
+                                }
+                            }
+
+                            //similarity++;
+                            //record = record.Insert(5, "1");
+                        }
                         if (!patient.Constitutional.Equals(null)
                                 & !patient.Constitutional.Equals("normal"))
                         {
@@ -362,10 +359,19 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 string str;
                 if (var.PossibleTreatment.Name.Equals("Drug"))
                 {
-                    str = "Drug: " + var.notes;
+                    try
+                    {
+                        str = "Drug: " + var.notes.ToString();
+                        patient.comparisonResults += str + " // ";
+                    } 
+                    catch (NullReferenceException e) { }
                 }
-                str = var.PossibleTreatment.Name;
-                patient.comparisonResults += str + " ";
+                else
+                {
+                    str = var.PossibleTreatment.Name;
+                    patient.comparisonResults += str + " // ";
+                }
+                
             }
             //patient.comparisonResults = target.patientID.ToString();//omg that worked haha
             //patient.comparisonResults = "Our Comparison Algorithm is Under Contruction! Check back soon. Sorry for any inconvenience.";
