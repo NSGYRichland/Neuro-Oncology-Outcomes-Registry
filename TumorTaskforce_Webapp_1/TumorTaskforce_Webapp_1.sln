@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TumorTaskforce_Webapp_1", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StringLibraryTest", "StringLibraryTest\StringLibraryTest.csproj", "{1056EA01-CB24-4814-A7D0-0F014D50DCAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{42687A1C-1229-412C-B154-54704F1070D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TumorTaskforce_UnitTests", "UnitTestProject1\TumorTaskforce_UnitTests.csproj", "{42687A1C-1229-412C-B154-54704F1070D4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{DE6DABCE-991D-4E86-8AA5-37B81356AEF6} = {DE6DABCE-991D-4E86-8AA5-37B81356AEF6}
 	EndProjectSection
