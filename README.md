@@ -52,6 +52,24 @@ To run behavioral test:
 		
 		-Selenium.Firfox.WebDriver
 		
+		-You will need the following headers in the test file:
+			
+			using System;
+			
+			using System.Text;
+			
+			using System.Text.RegularExpressions;
+			
+			using System.Threading;
+			
+			using NUnit.Framework;
+			
+			using OpenQA.Selenium;
+			
+			using OpenQA.Selenium.Firefox;
+			
+			using OpenQA.Selenium.Support.UI;
+		
 	4) Build the solution inside Visual Studios and this will activate the built in Test Explorer
 	
 	5) The available tests in the project will appear in a separate window that will pop-up on the side of the screen
