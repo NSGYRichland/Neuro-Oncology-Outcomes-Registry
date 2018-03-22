@@ -362,10 +362,10 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 string str;
                 if (var.PossibleTreatment.Name.Equals("Drug"))
                 {
-                    str = "Drug: " + var.notes;
+                    str = "Drug: " + var.notes + "\n";
                 }
-                str = var.PossibleTreatment.Name;
-                patient.comparisonResults += str + " ";
+                else str = var.PossibleTreatment.Name;
+                patient.comparisonResults += str + "\n";
             }
             //patient.comparisonResults = target.patientID.ToString();//omg that worked haha
             //patient.comparisonResults = "Our Comparison Algorithm is Under Contruction! Check back soon. Sorry for any inconvenience.";
