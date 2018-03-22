@@ -23,7 +23,12 @@ namespace TumorTaskforce_Webapp_1
             this.SymptomsPivots = new HashSet<SymptomsPivot>();
             this.TreatmentsPivots = new HashSet<TreatmentsPivot>();
         }
-    
+
+        public void CreatePatient(Patient pat)
+        {
+            throw new NotImplementedException();
+        }
+
         public int patientID { get; set; }
         public string Sex { get; set; }
         public bool Married { get; set; }
@@ -57,5 +62,10 @@ namespace TumorTaskforce_Webapp_1
         public virtual ICollection<SymptomsPivot> SymptomsPivots { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TreatmentsPivot> TreatmentsPivots { get; set; }
+
+        public object GetPatients()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
