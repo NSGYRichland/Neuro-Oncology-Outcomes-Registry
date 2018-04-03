@@ -457,6 +457,9 @@
       <DependentUpon>tumorDB-model.edmx</DependentUpon>
       <LastGenOutput>tumorDB-model.cs</LastGenOutput>
     </Content>
+    <Content Include="Images\me.JPG" />
+    <Content Include="Images\Taylor.jpg" />
+    <Content Include="Images\Burdell.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -588,6 +591,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
