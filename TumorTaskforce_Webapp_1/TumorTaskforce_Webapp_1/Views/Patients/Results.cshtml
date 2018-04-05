@@ -3,6 +3,9 @@
 
 @{
     ViewBag.Title = "Results";
+    //string[] targetData = new string[3];
+    //targetData = ViewBag.TargetData as string[];
+    //string m = ViewBag.targetData[2];
 }
 <div class="jumbotron">
     <h1>Results</h1>
@@ -19,93 +22,94 @@
         </h4>
         We recommend the following treatments:
 
-		<dl class="dl-horizontal">
-		    @Html.DisplayFor(i => i.comparisonResults)
-			<br />
-			<dt></dt>
-			@*Data is based on a statistical correlation with: Patient @target.patientID | @targetSimilarity | @targetEffect*@
-			<hr />
-			<dt>
-				Patient  Info
-			</dt>
-			<dd>
-				------------------------------
-			</dd>
-			<dt>
-				@Html.DisplayNameFor(model => model.Sex)
-			</dt>
+        <dl class="dl-horizontal">
+            @Html.DisplayFor(i => i.comparisonResults)
+            &nbsp;&nbsp;@ViewBag.TargetData[0]
+            <br />
+            <dt></dt>
+            @*Data is based on a statistical correlation with: Patient @target.patientID | @targetSimilarity | @targetEffect*@
+            <hr />
+            <dt>
+                Patient  Info
+            </dt>
+            <dd>
+                ------------------------------
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Sex)
+            </dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Sex)
-			</dd>
+            <dd>
+                @Html.DisplayFor(model => model.Sex)
+            </dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Married)
-			</dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Married)
+            </dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Married)
-			</dd>
+            <dd>
+                @Html.DisplayFor(model => model.Married)
+            </dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Age)
-			</dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Age)
+            </dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Age)
-			</dd>
+            <dd>
+                @Html.DisplayFor(model => model.Age)
+            </dd>
 
-			<dt>
-				Classification
-			</dt>
+            <dt>
+                Classification
+            </dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.HistologicalClassification)
-			</dd>
+            <dd>
+                @Html.DisplayFor(model => model.HistologicalClassification)
+            </dd>
 
-			<dt>
-				Grade (WHO)
-			</dt>
+            <dt>
+                Grade (WHO)
+            </dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.HistologicalGrade)
-			</dd>
+            <dd>
+                @Html.DisplayFor(model => model.HistologicalGrade)
+            </dd>
 
-			<dt>
-				Tumor Size (WxHxL)
-			</dt>
+            <dt>
+                Tumor Size (WxHxL)
+            </dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.TumorWidth)
-				x
-				@Html.DisplayFor(model => model.TumorHeight)
-				x
-				@Html.DisplayFor(model => model.TumorLength)
-			</dd>
+            <dd>
+                @Html.DisplayFor(model => model.TumorWidth)
+                x
+                @Html.DisplayFor(model => model.TumorHeight)
+                x
+                @Html.DisplayFor(model => model.TumorLength)
+            </dd>
 
-			@*<dt>
-			@Html.DisplayNameFor(model => model.TumorHeight)
-		</dt>
+            @*<dt>
+            @Html.DisplayNameFor(model => model.TumorHeight)
+        </dt>
 
-		<dd>
-			@Html.DisplayFor(model => model.TumorHeight)
-		</dd>
+        <dd>
+            @Html.DisplayFor(model => model.TumorHeight)
+        </dd>
 
-		<dt>
-			@Html.DisplayNameFor(model => model.TumorLength)
-		</dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.TumorLength)
+        </dt>
 
-		<dd>
-			@Html.DisplayFor(model => model.TumorLength)
-		</dd>*@
+        <dd>
+            @Html.DisplayFor(model => model.TumorLength)
+        </dd>*@
 
-			<dt>
-				Location
-			</dt>
+            <dt>
+                Location
+            </dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.TumorLocation)
-			</dd>
+            <dd>
+                @Html.DisplayFor(model => model.TumorLocation)
+            </dd>
 
             <dt>
                 <br /><br />
@@ -115,231 +119,231 @@
                 @Html.DisplayNameFor(model => model.Constitutional)
             </dt>
 
-			<dd>
+            <dd>
 
-				@Html.DisplayFor(model => model.Constitutional)
-			</dd>
+                @Html.DisplayFor(model => model.Constitutional)
+            </dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Respiratory)
-			</dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Respiratory)
+            </dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Respiratory)
-			</dd>
+            <dd>
+                @Html.DisplayFor(model => model.Respiratory)
+            </dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Cardiovascular)
-			</dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Cardiovascular)
+            </dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Cardiovascular)
-			</dd>
+            <dd>
+                @Html.DisplayFor(model => model.Cardiovascular)
+            </dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Gastrointestinal)
-			</dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gastrointestinal)
+            </dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Gastrointestinal)
-			</dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gastrointestinal)
+            </dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Musculoskeletal)
-			</dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Musculoskeletal)
+            </dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Musculoskeletal)
-			</dd>
+            <dd>
+                @Html.DisplayFor(model => model.Musculoskeletal)
+            </dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Integumentary)
-			</dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Integumentary)
+            </dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Integumentary)
-			</dd>
+            <dd>
+                @Html.DisplayFor(model => model.Integumentary)
+            </dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Neurologic)
-			</dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Neurologic)
+            </dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Neurologic)
-			</dd>
+            <dd>
+                @Html.DisplayFor(model => model.Neurologic)
+            </dd>
 
-			<dt>
-				Exercise
-			</dt>
+            <dt>
+                Exercise
+            </dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Exercize)
-			</dd>
+            <dd>
+                @Html.DisplayFor(model => model.Exercize)
+            </dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Diet)
-			</dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Diet)
+            </dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Diet)
-			</dd>
+            <dd>
+                @Html.DisplayFor(model => model.Diet)
+            </dd>
 
-			<dt>
-				<br />
-				Symptoms
-			</dt>
+            <dt>
+                <br />
+                Symptoms
+            </dt>
 
-			<dd>
-				<br />
-				@foreach (SymptomsPivot sp in Model.SymptomsPivots)
-		{
-			@Html.DisplayFor(spitem => sp.PossibleSymptom.Name)
+            <dd>
+                <br />
+                @foreach (SymptomsPivot sp in Model.SymptomsPivots)
+        {
+            @Html.DisplayFor(spitem => sp.PossibleSymptom.Name)
 
-	if (sp.date != null)
-	{
-		<tag> // </tag>
-		@Html.DisplayNameFor(spitem => sp.date)
-		<tag>: </tag>
-		@Html.DisplayFor(spitem => sp.date)
+    if (sp.date != null)
+    {
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.date)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.date)
 }
 if (sp.frequency != null)
 {
-		<tag> // </tag>
-		@Html.DisplayNameFor(spitem => sp.frequency)
-		<tag>: </tag>
-		@Html.DisplayFor(spitem => sp.frequency)
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.frequency)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.frequency)
 }
 if (sp.notes != null)
 {
-		<tag> // </tag>
-		@Html.DisplayNameFor(spitem => sp.notes)
-		<tag>: </tag>
-		@Html.DisplayFor(spitem => sp.notes)
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.notes)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.notes)
 }
 
-		<br />
+        <br />
 }
-				<br />
-			</dd>
+                <br />
+            </dd>
 
-			<dt>
-				<br />
-				Other Medications
-			</dt>
+            <dt>
+                <br />
+                Other Medications
+            </dt>
 
-			<dd>
-				<br />
-				@foreach (OtherMedsPivot sp in Model.OtherMedsPivots)
-		{
-			@Html.DisplayFor(spitem => sp.PossibleOtherMed.Name)
+            <dd>
+                <br />
+                @foreach (OtherMedsPivot sp in Model.OtherMedsPivots)
+        {
+            @Html.DisplayFor(spitem => sp.PossibleOtherMed.Name)
 
-	if (sp.date != null)
-	{
-		<tag> // </tag>
-		@Html.DisplayNameFor(spitem => sp.date)
-		<tag>: </tag>
-		@Html.DisplayFor(spitem => sp.date)
+    if (sp.date != null)
+    {
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.date)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.date)
 }
 if (sp.frequency != null)
 {
-		<tag> // </tag>
-		@Html.DisplayNameFor(spitem => sp.frequency)
-		<tag>: </tag>
-		@Html.DisplayFor(spitem => sp.frequency)
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.frequency)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.frequency)
 }
 if (sp.notes != null)
 {
-		<tag> // </tag>
-		@Html.DisplayNameFor(spitem => sp.notes)
-		<tag>: </tag>
-		@Html.DisplayFor(spitem => sp.notes)
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.notes)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.notes)
 }
-		<br />
+        <br />
 }
-				<br />
-			</dd>
+                <br />
+            </dd>
 
-			<dt>
-				<br />
-				Health Factors
-			</dt>
+            <dt>
+                <br />
+                Health Factors
+            </dt>
 
-			<dd>
-				<br />
-				@foreach (HealthFactorsPivot sp in Model.HealthFactorsPivots)
-		{
-			@Html.DisplayFor(spitem => sp.PossibleHealthFactor.Name)
-	if (sp.date != null)
-	{
-		<tag> // </tag>
-		@Html.DisplayNameFor(spitem => sp.date)
-		<tag>: </tag>
-		@Html.DisplayFor(spitem => sp.date)
+            <dd>
+                <br />
+                @foreach (HealthFactorsPivot sp in Model.HealthFactorsPivots)
+        {
+            @Html.DisplayFor(spitem => sp.PossibleHealthFactor.Name)
+    if (sp.date != null)
+    {
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.date)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.date)
 }
 if (sp.frequency != null)
 {
-		<tag> // </tag>
-		@Html.DisplayNameFor(spitem => sp.frequency)
-		<tag>: </tag>
-		@Html.DisplayFor(spitem => sp.frequency)
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.frequency)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.frequency)
 }
 if (sp.notes != null)
 {
-		<tag> // </tag>
-		@Html.DisplayNameFor(spitem => sp.notes)
-		<tag>: </tag>
-		@Html.DisplayFor(spitem => sp.notes)
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.notes)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.notes)
 }
-		<br />
+        <br />
 }
-				<br />
-			</dd>
+                <br />
+            </dd>
 
-			<dt>
-				<br />
-				Treatments Given
-			</dt>
+            <dt>
+                <br />
+                Treatments Given
+            </dt>
 
-			<dd>
-				<br />
-				@foreach (TreatmentsPivot sp in Model.TreatmentsPivots)
-		{
-			@Html.DisplayFor(spitem => sp.PossibleTreatment.Name)
-	if (sp.date != null)
-	{
-		<tag> // </tag>
-		@Html.DisplayNameFor(spitem => sp.date)
-		<tag>: </tag>
-		@Html.DisplayFor(spitem => sp.date)
+            <dd>
+                <br />
+                @foreach (TreatmentsPivot sp in Model.TreatmentsPivots)
+        {
+            @Html.DisplayFor(spitem => sp.PossibleTreatment.Name)
+    if (sp.date != null)
+    {
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.date)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.date)
 }
 if (sp.frequency != null)
 {
-		<tag> // </tag>
-		@Html.DisplayNameFor(spitem => sp.frequency)
-		<tag>: </tag>
-		@Html.DisplayFor(spitem => sp.frequency)
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.frequency)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.frequency)
 }
 if (sp.notes != null)
 {
-		<tag> // </tag>
-		@Html.DisplayNameFor(spitem => sp.notes)
-		<tag>: </tag>
-		@Html.DisplayFor(spitem => sp.notes)
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.notes)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.notes)
 }
 if (sp.effectiveness != null)
 {
-		<tag> // </tag>
-		@Html.DisplayNameFor(spitem => sp.effectiveness)
-		<tag>: </tag>
-		@Html.DisplayFor(spitem => sp.effectiveness)
+        <tag> // </tag>
+        @Html.DisplayNameFor(spitem => sp.effectiveness)
+        <tag>: </tag>
+        @Html.DisplayFor(spitem => sp.effectiveness)
 }
 
-		<br />
+        <br />
 }
-				<br />
-			</dd>
+                <br />
+            </dd>
 
-		</dl>
+        </dl>
     </div>
 
 

@@ -123,6 +123,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
 
         public ActionResult Results(int? id)
         {
+            string[] TargetData = new string[3];//Idea for moving data 
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -140,7 +141,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
 
             //ALGORITHM SHOULD GO HERE
             //MAKE SURE TO ONLY COMPARE AGAINST PATIENTS WHERE isCompare == false
-
+            
             Patient target = new Patient();//target variable keeps most recent "similar patient" during search
             int targetSimilarity = 0;//updated variable that hold most "similar" variable
             int currEffect = 0, targetEffect = 0; bool surgery = false;
@@ -336,7 +337,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     if (currEffect > targetEffect)
                     {
                         target = curr;
-                        //targetRecord = record;
+                        targetRecord = record;
                     }
                 }
                     /*< text > Patient: </ text >< span > @curr.patientID </ span >< text > | Sim: </ text >< span > @similarity </ span >< text > | Record: </ text >< span > @record </ span >< text > | Effect: </ text >< span > @currEffect </ span >< br /> */
@@ -349,7 +350,10 @@ namespace TumorTaskforce_Webapp_1.Controllers
             //var tuple = new Tuple<TumorTaskforce_Webapp_1.Patient, IEnumerable<TumorTaskforce_Webapp_1.Patient>>(patient, db.Patients.ToList());
 
             //PUT SUGGESTED TREATMENTS AS STRING INTO patient.comparisonResults
-            patient.comparisonResults = "";
+            TargetData[0] = target.patientID.ToString();
+            TargetData[1] = targetSimilarity.ToString();
+            TargetData[2] = "m";
+            //patient.comparisonResults = "empty";
             if (surgery == true)
             {
                 patient.comparisonResults = "Surgery  ";
@@ -373,7 +377,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 }
                 
             }
-            patient.comparisonResults += "      | " + targetRecord;
+            patient.comparisonResults += "| " + targetRecord;
             //patient.comparisonResults = target.patientID.ToString();//omg that worked haha
             //patient.comparisonResults = "Our Comparison Algorithm is Under Contruction! Check back soon. Sorry for any inconvenience.";
             db.SaveChanges();
@@ -387,6 +391,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     ViewBag.displayMenu = "Yes";
                 }
             }
+            ViewBag.TargetData = TargetData;
             return View(patient);
         }
         
