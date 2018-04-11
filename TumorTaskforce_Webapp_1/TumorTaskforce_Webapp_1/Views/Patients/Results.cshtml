@@ -3,9 +3,13 @@
 
 @{
     ViewBag.Title = "Results";
-    //string[] targetData = new string[3];
-    //targetData = ViewBag.TargetData as string[];
-    //string m = ViewBag.targetData[2];
+    /*int Seperator = Model.comparisonResults.IndexOf('|');
+    char[] count = new char[Seperator+1];
+    Model.comparisonResults.CopyTo( 0, count, 0, Seperator);
+    int arraySize = int.Parse(count.ToString());
+    int[] dataArray = new int[arraySize];
+    dataArray = ViewBag.simData as int[];
+    <dl class="dl-horizontal"> @Html.Display(dataArray.ToString()) </dl>*/
 }
 <div class="jumbotron">
     <h1>Results</h1>
@@ -24,8 +28,7 @@
 
 		<dl class="dl-horizontal">
 			@Html.DisplayFor(i => i.comparisonResults)
-			&nbsp;&nbsp;@ViewBag.TargetData[0]
-			<br />
+        <br />
 			<dt></dt>
 
 

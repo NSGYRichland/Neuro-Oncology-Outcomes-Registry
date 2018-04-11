@@ -60,7 +60,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 patients = patients.Where(u => u.Sex.Contains(sex));
             }
 
-            return View(patients);          
+            return View(patients);
         }
 
         public ActionResult CompIndex(string q, string tumLoc, string clss, string grade, string sex)
@@ -123,7 +123,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
 
         public ActionResult Results(int? id)
         {
-            string[] TargetData = new string[3];//Idea for moving data 
+            //string[] TargetData = new string[3];//Idea for moving data 
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -138,18 +138,25 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.Conflict);
             }
 
+            //bool cSex, cAge, cClass, cGrade, cSize, cLoca, cConst, cResp, cCardio, cGastro, cMusc, cNeuro, cExer, cDiet, cSymp, cMeds, cHF = true;
+            int wSex = 100, wAge = 100, wClass = 100, wGrade = 100, wVol = 100, wLoca = 100, wConst = 100, wResp = 100, wCardio = 100, wGast = 100, wMusc = 100, wInt = 100,
+                wNeuro = 100, wExer = 100, wDiet = 100, wSymp = 0, wMeds = 0, wHF = 0; //Weighted Variables
+            float simMax = (wSex + wAge + wClass + wGrade + wVol + wLoca + wConst + wResp + wCardio + wGast + wMusc + wInt
+                + wNeuro + wExer + wDiet + wSymp + wMeds + wHF) / 100;
+
+            string simData = "";
 
             //ALGORITHM SHOULD GO HERE
             //MAKE SURE TO ONLY COMPARE AGAINST PATIENTS WHERE isCompare == false
-            
+
             Patient target = new Patient();//target variable keeps most recent "similar patient" during search
             int targetSimilarity = 0;//updated variable that hold most "similar" variable
-            int currEffect = 0, targetEffect = 0; bool surgery = false;
+            int currEffect = 0, targetEffect = 0, count = 0; bool surgery = false;
             String targetRecord = "000000000000000000";//this is a primitive testing variable that I made to make sure its recording everything
                                                        // correctly. im going to comment these out for now
             foreach (var curr in db.Patients)
             {
-                int similarity = 0, i = 0;
+                int similarity = 0;// i = 0;
                 String record = "000000000000000000";
                 if (patient.patientID == curr.patientID || curr.isCompare == true)
                 {
@@ -157,46 +164,22 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 }
                 else
                 {
-                    /*double tVol = 0, currVol = 0;
-                    tVol = (double)(Model.TumorHeight * Model.TumorLength * Model.TumorWidth);
-                    currVol = (double)(curr.TumorHeight * curr.TumorLength * curr.TumorWidth); */
+                    int pVol = ((int)patient.TumorHeight) * (int)(patient.TumorLength) * (int)(patient.TumorWidth);
+                    int cVol = ((int)curr.TumorHeight) * (int)(curr.TumorLength) * (int)(curr.TumorWidth);
+
                     if (patient.Sex.Equals(curr.Sex))
                     {
-                        similarity++;
+                        similarity += (1 * wSex);
                         record = record.Insert(0, "1");
                     }
-                    if (patient.Age == curr.Age)
+                    if (patient.Age == curr.Age)//Range
                     {
-                        similarity++;
+                        similarity += (1 * wAge);
                         record = record.Insert(1, "1");
                     }
-                    
-
-                    /*if (patient.TumorLength == curr.TumorLength)
-                    {
-                        similarity++;
-                        //record = record.Insert(5, "1");
-                    }
-                    if (patient.TumorWidth == curr.TumorWidth)
-                    {
-                        similarity++;
-                        //record = record.Insert(6, "1");
-                    }
-                    if (patient.TumorHeight == curr.TumorHeight)
-                    {
-                        similarity++;
-                        //record = record.Insert(7, "1");
-                    }
-                    if (patient.TumorLocation.Equals(curr.TumorLocation))
-                    {
-                        similarity += 3;
-                        //record = record.Insert(8, "1");
-                    }*/
-
-
                     try
                     {
-                        if (patient.HistologicalClassification.Equals(curr.HistologicalClassification))
+                        /*if (patient.HistologicalClassification.Equals(curr.HistologicalClassification))
                         {
                             i = 3;
                             record = record.Insert(2, "1");
@@ -212,12 +195,17 @@ namespace TumorTaskforce_Webapp_1.Controllers
                             }
                             similarity += i;
                             i = 0;
+                        }*/
+                        if (patient.HistologicalClassification.Equals(curr.HistologicalClassification))
+                        {
+                            similarity += (1 * wClass);
+                            record = record.Insert(2, "1");
                         }
 
                         if (patient.TumorLength == curr.TumorLength
-                         & patient.TumorWidth == curr.TumorWidth
-                             & patient.TumorHeight == curr.TumorHeight
-                                 & patient.TumorLocation.Equals(curr.TumorLocation))
+                          & patient.TumorWidth == curr.TumorWidth
+                              & patient.TumorHeight == curr.TumorHeight
+                                  & patient.TumorLocation.Equals(curr.TumorLocation))
                         {
                             foreach (TreatmentsPivot var in curr.TreatmentsPivots)
                             {
@@ -226,94 +214,92 @@ namespace TumorTaskforce_Webapp_1.Controllers
                                     surgery = true;
                                 }
                             }
-
-                            //similarity++;
-                            //record = record.Insert(5, "1");
                         }
-                        if (!patient.Constitutional.Equals(null)
-                                & !patient.Constitutional.Equals("normal"))
+                        if (pVol == cVol)
+                        {
+                            similarity += (1 * wVol);
+                            record = record.Insert(4, "1");
+                        }
+
+                        if (patient.TumorLocation.Equals(curr.TumorLocation))
+                        {
+                            similarity += (1 * wLoca);
+                            record = record.Insert(5, "1");
+                        }
+
+                        if (!patient.Constitutional.Equals(null))
                         {
                             if (patient.Constitutional.Equals(curr.Constitutional))
                             {
-                                similarity++;
-                                record = record.Insert(9, "1");
+                                similarity += (1 * wConst);
+                                record = record.Insert(6, "1");
                             }
                         }
-                        if (!patient.Respiratory.Equals(null)
-                                & !patient.Respiratory.Equals("normal"))
+                        if (!patient.Respiratory.Equals(null))
                         {
                             if (patient.Respiratory.Equals(curr.Respiratory))
                             {
-                                similarity++;
-                                record = record.Insert(10, "1");
+                                similarity += (1 * wResp);
+                                record = record.Insert(7, "1");
                             }
                         }
-                        if (!patient.Cardiovascular.Equals(null)
-                                & !patient.Cardiovascular.Equals("normal"))
+                        if (!patient.Cardiovascular.Equals(null))
                         {
                             if (patient.Cardiovascular.Equals(curr.Cardiovascular))
                             {
-                                similarity++;
-                                record = record.Insert(11, "1");
+                                similarity += (1 * wCardio);
+                                record = record.Insert(8, "1");
                             }
                         }
-                        if (!patient.Gastrointestinal.Equals(null)
-                                & !patient.Gastrointestinal.Equals("normal"))
+                        if (!patient.Gastrointestinal.Equals(null))
                         {
                             if (patient.Gastrointestinal.Equals(curr.Gastrointestinal))
                             {
-                                similarity++;
-                                record = record.Insert(12, "1");
+                                similarity += (1 * wGast);
+                                record = record.Insert(9, "1");
                             }
                         }
-                        if (!patient.Musculoskeletal.Equals(null)
-                                & !patient.Musculoskeletal.Equals("normal"))
+                        if (!patient.Musculoskeletal.Equals(null))
                         {
                             if (patient.Musculoskeletal.Equals(curr.Musculoskeletal))
                             {
-                                similarity++;
-                                record = record.Insert(13, "1");
+                                similarity += (1 * wMusc);
+                                record = record.Insert(10, "1");
                             }
                         }
-                        if (!patient.Integumentary.Equals(null)
-                                & !patient.Integumentary.Equals("normal"))
+                        if (!patient.Integumentary.Equals(null))
                         {
                             if (patient.Integumentary.Equals(curr.Integumentary))
                             {
-                                similarity++;
-                                record = record.Insert(14, "1");
+                                similarity += (1 * wInt);
+                                record = record.Insert(11, "1");
                             }
                         }
-                        if (!patient.Neurologic.Equals(null)
-                                & !patient.Neurologic.Equals("normal"))
+                        if (!patient.Neurologic.Equals(null))
                         {
                             if (patient.Neurologic.Equals(curr.Neurologic))
                             {
-                                similarity++;
-                                record = record.Insert(15, "1");
+                                similarity += (1 * wNeuro);
+                                record = record.Insert(12, "1");
                             }
                         }
-                        if (!patient.Exercize.Equals(null)
-                                & !patient.Exercize.Equals("normal"))
+                        if (!patient.Exercize.Equals(null))
                         {
                             if (patient.Exercize.Equals(curr.Exercize))
                             {
-                                similarity++;
-                                record = record.Insert(16, "1");
+                                similarity += (1 * wExer);
+                                record = record.Insert(13, "1");
                             }
                         }
-                        if (!patient.Diet.Equals(null)
-                                & !patient.Diet.Equals("normal"))
+                        if (!patient.Diet.Equals(null))
                         {
                             if (patient.Diet.Equals(curr.Diet))
                             {
-                                similarity++;
-                                record = record.Insert(17, "1");
+                                similarity += (1 * wDiet);
+                                record = record.Insert(14, "1");
                             }
                         }
-                    }catch (NullReferenceException e) { }
-                        
-
+                    } catch (NullReferenceException e) { }
 
                 }
                 if (similarity > targetSimilarity)
@@ -328,7 +314,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     targetEffect = 0;
                     foreach (TreatmentsPivot sp in curr.TreatmentsPivots)
                     {
-                       currEffect += sp.effectiveness;
+                        currEffect += sp.effectiveness;
                     }
                     foreach (TreatmentsPivot sp in target.TreatmentsPivots)
                     {
@@ -340,23 +326,44 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         targetRecord = record;
                     }
                 }
-                    /*< text > Patient: </ text >< span > @curr.patientID </ span >< text > | Sim: </ text >< span > @similarity </ span >< text > | Record: </ text >< span > @record </ span >< text > | Effect: </ text >< span > @currEffect </ span >< br /> */
-
+                int simResult = ((int)(similarity / simMax) * 100);
+                simData += ('|' + curr.patientID + '|' + simResult);
+                count++;
             }
+            //int[] TargetData = new int[count * 2];
+            //string[] TargetData = simData.Split('|');
+            //int[] Data =                                      Take simData and delim in by | to array of int[]
+                //simData.Split('|').Select(x => int.Parse(x));  Everytime I try is doenst split correctly and all ends up in 1 mass
+            //for (int i = 0; i < TargetData.Length; i++)           Sleep is important ill have to fix this tommorow.
+                //Data[i] = int.Parse(TargetData[i]);
+            //int[] Data = Array.ConvertAll(TargetData., int.Parse);
 
 
-
+           /* for(int i = 0; i < simData.Length; i++)
+            {
+                int intCount = 0, num = 0;
+                string parseInt;
+                bool isInt = int.TryParse(simData[i]);
+                if (isInt)
+                {
+                    intCount++;
+                }
+                else
+                {
+                    parseInt = simData.
+                }
+            }*/
 
             //var tuple = new Tuple<TumorTaskforce_Webapp_1.Patient, IEnumerable<TumorTaskforce_Webapp_1.Patient>>(patient, db.Patients.ToList());
 
             //PUT SUGGESTED TREATMENTS AS STRING INTO patient.comparisonResults
-            TargetData[0] = target.patientID.ToString();
-            TargetData[1] = targetSimilarity.ToString();
-            TargetData[2] = "m";
+            /*TargetData[0] = ((string)count);
+            TargetData[1] = target.patientID.ToString();*/
             //patient.comparisonResults = "empty";
+            patient.comparisonResults = (count + "| " + target.patientID + " | ");
             if (surgery == true)
             {
-                patient.comparisonResults = "Surgery  ";
+                patient.comparisonResults += "Surgery | ";
             }
             foreach (TreatmentsPivot var in target.TreatmentsPivots)
             {
@@ -391,7 +398,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     ViewBag.displayMenu = "Yes";
                 }
             }
-            ViewBag.TargetData = TargetData;
+            //ViewBag.SimData = Data;
             return View(patient);
         }
         
