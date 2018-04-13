@@ -16,177 +16,183 @@
     {
         if (ViewBag.displayMenu == "Yes")
         {
-
             <div>
                 <h4>Patient @Html.DisplayFor(model => model.patientID)</h4>
                 <hr />
+                <div class="row">
+                    <div class="col-md-5">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                General Info
+                            </dt>
+
+                            <dd>
+                                ------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Sex)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Sex)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Married)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Married)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Age)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Age)
+                            </dd>
+
+                            <dt>
+                                Classification
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.HistologicalClassification)
+                            </dd>
+
+                            <dt>
+                                Grade (WHO)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.HistologicalGrade)
+                            </dd>
+
+                            <dt>
+                                Tumor Size (WxHxL)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.TumorWidth)
+                                x
+                                @Html.DisplayFor(model => model.TumorHeight)
+                                x
+                                @Html.DisplayFor(model => model.TumorLength)
+                            </dd>
+
+                            @*<dt>
+                                @Html.DisplayNameFor(model => model.TumorHeight)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.TumorHeight)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.TumorLength)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.TumorLength)
+                            </dd>*@
+
+                            <dt>
+                                Location
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.TumorLocation)
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-5">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                Review of Systems
+                            </dt>
+                            <dd>
+                                ------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Constitutional)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Constitutional)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Respiratory)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Respiratory)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Cardiovascular)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Cardiovascular)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Gastrointestinal)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Gastrointestinal)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Musculoskeletal)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Musculoskeletal)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Integumentary)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Integumentary)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Neurologic)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Neurologic)
+                            </dd>
+
+                            <dt>
+                                Exercise
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Exercize)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Diet)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Diet)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
                 <dl class="dl-horizontal">
                     <dt>
-                        General Info
-                    </dt>
-
-                    <dd>
-                        ------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Sex)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Sex)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Married)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Married)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Age)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Age)
-                    </dd>
-
-                    <dt>
-                        Classification
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.HistologicalClassification)
-                    </dd>
-
-                    <dt>
-                        Grade (WHO)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.HistologicalGrade)
-                    </dd>
-
-                    <dt>
-                        Tumor Size (WxHxL)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.TumorWidth)
-                        x
-                        @Html.DisplayFor(model => model.TumorHeight)
-                        x
-                        @Html.DisplayFor(model => model.TumorLength)
-                    </dd>
-
-                    @*<dt>
-                            @Html.DisplayNameFor(model => model.TumorHeight)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.TumorHeight)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.TumorLength)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.TumorLength)
-                        </dd>*@
-
-                    <dt>
-                        Location
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.TumorLocation)
-                    </dd>
-
-                    <dt>
-                        <br /><br />
-                        Review of Systems<br />
-                        ------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })<br /><br />
-
-
-                        @Html.DisplayNameFor(model => model.Constitutional)
-                    </dt>
-
-                    <dd>
-                        <br />
-                        @Html.DisplayFor(model => model.Constitutional)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Respiratory)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Respiratory)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Cardiovascular)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Cardiovascular)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Gastrointestinal)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Gastrointestinal)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Musculoskeletal)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Musculoskeletal)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Integumentary)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Integumentary)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Neurologic)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Neurologic)
-                    </dd>
-
-                    <dt>
-                        Exercise
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Exercize)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Diet)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Diet)
-                    </dd>
-
-                    <dt>
-                        <br />
                         Symptoms
                     </dt>
-
                     <dd>
                         <br />
                         @foreach (SymptomsPivot sp in Model.SymptomsPivots)
@@ -354,7 +360,6 @@
                         @Html.ActionLink("Add Treatment", "Create", "TreatmentsPivots", new { patientId = Model.patientID }, null)
                         <br />
                     </dd>
-
                 </dl>
             </div>
             <p>
@@ -407,172 +412,180 @@ else
                 </p>
                 <br />
                 <hr />
+                <div class="row">
+                    <div class="col-md-5">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                General Info
+                            </dt>
+
+                            <dd>
+                                ------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Sex)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Sex)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Married)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Married)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Age)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Age)
+                            </dd>
+
+                            <dt>
+                                Classification
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.HistologicalClassification)
+                            </dd>
+
+                            <dt>
+                                Grade (WHO)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.HistologicalGrade)
+                            </dd>
+
+                            <dt>
+                                Tumor Size (WxHxL)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.TumorWidth)
+                                x
+                                @Html.DisplayFor(model => model.TumorHeight)
+                                x
+                                @Html.DisplayFor(model => model.TumorLength)
+                            </dd>
+
+                            @*<dt>
+                                @Html.DisplayNameFor(model => model.TumorHeight)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.TumorHeight)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.TumorLength)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.TumorLength)
+                            </dd>*@
+
+                            <dt>
+                                Location
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.TumorLocation)
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-5">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                Review of Systems
+                            </dt>
+                            <dd>
+                                ------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Constitutional)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Constitutional)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Respiratory)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Respiratory)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Cardiovascular)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Cardiovascular)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Gastrointestinal)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Gastrointestinal)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Musculoskeletal)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Musculoskeletal)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Integumentary)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Integumentary)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Neurologic)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Neurologic)
+                            </dd>
+
+                            <dt>
+                                Exercise
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Exercize)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Diet)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Diet)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
                 <dl class="dl-horizontal">
                     <dt>
-                        General Info
-                    </dt>
-
-                    <dd>
-                        ------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Sex)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Sex)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Married)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Married)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Age)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Age)
-                    </dd>
-
-                    <dt>
-                        Classification
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.HistologicalClassification)
-                    </dd>
-
-                    <dt>
-                        Grade (WHO)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.HistologicalGrade)
-                    </dd>
-
-                    <dt>
-                        Tumor Size (WxHxL)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.TumorWidth)
-                        x
-                        @Html.DisplayFor(model => model.TumorHeight)
-                        x
-                        @Html.DisplayFor(model => model.TumorLength)
-                    </dd>
-
-                    @*<dt>
-                            @Html.DisplayNameFor(model => model.TumorHeight)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.TumorHeight)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.TumorLength)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.TumorLength)
-                        </dd>*@
-
-                    <dt>
-                        Location
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.TumorLocation)
-                    </dd>
-
-                    <dt>
-                        <br /><br />
-                        Review of Systems<br />
-                        ------------------------------ @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })<br /><br />
-
-                        @Html.DisplayNameFor(model => model.Constitutional)
-                    </dt>
-
-                    <dd>
-                        
-                        @Html.DisplayFor(model => model.Constitutional)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Respiratory)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Respiratory)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Cardiovascular)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Cardiovascular)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Gastrointestinal)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Gastrointestinal)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Musculoskeletal)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Musculoskeletal)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Integumentary)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Integumentary)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Neurologic)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Neurologic)
-                    </dd>
-
-                    <dt>
-                        Exercise
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Exercize)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Diet)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Diet)
-                    </dd>
-
-                    <dt>
-                        <br />
                         Symptoms
                     </dt>
-
                     <dd>
                         <br />
                         @foreach (SymptomsPivot sp in Model.SymptomsPivots)
@@ -740,7 +753,6 @@ else
                         @Html.ActionLink("Add Treatment", "Create", "TreatmentsPivots", new { patientId = Model.patientID }, null)
                         <br />
                     </dd>
-
                 </dl>
             </div>
             <p>
