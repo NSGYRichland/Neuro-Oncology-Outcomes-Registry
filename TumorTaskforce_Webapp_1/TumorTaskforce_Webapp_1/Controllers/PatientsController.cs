@@ -43,7 +43,6 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 patients = patients.Where(r => r.TumorLocation.Contains(tumLoc));
             }
-
             if (!string.IsNullOrWhiteSpace(clss))
             {
                 patients = patients.Where(s => s.HistologicalClassification.Contains(clss));
@@ -77,7 +76,6 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     ViewBag.displayMenu = "Yes";
                 }
             }
-
             if (!string.IsNullOrWhiteSpace(q))
             {
                 int pID = int.Parse(q);
@@ -108,18 +106,18 @@ namespace TumorTaskforce_Webapp_1.Controllers
             return View(patients);
         }
 
-        //public ActionResult Compare()
-        //{
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        ViewBag.displayMenu = "No";
-        //        if (isAdminUser())
-        //        {
-        //            ViewBag.displayMenu = "Yes";
-        //        }
-        //    }
-        //    return View(db.Patients.ToList());
-        //}
+        /*public ActionResult Compare()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.displayMenu = "No";
+                if (isAdminUser())
+                {
+                    ViewBag.displayMenu = "Yes";
+                }
+            }
+            return View(db.Patients.ToList());
+        }*/
 
         public ActionResult Results(int? id)
         {
@@ -138,12 +136,10 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.Conflict);
             }
 
-            //bool cSex, cAge, cClass, cGrade, cSize, cLoca, cConst, cResp, cCardio, cGastro, cMusc, cNeuro, cExer, cDiet, cSymp, cMeds, cHF = true;
             int wSex = 100, wAge = 100, wClass = 100, wGrade = 100, wVol = 100, wLoca = 100, wConst = 100, wResp = 100, wCardio = 100, wGast = 100, wMusc = 100, wInt = 100,
                 wNeuro = 100, wExer = 100, wDiet = 100, wSymp = 0, wMeds = 0, wHF = 0; //Weighted Variables
             float simMax = (wSex + wAge + wClass + wGrade + wVol + wLoca + wConst + wResp + wCardio + wGast + wMusc + wInt
                 + wNeuro + wExer + wDiet + wSymp + wMeds + wHF) / 100;
-
             string simData = "";
 
             //ALGORITHM SHOULD GO HERE
@@ -166,7 +162,6 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 {
                     int pVol = ((int)patient.TumorHeight) * (int)(patient.TumorLength) * (int)(patient.TumorWidth);
                     int cVol = ((int)curr.TumorHeight) * (int)(curr.TumorLength) * (int)(curr.TumorWidth);
-
                     if (patient.Sex.Equals(curr.Sex))
                     {
                         similarity += (1 * wSex);
@@ -201,7 +196,6 @@ namespace TumorTaskforce_Webapp_1.Controllers
                             similarity += (1 * wClass);
                             record = record.Insert(2, "1");
                         }
-
                         if (patient.TumorLength == curr.TumorLength
                           & patient.TumorWidth == curr.TumorWidth
                               & patient.TumorHeight == curr.TumorHeight
@@ -300,7 +294,6 @@ namespace TumorTaskforce_Webapp_1.Controllers
                             }
                         }
                     } catch (NullReferenceException e) { }
-
                 }
                 if (similarity > targetSimilarity)
                 {
@@ -388,7 +381,6 @@ namespace TumorTaskforce_Webapp_1.Controllers
             //patient.comparisonResults = target.patientID.ToString();//omg that worked haha
             //patient.comparisonResults = "Our Comparison Algorithm is Under Contruction! Check back soon. Sorry for any inconvenience.";
             db.SaveChanges();
-
 
             if (User.Identity.IsAuthenticated)
             {
