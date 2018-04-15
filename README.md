@@ -1,5 +1,3 @@
-# TumorTaskforce
-
 
 ## Objective
 This web app is built with the intention that medical personnel could use this as a tool to determine a patient's overall health outcomes post surgery. More specifically, diagnosed patients with brain tumors. 
