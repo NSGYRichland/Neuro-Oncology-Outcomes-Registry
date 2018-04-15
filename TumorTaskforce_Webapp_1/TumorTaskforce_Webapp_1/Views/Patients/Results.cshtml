@@ -30,13 +30,13 @@
 
 
 			@*Chart Printed Out on Results Page Showing the Current Patient's Level of Similarity to Other Patients in the Database*@
-				<!DOCTYPE html>
-		<html>
-		<head>
-			@*<title>chart created with amCharts | amCharts</title>*@
-			@*<meta name="description" content="chart created using amCharts live editor" />*@
+			<!DOCTYPE html>
+			<html>
+			<head>
+				@*<title>chart created with amCharts | amCharts</title>*@
+				@*<meta name="description" content="chart created using amCharts live editor" />*@
 
-			
+
 				<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 				<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
 
@@ -125,7 +125,7 @@
 			<body>
 				<div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;"></div>
 			</body>
-		</html> 
+		</html>
 
 
 
@@ -133,180 +133,205 @@
 
 
 
-			@*Data is based on a statistical correlation with: Patient @target.patientID | @targetSimilarity | @targetEffect*@
-			<hr />
-			<dt>
-				Patient  Info
-			</dt>
-			<dd>
-				------------------------------
-			</dd>
-			<dt>
-				@Html.DisplayNameFor(model => model.Sex)
-			</dt>
+		@*Data is based on a statistical correlation with: Patient @target.patientID | @targetSimilarity | @targetEffect*@
+		<hr />
+		<dt>
+			Patient  Information
+		</dt>
+		<dd>
+			------------------------------
+		</dd>
 
-			<dd>
-				@Html.DisplayFor(model => model.Sex)
-			</dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Married)
-			</dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Married)
-			</dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Age)
-			</dt>
+	@*	<hr>
+		@Html.DisplayNameFor(model => model.Sex)
+		</hr>
 
-			<dd>
-				@Html.DisplayFor(model => model.Age)
-			</dd>
+		<dd>
+			@Html.DisplayFor(model => model.Sex)
+		</dd>
+		<hr>
+			@Html.DisplayNameFor(model => model.Married)
+		</hr>
 
-			<dt>
-				Classification
-			</dt>
+		<dd>
+			@Html.DisplayFor(model => model.Married)
+		</dd>
+		*@
 
-			<dd>
-				@Html.DisplayFor(model => model.HistologicalClassification)
-			</dd>
 
-			<dt>
-				Grade (WHO)
-			</dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.HistologicalGrade)
-			</dd>
 
-			<dt>
-				Tumor Size (WxHxL)
-			</dt>
-
-			<dd>
-				@Html.DisplayFor(model => model.TumorWidth)
-				x
-				@Html.DisplayFor(model => model.TumorHeight)
-				x
-				@Html.DisplayFor(model => model.TumorLength)
-			</dd>
-
-			@*<dt>
-			@Html.DisplayNameFor(model => model.TumorHeight)
+		@*unedited code.... restore to this if above does not work*@
+		<dt>
+			@Html.DisplayNameFor(model => model.Sex)
 		</dt>
 
 		<dd>
-			@Html.DisplayFor(model => model.TumorHeight)
+			@Html.DisplayFor(model => model.Sex)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Married)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Married)
+		</dd>
+
+
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Age)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Age)
 		</dd>
 
 		<dt>
-			@Html.DisplayNameFor(model => model.TumorLength)
+			Classification
 		</dt>
 
 		<dd>
+			@Html.DisplayFor(model => model.HistologicalClassification)
+		</dd>
+
+		<dt>
+			Grade (WHO)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.HistologicalGrade)
+		</dd>
+
+		<dt>
+			Tumor Size (WxHxL)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.TumorWidth)
+			x
+			@Html.DisplayFor(model => model.TumorHeight)
+			x
 			@Html.DisplayFor(model => model.TumorLength)
-		</dd>*@
+		</dd>
 
-			<dt>
-				Location
-			</dt>
+		@*<dt>
+		@Html.DisplayNameFor(model => model.TumorHeight)
+	</dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.TumorLocation)
-			</dd>
+	<dd>
+		@Html.DisplayFor(model => model.TumorHeight)
+	</dd>
 
-			<dt>
-				<br /><br />
-				Review of Systems<br />
-				------------------------------<br /><br />
+	<dt>
+		@Html.DisplayNameFor(model => model.TumorLength)
+	</dt>
 
-				@Html.DisplayNameFor(model => model.Constitutional)
-			</dt>
+	<dd>
+		@Html.DisplayFor(model => model.TumorLength)
+	</dd>*@
 
-			<dd>
+		<dt>
+			Location
+		</dt>
 
-				@Html.DisplayFor(model => model.Constitutional)
-			</dd>
+		<dd>
+			@Html.DisplayFor(model => model.TumorLocation)
+		</dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Respiratory)
-			</dt>
+		<dt>
+			<br /><br />
+			Review of Systems<br />
+			------------------------------<br /><br />
 
-			<dd>
-				@Html.DisplayFor(model => model.Respiratory)
-			</dd>
+			@Html.DisplayNameFor(model => model.Constitutional)
+		</dt>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Cardiovascular)
-			</dt>
+		<dd>
 
-			<dd>
-				@Html.DisplayFor(model => model.Cardiovascular)
-			</dd>
+			@Html.DisplayFor(model => model.Constitutional)
+		</dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Gastrointestinal)
-			</dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.Respiratory)
+		</dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Gastrointestinal)
-			</dd>
+		<dd>
+			@Html.DisplayFor(model => model.Respiratory)
+		</dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Musculoskeletal)
-			</dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.Cardiovascular)
+		</dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Musculoskeletal)
-			</dd>
+		<dd>
+			@Html.DisplayFor(model => model.Cardiovascular)
+		</dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Integumentary)
-			</dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.Gastrointestinal)
+		</dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Integumentary)
-			</dd>
+		<dd>
+			@Html.DisplayFor(model => model.Gastrointestinal)
+		</dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Neurologic)
-			</dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.Musculoskeletal)
+		</dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Neurologic)
-			</dd>
+		<dd>
+			@Html.DisplayFor(model => model.Musculoskeletal)
+		</dd>
 
-			<dt>
-				Exercise
-			</dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.Integumentary)
+		</dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Exercize)
-			</dd>
+		<dd>
+			@Html.DisplayFor(model => model.Integumentary)
+		</dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Diet)
-			</dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.Neurologic)
+		</dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Diet)
-			</dd>
+		<dd>
+			@Html.DisplayFor(model => model.Neurologic)
+		</dd>
 
-			<dt>
-				<br />
-				Symptoms
-			</dt>
+		<dt>
+			Exercise
+		</dt>
 
-			<dd>
-				<br />
-				@foreach (SymptomsPivot sp in Model.SymptomsPivots)
-		{
-			@Html.DisplayFor(spitem => sp.PossibleSymptom.Name)
+		<dd>
+			@Html.DisplayFor(model => model.Exercize)
+		</dd>
 
-	if (sp.date != null)
+		<dt>
+			@Html.DisplayNameFor(model => model.Diet)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Diet)
+		</dd>
+
+		<dt>
+			<br />
+			Symptoms
+		</dt>
+
+		<dd>
+			<br />
+			@foreach (SymptomsPivot sp in Model.SymptomsPivots)
 	{
+		@Html.DisplayFor(spitem => sp.PossibleSymptom.Name)
+
+if (sp.date != null)
+{
 		<tag> // </tag>
 		@Html.DisplayNameFor(spitem => sp.date)
 		<tag>: </tag>
@@ -329,22 +354,22 @@ if (sp.notes != null)
 
 		<br />
 }
-				<br />
-			</dd>
+			<br />
+		</dd>
 
-			<dt>
-				<br />
-				Other Medications
-			</dt>
+		<dt>
+			<br />
+			Other Medications
+		</dt>
 
-			<dd>
-				<br />
-				@foreach (OtherMedsPivot sp in Model.OtherMedsPivots)
-		{
-			@Html.DisplayFor(spitem => sp.PossibleOtherMed.Name)
-
-	if (sp.date != null)
+		<dd>
+			<br />
+			@foreach (OtherMedsPivot sp in Model.OtherMedsPivots)
 	{
+		@Html.DisplayFor(spitem => sp.PossibleOtherMed.Name)
+
+if (sp.date != null)
+{
 		<tag> // </tag>
 		@Html.DisplayNameFor(spitem => sp.date)
 		<tag>: </tag>
@@ -366,21 +391,21 @@ if (sp.notes != null)
 }
 		<br />
 }
-				<br />
-			</dd>
+			<br />
+		</dd>
 
-			<dt>
-				<br />
-				Health Factors
-			</dt>
+		<dt>
+			<br />
+			Health Factors
+		</dt>
 
-			<dd>
-				<br />
-				@foreach (HealthFactorsPivot sp in Model.HealthFactorsPivots)
-		{
-			@Html.DisplayFor(spitem => sp.PossibleHealthFactor.Name)
-	if (sp.date != null)
+		<dd>
+			<br />
+			@foreach (HealthFactorsPivot sp in Model.HealthFactorsPivots)
 	{
+		@Html.DisplayFor(spitem => sp.PossibleHealthFactor.Name)
+if (sp.date != null)
+{
 		<tag> // </tag>
 		@Html.DisplayNameFor(spitem => sp.date)
 		<tag>: </tag>
@@ -402,21 +427,21 @@ if (sp.notes != null)
 }
 		<br />
 }
-				<br />
-			</dd>
+			<br />
+		</dd>
 
-			<dt>
-				<br />
-				Treatments Given
-			</dt>
+		<dt>
+			<br />
+			Treatments Given
+		</dt>
 
-			<dd>
-				<br />
-				@foreach (TreatmentsPivot sp in Model.TreatmentsPivots)
-		{
-			@Html.DisplayFor(spitem => sp.PossibleTreatment.Name)
-	if (sp.date != null)
+		<dd>
+			<br />
+			@foreach (TreatmentsPivot sp in Model.TreatmentsPivots)
 	{
+		@Html.DisplayFor(spitem => sp.PossibleTreatment.Name)
+if (sp.date != null)
+{
 		<tag> // </tag>
 		@Html.DisplayNameFor(spitem => sp.date)
 		<tag>: </tag>
@@ -446,8 +471,8 @@ if (sp.effectiveness != null)
 
 		<br />
 }
-				<br />
-			</dd>
+			<br />
+		</dd>
 
 		</dl>
     </div>
