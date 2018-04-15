@@ -1,4 +1,13 @@
-# TumorTaskforce
+
+## Objective
+This web app is built with the intention that medical personnel could use this as a tool to determine a patient's overall health outcomes post surgery. More specifically, diagnosed patients with brain tumors. 
+
+Our way of helping their cause is by creating a web app that will allow medical personnel to input key information from pre and post operative visits into a database. Then, with the algorithm we developed to evaluate the tumors location, and type among other common variables; which will be used to compare against the patients in the database. 
+
+Finally, the web app will provide medical personnel a visual demonstration of the results gathered from the comparison analysis.
+
+
+## General Info.
 
 This solution houses all the code for Tumor Taskforce's "Tumor App."
 
@@ -29,7 +38,7 @@ Get a suggested treatment option
 	Receive a suggested treatment option based on comparison with similar patients.
 
 
-TESTING:
+## Testing:
 
 To run behavioral and unit tests:
 
