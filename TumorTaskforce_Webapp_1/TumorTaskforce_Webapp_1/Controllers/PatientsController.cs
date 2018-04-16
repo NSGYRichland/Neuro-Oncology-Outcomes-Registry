@@ -427,6 +427,8 @@ namespace TumorTaskforce_Webapp_1.Controllers
             ViewBag.isCompare = isCompare;
             ViewBag.Sex = new SelectList(getSexes(), "Value", "Text");
             ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text");
+            ViewBag.HistologicalClassification = new SelectList(getTumorTypes(), "Value", "Text");
+            ViewBag.TumorLocation = new SelectList(getLocations(), "Value", "Text");
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
@@ -442,17 +444,23 @@ namespace TumorTaskforce_Webapp_1.Controllers
         public SelectListItem[] getSexes()
         {
             SelectListItem[] sex = new SelectListItem[3];
-            SelectListItem male = new SelectListItem();
-            male.Text = "Male";
-            male.Value = "M";
+            SelectListItem male = new SelectListItem
+            {
+                Text = "Male",
+                Value = "M"
+            };
             sex[0] = male;
-            SelectListItem female = new SelectListItem();
-            female.Text = "Female";
-            female.Value = "F";
+            SelectListItem female = new SelectListItem
+            {
+                Text = "Female",
+                Value = "F"
+            };
             sex[1] = female;
-            SelectListItem other = new SelectListItem();
-            other.Text = "Other";
-            other.Value = "O";
+            SelectListItem other = new SelectListItem
+            {
+                Text = "Other",
+                Value = "O"
+            };
             sex[2] = other;
             return sex;
         }
@@ -460,27 +468,84 @@ namespace TumorTaskforce_Webapp_1.Controllers
         public SelectListItem[] getGrades()
         {
             SelectListItem[] grade = new SelectListItem[5];
-            SelectListItem zero = new SelectListItem();
-            zero.Text = "0";
-            zero.Value = "0";
+            SelectListItem zero = new SelectListItem
+            {
+                Text = "0",
+                Value = "0"
+            };
             grade[0] = zero;
-            SelectListItem one = new SelectListItem();
-            one.Text = "1";
-            one.Value = "1";
+            SelectListItem one = new SelectListItem
+            {
+                Text = "1",
+                Value = "1"
+            };
             grade[1] = one;
-            SelectListItem two = new SelectListItem();
-            two.Text = "2";
-            two.Value = "2";
+            SelectListItem two = new SelectListItem
+            {
+                Text = "2",
+                Value = "2"
+            };
             grade[2] = two;
-            SelectListItem three = new SelectListItem();
-            three.Text = "3";
-            three.Value = "3";
+            SelectListItem three = new SelectListItem
+            {
+                Text = "3",
+                Value = "3"
+            };
             grade[3] = three;
-            SelectListItem four = new SelectListItem();
-            four.Text = "4";
-            four.Value = "4";
+            SelectListItem four = new SelectListItem
+            {
+                Text = "4",
+                Value = "4"
+            };
             grade[4] = four;
             return grade;
+        }
+        public SelectListItem[] getLocations()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach(Patient p in db.Patients.Where((item)=>item.isCompare==false))
+            {
+                if (list.Where((item)=>item.Text == p.TumorLocation).Count() < 1)
+                {
+                    SelectListItem sli = new SelectListItem
+                    {
+                        Text = p.TumorLocation,
+                        Value = p.TumorLocation
+                    };
+                    list.Add(sli);
+                }
+            }
+            SelectListItem other = new SelectListItem
+            {
+                Text = "Other",
+                Value = "Other"
+            };
+            list.Add(other);
+            return list.ToArray();
+        }
+
+        public SelectListItem[] getTumorTypes()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach (Patient p in db.Patients.Where((item) => item.isCompare == false))
+            {
+                if (list.Where((item) => item.Text == p.HistologicalClassification).Count() < 1)
+                {
+                    SelectListItem sli = new SelectListItem
+                    {
+                        Text = p.HistologicalClassification,
+                        Value = p.HistologicalClassification
+                    };
+                    list.Add(sli);
+                }
+            }
+            SelectListItem other = new SelectListItem
+            {
+                Text = "Other",
+                Value = "Other"
+            };
+            list.Add(other);
+            return list.ToArray();
         }
 
         // POST: Patients/Create
@@ -490,6 +555,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
         [ValidateAntiForgeryToken]
         public async System.Threading.Tasks.Task<ActionResult> Create([Bind(Include = "patientID,Sex,Married,Age,HistologicalClassification,HistologicalGrade,TumorWidth,TumorHeight,TumorLength,TumorLocation,Constitutional,Respiratory,Cardiovascular,Gastrointestinal,Musculoskeletal,Integumentary,Neurologic,Exercize,Diet,isCompare,comparisonResults,userName")] Patient patient)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Patients.Add(patient);
@@ -504,6 +570,8 @@ namespace TumorTaskforce_Webapp_1.Controllers
             }
             ViewBag.Sex = new SelectList(getSexes(), "Value", "Text", patient.Sex);
             ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text", patient.HistologicalGrade);
+            ViewBag.HistologicalClassification = new SelectList(getTumorTypes(), "Value", "Text",patient.HistologicalClassification);
+            ViewBag.TumorLocation = new SelectList(getLocations(), "Value", "Text", patient.TumorLocation);
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
@@ -530,6 +598,8 @@ namespace TumorTaskforce_Webapp_1.Controllers
             ViewBag.isCompare = patient.isCompare;
             ViewBag.Sex = new SelectList(getSexes(), "Value", "Text", patient.Sex);
             ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text", patient.HistologicalGrade);
+            ViewBag.HistologicalClassification = new SelectList(getTumorTypes(), "Value", "Text", patient.HistologicalClassification);
+            ViewBag.TumorLocation = new SelectList(getLocations(), "Value", "Text", patient.TumorLocation);
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
@@ -556,6 +626,8 @@ namespace TumorTaskforce_Webapp_1.Controllers
             }
             ViewBag.Sex =new SelectList(getSexes(), "Value", "Text", patient.Sex);
             ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text", patient.HistologicalGrade);
+            ViewBag.HistologicalClassification = new SelectList(getTumorTypes(), "Value", "Text", patient.HistologicalClassification);
+            ViewBag.TumorLocation = new SelectList(getLocations(), "Value", "Text", patient.TumorLocation);
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";

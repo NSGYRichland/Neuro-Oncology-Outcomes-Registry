@@ -60,7 +60,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.HistologicalClassification, "Classification", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.HistologicalClassification, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.DropDownList("TumorTypes", null, htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.HistologicalClassification, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.TumorLocation, "Tumor Location", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.TumorLocation, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.DropDownList("Locations", null, htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.TumorLocation, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -270,7 +270,7 @@ else
                             <div class="form-group">
                                 @Html.LabelFor(model => model.HistologicalClassification, "Classification", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.HistologicalClassification, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.DropDownList("HistologicalClassification", null, htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.HistologicalClassification, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -310,7 +310,7 @@ else
                             <div class="form-group">
                                 @Html.LabelFor(model => model.TumorLocation, "Tumor Location", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.TumorLocation, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.DropDownList("TumorLocation", null, htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.TumorLocation, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -422,8 +422,41 @@ else
         </h3>
     }
 }
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $("#TumorLocation").change(function() {
+        console.log($(this).val());
+        if ($(this).val() == "Other") {
+            $(this).parent().append('<input type="text" class="LocationsOther" placeholder="Please Specify">');
+            $(".LocationsOther").keyup(function () {
+                $(".tempLocation").hide();
+                $("#TumorLocation").append('<option value="' + $(this).val() + '" class="tempLocation">' + $(this).val() + '</option>');
+                //console.log($(this).val());
+                $("#TumorLocation").val($(this).val());
+                //console.log($("#Locations").first().val());
+            });
+        }
+        else {
+            $(".LocationsOther").hide();
+        }
+    });
+    $("#HistologicalClassification").change(function () {
+        console.log($(this).val());
+        if ($(this).val() == "Other") {
+            $(this).parent().append('<input type="text" class="ClassificationsOther" placeholder="Please Specify">');
+            $(".ClassificationsOther").keyup(function () {
+                $(".tempClassification").hide();
+                $("#HistologicalClassification").append('<option value="' + $(this).val() + '" class="tempClassification">' + $(this).val() + '</option>');
+                //console.log($(this).val());
+                $("#HistologicalClassification").val($(this).val());
+                //console.log($("#Locations").first().val());
+            });
+        }
+        else {
+            $(".ClassificationsOther").hide();
+        }
+    });
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
