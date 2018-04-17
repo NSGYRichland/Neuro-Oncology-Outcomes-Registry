@@ -319,12 +319,31 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         targetRecord = record;
                     }
                 }
-                int simResult = ((int)(similarity / simMax) * 100);
-                simData += ('|' + curr.patientID + '|' + simResult);
+                int simResult = (int)((simMax / similarity) * 100);
+                simData += (curr.patientID + "," +simResult+ ",");
                 count++;
             }
-            //int[] TargetData = new int[count * 2];
-            //string[] TargetData = simData.Split('|');
+            string[] TargetData = simData.Split(',');
+            Array.Reverse(TargetData);
+            //string[] TData = new string[TargetData.Length-1];
+            //TargetData.CopyTo(TData, 1);
+            TargetData = TargetData.Skip(1).ToArray();
+            Array.Reverse(TargetData);
+            //Array.Reverse(TData);
+            int[] Data = new int[count * 2];
+            int c = 0;
+            foreach (string x in TargetData)
+            {
+                int m = 69;
+                int.TryParse(x,out m);
+                Data[c] = m;
+                c++;
+            }
+
+            /*for(int i = 0; i < (count*2); i++)
+            { 
+            Data[i] = simData.Split('|').Select(i => int.Parse(i));
+            }*/
             //int[] Data =                                      Take simData and delim in by | to array of int[]
                 //simData.Split('|').Select(x => int.Parse(x));  Everytime I try is doenst split correctly and all ends up in 1 mass
             //for (int i = 0; i < TargetData.Length; i++)           Sleep is important ill have to fix this tommorow.
@@ -390,7 +409,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     ViewBag.displayMenu = "Yes";
                 }
             }
-            //ViewBag.SimData = Data;
+            ViewBag.SimData = Data;
             return View(patient);
         }
         
