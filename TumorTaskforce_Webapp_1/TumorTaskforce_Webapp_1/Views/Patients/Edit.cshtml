@@ -28,9 +28,9 @@
                 @Html.HiddenFor(model => model.isCompare)
                 @Html.HiddenFor(model => model.comparisonResults)
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Sex, "Sex", htmlAttributes: new { @class = "control-label col-md-5" })
+                            @Html.LabelFor(model => model.Sex, "Sex", htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-10">
                                 @Html.DropDownList("Sex", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Married, htmlAttributes: new { @class = "control-label col-md-5" })
+                            @Html.LabelFor(model => model.Married, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-10">
                                 <div class="checkbox">
                                     @Html.EditorFor(model => model.Married)
@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-5" })
+                            @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
@@ -64,7 +64,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.HistologicalGrade, "Grade (WHO)", htmlAttributes: new { @class = "control-label col-md-5" })
+                            @Html.LabelFor(model => model.HistologicalGrade, "Grade (WHO)", htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-10">
                                 @Html.DropDownList("HistologicalGrade", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.HistologicalGrade, "", new { @class = "text-danger" })
@@ -72,7 +72,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.TumorWidth, "Tumor Width (mm)", htmlAttributes: new { @class = "control-label col-md-5" })
+                            @Html.LabelFor(model => model.TumorWidth, "Tumor Width (mm)", htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.TumorWidth, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.TumorWidth, "", new { @class = "text-danger" })
@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.TumorHeight, "Tumor Height (mm)", htmlAttributes: new { @class = "control-label col-md-5" })
+                            @Html.LabelFor(model => model.TumorHeight, "Tumor Height (mm)", htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.TumorHeight, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.TumorHeight, "", new { @class = "text-danger" })
@@ -88,7 +88,7 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.TumorLength, "Tumor Length (mm)", htmlAttributes: new { @class = "control-label col-md-5" })
+                            @Html.LabelFor(model => model.TumorLength, "Tumor Length (mm)", htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.TumorLength, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.TumorLength, "", new { @class = "text-danger" })
@@ -103,82 +103,209 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <h5>
+                            @Html.LabelFor(model => model.TumorLocation, "Review of Systems", htmlAttributes: new { @class = "control-label col-md-9" })
+                        </h5>
+                        <h6>
+                            &emsp; Use 'Ctrl' to multi-select.<hr />
+                        </h6>
                         <div class="form-group">
-                            <h5>
-                                @Html.LabelFor(model => model.TumorLocation, "Review of Systems", htmlAttributes: new { @class = "control-label col-md-5" })
-                            </h5>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Constitutional, htmlAttributes: new { @class = "control-label col-md-5" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Constitutional, new { htmlAttributes = new { @class = "form-control" } })
+                            <b>
+                                @Html.LabelFor(model => model.Constitutional, htmlAttributes: new { @class = "control-label col-md-6" })
+                            </b>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Constitutional, new { htmlAttributes = new { @class = "hiddenConstitutional", @style = "display:none" } })
+                                @Html.ListBox("Constitutional", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Constitutional, "", new { @class = "text-danger" })
+                                <div class="row">
+                                    <div class="col-1">
+                                        Other:
+                                    </div><div class="col-1"></div>
+                                    <div>
+                                        <input type="text" id="ConstitutionalOther" style="width:150px" />
+                                    </div>
+                                    <div>
+                                        <input type="button" style="float:left" id="ConstitutionalOtherAdd" value="Add" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
+                        <hr />
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Respiratory, htmlAttributes: new { @class = "control-label col-md-5" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Respiratory, new { htmlAttributes = new { @class = "form-control" } })
+                            <b>
+                                @Html.LabelFor(model => model.Respiratory, htmlAttributes: new { @class = "control-label col-md-6" })
+                            </b>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Respiratory, new { htmlAttributes = new { @class = "hiddenRespiratory", @style = "display:none" } })
+                                @Html.ListBox("Respiratory", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Respiratory, "", new { @class = "text-danger" })
+                                <div class="row">
+                                    <div class="col-1">
+                                        Other:
+                                    </div><div class="col-1"></div>
+                                    <div>
+                                        <input type="text" id="RespiratoryOther" style="width:150px" />
+                                    </div>
+                                    <div>
+                                        <input type="button" style="float:left" id="RespiratoryOtherAdd" value="Add" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
+                        <hr />
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Cardiovascular, htmlAttributes: new { @class = "control-label col-md-5" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Cardiovascular, new { htmlAttributes = new { @class = "form-control" } })
+                            <b>
+                                @Html.LabelFor(model => model.Cardiovascular, htmlAttributes: new { @class = "control-label col-md-6" })
+                            </b>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Cardiovascular, new { htmlAttributes = new { @class = "hiddenCardiovascular", @style = "display:none" } })
+                                @Html.ListBox("Cardiovascular", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Cardiovascular, "", new { @class = "text-danger" })
+                                <div class="row">
+                                    <div class="col-1">
+                                        Other:
+                                    </div><div class="col-1"></div>
+                                    <div>
+                                        <input type="text" id="CardiovascularOther" style="width:150px" />
+                                    </div>
+                                    <div>
+                                        <input type="button" style="float:left" id="CardiovascularOtherAdd" value="Add" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
+                        <hr />
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Gastrointestinal, htmlAttributes: new { @class = "control-label col-md-5" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Gastrointestinal, new { htmlAttributes = new { @class = "form-control" } })
+                            <b>
+                                @Html.LabelFor(model => model.Gastrointestinal, htmlAttributes: new { @class = "control-label col-md-6" })
+                            </b>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Gastrointestinal, new { htmlAttributes = new { @class = "hiddenGastrointestinal", @style = "display:none" } })
+                                @Html.ListBox("Gastrointestinal", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Gastrointestinal, "", new { @class = "text-danger" })
+                                <div class="row">
+                                    <div class="col-1">
+                                        Other:
+                                    </div><div class="col-1"></div>
+                                    <div>
+                                        <input type="text" id="GastrointestinalOther" style="width:150px" />
+                                    </div>
+                                    <div>
+                                        <input type="button" style="float:left" id="GastrointestinalOtherAdd" value="Add" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Musculoskeletal, htmlAttributes: new { @class = "control-label col-md-5" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Musculoskeletal, new { htmlAttributes = new { @class = "form-control" } })
+                            <b>
+                                @Html.LabelFor(model => model.Musculoskeletal, htmlAttributes: new { @class = "control-label col-md-6" })
+                            </b>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Musculoskeletal, new { htmlAttributes = new { @class = "hiddenMusculoskeletal", @style = "display:none" } })
+                                @Html.ListBox("Musculoskeletal", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Musculoskeletal, "", new { @class = "text-danger" })
+                                <div class="row">
+                                    <div class="col-1">
+                                        Other:
+                                    </div><div class="col-1"></div>
+                                    <div>
+                                        <input type="text" id="MusculoskeletalOther" style="width:150px" />
+                                    </div>
+                                    <div>
+                                        <input type="button" style="float:left" id="MusculoskeletalOtherAdd" value="Add" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
+                        <hr />
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Integumentary, htmlAttributes: new { @class = "control-label col-md-5" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Integumentary, new { htmlAttributes = new { @class = "form-control" } })
+                            <b>
+                                @Html.LabelFor(model => model.Integumentary, htmlAttributes: new { @class = "control-label col-md-6" })
+                            </b>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Integumentary, new { htmlAttributes = new { @class = "hiddenIntegumentary", @style = "display:none" } })
+                                @Html.ListBox("Integumentary", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Integumentary, "", new { @class = "text-danger" })
+                                <div class="row">
+                                    <div class="col-1">
+                                        Other:
+                                    </div><div class="col-1"></div>
+                                    <div>
+                                        <input type="text" id="IntegumentaryOther" style="width:150px" />
+                                    </div>
+                                    <div>
+                                        <input type="button" style="float:left" id="IntegumentaryOtherAdd" value="Add" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
+                        <hr />
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Neurologic, htmlAttributes: new { @class = "control-label col-md-5" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Neurologic, new { htmlAttributes = new { @class = "form-control" } })
+                            <b>
+                                @Html.LabelFor(model => model.Neurologic, htmlAttributes: new { @class = "control-label col-md-6" })
+                            </b>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Neurologic, new { htmlAttributes = new { @class = "hiddenNeurologic", @style = "display:none" } })
+                                @Html.ListBox("Neurologic", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Neurologic, "", new { @class = "text-danger" })
+                                <div class="row">
+                                    <div class="col-1">
+                                        Other:
+                                    </div><div class="col-1"></div>
+                                    <div>
+                                        <input type="text" id="NeurologicOther" style="width:150px" />
+                                    </div>
+                                    <div>
+                                        <input type="button" style="float:left" id="NeurologicOtherAdd" value="Add" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
+                        <hr />
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Exercize, htmlAttributes: new { @class = "control-label col-md-5" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Exercize, new { htmlAttributes = new { @class = "form-control" } })
+                            <b>
+                                @Html.LabelFor(model => model.Exercize, htmlAttributes: new { @class = "control-label col-md-6" })
+                            </b>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Exercize, new { htmlAttributes = new { @class = "hiddenExercize", @style = "display:none" } })
+                                @Html.ListBox("Exercize", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Exercize, "", new { @class = "text-danger" })
+                                <div class="row">
+                                    <div class="col-1">
+                                        Other:
+                                    </div><div class="col-1"></div>
+                                    <div>
+                                        <input type="text" id="ExercizeOther" style="width:150px" />
+                                    </div>
+                                    <div>
+                                        <input type="button" style="float:left" id="ExercizeOtherAdd" value="Add" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
+                        <hr />
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Diet, htmlAttributes: new { @class = "control-label col-md-5" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Diet, new { htmlAttributes = new { @class = "form-control" } })
+                            <b>
+                                @Html.LabelFor(model => model.Diet, htmlAttributes: new { @class = "control-label col-md-6" })
+                            </b>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Diet, new { htmlAttributes = new { @class = "hiddenDiet", @style = "display:none" } })
+                                @Html.ListBox("Diet", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Diet, "", new { @class = "text-danger" })
+                                <div class="row">
+                                    <div class="col-1">
+                                        Other:
+                                    </div><div class="col-1"></div>
+                                    <div>
+                                        <input type="text" id="DietOther" style="width:150px" />
+                                    </div>
+                                    <div>
+                                        <input type="button" style="float:left" id="DietOtherAdd" value="Add" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -246,6 +373,159 @@ else
         else {
             $(".ClassificationsOther").hide();
         }
+    });
+    $("#DietOtherAdd").click(function () {
+        var entry = $("#DietOther").val();
+        if (!(entry == "")) {
+            diet = $("select[id='Diet']");
+            diet.append('<option value="' + entry + '">' + entry + '</option>');
+            $("#DietOther").val("");
+            var values = diet.val().toString() + "," + entry;
+            diet.val(values.split(','));
+            console.log(diet.val());
+            $(".hiddenDiet").val($(".hiddenDiet").val().toString() + "," + entry);
+            console.log($(".hiddenDiet").val());
+        }
+    });
+    $("select[id='Diet']").change(function () {
+        $(".hiddenDiet").val($(this).val().toString());
+        console.log($(".hiddenDiet").val());
+    });
+    $("#ConstitutionalOtherAdd").click(function () {
+        var entry = $("#ConstitutionalOther").val();
+        if (!(entry == "")) {
+            Constitutional = $("select[id='Constitutional']");
+            Constitutional.append('<option value="' + entry + '">' + entry + '</option>');
+            $("#ConstitutionalOther").val("");
+            var values = Constitutional.val().toString() + "," + entry;
+            Constitutional.val(values.split(','));
+            console.log(Constitutional.val());
+            $(".hiddenConstitutional").val($(".hiddenConstitutional").val().toString() + "," + entry);
+            console.log($(".hiddenConstitutional").val());
+        }
+    });
+    $("select[id='Constitutional']").change(function () {
+        $(".hiddenConstitutional").val($(this).val().toString());
+        console.log($(".hiddenConstitutional").val());
+    });
+    $("#RespiratoryOtherAdd").click(function () {
+        var entry = $("#RespiratoryOther").val();
+        if (!(entry == "")) {
+            Respiratory = $("select[id='Respiratory']");
+            Respiratory.append('<option value="' + entry + '">' + entry + '</option>');
+            $("#RespiratoryOther").val("");
+            var values = Respiratory.val().toString() + "," + entry;
+            Respiratory.val(values.split(','));
+            console.log(Respiratory.val());
+            $(".hiddenRespiratory").val($(".hiddenRespiratory").val().toString() + "," + entry);
+            console.log($(".hiddenRespiratory").val());
+        }
+    });
+    $("select[id='Respiratory']").change(function () {
+        $(".hiddenRespiratory").val($(this).val().toString());
+        console.log($(".hiddenRespiratory").val());
+    });
+    $("#CardiovascularOtherAdd").click(function () {
+        var entry = $("#CardiovascularOther").val();
+        if (!(entry == "")) {
+            Cardiovascular = $("select[id='Cardiovascular']");
+            Cardiovascular.append('<option value="' + entry + '">' + entry + '</option>');
+            $("#CardiovascularOther").val("");
+            var values = Cardiovascular.val().toString() + "," + entry;
+            Cardiovascular.val(values.split(','));
+            console.log(Cardiovascular.val());
+            $(".hiddenCardiovascular").val($(".hiddenCardiovascular").val().toString() + "," + entry);
+            console.log($(".hiddenCardiovascular").val());
+        }
+    });
+    $("select[id='Cardiovascular']").change(function () {
+        $(".hiddenCardiovascular").val($(this).val().toString());
+        console.log($(".hiddenCardiovascular").val());
+    });
+    $("#MusculoskeletalOtherAdd").click(function () {
+        var entry = $("#MusculoskeletalOther").val();
+        if (!(entry == "")) {
+            Musculoskeletal = $("select[id='Musculoskeletal']");
+            Musculoskeletal.append('<option value="' + entry + '">' + entry + '</option>');
+            $("#MusculoskeletalOther").val("");
+            var values = Musculoskeletal.val().toString() + "," + entry;
+            Musculoskeletal.val(values.split(','));
+            console.log(Musculoskeletal.val());
+            $(".hiddenMusculoskeletal").val($(".hiddenMusculoskeletal").val().toString() + "," + entry);
+            console.log($(".hiddenMusculoskeletal").val());
+        }
+    });
+    $("select[id='Musculoskeletal']").change(function () {
+        $(".hiddenMusculoskeletal").val($(this).val().toString());
+        console.log($(".hiddenMusculoskeletal").val());
+    });
+    $("#IntegumentaryOtherAdd").click(function () {
+        var entry = $("#IntegumentaryOther").val();
+        if (!(entry == "")) {
+            Integumentary = $("select[id='Integumentary']");
+            Integumentary.append('<option value="' + entry + '">' + entry + '</option>');
+            $("#IntegumentaryOther").val("");
+            var values = Integumentary.val().toString() + "," + entry;
+            Integumentary.val(values.split(','));
+            console.log(Integumentary.val());
+            $(".hiddenIntegumentary").val($(".hiddenIntegumentary").val().toString() + "," + entry);
+            console.log($(".hiddenIntegumentary").val());
+        }
+    });
+    $("select[id='Integumentary']").change(function () {
+        $(".hiddenIntegumentary").val($(this).val().toString());
+        console.log($(".hiddenIntegumentary").val());
+    });
+    $("#NeurologicOtherAdd").click(function () {
+        var entry = $("#NeurologicOther").val();
+        if (!(entry == "")) {
+            Neurologic = $("select[id='Neurologic']");
+            Neurologic.append('<option value="' + entry + '">' + entry + '</option>');
+            $("#NeurologicOther").val("");
+            var values = Neurologic.val().toString() + "," + entry;
+            Neurologic.val(values.split(','));
+            console.log(Neurologic.val());
+            $(".hiddenNeurologic").val($(".hiddenNeurologic").val().toString() + "," + entry);
+            console.log($(".hiddenNeurologic").val());
+        }
+    });
+    $("select[id='Neurologic']").change(function () {
+        $(".hiddenNeurologic").val($(this).val().toString());
+        console.log($(".hiddenNeurologic").val());
+    });
+    $("#ExercizeOtherAdd").click(function () {
+        var entry = $("#ExercizeOther").val();
+        if (!(entry == "")) {
+            Exercize = $("select[id='Exercize']");
+            Exercize.append('<option value="' + entry + '">' + entry + '</option>');
+            $("#ExercizeOther").val("");
+            var values = Exercize.val().toString() + "," + entry;
+            Exercize.val(values.split(','));
+            console.log(Exercize.val());
+            $(".hiddenExercize").val($(".hiddenExercize").val().toString() + "," + entry);
+            console.log($(".hiddenExercize").val());
+        }
+    });
+    $("select[id='Exercize']").change(function () {
+        $(".hiddenExercize").val($(this).val().toString());
+        console.log($(".hiddenExercize").val());
+    });
+    $("#GastrointestinalOtherAdd").click(function () {
+        var entry = $("#GastrointestinalOther").val();
+        if (!(entry == "")) {
+            Gastrointestinal = $("select[id='Gastrointestinal']");
+            Gastrointestinal.append('<option value="' + entry + '">' + entry + '</option>');
+            $("#GastrointestinalOther").val("");
+            var values = Gastrointestinal.val().toString() + "," + entry;
+            Gastrointestinal.val(values.split(','));
+            console.log(Gastrointestinal.val());
+            $(".hiddenGastrointestinal").val($(".hiddenGastrointestinal").val().toString() + "," + entry);
+            console.log($(".hiddenGastrointestinal").val());
+        }
+    });
+    $("select[id='Gastrointestinal']").change(function () {
+        $(".hiddenGastrointestinal").val($(this).val().toString());
+        console.log($(".hiddenGastrointestinal").val());
     });
 </script>
 
