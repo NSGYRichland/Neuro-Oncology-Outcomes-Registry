@@ -7,8 +7,18 @@
 	<p class="lead">Welcome! Use the links above to navigate.</p>
 </div>
 
+@*changes the background color of our home page to teal*@
+<style>
+	body {
+		background: #89cdce;
+		margin: auto;
+		width: 960px;
+	}
+</style>
+
 <div class="row">
 	<div class="col-md-4">
+		@*describes what our webapp will be used for and how to contact us*@
 		<h2>Desciption</h2>
 		<p>
 			We have compiled a database of existing patients and have created a comparison algorithm to analyze patterns between certain variables involved in each patients condition and the effects on the success rate of a variety of treatments. We have also created a user interface that allows users to login or register to gain access to the database showing them the conclusions of our comparison algorithm, as well as allow them to input information regarding a specific patient and receive both a computative analysis of the patients conditions and a recommended course of action calculated using the database.
@@ -23,7 +33,7 @@
 	</div>
 
 
-
+	@*each of our teams picture's and role descriptions*@
 	<div class="col-md-4">
 		<h2>Get to Know Us</h2>
 		<img src="~/Images/me.JPG" alt="Picture of Laura." style="width:120px;height:160px;" />
@@ -36,12 +46,13 @@
 		</p>
 		<img src="~/Images/Burdell.JPG" alt="Picture of Burdell." style="width:130px;height:150px;" />
 		<p>
-			Researcher- Burdell Fitzgerald
+			Researcher- C. Burdell FitzGerald
 		</p>
 	</div>
 
-
+	@*teams picture's and role descriptions continued*@
 	<div class="col-md-4">
+		<p>&nbsp;</p>
 		<h2>  </h2>
 		<img src="~/Images/Taylor.JPG" alt="Picture of Taylor." style="width:150px;height:160px;" />
 		<p>
@@ -56,6 +67,10 @@
 
 
 
+
+
+
+
 @*code for clock- add smaller version to home page*@
 @*
 	<!DOCTYPE html>
@@ -63,7 +78,7 @@
 	<style>
 
 		body {
-			background: #00ff90;
+			background: #71bcc1;
 			margin: auto;
 			width: 960px;
 		}
@@ -103,7 +118,7 @@
 			text-anchor: middle;
 		}
 	</style>
-	<svg width="960" height="960"></svg>
+	<svg width="350" height="350"></svg>
 	<script src="//d3js.org/d3.v4.0.0-alpha.28.min.js"></script>
 	<script>
 
@@ -209,5 +224,4 @@
 		})();
 
 	</script>
-
 *@
