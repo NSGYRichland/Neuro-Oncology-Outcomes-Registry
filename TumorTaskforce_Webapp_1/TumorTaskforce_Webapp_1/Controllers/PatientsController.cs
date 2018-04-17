@@ -160,8 +160,8 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 }
                 else
                 {
-                    int pVol = ((int)patient.TumorHeight) * (int)(patient.TumorLength) * (int)(patient.TumorWidth);
-                    int cVol = ((int)curr.TumorHeight) * (int)(curr.TumorLength) * (int)(curr.TumorWidth);
+                    try
+                    {
                     if (patient.Sex.Equals(curr.Sex))
                     {
                         similarity += (1 * wSex);
@@ -172,9 +172,9 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         similarity += (1 * wAge);
                         record = record.Insert(1, "1");
                     }
-                    try
-                    {
-                        /*if (patient.HistologicalClassification.Equals(curr.HistologicalClassification))
+                    
+                       int pVol = ((int)patient.TumorHeight) * (int)(patient.TumorLength) * (int)(patient.TumorWidth);
+                       int cVol = ((int)curr.TumorHeight) * (int)(curr.TumorLength) * (int)(curr.TumorWidth); /*if (patient.HistologicalClassification.Equals(curr.HistologicalClassification))
                         {
                             i = 3;
                             record = record.Insert(2, "1");
