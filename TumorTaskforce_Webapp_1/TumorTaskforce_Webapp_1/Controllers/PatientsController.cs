@@ -934,7 +934,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
             db.SaveChanges();
             if (isCompare)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Manage");
             }
             return RedirectToAction("Index");
         }
