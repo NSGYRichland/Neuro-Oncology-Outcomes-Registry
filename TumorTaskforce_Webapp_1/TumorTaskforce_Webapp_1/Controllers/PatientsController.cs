@@ -826,6 +826,15 @@ namespace TumorTaskforce_Webapp_1.Controllers
             ViewBag.Integumentary = new MultiSelectList(getIntegumentaryChoices(), "Value", "Text");
             ViewBag.Respiratory = new MultiSelectList(getRespiratoryChoices(), "Value", "Text");
             ViewBag.Constitutional = new MultiSelectList(getConstitutionalChoices(), "Value", "Text");
+            ViewBag.curDiet = patient.Diet;
+            ViewBag.curNeurologic = patient.Neurologic;
+            ViewBag.curMusculoskeletal = patient.Musculoskeletal;
+            ViewBag.curGastrointestinal = patient.Gastrointestinal;
+            ViewBag.curCardiovascular = patient.Cardiovascular;
+            ViewBag.curExercize = patient.Exercize;
+            ViewBag.curIntegumentary = patient.Integumentary;
+            ViewBag.curRespiratory = patient.Respiratory;
+            ViewBag.curConstitutional = patient.Constitutional;
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";

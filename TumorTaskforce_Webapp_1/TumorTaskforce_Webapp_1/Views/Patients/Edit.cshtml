@@ -342,6 +342,30 @@ else
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+    var isCompare = '@(ViewBag.isCompare)';
+    var curDiet = '@(ViewBag.curDiet)';
+    var curNeurologic = '@(ViewBag.curNeurologic)';
+    var curMusculoskeletal = '@(ViewBag.curMusculoskeletal)';
+    var curGastrointestinal = '@(ViewBag.curGastrointestinal)';
+    var curCardiovascular = '@(ViewBag.curCardiovascular)';
+    var curExercize = '@(ViewBag.curExercize)';
+    var curIntegumentary = '@(ViewBag.curIntegumentary)';
+    var curRespiratory = '@(ViewBag.curRespiratory)';
+    var curConstitutional = '@(ViewBag.curConstitutional)';
+    $(document).ready(function () {
+        console.log(isCompare + "");
+        if (isCompare=="False") {
+            $("select[id='Diet']").val(curDiet.split(","));
+            $("select[id='Neurologic']").val(curNeurologic.split(","));
+            $("select[id='Musculoskeletal']").val(curMusculoskeletal.split(","));
+            $("select[id='Gastrointestinal']").val(curGastrointestinal.split(","));
+            $("select[id='Cardiovascular']").val(curCardiovascular.split(","));
+            $("select[id='Exercize']").val(curExercize.split(","));
+            $("select[id='Integumentary']").val(curIntegumentary.split(","));
+            $("select[id='Respiratory']").val(curRespiratory.split(","));
+            $("select[id='Constitutional']").val(curConstitutional.split(","));
+        }
+    })
     $("#TumorLocation").change(function() {
         console.log($(this).val());
         if ($(this).val() == "Other") {
