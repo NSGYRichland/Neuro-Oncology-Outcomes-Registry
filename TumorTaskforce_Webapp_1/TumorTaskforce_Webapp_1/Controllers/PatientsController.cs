@@ -146,13 +146,13 @@ namespace TumorTaskforce_Webapp_1.Controllers
             //MAKE SURE TO ONLY COMPARE AGAINST PATIENTS WHERE isCompare == false
 
             Patient target = new Patient();//target variable keeps most recent "similar patient" during search
-            int targetSimilarity = 0;//updated variable that hold most "similar" variable
+            float targetSimilarity = 0;//updated variable that hold most "similar" variable
             int currEffect = 0, targetEffect = 0, count = 0; bool surgery = false;
             String targetRecord = "000000000000000000";//this is a primitive testing variable that I made to make sure its recording everything
                                                        // correctly. im going to comment these out for now
             foreach (var curr in db.Patients)
             {
-                int similarity = 0;// i = 0;
+                float similarity = 0;// i = 0;
                 String record = "000000000000000000";
                 if (patient.patientID == curr.patientID || curr.isCompare == true)
                 {
@@ -164,12 +164,12 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     {
                     if (patient.Sex.Equals(curr.Sex))
                     {
-                        similarity += (1 * wSex);
+                        similarity += (1 * (wSex / 100));
                         record = record.Insert(0, "1");
                     }
                     if (patient.Age == curr.Age)//Range
                     {
-                        similarity += (1 * wAge);
+                        similarity += (1 * (wAge / 100));
                         record = record.Insert(1, "1");
                     }
                     
@@ -193,7 +193,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         }*/
                         if (patient.HistologicalClassification.Equals(curr.HistologicalClassification))
                         {
-                            similarity += (1 * wClass);
+                            similarity += (1 * (wClass / 100));
                             record = record.Insert(2, "1");
                         }
                         if (patient.TumorLength == curr.TumorLength
@@ -211,13 +211,13 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         }
                         if (pVol == cVol)
                         {
-                            similarity += (1 * wVol);
+                            similarity += (1 * (wVol / 100));
                             record = record.Insert(4, "1");
                         }
 
                         if (patient.TumorLocation.Equals(curr.TumorLocation))
                         {
-                            similarity += (1 * wLoca);
+                            similarity += (1 * (wLoca / 100));
                             record = record.Insert(5, "1");
                         }
 
@@ -225,7 +225,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         {
                             if (patient.Constitutional.Equals(curr.Constitutional))
                             {
-                                similarity += (1 * wConst);
+                                similarity += (1 * (wConst / 100));
                                 record = record.Insert(6, "1");
                             }
                         }
@@ -233,7 +233,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         {
                             if (patient.Respiratory.Equals(curr.Respiratory))
                             {
-                                similarity += (1 * wResp);
+                                similarity += (1 * (wResp / 100));
                                 record = record.Insert(7, "1");
                             }
                         }
@@ -241,7 +241,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         {
                             if (patient.Cardiovascular.Equals(curr.Cardiovascular))
                             {
-                                similarity += (1 * wCardio);
+                                similarity += (1 * (wCardio / 100));
                                 record = record.Insert(8, "1");
                             }
                         }
@@ -249,7 +249,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         {
                             if (patient.Gastrointestinal.Equals(curr.Gastrointestinal))
                             {
-                                similarity += (1 * wGast);
+                                similarity += (1 * (wGast / 100));
                                 record = record.Insert(9, "1");
                             }
                         }
@@ -257,7 +257,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         {
                             if (patient.Musculoskeletal.Equals(curr.Musculoskeletal))
                             {
-                                similarity += (1 * wMusc);
+                                similarity += (1 * (wMusc / 100));
                                 record = record.Insert(10, "1");
                             }
                         }
@@ -265,7 +265,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         {
                             if (patient.Integumentary.Equals(curr.Integumentary))
                             {
-                                similarity += (1 * wInt);
+                                similarity += (1 * (wInt / 100));
                                 record = record.Insert(11, "1");
                             }
                         }
@@ -273,7 +273,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         {
                             if (patient.Neurologic.Equals(curr.Neurologic))
                             {
-                                similarity += (1 * wNeuro);
+                                similarity += (1 * (wNeuro / 100));
                                 record = record.Insert(12, "1");
                             }
                         }
@@ -281,7 +281,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         {
                             if (patient.Exercize.Equals(curr.Exercize))
                             {
-                                similarity += (1 * wExer);
+                                similarity += (1 * (wExer / 100));
                                 record = record.Insert(13, "1");
                             }
                         }
@@ -289,7 +289,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         {
                             if (patient.Diet.Equals(curr.Diet))
                             {
-                                similarity += (1 * wDiet);
+                                similarity += (1 * (wDiet / 100));
                                 record = record.Insert(14, "1");
                             }
                         }
@@ -319,17 +319,14 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         targetRecord = record;
                     }
                 }
-                int simResult = (int)((simMax / similarity) * 100);
+                int simResult = (int)Math.Round((similarity / simMax) * 100,0);
                 simData += (curr.patientID + "," +simResult+ ",");
                 count++;
             }
             string[] TargetData = simData.Split(',');
             Array.Reverse(TargetData);
-            //string[] TData = new string[TargetData.Length-1];
-            //TargetData.CopyTo(TData, 1);
             TargetData = TargetData.Skip(1).ToArray();
             Array.Reverse(TargetData);
-            //Array.Reverse(TData);
             int[] Data = new int[count * 2];
             int c = 0;
             foreach (string x in TargetData)
@@ -340,38 +337,6 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 c++;
             }
 
-            /*for(int i = 0; i < (count*2); i++)
-            { 
-            Data[i] = simData.Split('|').Select(i => int.Parse(i));
-            }*/
-            //int[] Data =                                      Take simData and delim in by | to array of int[]
-                //simData.Split('|').Select(x => int.Parse(x));  Everytime I try is doenst split correctly and all ends up in 1 mass
-            //for (int i = 0; i < TargetData.Length; i++)           Sleep is important ill have to fix this tommorow.
-                //Data[i] = int.Parse(TargetData[i]);
-            //int[] Data = Array.ConvertAll(TargetData., int.Parse);
-
-
-           /* for(int i = 0; i < simData.Length; i++)
-            {
-                int intCount = 0, num = 0;
-                string parseInt;
-                bool isInt = int.TryParse(simData[i]);
-                if (isInt)
-                {
-                    intCount++;
-                }
-                else
-                {
-                    parseInt = simData.
-                }
-            }*/
-
-            //var tuple = new Tuple<TumorTaskforce_Webapp_1.Patient, IEnumerable<TumorTaskforce_Webapp_1.Patient>>(patient, db.Patients.ToList());
-
-            //PUT SUGGESTED TREATMENTS AS STRING INTO patient.comparisonResults
-            /*TargetData[0] = ((string)count);
-            TargetData[1] = target.patientID.ToString();*/
-            //patient.comparisonResults = "empty";
             patient.comparisonResults = (count + "| " + target.patientID + " | ");
             if (surgery == true)
             {
