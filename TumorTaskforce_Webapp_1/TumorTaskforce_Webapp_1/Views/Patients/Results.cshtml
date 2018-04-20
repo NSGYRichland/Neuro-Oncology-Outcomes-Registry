@@ -17,13 +17,11 @@
 	ViewBag.Title = "Results";
 	int sIndex = Model.comparisonResults.IndexOf('|');
 	char[] count = new char[sIndex];
-	//string count = " ";
 	Model.comparisonResults.CopyTo(0, count, 0, sIndex);
 	string str = new string(count);
 	int arraySize = int.Parse(str);
 	int[] dataArray = new int[arraySize * 2];
 	dataArray = ViewBag.SimData as int[];
-	//<dl class="dl-horizontal"> @Html.Display(dataArray.ToString()) </dl>
 }
 
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
@@ -77,7 +75,7 @@
 					"text": "Patient's Comparison Results"
 				}
 			],
-			"dataProvider": [
+            "dataProvider": [
 				{
                     "category": "Patient " + @ViewBag.SimData[0],
                     "column-1": @ViewBag.SimData[1]
@@ -126,7 +124,6 @@
 		</h4>
 		We recommend the following treatments:
 		@Html.DisplayFor(i => i.comparisonResults)
-		&nbsp;&nbsp;@ViewBag.SimData[0]
 		@*Chart Printed Out on Results Page Showing the Current Patient's Level of Similarity to Other Patients in the Database*@
 		<div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;"></div>
 
