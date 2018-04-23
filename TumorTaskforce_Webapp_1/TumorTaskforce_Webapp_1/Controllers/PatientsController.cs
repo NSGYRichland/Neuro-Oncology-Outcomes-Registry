@@ -326,7 +326,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
 
 
             string str2 = new string(targetRecord);
-            patient.comparisonResults = (count + " | " + target.patientID + " | " + str2 + " | ");
+            patient.comparisonResults = (count + "| Patient # " + target.patientID + " was most similar | ");// + str2 + " | ");
 
             if (surgery == true)
             {
