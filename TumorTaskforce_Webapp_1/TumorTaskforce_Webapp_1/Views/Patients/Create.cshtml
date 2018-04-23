@@ -269,7 +269,7 @@
                             <hr />
                             <div class="form-group">
                                 <b>
-                                    @Html.LabelFor(model => model.Exercize, htmlAttributes: new { @class = "control-label col-md-6" })
+                                    @Html.LabelFor(model => model.Exercize,"Exercise", htmlAttributes: new { @class = "control-label col-md-6" })
                                 </b>                                
                                 <div class="col-md-12">
                                     @Html.EditorFor(model => model.Exercize, new { htmlAttributes = new { @class = "hiddenExercize", @style = "display:none" } })
@@ -609,7 +609,7 @@ else
                             <hr />
                             <div class="form-group">
                                 <b>
-                                    @Html.LabelFor(model => model.Exercize, htmlAttributes: new { @class = "control-label col-md-6" })
+                                    @Html.LabelFor(model => model.Exercize,"Exercise", htmlAttributes: new { @class = "control-label col-md-6" })
                                 </b>
                                 <div class="col-md-12">
                                     @Html.EditorFor(model => model.Exercize, new { htmlAttributes = new { @class = "hiddenExercize", @style = "display:none" } })
