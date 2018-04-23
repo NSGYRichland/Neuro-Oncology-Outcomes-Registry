@@ -73,7 +73,7 @@
       <HintPath>..\packages\MvcIntegrationTestFramework.1.0.7\lib\net45\MvcIntegrationTestFramework.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit-agent, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.Engine.3.8.0\lib\nunit-agent.exe</HintPath>
@@ -94,6 +94,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Data.SqlXml" />
     <Reference Include="System.Drawing" />
@@ -141,7 +142,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="TestPatientControllerClass.cs" />
+    <Compile Include="Controllers\AccountControllerTests.cs" />
+    <Compile Include="Controllers\PatientsControllerTests.cs" />
+    <Compile Include="Controllers\UsersControllerTests.cs" />
+    <Compile Include="TestViewResults.cs" />
     <Compile Include="TestWebApp.cs" />
     <Compile Include="HttpContextManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
