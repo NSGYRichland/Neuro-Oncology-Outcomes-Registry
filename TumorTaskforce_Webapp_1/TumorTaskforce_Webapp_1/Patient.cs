@@ -35,9 +35,9 @@ namespace TumorTaskforce_Webapp_1
         public byte Age { get; set; }
         public string HistologicalClassification { get; set; }
         public Nullable<byte> HistologicalGrade { get; set; }
-        public Nullable<short> TumorWidth { get; set; }
-        public Nullable<short> TumorHeight { get; set; }
-        public Nullable<short> TumorLength { get; set; }
+        public short TumorWidth { get; set; }
+        public short TumorHeight { get; set; }
+        public short TumorLength { get; set; }
         public string TumorLocation { get; set; }
         public string Constitutional { get; set; }
         public string Respiratory { get; set; }
