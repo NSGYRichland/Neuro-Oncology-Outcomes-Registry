@@ -144,14 +144,9 @@
 		@*Data is based on a statistical correlation with: Patient @target.patientID | @targetSimilarity | @targetEffect*@
 		<hr />
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-5">
 				<dl class="dl-horizontal">
-					<dt>
-						Patient  Info
-					</dt>
-					<dd>
-						------------------------------
-					</dd>
+					<b>Patient Info</b><hr />
 					<dt>
 						@Html.DisplayNameFor(model => model.Sex)
 					</dt>
@@ -230,86 +225,82 @@
 				</dl>
 			</div>
 			<div class="col-md-6">
-				<dl class="dl-horizontal">
-					<dt>
-						Review of Systems
-					</dt>
-					<dd>
-						------------------------------
-					</dd>
-					<dt>
-						@Html.DisplayNameFor(model => model.Constitutional)
-					</dt>
+                <dl class="dl-horizontal">
+                    <b>Review of Systems</b>
+                    <hr />
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Constitutional)
+                    </dt>
 
-					<dd>
+                    <dd>
 
-						@Html.DisplayFor(model => model.Constitutional)
-					</dd>
+                        @Html.DisplayFor(model => model.Constitutional)
+                    </dd>
 
-					<dt>
-						@Html.DisplayNameFor(model => model.Respiratory)
-					</dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Respiratory)
+                    </dt>
 
-					<dd>
-						@Html.DisplayFor(model => model.Respiratory)
-					</dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Respiratory)
+                    </dd>
 
-					<dt>
-						@Html.DisplayNameFor(model => model.Cardiovascular)
-					</dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Cardiovascular)
+                    </dt>
 
-					<dd>
-						@Html.DisplayFor(model => model.Cardiovascular)
-					</dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Cardiovascular)
+                    </dd>
 
-					<dt>
-						@Html.DisplayNameFor(model => model.Gastrointestinal)
-					</dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Gastrointestinal)
+                    </dt>
 
-					<dd>
-						@Html.DisplayFor(model => model.Gastrointestinal)
-					</dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Gastrointestinal)
+                    </dd>
 
-					<dt>
-						@Html.DisplayNameFor(model => model.Musculoskeletal)
-					</dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Musculoskeletal)
+                    </dt>
 
-					<dd>
-						@Html.DisplayFor(model => model.Musculoskeletal)
-					</dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Musculoskeletal)
+                    </dd>
 
-					<dt>
-						@Html.DisplayNameFor(model => model.Integumentary)
-					</dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Integumentary)
+                    </dt>
 
-					<dd>
-						@Html.DisplayFor(model => model.Integumentary)
-					</dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Integumentary)
+                    </dd>
 
-					<dt>
-						@Html.DisplayNameFor(model => model.Neurologic)
-					</dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Neurologic)
+                    </dt>
 
-					<dd>
-						@Html.DisplayFor(model => model.Neurologic)
-					</dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Neurologic)
+                    </dd>
 
-					<dt>
-						Exercise
-					</dt>
+                    <dt>
+                        Exercise
+                    </dt>
 
-					<dd>
-						@Html.DisplayFor(model => model.Exercize)
-					</dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Exercize)
+                    </dd>
 
-					<dt>
-						@Html.DisplayNameFor(model => model.Diet)
-					</dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Diet)
+                    </dt>
 
-					<dd>
-						@Html.DisplayFor(model => model.Diet)
-					</dd>
-				</dl>
+                    <dd>
+                        @Html.DisplayFor(model => model.Diet)
+                    </dd>
+                </dl>
 			</div>
 		</div>
 		<dl class="dl-horizontal">
