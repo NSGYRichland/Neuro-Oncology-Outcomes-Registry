@@ -748,6 +748,15 @@ namespace TumorTaskforce_Webapp_1.Controllers
             ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text", patient.HistologicalGrade);
             ViewBag.HistologicalClassification = new SelectList(getTumorTypes(), "Value", "Text",patient.HistologicalClassification);
             ViewBag.TumorLocation = new SelectList(getLocations(), "Value", "Text", patient.TumorLocation);
+            ViewBag.Diet = new MultiSelectList(getDietChoices(), "Value", "Text");
+            ViewBag.Neurologic = new MultiSelectList(getNeurologicChoices(), "Value", "Text");
+            ViewBag.Musculoskeletal = new MultiSelectList(getMusculoskeletalChoices(), "Value", "Text");
+            ViewBag.Gastrointestinal = new MultiSelectList(getGastrointestinalChoices(), "Value", "Text");
+            ViewBag.Cardiovascular = new MultiSelectList(getCardiovascularChoices(), "Value", "Text");
+            ViewBag.Exercize = new MultiSelectList(getExercizeChoices(), "Value", "Text");
+            ViewBag.Integumentary = new MultiSelectList(getIntegumentaryChoices(), "Value", "Text");
+            ViewBag.Respiratory = new MultiSelectList(getRespiratoryChoices(), "Value", "Text");
+            ViewBag.Constitutional = new MultiSelectList(getConstitutionalChoices(), "Value", "Text");
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";

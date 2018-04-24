@@ -30,7 +30,7 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="MobilePage1">
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Sex, "Sex", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-10">
@@ -105,13 +105,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <h5>
-                                @Html.LabelFor(model => model.TumorLocation, "Review of Systems", htmlAttributes: new { @class = "control-label col-md-9" })
-                            </h5>
-                            <h6>
-                                &emsp; Use 'Ctrl' to multi-select.<hr />
-                            </h6>
+                        <div class="col-md-4" id="MobilePage2">
+                            <div>
+                                <h5>
+                                    @Html.LabelFor(model => model.TumorLocation, "Review of Systems", htmlAttributes: new { @class = "control-label col-md-9" })
+                                </h5>
+                                <h6>
+                                    &emsp; Use 'Ctrl' to multi-select.</h6>
+                                <hr/>
+                            </div>
                             <div class="form-group">
                                 <b>
                                 @Html.LabelFor(model => model.Constitutional, htmlAttributes: new { @class = "control-label col-md-6" })
@@ -200,11 +202,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="MobilePage3">
+                            <div id="MobilePage3Title">
+                                <h5>
+                                    @Html.LabelFor(model => model.TumorLocation, "Review of Systems", htmlAttributes: new { @class = "control-label col-md-9" })
+                                </h5>
+                                <h6>
+                                    &emsp; Use 'Ctrl' to multi-select.
+                                </h6>
+                                <hr />
+                            </div>
                             <div class="form-group">
                                 <b>
                                     @Html.LabelFor(model => model.Musculoskeletal, htmlAttributes: new { @class = "control-label col-md-6" })
-                                </b>                                
+                                </b>
                                 <div class="col-md-12">
                                     @Html.EditorFor(model => model.Musculoskeletal, new { htmlAttributes = new { @class = "hiddenMusculoskeletal", @style = "display:none" } })
                                     @Html.ListBox("Musculoskeletal", null, htmlAttributes: new { @class = "form-control" })
@@ -226,7 +237,7 @@
                             <div class="form-group">
                                 <b>
                                     @Html.LabelFor(model => model.Integumentary, htmlAttributes: new { @class = "control-label col-md-6" })
-                                </b>                                
+                                </b>
                                 <div class="col-md-12">
                                     @Html.EditorFor(model => model.Integumentary, new { htmlAttributes = new { @class = "hiddenIntegumentary", @style = "display:none" } })
                                     @Html.ListBox("Integumentary", null, htmlAttributes: new { @class = "form-control" })
@@ -248,7 +259,7 @@
                             <div class="form-group">
                                 <b>
                                     @Html.LabelFor(model => model.Neurologic, htmlAttributes: new { @class = "control-label col-md-6" })
-                                </b>                                
+                                </b>
                                 <div class="col-md-12">
                                     @Html.EditorFor(model => model.Neurologic, new { htmlAttributes = new { @class = "hiddenNeurologic", @style = "display:none" } })
                                     @Html.ListBox("Neurologic", null, htmlAttributes: new { @class = "form-control" })
@@ -269,8 +280,8 @@
                             <hr />
                             <div class="form-group">
                                 <b>
-                                    @Html.LabelFor(model => model.Exercize,"Exercise", htmlAttributes: new { @class = "control-label col-md-6" })
-                                </b>                                
+                                    @Html.LabelFor(model => model.Exercize, "Exercise", htmlAttributes: new { @class = "control-label col-md-6" })
+                                </b>
                                 <div class="col-md-12">
                                     @Html.EditorFor(model => model.Exercize, new { htmlAttributes = new { @class = "hiddenExercize", @style = "display:none" } })
                                     @Html.ListBox("Exercize", null, htmlAttributes: new { @class = "form-control" })
@@ -292,7 +303,7 @@
                             <div class="form-group">
                                 <b>
                                     @Html.LabelFor(model => model.Diet, htmlAttributes: new { @class = "control-label col-md-6" })
-                                </b>                                
+                                </b>
                                 <div class="col-md-12">
                                     @Html.EditorFor(model => model.Diet, new { htmlAttributes = new { @class = "hiddenDiet", @style = "display:none" } })
                                     @Html.ListBox("Diet", null, htmlAttributes: new { @class = "form-control" })
@@ -310,6 +321,12 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="MobileButton">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="button" value="Back" class="btn btn-default" id="MobileBackButton" />
+                            <input type="button" value="Next" class="btn btn-default" id="MobileNextButton" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -370,7 +387,7 @@ else
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="MobilePage1">
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Sex, "Sex", htmlAttributes: new { @class = "control-label col-md-6" })
                                 <div class="col-md-10">
@@ -445,13 +462,16 @@ else
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <h5>
-                                @Html.LabelFor(model => model.TumorLocation, "Review of Systems", htmlAttributes: new { @class = "control-label col-md-9" })
-                            </h5>
-                            <h6>
-                                &emsp; Use 'Ctrl' to multi-select.<hr />
-                            </h6>
+                        <div class="col-md-4" id="MobilePage2">
+                            <div>
+                                <h5>
+                                    @Html.LabelFor(model => model.TumorLocation, "Review of Systems", htmlAttributes: new { @class = "control-label col-md-9" })
+                                </h5>
+                                <h6>
+                                    &emsp; Use 'Ctrl' to multi-select.
+                                </h6>
+                                <hr />
+                            </div>
                             <div class="form-group">
                                 <b>
                                     @Html.LabelFor(model => model.Constitutional, htmlAttributes: new { @class = "control-label col-md-6" })
@@ -540,7 +560,16 @@ else
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4" id="MobilePage3">
+                            <div id="MobilePage3Title">
+                                <h5>
+                                    @Html.LabelFor(model => model.TumorLocation, "Review of Systems", htmlAttributes: new { @class = "control-label col-md-9" })
+                                </h5>
+                                <h6>
+                                    &emsp; Use 'Ctrl' to multi-select.
+                                </h6>
+                                <hr />
+                            </div>
                             <div class="form-group">
                                 <b>
                                     @Html.LabelFor(model => model.Musculoskeletal, htmlAttributes: new { @class = "control-label col-md-6" })
@@ -609,7 +638,7 @@ else
                             <hr />
                             <div class="form-group">
                                 <b>
-                                    @Html.LabelFor(model => model.Exercize,"Exercise", htmlAttributes: new { @class = "control-label col-md-6" })
+                                    @Html.LabelFor(model => model.Exercize, "Exercise", htmlAttributes: new { @class = "control-label col-md-6" })
                                 </b>
                                 <div class="col-md-12">
                                     @Html.EditorFor(model => model.Exercize, new { htmlAttributes = new { @class = "hiddenExercize", @style = "display:none" } })
@@ -652,8 +681,14 @@ else
                             </div>
                         </div>
                     </div>
+                    <div class="form-group" id="MobileButton">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="button" value="Back" class="btn btn-default" id="MobileBackButton"/>
+                            <input type="button" value="Next" class="btn btn-default" id="MobileNextButton"/>
+                        </div>
+                    </div>
 
-                    <div class="form-group">
+                    <div class="form-group" id="SubmitButton">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Next" class="btn btn-default" />
                         </div>
@@ -684,6 +719,41 @@ else
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+    var MobilePage = 1;
+    $(document).ready(function () {
+        $("#MobileButton").hide();
+        $("#MobilePage3Title").hide();
+        if ($(window).width() < 750) {
+            $("#MobilePage3Title").show();
+            $("#MobilePage2").hide();
+            $("#MobilePage3").hide();
+            $("#SubmitButton").hide();
+            $("#MobileButton").show();
+            $("#MobileBackButton").hide();
+        }
+    });
+    $("#MobileNextButton").click(function () {
+        $("#MobilePage" + MobilePage).hide();
+        $("#MobileBackButton").show();
+        MobilePage++;
+        $("#MobilePage" + MobilePage).show();
+        if (MobilePage == 3) {
+            $(this).hide();
+            $("#SubmitButton").show();
+        }
+        window.scrollTo(0, 0);
+    });
+    $("#MobileBackButton").click(function () {
+        $("#MobilePage" + MobilePage).hide();
+        $("#MobileNextButton").show();
+        MobilePage--;
+        $("#MobilePage" + MobilePage).show();
+        if (MobilePage == 1) {
+            $(this).hide();
+        }
+        $("#SubmitButton").hide();
+        window.scrollTo(0, 0);
+    });
     
     $("#TumorLocation").change(function() {
         console.log($(this).val());

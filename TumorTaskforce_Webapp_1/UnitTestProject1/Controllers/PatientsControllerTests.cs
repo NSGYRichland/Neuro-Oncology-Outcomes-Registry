@@ -21,7 +21,7 @@ namespace TumorTaskforce_Webapp_1.Controllers.Tests
             using(var conn = context.NewConnection())
             {
                 var table = conn.GetSchema("Tables");
-                var tableNames = table.Rows.Cast<System.Data.DataRow>().Select(xe => xe["TABLE_NAME"].ToString)).ToArray();
+                var tableNames = table.Rows.Cast<System.Data.DataRow>().Select(xe => xe["TABLE_NAME"].ToString).ToArray();
                 Assert.That(tableNames.Contains("NewTable"), Is.True);
             }
             string expected = "Index";
