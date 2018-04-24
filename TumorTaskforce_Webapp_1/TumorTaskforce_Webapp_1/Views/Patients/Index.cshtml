@@ -25,32 +25,32 @@
                Search for patient(s)
             </h4>
             <div class="row">
-                <div class="col-md-2">
+                <div class="form-inline" style="margin:4px 30px 2px 40px;">
                     <p>
-                        ID: @Html.TextBox("q")
+                        ID: <br />@Html.TextBox("q")
                     </p>
                 </div>
-                <div class="col-md-2">
+                <div class="form-inline" style="margin:4px 30px 2px 4px;">
                     <p>
-                        Sex: @Html.TextBox("sex")
+                        Sex: <br />@Html.DropDownList("sex")
                     </p>
                 </div>
-                <div class="col-md-2">
+                <div class="form-inline" style="margin:4px 30px 2px 4px;">
                     <p>
-                        Classification: @Html.TextBox("clss")
+                        Classification: <br />@Html.DropDownList("clss")
                     </p>
                 </div>
-                <div class="col-md-2">
+                <div class="form-inline" style="margin:4px 30px 2px 4px;">
                     <p>
-                        Location: @Html.TextBox("tumLoc")
+                        Location: <br />@Html.DropDownList("tumLoc")
                     </p>
                 </div>
-                <div class="col-md-2">
+                <div class="form-inline" style="margin:4px 30px 2px 4px;">
                     <p>
-                        Grade: @Html.TextBox("grade")
+                        Grade: <br />@Html.DropDownList("grade")
                     </p>
                 </div>
-                <div class="col-md-1">
+                <div class="form-inline">
                     <br />
                     <div id="buttonSearch">
                         <input type="submit" value="Search" id="buttonSubmit" />

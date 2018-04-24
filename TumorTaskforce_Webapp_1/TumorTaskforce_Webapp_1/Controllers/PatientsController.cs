@@ -15,6 +15,8 @@ namespace TumorTaskforce_Webapp_1.Controllers
 {
     public class PatientsController : Controller
     {
+        private static int PatientSearch = 1;
+        private static int CompareSearch = 2;
         private tumorDBEntities db = new tumorDBEntities();
 
         // GET: Patients
@@ -59,6 +61,11 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 patients = patients.Where(u => u.Sex.Contains(sex));
             }
 
+            ViewBag.tumLoc = new SelectList(getLocations(PatientSearch), "Value", "Text");
+            ViewBag.sex = new SelectList(getSexes(PatientSearch), "Value", "Text");
+            ViewBag.clss = new SelectList(getTumorTypes(PatientSearch), "Value", "Text");
+            ViewBag.grade = new SelectList(getGrades(PatientSearch), "Value", "Text");
+
             return View(patients);
         }
 
@@ -102,6 +109,11 @@ namespace TumorTaskforce_Webapp_1.Controllers
             {
                 patients = patients.Where(u => u.Sex.Contains(sex));
             }
+
+            ViewBag.tumLoc = new SelectList(getLocations(CompareSearch), "Value", "Text");
+            ViewBag.sex = new SelectList(getSexes(CompareSearch), "Value", "Text");
+            ViewBag.clss = new SelectList(getTumorTypes(CompareSearch), "Value", "Text");
+            ViewBag.grade = new SelectList(getGrades(CompareSearch), "Value", "Text");
 
             return View(patients);
         }
@@ -402,10 +414,10 @@ namespace TumorTaskforce_Webapp_1.Controllers
         {
             if (isCompare == null) { isCompare = false; }
             ViewBag.isCompare = isCompare;
-            ViewBag.Sex = new SelectList(getSexes(), "Value", "Text");
-            ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text");
-            ViewBag.HistologicalClassification = new SelectList(getTumorTypes(), "Value", "Text");
-            ViewBag.TumorLocation = new SelectList(getLocations(), "Value", "Text");
+            ViewBag.Sex = new SelectList(getSexes(null), "Value", "Text");
+            ViewBag.HistologicalGrade = new SelectList(getGrades(null), "Value", "Text");
+            ViewBag.HistologicalClassification = new SelectList(getTumorTypes(null), "Value", "Text");
+            ViewBag.TumorLocation = new SelectList(getLocations(null), "Value", "Text");
             ViewBag.Diet = new MultiSelectList(getDietChoices(), "Value", "Text");
             ViewBag.Neurologic = new MultiSelectList(getNeurologicChoices(), "Value", "Text");
             ViewBag.Musculoskeletal = new MultiSelectList(getMusculoskeletalChoices(), "Value", "Text");
@@ -427,9 +439,21 @@ namespace TumorTaskforce_Webapp_1.Controllers
         }
 
         
-        public SelectListItem[] getSexes()
+        public SelectListItem[] getSexes(int? searchPurpose)
         {
-            SelectListItem[] sex = new SelectListItem[3];
+            SelectListItem[] sex;
+            if (searchPurpose != null)
+            {
+                sex = new SelectListItem[4];
+                SelectListItem any = new SelectListItem
+                {
+                    Text = "Any",
+                    Value = null
+                };
+                sex[3] = any;
+            }
+            else
+                sex = new SelectListItem[3];
             SelectListItem male = new SelectListItem
             {
                 Text = "Male",
@@ -451,9 +475,21 @@ namespace TumorTaskforce_Webapp_1.Controllers
             return sex;
         }
 
-        public SelectListItem[] getGrades()
+        public SelectListItem[] getGrades(int? searchPurpose)
         {
-            SelectListItem[] grade = new SelectListItem[5];
+            SelectListItem[] grade;
+            if (searchPurpose != null)
+            {
+                grade = new SelectListItem[6];
+                SelectListItem any = new SelectListItem
+                {
+                    Text = "Any",
+                    Value = null
+                };
+                grade[5] = any;
+            }
+            else
+                grade = new SelectListItem[5];
             SelectListItem zero = new SelectListItem
             {
                 Text = "0",
@@ -486,51 +522,115 @@ namespace TumorTaskforce_Webapp_1.Controllers
             grade[4] = four;
             return grade;
         }
-        public SelectListItem[] getLocations()
+        public SelectListItem[] getLocations(int? searchPurpose)
         {
             List<SelectListItem> list = new List<SelectListItem>();
-            foreach(Patient p in db.Patients.Where((item)=>item.isCompare==false && item.TumorLocation != "" && item.TumorLocation != null))
+            if (searchPurpose == CompareSearch)
             {
-                if (list.Where((item)=>item.Text == p.TumorLocation).Count() < 1)
+                foreach (Patient p in db.Patients.Where((item) => item.isCompare && item.TumorLocation != "" && item.TumorLocation != null))
                 {
-                    SelectListItem sli = new SelectListItem
+                    if (list.Where((item) => item.Text == p.TumorLocation).Count() < 1)
                     {
-                        Text = p.TumorLocation,
-                        Value = p.TumorLocation
-                    };
-                    list.Add(sli);
+                        SelectListItem sli = new SelectListItem
+                        {
+                            Text = p.TumorLocation,
+                            Value = p.TumorLocation
+                        };
+                        list.Add(sli);
+                    }
                 }
             }
-            SelectListItem other = new SelectListItem
+            else
             {
-                Text = "Other",
-                Value = "Other"
-            };
-            list.Add(other);
+                foreach (Patient p in db.Patients.Where((item) => item.isCompare == false && item.TumorLocation != "" && item.TumorLocation != null))
+                {
+                    if (list.Where((item) => item.Text == p.TumorLocation).Count() < 1)
+                    {
+                        SelectListItem sli = new SelectListItem
+                        {
+                            Text = p.TumorLocation,
+                            Value = p.TumorLocation
+                        };
+                        list.Add(sli);
+                    }
+                }
+            }
+            
+            
+            if (searchPurpose != null)
+            {
+                SelectListItem any = new SelectListItem
+                {
+                    Text = "Any",
+                    Value = null
+                };
+                list.Add(any);
+            }
+            else
+            {
+                SelectListItem other = new SelectListItem
+                {
+                    Text = "Other",
+                    Value = "Other"
+                };
+                list.Add(other);
+            }
             return list.ToArray();
         }
 
-        public SelectListItem[] getTumorTypes()
+        public SelectListItem[] getTumorTypes(int? searchPurpose)
         {
             List<SelectListItem> list = new List<SelectListItem>();
-            foreach (Patient p in db.Patients.Where((item) => item.isCompare == false && item.HistologicalClassification != "" && item.HistologicalClassification != null))
+            if (searchPurpose == CompareSearch)
             {
-                if (list.Where((item) => item.Text == p.HistologicalClassification).Count() < 1)
+                foreach (Patient p in db.Patients.Where((item) => item.isCompare && item.HistologicalClassification != "" && item.HistologicalClassification != null))
                 {
-                    SelectListItem sli = new SelectListItem
+                    if (list.Where((item) => item.Text == p.HistologicalClassification).Count() < 1)
                     {
-                        Text = p.HistologicalClassification,
-                        Value = p.HistologicalClassification
-                    };
-                    list.Add(sli);
+                        SelectListItem sli = new SelectListItem
+                        {
+                            Text = p.HistologicalClassification,
+                            Value = p.HistologicalClassification
+                        };
+                        list.Add(sli);
+                    }
                 }
             }
-            SelectListItem other = new SelectListItem
+            else
             {
-                Text = "Other",
-                Value = "Other"
-            };
-            list.Add(other);
+                foreach (Patient p in db.Patients.Where((item) => item.isCompare == false && item.HistologicalClassification != "" && item.HistologicalClassification != null))
+                {
+                    if (list.Where((item) => item.Text == p.HistologicalClassification).Count() < 1)
+                    {
+                        SelectListItem sli = new SelectListItem
+                        {
+                            Text = p.HistologicalClassification,
+                            Value = p.HistologicalClassification
+                        };
+                        list.Add(sli);
+                    }
+                }
+            }
+            
+            
+            if (searchPurpose != null)
+            {
+                SelectListItem any = new SelectListItem
+                {
+                    Text = "Any",
+                    Value = null
+                };
+                list.Add(any);
+            }
+            else
+            {
+                SelectListItem other = new SelectListItem
+                {
+                    Text = "Other",
+                    Value = "Other"
+                };
+                list.Add(other);
+            }
             return list.ToArray();
         }
         public SelectListItem[] getDietChoices()
@@ -744,10 +844,10 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 }  
                 return RedirectToAction("Index");
             }
-            ViewBag.Sex = new SelectList(getSexes(), "Value", "Text", patient.Sex);
-            ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text", patient.HistologicalGrade);
-            ViewBag.HistologicalClassification = new SelectList(getTumorTypes(), "Value", "Text",patient.HistologicalClassification);
-            ViewBag.TumorLocation = new SelectList(getLocations(), "Value", "Text", patient.TumorLocation);
+            ViewBag.Sex = new SelectList(getSexes(null), "Value", "Text", patient.Sex);
+            ViewBag.HistologicalGrade = new SelectList(getGrades(null), "Value", "Text", patient.HistologicalGrade);
+            ViewBag.HistologicalClassification = new SelectList(getTumorTypes(null), "Value", "Text",patient.HistologicalClassification);
+            ViewBag.TumorLocation = new SelectList(getLocations(null), "Value", "Text", patient.TumorLocation);
             ViewBag.Diet = new MultiSelectList(getDietChoices(), "Value", "Text");
             ViewBag.Neurologic = new MultiSelectList(getNeurologicChoices(), "Value", "Text");
             ViewBag.Musculoskeletal = new MultiSelectList(getMusculoskeletalChoices(), "Value", "Text");
@@ -781,10 +881,10 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 return HttpNotFound();
             }
             ViewBag.isCompare = patient.isCompare;
-            ViewBag.Sex = new SelectList(getSexes(), "Value", "Text", patient.Sex);
-            ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text", patient.HistologicalGrade);
-            ViewBag.HistologicalClassification = new SelectList(getTumorTypes(), "Value", "Text", patient.HistologicalClassification);
-            ViewBag.TumorLocation = new SelectList(getLocations(), "Value", "Text", patient.TumorLocation);
+            ViewBag.Sex = new SelectList(getSexes(null), "Value", "Text", patient.Sex);
+            ViewBag.HistologicalGrade = new SelectList(getGrades(null), "Value", "Text", patient.HistologicalGrade);
+            ViewBag.HistologicalClassification = new SelectList(getTumorTypes(null), "Value", "Text", patient.HistologicalClassification);
+            ViewBag.TumorLocation = new SelectList(getLocations(null), "Value", "Text", patient.TumorLocation);
             ViewBag.Diet = new MultiSelectList(getDietChoices(), "Value", "Text");
             ViewBag.Neurologic = new MultiSelectList(getNeurologicChoices(), "Value", "Text");
             ViewBag.Musculoskeletal = new MultiSelectList(getMusculoskeletalChoices(), "Value", "Text");
@@ -827,10 +927,10 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Details", new { id = patient.patientID });
             }
-            ViewBag.Sex =new SelectList(getSexes(), "Value", "Text", patient.Sex);
-            ViewBag.HistologicalGrade = new SelectList(getGrades(), "Value", "Text", patient.HistologicalGrade);
-            ViewBag.HistologicalClassification = new SelectList(getTumorTypes(), "Value", "Text", patient.HistologicalClassification);
-            ViewBag.TumorLocation = new SelectList(getLocations(), "Value", "Text", patient.TumorLocation);
+            ViewBag.Sex =new SelectList(getSexes(null), "Value", "Text", patient.Sex);
+            ViewBag.HistologicalGrade = new SelectList(getGrades(null), "Value", "Text", patient.HistologicalGrade);
+            ViewBag.HistologicalClassification = new SelectList(getTumorTypes(null), "Value", "Text", patient.HistologicalClassification);
+            ViewBag.TumorLocation = new SelectList(getLocations(null), "Value", "Text", patient.TumorLocation);
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
