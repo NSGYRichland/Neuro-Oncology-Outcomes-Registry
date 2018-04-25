@@ -379,7 +379,12 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 }
             }
             ViewBag.SimData = Data;
-            var temp = patient.comparisonResults.Substring(patient.comparisonResults.LastIndexOf("|") + 1);
+            int a = patient.comparisonResults.LastIndexOf('|') + 1;
+            var temp = patient.comparisonResults.Substring(a);
+            if (temp.Equals(" ") || temp.Equals(null))
+            {
+                temp = "No Treatments to recommend, most similar patient had only treatments not applicable...";
+            }
             ViewBag.CompResults = temp.Substring(0, temp.Length - 2);
             return View(patient);
         }
