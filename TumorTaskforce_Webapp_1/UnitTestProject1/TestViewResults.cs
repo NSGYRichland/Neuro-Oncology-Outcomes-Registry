@@ -1,12 +1,22 @@
 ﻿using System;
+using NUnit.Framework;
+using Moq;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace UnitTestProject1
+namespace UnitTestProject1.Controller
 {
-    class TestViewRsults
+    class TestUserAuthentication
     {
+        public interface IMock
+        {
+            List<Users> GetUser();
+        }
+        [Test]
+        public void AuthenticateValidUser()
+        {
+            IMock mockData = new MockDataAccess();
+            var service = new AuthenticationManager(mockData);
+        }
+        
     }
 }

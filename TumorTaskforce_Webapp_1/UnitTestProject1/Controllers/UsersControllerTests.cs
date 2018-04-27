@@ -25,11 +25,6 @@ namespace TumorTaskforce_Webapp_1.Controllers.Tests
             Assert.Fail();
         }
 
-        [Test()]
-        public void EditTest1()
-        {
-            Assert.Fail();
-        }
 
         [Test()]
         public void DeleteTest()
