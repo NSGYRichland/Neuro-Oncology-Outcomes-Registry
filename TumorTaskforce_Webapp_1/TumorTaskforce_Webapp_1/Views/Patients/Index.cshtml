@@ -72,9 +72,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Sex)
                     </th>
-                    <th>
+                    @*<th>
                         @Html.DisplayNameFor(model => model.Married)
-                    </th>
+                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.Age)
                     </th>
@@ -102,9 +102,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Sex)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.Married)
-                        </td>
+                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.Age)
                         </td>
@@ -126,7 +126,7 @@
                         </td>
                         <td>
                             @*@Html.ActionLink("Edit", "Edit", new { id=item.patientID }) |*@
-                            @Html.ActionLink("View Patient", "Details", new { id = item.patientID }) |
+                            @Html.ActionLink("View", "Details", new { id = item.patientID }) |
                             @Html.ActionLink("Delete", "Delete", new { id = item.patientID })
 
                         </td>

@@ -139,9 +139,9 @@
                 <th>
                     Sex
                 </th>
-                <th>
+                @*<th>
                     Married
-                </th>
+                </th>*@
                 <th>
                     Age
                 </th>
@@ -169,9 +169,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Sex)
                     </td>
-                    <td>
+                    @*<td>
                         @Html.DisplayFor(modelItem => item.Married)
-                    </td>
+                    </td>*@
                     <td>
                         @Html.DisplayFor(modelItem => item.Age)
                     </td>
@@ -193,7 +193,7 @@
                     </td>
                     <td>
                         @*@Html.ActionLink("Edit", "Edit", new { id=item.patientID }) |*@
-                        @Html.ActionLink("View Patient", "Details", "Patients", new { id = item.patientID }, null) |
+                        @Html.ActionLink("View", "Details", "Patients", new { id = item.patientID }, null) |
                         @Html.ActionLink("Delete", "Delete", "Patients", new { id = item.patientID }, null)
 
                     </td>
