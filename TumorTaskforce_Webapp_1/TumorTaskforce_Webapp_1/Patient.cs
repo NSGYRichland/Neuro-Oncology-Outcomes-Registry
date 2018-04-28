@@ -11,6 +11,7 @@ namespace TumorTaskforce_Webapp_1
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Patient
     {
@@ -32,11 +33,15 @@ namespace TumorTaskforce_Webapp_1
         public int patientID { get; set; }
         public string Sex { get; set; }
         public bool Married { get; set; }
+        [Range(0,120)]
         public byte Age { get; set; }
         public string HistologicalClassification { get; set; }
         public Nullable<byte> HistologicalGrade { get; set; }
+        [Range(0, 120)]
         public short TumorWidth { get; set; }
+        [Range(0, 120)]
         public short TumorHeight { get; set; }
+        [Range(0, 120)]
         public short TumorLength { get; set; }
         public string TumorLocation { get; set; }
         public string Constitutional { get; set; }

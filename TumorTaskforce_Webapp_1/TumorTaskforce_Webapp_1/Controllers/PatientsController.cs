@@ -423,15 +423,15 @@ namespace TumorTaskforce_Webapp_1.Controllers
             ViewBag.HistologicalGrade = new SelectList(getGrades(null), "Value", "Text");
             ViewBag.HistologicalClassification = new SelectList(getTumorTypes(null), "Value", "Text");
             ViewBag.TumorLocation = new SelectList(getLocations(null), "Value", "Text");
-            ViewBag.Diet = new MultiSelectList(getDietChoices(), "Value", "Text");
+            ViewBag.Diet = new MultiSelectList(getBMIChoices(), "Value", "Text");
             ViewBag.Neurologic = new MultiSelectList(getNeurologicChoices(), "Value", "Text");
             ViewBag.Musculoskeletal = new MultiSelectList(getMusculoskeletalChoices(), "Value", "Text");
-            ViewBag.Gastrointestinal = new MultiSelectList(getGastrointestinalChoices(), "Value", "Text");
+            ViewBag.Gastrointestinal = new MultiSelectList(getCCIChoices(), "Value", "Text");
             ViewBag.Cardiovascular = new MultiSelectList(getCardiovascularChoices(), "Value", "Text");
-            ViewBag.Exercize = new MultiSelectList(getExercizeChoices(), "Value", "Text");
-            ViewBag.Integumentary = new MultiSelectList(getIntegumentaryChoices(), "Value", "Text");
+            ViewBag.Exercize = new MultiSelectList(getASAChoices(), "Value", "Text");
+            ViewBag.Integumentary = new MultiSelectList(getRaceChoices(), "Value", "Text");
             ViewBag.Respiratory = new MultiSelectList(getRespiratoryChoices(), "Value", "Text");
-            ViewBag.Constitutional = new MultiSelectList(getConstitutionalChoices(), "Value", "Text");
+            ViewBag.Constitutional = new MultiSelectList(getKPSChoices(), "Value", "Text");
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
@@ -638,46 +638,75 @@ namespace TumorTaskforce_Webapp_1.Controllers
             }
             return list.ToArray();
         }
-        public SelectListItem[] getDietChoices()
+        public SelectListItem[] getBMIChoices()
         {
             List<SelectListItem> list = new List<SelectListItem>();
-            foreach (Patient p in db.Patients.Where((item) => item.isCompare == false && item.Diet != "" && item.Diet != null))
+            list.Add(new SelectListItem
             {
-                var array = p.Diet.Split(',');
-                for (int i = 0; i < array.Length; i++)
-                {
-                    if (list.Where((item) => item.Text == array[i]).Count() < 1)
-                    {
-                        SelectListItem sli = new SelectListItem
-                        {
-                            Text = array[i],
-                            Value = array[i]
-                        };
-                        list.Add(sli);
-                    }
-                }
-            }
+                Text = "Underweight",
+                Value = "Underweight"
+            });
+            list.Add(new SelectListItem
+            {
+                Text = "Normal",
+                Value = "Normal"
+            });
+            list.Add(new SelectListItem
+            {
+                Text = "Overweight",
+                Value = "Overweight"
+            });
+            list.Add(new SelectListItem
+            {
+                Text = "Obese",
+                Value = "Obese"
+            });
             return list.ToArray();
         }
-        public SelectListItem[] getConstitutionalChoices()
+        public SelectListItem[] getKPSChoices()
         {
             List<SelectListItem> list = new List<SelectListItem>();
-            foreach (Patient p in db.Patients.Where((item) => item.isCompare == false && item.Constitutional != "" && item.Constitutional != null))
+            list.Add(new SelectListItem
             {
-                var array = p.Constitutional.Split(',');
-                for (int i = 0; i < array.Length; i++)
-                {
-                    if (list.Where((item) => item.Text == array[i]).Count() < 1)
-                    {
-                        SelectListItem sli = new SelectListItem
-                        {
-                            Text = array[i],
-                            Value = array[i]
-                        };
-                        list.Add(sli);
-                    }
-                }
-            }
+                Text = "10",
+                Value = "10"
+            }); list.Add(new SelectListItem
+            {
+                Text = "20",
+                Value = "20"
+            }); list.Add(new SelectListItem
+            {
+                Text = "30",
+                Value = "30"
+            }); list.Add(new SelectListItem
+            {
+                Text = "40",
+                Value = "40"
+            }); list.Add(new SelectListItem
+            {
+                Text = "50",
+                Value = "50"
+            }); list.Add(new SelectListItem
+            {
+                Text = "60",
+                Value = "60"
+            }); list.Add(new SelectListItem
+            {
+                Text = "70",
+                Value = "70"
+            }); list.Add(new SelectListItem
+            {
+                Text = "80",
+                Value = "80"
+            }); list.Add(new SelectListItem
+            {
+                Text = "90",
+                Value = "90"
+            }); list.Add(new SelectListItem
+            {
+                Text = "100",
+                Value = "100"
+            });
             return list.ToArray();
         }
         public SelectListItem[] getRespiratoryChoices()
@@ -722,25 +751,34 @@ namespace TumorTaskforce_Webapp_1.Controllers
             }
             return list.ToArray();
         }
-        public SelectListItem[] getExercizeChoices()
+        public SelectListItem[] getASAChoices()
         {
             List<SelectListItem> list = new List<SelectListItem>();
-            foreach (Patient p in db.Patients.Where((item) => item.isCompare == false && item.Exercize != "" && item.Exercize != null))
+            list.Add(new SelectListItem
             {
-                var array = p.Exercize.Split(',');
-                for (int i = 0; i < array.Length; i++)
-                {
-                    if (list.Where((item) => item.Text == array[i]).Count() < 1)
-                    {
-                        SelectListItem sli = new SelectListItem
-                        {
-                            Text = array[i],
-                            Value = array[i]
-                        };
-                        list.Add(sli);
-                    }
-                }
-            }
+                Text = "I",
+                Value = "I"
+            }); list.Add(new SelectListItem
+            {
+                Text = "II",
+                Value = "II"
+            }); list.Add(new SelectListItem
+            {
+                Text = "III",
+                Value = "III"
+            }); list.Add(new SelectListItem
+            {
+                Text = "IV",
+                Value = "IV"
+            }); list.Add(new SelectListItem
+            {
+                Text = "V",
+                Value = "V"
+            }); list.Add(new SelectListItem
+            {
+                Text = "VI",
+                Value = "VI"
+            });
             return list.ToArray();
         }
         public SelectListItem[] getNeurologicChoices()
@@ -764,25 +802,39 @@ namespace TumorTaskforce_Webapp_1.Controllers
             }
             return list.ToArray();
         }
-        public SelectListItem[] getIntegumentaryChoices()
+        public SelectListItem[] getRaceChoices()
         {
             List<SelectListItem> list = new List<SelectListItem>();
-            foreach (Patient p in db.Patients.Where((item) => item.isCompare == false && item.Integumentary != "" && item.Integumentary != null))
+            list.Add(new SelectListItem
             {
-                var array = p.Integumentary.Split(',');
-                for (int i = 0; i < array.Length; i++)
-                {
-                    if (list.Where((item) => item.Text == array[i]).Count() < 1)
-                    {
-                        SelectListItem sli = new SelectListItem
-                        {
-                            Text = array[i],
-                            Value = array[i]
-                        };
-                        list.Add(sli);
-                    }
-                }
-            }
+                Text = "American Indian or Alaska Native",
+                Value = "American Indian or Alaska Native"
+            });
+            list.Add(new SelectListItem
+            {
+                Text = "Asian",
+                Value = "Asian"
+            });
+            list.Add(new SelectListItem
+            {
+                Text = "Black or African American",
+                Value = "Black or African American"
+            });
+            list.Add(new SelectListItem
+            {
+                Text = "Native Hawaiian or Pacific Islander",
+                Value = "Native Hawaiian or Pacific Islander"
+            });
+            list.Add(new SelectListItem
+            {
+                Text = "White",
+                Value = "White"
+            });
+            list.Add(new SelectListItem
+            {
+                Text = "Hispanic or Latino",
+                Value = "Hispanic or Latino"
+            });
             return list.ToArray();
         }
         public SelectListItem[] getMusculoskeletalChoices()
@@ -806,25 +858,26 @@ namespace TumorTaskforce_Webapp_1.Controllers
             }
             return list.ToArray();
         }
-        public SelectListItem[] getGastrointestinalChoices()
+        public SelectListItem[] getCCIChoices()
         {
             List<SelectListItem> list = new List<SelectListItem>();
-            foreach (Patient p in db.Patients.Where((item) => item.isCompare == false && item.Gastrointestinal != "" && item.Gastrointestinal != null))
+            list.Add(new SelectListItem
             {
-                var array = p.Gastrointestinal.Split(',');
-                for (int i = 0; i < array.Length; i++)
-                {
-                    if (list.Where((item) => item.Text == array[i]).Count() < 1)
-                    {
-                        SelectListItem sli = new SelectListItem
-                        {
-                            Text = array[i],
-                            Value = array[i]
-                        };
-                        list.Add(sli);
-                    }
-                }
-            }
+                Text = "Low",
+                Value = "Low"
+            }); list.Add(new SelectListItem
+            {
+                Text = "Moderate",
+                Value = "Moderate"
+            }); list.Add(new SelectListItem
+            {
+                Text = "High",
+                Value = "High"
+            }); list.Add(new SelectListItem
+            {
+                Text = "Very High",
+                Value = "Very High"
+            });
             return list.ToArray();
         }
 
@@ -853,15 +906,15 @@ namespace TumorTaskforce_Webapp_1.Controllers
             ViewBag.HistologicalGrade = new SelectList(getGrades(null), "Value", "Text", patient.HistologicalGrade);
             ViewBag.HistologicalClassification = new SelectList(getTumorTypes(null), "Value", "Text",patient.HistologicalClassification);
             ViewBag.TumorLocation = new SelectList(getLocations(null), "Value", "Text", patient.TumorLocation);
-            ViewBag.Diet = new MultiSelectList(getDietChoices(), "Value", "Text");
+            ViewBag.Diet = new MultiSelectList(getBMIChoices(), "Value", "Text");
             ViewBag.Neurologic = new MultiSelectList(getNeurologicChoices(), "Value", "Text");
             ViewBag.Musculoskeletal = new MultiSelectList(getMusculoskeletalChoices(), "Value", "Text");
-            ViewBag.Gastrointestinal = new MultiSelectList(getGastrointestinalChoices(), "Value", "Text");
+            ViewBag.Gastrointestinal = new MultiSelectList(getCCIChoices(), "Value", "Text");
             ViewBag.Cardiovascular = new MultiSelectList(getCardiovascularChoices(), "Value", "Text");
-            ViewBag.Exercize = new MultiSelectList(getExercizeChoices(), "Value", "Text");
-            ViewBag.Integumentary = new MultiSelectList(getIntegumentaryChoices(), "Value", "Text");
+            ViewBag.Exercize = new MultiSelectList(getASAChoices(), "Value", "Text");
+            ViewBag.Integumentary = new MultiSelectList(getRaceChoices(), "Value", "Text");
             ViewBag.Respiratory = new MultiSelectList(getRespiratoryChoices(), "Value", "Text");
-            ViewBag.Constitutional = new MultiSelectList(getConstitutionalChoices(), "Value", "Text");
+            ViewBag.Constitutional = new MultiSelectList(getKPSChoices(), "Value", "Text");
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.displayMenu = "No";
@@ -890,15 +943,15 @@ namespace TumorTaskforce_Webapp_1.Controllers
             ViewBag.HistologicalGrade = new SelectList(getGrades(null), "Value", "Text", patient.HistologicalGrade);
             ViewBag.HistologicalClassification = new SelectList(getTumorTypes(null), "Value", "Text", patient.HistologicalClassification);
             ViewBag.TumorLocation = new SelectList(getLocations(null), "Value", "Text", patient.TumorLocation);
-            ViewBag.Diet = new MultiSelectList(getDietChoices(), "Value", "Text");
+            ViewBag.Diet = new MultiSelectList(getBMIChoices(), "Value", "Text");
             ViewBag.Neurologic = new MultiSelectList(getNeurologicChoices(), "Value", "Text");
             ViewBag.Musculoskeletal = new MultiSelectList(getMusculoskeletalChoices(), "Value", "Text");
-            ViewBag.Gastrointestinal = new MultiSelectList(getGastrointestinalChoices(), "Value", "Text");
+            ViewBag.Gastrointestinal = new MultiSelectList(getCCIChoices(), "Value", "Text");
             ViewBag.Cardiovascular = new MultiSelectList(getCardiovascularChoices(), "Value", "Text");
-            ViewBag.Exercize = new MultiSelectList(getExercizeChoices(), "Value", "Text");
-            ViewBag.Integumentary = new MultiSelectList(getIntegumentaryChoices(), "Value", "Text");
+            ViewBag.Exercize = new MultiSelectList(getASAChoices(), "Value", "Text");
+            ViewBag.Integumentary = new MultiSelectList(getRaceChoices(), "Value", "Text");
             ViewBag.Respiratory = new MultiSelectList(getRespiratoryChoices(), "Value", "Text");
-            ViewBag.Constitutional = new MultiSelectList(getConstitutionalChoices(), "Value", "Text");
+            ViewBag.Constitutional = new MultiSelectList(getKPSChoices(), "Value", "Text");
             ViewBag.curDiet = patient.Diet;
             ViewBag.curNeurologic = patient.Neurologic;
             ViewBag.curMusculoskeletal = patient.Musculoskeletal;
