@@ -346,6 +346,7 @@
                     </dd>
                 </dl>
             </div>
+            <hr />
             <p>
                 @Html.ActionLink("Delete Patient", "Delete", new { id = Model.patientID }) |
                 @Html.ActionLink("Back to Patient Directory", "Index")
@@ -723,9 +724,19 @@ else
                     </dd>
                 </dl>
             </div>
+            <hr />
             <p>
-                @Html.ActionLink("Delete", "Delete", new { id = Model.patientID }) |
-                @Html.ActionLink("Compare Now", "Results", new { id = Model.patientID })
+                @using (Html.BeginForm("Results","Patient", new { id = Model.patientID }))
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Compare Now" class="btn btn-default" /> |
+                    @Html.ActionLink("Delete", "Delete", new { id = Model.patientID })
+                </div>
+                }
+                
+                @*@Html.ActionLink("Compare Now", "Results", new { id = Model.patientID })*@
             </p>
 
 
