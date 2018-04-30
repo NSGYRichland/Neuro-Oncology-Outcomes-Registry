@@ -86,7 +86,69 @@ namespace SeleniumTests
         [Test]
         public void NavigateDatabase()
         {
-            
+            driver.Navigate().GoToUrl("http://tumor1.azurewebsites.net/");
+            driver.FindElement(By.Id("loginLink")).Click();
+            driver.FindElement(By.Id("UserName")).Click();
+            driver.FindElement(By.Id("UserName")).Clear();
+            driver.FindElement(By.Id("UserName")).SendKeys("Briangs");
+            driver.FindElement(By.Id("Password")).Clear();
+            driver.FindElement(By.Id("Password")).SendKeys("Password2018!");
+            driver.FindElement(By.XPath("//input[@value='Log in']")).Click();
+            driver.FindElement(By.LinkText("Patients")).Click();
+            //Thread.Sleep(1500);
+            driver.FindElement(By.Id("sex")).Click();
+            new SelectElement(driver.FindElement(By.Id("sex"))).SelectByText("Any");
+            driver.FindElement(By.XPath("//option[@value='']")).Click();
+            driver.FindElement(By.Id("clss")).Click();
+            new SelectElement(driver.FindElement(By.Id("clss"))).SelectByText("Any");
+            driver.FindElement(By.XPath("(//option[@value=''])[2]")).Click();
+            driver.FindElement(By.Id("tumLoc")).Click();
+            new SelectElement(driver.FindElement(By.Id("tumLoc"))).SelectByText("Any");
+            driver.FindElement(By.XPath("(//option[@value=''])[3]")).Click();
+            driver.FindElement(By.Id("grade")).Click();
+            new SelectElement(driver.FindElement(By.Id("grade"))).SelectByText("Any");
+            driver.FindElement(By.XPath("(//option[@value=''])[4]")).Click();
+            Thread.Sleep(1500);
+            driver.FindElement(By.Id("q")).Click();
+            driver.FindElement(By.Id("q")).Clear();
+            driver.FindElement(By.Id("q")).SendKeys("6");
+            driver.FindElement(By.Id("buttonSubmit")).Click();
+            Thread.Sleep(1500);
+            driver.FindElement(By.Id("q")).Click();
+            driver.FindElement(By.Id("q")).Clear();
+            driver.FindElement(By.Id("q")).SendKeys("");
+            driver.FindElement(By.Id("sex")).Click();
+            new SelectElement(driver.FindElement(By.Id("sex"))).SelectByText("Male");
+            driver.FindElement(By.XPath("//option[@value='M']")).Click();
+            driver.FindElement(By.Id("buttonSubmit")).Click();
+            Thread.Sleep(1500);
+            driver.FindElement(By.Id("sex")).Click();
+            new SelectElement(driver.FindElement(By.Id("sex"))).SelectByText("Any");
+            driver.FindElement(By.XPath("//option[@value='']")).Click();
+            driver.FindElement(By.Id("clss")).Click();
+            new SelectElement(driver.FindElement(By.Id("clss"))).SelectByText("Metastatic Squamous Cell Carcinoma");
+            driver.FindElement(By.XPath("//option[@value='Metastatic Squamous Cell Carcinoma ']")).Click();
+            driver.FindElement(By.Id("buttonSubmit")).Click();
+            Thread.Sleep(1500);
+            driver.FindElement(By.Id("clss")).Click();
+            new SelectElement(driver.FindElement(By.Id("clss"))).SelectByText("Any");
+            driver.FindElement(By.XPath("(//option[@value=''])[2]")).Click();
+            driver.FindElement(By.Id("tumLoc")).Click();
+            new SelectElement(driver.FindElement(By.Id("tumLoc"))).SelectByText("Right Intraaxial Parietal");
+            driver.FindElement(By.XPath("//option[@value='Right Intraaxial Parietal']")).Click();
+            driver.FindElement(By.Id("buttonSubmit")).Click();
+            Thread.Sleep(1500);
+            driver.FindElement(By.Id("tumLoc")).Click();
+            new SelectElement(driver.FindElement(By.Id("tumLoc"))).SelectByText("Any");
+            driver.FindElement(By.XPath("(//option[@value=''])[3]")).Click();
+            driver.FindElement(By.Id("grade")).Click();
+            new SelectElement(driver.FindElement(By.Id("grade"))).SelectByText("1");
+            driver.FindElement(By.XPath("//option[@value='1']")).Click();
+            driver.FindElement(By.Id("buttonSubmit")).Click();
+            Thread.Sleep(1500);
+            driver.FindElement(By.Id("grade")).Click();
+            new SelectElement(driver.FindElement(By.Id("grade"))).SelectByText("Any");
+            driver.FindElement(By.XPath("(//option[@value=''])[4]")).Click();
         }
 
         //creates a dummy patient ID just for testing purposes; uses the 11th patient in database
@@ -98,83 +160,59 @@ namespace SeleniumTests
             driver.FindElement(By.Id("UserName")).Click();
             driver.FindElement(By.Id("UserName")).Clear();
             driver.FindElement(By.Id("UserName")).SendKeys("Briangs");
-            Thread.Sleep(1000);
-            driver.FindElement(By.Id("Password")).Click();
             driver.FindElement(By.Id("Password")).Clear();
             driver.FindElement(By.Id("Password")).SendKeys("Password2018!");
             driver.FindElement(By.XPath("//input[@value='Log in']")).Click();
-            Thread.Sleep(1000);
             driver.FindElement(By.LinkText("Patients")).Click();
             driver.FindElement(By.LinkText("Create New Patient")).Click();
-            Thread.Sleep(3000);
             driver.FindElement(By.Id("Sex")).Click();
-            //new SelectElement(driver.FindElement(By.Id("Sex"))).SelectByText("Female");
-            driver.FindElement(By.Id("Sex")).SendKeys("Female");
+            new SelectElement(driver.FindElement(By.Id("Sex"))).SelectByText("Female");
             driver.FindElement(By.XPath("//option[@value='F']")).Click();
-            Thread.Sleep(1500);
-            driver.FindElement(By.Id("Married")).Click();
-            Thread.Sleep(1500);
             driver.FindElement(By.Id("Age")).Click();
             driver.FindElement(By.Id("Age")).Clear();
-            driver.FindElement(By.Id("Age")).SendKeys("45");
-            Thread.Sleep(1500);
+            driver.FindElement(By.Id("Age")).SendKeys("25");
+            driver.FindElement(By.Id("Integumentary")).Click();
+            new SelectElement(driver.FindElement(By.Id("Integumentary"))).SelectByText("Asian");
+            driver.FindElement(By.XPath("//option[@value='Asian']")).Click();
+            driver.FindElement(By.Id("Diet")).Click();
+            new SelectElement(driver.FindElement(By.Id("Diet"))).SelectByText("Normal");
+            driver.FindElement(By.XPath("//option[@value='Normal']")).Click();
+            driver.FindElement(By.Id("Exercize")).Click();
+            new SelectElement(driver.FindElement(By.Id("Exercize"))).SelectByText("III");
+            driver.FindElement(By.XPath("//option[@value='III']")).Click();
+            driver.FindElement(By.Id("Gastrointestinal")).Click();
+            new SelectElement(driver.FindElement(By.Id("Gastrointestinal"))).SelectByText("Moderate");
+            driver.FindElement(By.XPath("//option[@value='Moderate']")).Click();
+            driver.FindElement(By.Id("Constitutional")).Click();
+            new SelectElement(driver.FindElement(By.Id("Constitutional"))).SelectByText("50");
+            driver.FindElement(By.XPath("//option[@value='50']")).Click();
             driver.FindElement(By.Id("HistologicalClassification")).Click();
-            driver.FindElement(By.Id("HistologicalClassification")).Clear();
-            driver.FindElement(By.Id("HistologicalClassification")).SendKeys("right posterior");
-            Thread.Sleep(1500);
+            new SelectElement(driver.FindElement(By.Id("HistologicalClassification"))).SelectByText("Hemangioblastoma");
+            driver.FindElement(By.XPath("//option[@value='Hemangioblastoma']")).Click();
             driver.FindElement(By.Id("HistologicalGrade")).Click();
-            //new SelectElement(driver.FindElement(By.Id("HistologicalGrade"))).SelectByText("2");
-            driver.FindElement(By.Id("HistologicalGrade")).SendKeys("2");
+            new SelectElement(driver.FindElement(By.Id("HistologicalGrade"))).SelectByText("2");
             driver.FindElement(By.XPath("//option[@value='2']")).Click();
-            Thread.Sleep(1500);
             driver.FindElement(By.Id("TumorWidth")).Click();
             driver.FindElement(By.Id("TumorWidth")).Clear();
             driver.FindElement(By.Id("TumorWidth")).SendKeys("5");
-            Thread.Sleep(1500);
             driver.FindElement(By.Id("TumorHeight")).Clear();
             driver.FindElement(By.Id("TumorHeight")).SendKeys("5");
-            Thread.Sleep(1500);
             driver.FindElement(By.Id("TumorLength")).Clear();
             driver.FindElement(By.Id("TumorLength")).SendKeys("5");
-            Thread.Sleep(1500);
-            driver.FindElement(By.Id("HistologicalClassification")).Click();
-            driver.FindElement(By.Id("HistologicalClassification")).Clear();
-            driver.FindElement(By.Id("HistologicalClassification")).SendKeys("giloblastoma");
-            Thread.Sleep(1500);
             driver.FindElement(By.Id("TumorLocation")).Click();
-            driver.FindElement(By.Id("TumorLocation")).Clear();
-            driver.FindElement(By.Id("TumorLocation")).SendKeys("right posterior");
-            Thread.Sleep(1500);
-            driver.FindElement(By.Id("Constitutional")).Click();
-            driver.FindElement(By.Id("Constitutional")).Clear();
-            driver.FindElement(By.Id("Constitutional")).SendKeys("normal");
-            Thread.Sleep(1500);
-            driver.FindElement(By.Id("Respiratory")).Clear();
-            driver.FindElement(By.Id("Respiratory")).SendKeys("normal");
-            Thread.Sleep(1500);
-            driver.FindElement(By.Id("Cardiovascular")).Clear();
-            driver.FindElement(By.Id("Cardiovascular")).SendKeys("normal");
-            Thread.Sleep(1500);
-            driver.FindElement(By.Id("Gastrointestinal")).Clear();
-            driver.FindElement(By.Id("Gastrointestinal")).SendKeys("normal");
-            Thread.Sleep(1500);
-            driver.FindElement(By.Id("Musculoskeletal")).Clear();
-            driver.FindElement(By.Id("Musculoskeletal")).SendKeys("normal");
-            Thread.Sleep(1500);
-            driver.FindElement(By.Id("Integumentary")).Clear();
-            driver.FindElement(By.Id("Integumentary")).SendKeys("normal");
-            Thread.Sleep(1500);
-            driver.FindElement(By.Id("Neurologic")).Clear();
-            driver.FindElement(By.Id("Neurologic")).SendKeys("normal");
-            Thread.Sleep(1500);
-            driver.FindElement(By.Id("Exercize")).Clear();
-            driver.FindElement(By.Id("Exercize")).SendKeys("active");
-            Thread.Sleep(1500);
-            driver.FindElement(By.Id("Diet")).Clear();
-            driver.FindElement(By.Id("Diet")).SendKeys("Vegetarian");
-            Thread.Sleep(1500);
+            new SelectElement(driver.FindElement(By.Id("TumorLocation"))).SelectByText("Extraaxial Anterior Fossa");
+            driver.FindElement(By.XPath("//option[@value='Extraaxial Anterior Fossa']")).Click();
+            // ERROR: Caught exception [ERROR: Unsupported command [addSelection | //select[@id='Respiratory'] | label=Lung Cancer]]
+            driver.FindElement(By.XPath("//option[@value='Lung Cancer ']")).Click();
+            // ERROR: Caught exception [ERROR: Unsupported command [addSelection | //select[@id='Respiratory'] | label=Chronic Pulmonary Disease]]
+            driver.FindElement(By.XPath("//option[@value='Chronic Pulmonary Disease ']")).Click();
+            // ERROR: Caught exception [ERROR: Unsupported command [addSelection | //select[@id='Cardiovascular'] | label=Hypertension]]
+            driver.FindElement(By.XPath("//option[@value='Hypertension']")).Click();
+            // ERROR: Caught exception [ERROR: Unsupported command [addSelection | //select[@id='Musculoskeletal'] | label=Weakness]]
+            driver.FindElement(By.XPath("//option[@value='Weakness ']")).Click();
+            // ERROR: Caught exception [ERROR: Unsupported command [addSelection | //select[@id='Neurologic'] | label=Dizziness]]
+            driver.FindElement(By.XPath("//option[@value='Dizziness ']")).Click();
             driver.FindElement(By.XPath("//input[@value='Create']")).Click();
-            Thread.Sleep(3500);
         }
 
         //use of dummy patient ID to show deletion of a patient inside database; uses 11th patient
@@ -229,6 +267,47 @@ namespace SeleniumTests
             driver.FindElement(By.XPath("//input[@value='Save']")).Click();
         }
 
+        [Test]
+        public void ComparePatient()
+        {
+            driver.Navigate().GoToUrl("http://tumor1.azurewebsites.net/");
+            driver.FindElement(By.Id("loginLink")).Click();
+            driver.FindElement(By.Id("UserName")).Click();
+            driver.FindElement(By.Id("UserName")).Clear();
+            driver.FindElement(By.Id("UserName")).SendKeys("Briangs");
+            driver.FindElement(By.Id("Password")).Clear();
+            driver.FindElement(By.Id("Password")).SendKeys("Password2018!");
+            driver.FindElement(By.XPath("//input[@value='Log in']")).Click();
+            driver.FindElement(By.LinkText("Manage")).Click();
+            driver.FindElement(By.LinkText("Comparison Patients")).Click();
+            driver.FindElement(By.XPath("(//a[contains(text(),'View')])[5]")).Click();
+            driver.FindElement(By.XPath("//input[@value='Compare Now']")).Click();
+        }
+
+        [Test]
+        public void TravManageData ()
+        {
+            driver.Navigate().GoToUrl("http://tumor1.azurewebsites.net/");
+            driver.FindElement(By.Id("loginLink")).Click();
+            driver.FindElement(By.Id("UserName")).Click();
+            driver.FindElement(By.Id("UserName")).Clear();
+            driver.FindElement(By.Id("UserName")).SendKeys("Briangs");
+            driver.FindElement(By.Id("Password")).Clear();
+            driver.FindElement(By.Id("Password")).SendKeys("Password2018!");
+            driver.FindElement(By.XPath("//input[@value='Log in']")).Click();
+            driver.FindElement(By.LinkText("Manage")).Click();
+            driver.FindElement(By.LinkText("Possible Health Factors")).Click();
+            driver.FindElement(By.LinkText("Manage")).Click();
+            driver.FindElement(By.LinkText("Possible Treatments")).Click();
+            driver.FindElement(By.LinkText("Manage")).Click();
+            driver.FindElement(By.LinkText("Possible Other Meds")).Click();
+            driver.FindElement(By.LinkText("Manage")).Click();
+            driver.FindElement(By.LinkText("Possible Symptoms")).Click();
+            driver.FindElement(By.LinkText("Manage")).Click();
+            driver.FindElement(By.LinkText("Users")).Click();
+            driver.FindElement(By.LinkText("Manage")).Click();
+            driver.FindElement(By.LinkText("Comparison Patients")).Click();
+        }
 
         private bool IsElementPresent(By by)
         {
