@@ -149,24 +149,86 @@ namespace TumorTaskforce_Webapp_1.Controllers
             }
 
             int wSex = 100, wAge = 100, wClass = 100, wGrade = 100, wVol = 100, wLoca = 100, wConst = 100, wResp = 100, wCardio = 100, wGast = 100, wMusc = 100, wInt = 100,
-                wNeuro = 100, wExer = 100, wDiet = 100, wSymp = 0, wMeds = 0, wHF = 0, wDeath = 100; //Weighted Variables
+                wNeuro = 100, wExer = 100, wDiet = 100, wSymp = 0, wMeds = 0, wHF = 0, wDeath = 100; //Weighted Variables, for changing the weight of a patients Similarity impact.
             float simMax = (wSex + wAge + wClass + wGrade + wVol + wLoca + wConst + wResp + wCardio + wGast + wMusc + wInt
-                + wNeuro + wExer + wDiet + wSymp + wMeds + wHF + wDeath) / 100;
+                + wNeuro + wExer + wDiet + wSymp + wMeds + wHF + wDeath);//General Similarity Max, we will add to soon for multi-input variables
             string simData = "";
 
+            string[] muscString = null;
+            string[] respString = null;
+            string[] neuroString = null;
+            string[] cardString = null;
+
+
+            try
+            {
+                if (!patient.Musculoskeletal.Equals(null))//I need to add to the Max similarity is our Compare patient has mulitple variables in these 
+                {
+                    muscString = patient.Musculoskeletal.Split(',');
+                    if (patient.Musculoskeletal.Contains(','))
+                    {
+                        simMax += ((muscString.Length - 1) * wMusc);//If it does add the weight of that variable to the max that number of times. 
+                    }
+                }
+                else simMax -= wMusc;//If it is null then these variables dont need to be added in the first place
+            }
+            catch (NullReferenceException e) { }
+
+            try
+            {
+                if (!patient.Respiratory.Equals(null))//Do these for all 4 that this is possible in.
+                {
+                    respString = patient.Respiratory.Split(',');
+                    if (patient.Respiratory.Contains(','))
+                    {
+                        simMax += ((respString.Length - 1) * wResp);
+                    }
+                }
+                else simMax -= wResp;
+            }
+            catch (NullReferenceException e) { }
+
+            try
+            {
+                if (!patient.Neurologic.Equals(null))
+                {
+                    neuroString = patient.Neurologic.Split(',');
+                    if (patient.Neurologic.Contains(','))
+                    {
+                        simMax += ((neuroString.Length - 1) * wNeuro);
+                    }
+                }
+                else simMax -= wNeuro;
+            }
+            catch (NullReferenceException e) { }
+
+            try
+            {
+                if (!patient.Cardiovascular.Equals(null))
+                {
+                    cardString = patient.Cardiovascular.Split(',');
+                    if (patient.Cardiovascular.Contains(','))
+                    {
+                        simMax += ((cardString.Length - 1) * wCardio);
+                    }
+                }
+                else simMax -= wCardio;
+            }
+            catch (NullReferenceException e) { }
+
+            simMax /= 100;
             //ALGORITHM SHOULD GO HERE
             //MAKE SURE TO ONLY COMPARE AGAINST PATIENTS WHERE isCompare == false
 
             Patient target = new Patient();//target variable keeps most recent "similar patient" during search
             float targetSimilarity = 0;//updated variable that hold most "similar" variable
             int currEffect = 0, targetEffect = 0, count = 0; bool surgery = false;
-            char[] targetRecord = { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };//this is a primitive testing variable that I made to make sure its recording everything
+            char[] targetRecord = { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };//this is a primitive testing variable that I made to make sure its recording everything
                                                                                                                                // correctly. im going to comment these out for now
             foreach (var curr in db.Patients)
             {
                 float similarity = 0;
-                char[] record = { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
-                float indMax = simMax;
+                char[] record = { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
 
 
                 if (patient.patientID == curr.patientID || curr.isCompare == true)
@@ -201,6 +263,11 @@ namespace TumorTaskforce_Webapp_1.Controllers
                             similarity += (1 * (wClass / 100));
                             record[8] = '1';
                         }
+                        if (patient.HistologicalGrade.Equals(curr.HistologicalGrade))
+                        {
+                            similarity += (1 * (wGrade / 100));
+                            record[9] = '1';
+                        }
                         if (patient.TumorLength == curr.TumorLength
                           & patient.TumorWidth == curr.TumorWidth
                               & patient.TumorHeight == curr.TumorHeight
@@ -234,60 +301,140 @@ namespace TumorTaskforce_Webapp_1.Controllers
                                 record[7] = '1';
                             }
                         }
-                        if (!patient.Respiratory.Equals(null))
+
+                        
+                        if(!respString.Equals(null))
+                        {
+                            int cord = 0;//This variable will adjust as we go for how many variables were similar for our record. 
+                            if(respString.Length > 1)
+                            {
+                                string[] tString = curr.Respiratory.Split(',');
+                                foreach (var i in respString)
+                                {
+                                    if (tString.Contains(i))
+                                    {
+                                        similarity += (1 * (wResp / 100));
+                                        cord++;
+                                    }
+                                }
+                            }
+                            record[12] = (char)cord;
+                        }
+
+                        /*if (!patient.Respiratory.Equals(null))
                         {
                             if (patient.Respiratory.Equals(curr.Respiratory))//Substring this 
                             {
                                 similarity += (1 * (wResp / 100));
                                 record[12] = '1';
                             }
+                        }*/
+
+                        if (!cardString.Equals(null))
+                        {
+                            int cord = 0;//This variable will adjust as we go for how many variables were similar for our record. 
+                            if (cardString.Length > 1)
+                            {
+                                string[] tString = curr.Cardiovascular.Split(',');
+                                foreach (var i in cardString)
+                                {
+                                    if (tString.Contains(i))
+                                    {
+                                        similarity += (1 * (wCardio / 100));
+                                        cord++;
+                                    }
+                                }
+                            }
+                            record[13] = (char)cord;
                         }
-                        if (!patient.Cardiovascular.Equals(null))
+
+                        /*if (!patient.Cardiovascular.Equals(null))
                         {
                             if (patient.Cardiovascular.Equals(curr.Cardiovascular))//Substring this 
                             {
                                 similarity += (1 * (wCardio / 100));
-                                record[8] = '1';
+                                record[13] = '1';
                             }
-                        }
+                        }*/
+
                         if (!patient.Gastrointestinal.Equals(null))
                         {
                             if (patient.Gastrointestinal.Equals(curr.Gastrointestinal))//CCI variable
                             {
                                 similarity += (1 * (wGast / 100));
-                                record[9] = '1';
+                                record[6] = '1';
                             }
                         }
-                        if (!patient.Musculoskeletal.Equals(null))
+
+                        if (!muscString.Equals(null))
+                        {
+                            int cord = 0;//This variable will adjust as we go for how many variables were similar for our record. 
+                            if (muscString.Length > 1)
+                            {
+                                string[] tString = curr.Musculoskeletal.Split(',');
+                                foreach (var i in muscString)
+                                {
+                                    if (tString.Contains(i))
+                                    {
+                                        similarity += (1 * (wMusc / 100));
+                                        cord++;
+                                    }
+                                }
+                            }
+                            record[14] = (char)cord;
+                        }
+
+                       /* if (!patient.Musculoskeletal.Equals(null))
                         {
                             if (patient.Musculoskeletal.Equals(curr.Musculoskeletal))//Substring this
                             {
                                 similarity += (1 * (wMusc / 100));
                                 record[10] = '1';
                             }
-                        }
+                        }*/
+
                         if (!patient.Integumentary.Equals(null))
                         {
                             if (patient.Integumentary.Equals(curr.Integumentary))//Race Variable
                             {
                                 similarity += (1 * (wInt / 100));
-                                record[11] = '1';
+                                record[2] = '1';
                             }
                         }
-                        if (!patient.Neurologic.Equals(null))
+
+                        if (!neuroString.Equals(null))
+                        {
+                            int cord = 0;//This variable will adjust as we go for how many variables were similar for our record. 
+                            if (neuroString.Length > 1)
+                            {
+                                string[] tString = curr.Neurologic.Split(',');
+                                foreach (var i in neuroString)
+                                {
+                                    if (tString.Contains(i))
+                                    {
+                                        similarity += (1 * (wNeuro / 100));
+                                        cord++;
+                                    }
+                                }
+                            }
+                            record[15] = (char)cord;
+                        }
+
+                        /*if (!patient.Neurologic.Equals(null))
                         {
                             if (patient.Neurologic.Equals(curr.Neurologic))//Substring this
                             {
                                 similarity += (1 * (wNeuro / 100));
                                 record[12] = '1';
                             }
-                        }
+                        }*/
+
                         if (!patient.Exercize.Equals(null))
                         {
                             if (patient.Exercize.Equals(curr.Exercize))//ASA variable 
                             {
                                 similarity += (1 * (wExer / 100));
-                                record[13] = '1';
+                                record[5] = '1';
                             }
                         }
                         if (!patient.Diet.Equals(null))
@@ -295,7 +442,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                             if (patient.Diet.Equals(curr.Diet))//BMI Variable
                             {
                                 similarity += (1 * (wDiet / 100));
-                                record[14] = '1';
+                                record[4] = '1';
                             }
                         }
                         //Need Symptoms 
@@ -304,8 +451,6 @@ namespace TumorTaskforce_Webapp_1.Controllers
 
                         //Need Health Factors
 
-
-                        //Need Family History
 
 
                         //Need Other Meds
