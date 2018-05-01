@@ -299,8 +299,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                             }
                         }
                         //Need Symptoms 
-                        
-
+                       
 
                         //Need Health Factors
 
