@@ -476,6 +476,11 @@
     <Content Include="Images\me.JPG" />
     <Content Include="Images\Taylor.jpg" />
     <Content Include="Images\Burdell.jpg" />
+    <Content Include="Images\home_page.png" />
+    <Content Include="Images\comparison.png" />
+    <Content Include="Images\directory.png" />
+    <Content Include="Images\compare.png" />
+    <Content Include="Images\results.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
