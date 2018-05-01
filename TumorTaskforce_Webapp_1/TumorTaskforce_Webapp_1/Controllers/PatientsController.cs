@@ -149,9 +149,9 @@ namespace TumorTaskforce_Webapp_1.Controllers
             }
 
             int wSex = 100, wAge = 100, wClass = 100, wGrade = 100, wVol = 100, wLoca = 100, wConst = 100, wResp = 100, wCardio = 100, wGast = 100, wMusc = 100, wInt = 100,
-                wNeuro = 100, wExer = 100, wDiet = 100, wSymp = 0, wMeds = 0, wHF = 0; //Weighted Variables
+                wNeuro = 100, wExer = 100, wDiet = 100, wSymp = 0, wMeds = 0, wHF = 0, wDeath = 100; //Weighted Variables
             float simMax = (wSex + wAge + wClass + wGrade + wVol + wLoca + wConst + wResp + wCardio + wGast + wMusc + wInt
-                + wNeuro + wExer + wDiet + wSymp + wMeds + wHF) / 100;
+                + wNeuro + wExer + wDiet + wSymp + wMeds + wHF + wDeath) / 100;
             string simData = "";
 
             //ALGORITHM SHOULD GO HERE
@@ -160,12 +160,13 @@ namespace TumorTaskforce_Webapp_1.Controllers
             Patient target = new Patient();//target variable keeps most recent "similar patient" during search
             float targetSimilarity = 0;//updated variable that hold most "similar" variable
             int currEffect = 0, targetEffect = 0, count = 0; bool surgery = false;
-            char[] targetRecord = { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };//this is a primitive testing variable that I made to make sure its recording everything
+            char[] targetRecord = { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };//this is a primitive testing variable that I made to make sure its recording everything
                                                                                                                                // correctly. im going to comment these out for now
             foreach (var curr in db.Patients)
             {
-                float similarity = 0;// i = 0;
-                char[] record = { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+                float similarity = 0;
+                char[] record = { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+                float indMax = simMax;
 
 
                 if (patient.patientID == curr.patientID || curr.isCompare == true)
@@ -179,21 +180,26 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         if (patient.Sex.Equals(curr.Sex))
                         {
                             similarity += (1 * (wSex / 100));
-                            //record = record.Insert(0, "1");
                             record[0] = '1';
                         }
-                        if (patient.Age == curr.Age)//Range
+                        if (patient.Age == curr.Age)
                         {
                             similarity += (1 * (wAge / 100));
                             record[1] = '1';
                         }
+                        if(patient.Married == curr.Married)//Deceased Variable
+                        {
+                            similarity += (1 * (wDeath / 100));
+                            record[3] = '1';
+                        }
+                        
 
                         int pVol = ((int)patient.TumorHeight) * (int)(patient.TumorLength) * (int)(patient.TumorWidth);
                         int cVol = ((int)curr.TumorHeight) * (int)(curr.TumorLength) * (int)(curr.TumorWidth);
                         if (patient.HistologicalClassification.Equals(curr.HistologicalClassification))
                         {
                             similarity += (1 * (wClass / 100));
-                            record[2] = '1';
+                            record[8] = '1';
                         }
                         if (patient.TumorLength == curr.TumorLength
                           & patient.TumorWidth == curr.TumorWidth
@@ -211,34 +217,34 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         if (pVol == cVol)
                         {
                             similarity += (1 * (wVol / 100));
-                            record[4] = '1';
+                            record[10] = '1';
                         }
 
                         if (patient.TumorLocation.Equals(curr.TumorLocation))
                         {
                             similarity += (1 * (wLoca / 100));
-                            record[5] = '1';
+                            record[11] = '1';
                         }
 
-                        if (!patient.Constitutional.Equals(null))
+                        if (!patient.Constitutional.Equals(null))//KPS Variable
                         {
                             if (patient.Constitutional.Equals(curr.Constitutional))
                             {
                                 similarity += (1 * (wConst / 100));
-                                record[6] = '1';
+                                record[7] = '1';
                             }
                         }
                         if (!patient.Respiratory.Equals(null))
                         {
-                            if (patient.Respiratory.Equals(curr.Respiratory))
+                            if (patient.Respiratory.Equals(curr.Respiratory))//Substring this 
                             {
                                 similarity += (1 * (wResp / 100));
-                                record[7] = '1';
+                                record[12] = '1';
                             }
                         }
                         if (!patient.Cardiovascular.Equals(null))
                         {
-                            if (patient.Cardiovascular.Equals(curr.Cardiovascular))
+                            if (patient.Cardiovascular.Equals(curr.Cardiovascular))//Substring this 
                             {
                                 similarity += (1 * (wCardio / 100));
                                 record[8] = '1';
@@ -246,7 +252,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         }
                         if (!patient.Gastrointestinal.Equals(null))
                         {
-                            if (patient.Gastrointestinal.Equals(curr.Gastrointestinal))
+                            if (patient.Gastrointestinal.Equals(curr.Gastrointestinal))//CCI variable
                             {
                                 similarity += (1 * (wGast / 100));
                                 record[9] = '1';
@@ -254,7 +260,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         }
                         if (!patient.Musculoskeletal.Equals(null))
                         {
-                            if (patient.Musculoskeletal.Equals(curr.Musculoskeletal))
+                            if (patient.Musculoskeletal.Equals(curr.Musculoskeletal))//Substring this
                             {
                                 similarity += (1 * (wMusc / 100));
                                 record[10] = '1';
@@ -262,7 +268,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         }
                         if (!patient.Integumentary.Equals(null))
                         {
-                            if (patient.Integumentary.Equals(curr.Integumentary))
+                            if (patient.Integumentary.Equals(curr.Integumentary))//Race Variable
                             {
                                 similarity += (1 * (wInt / 100));
                                 record[11] = '1';
@@ -270,7 +276,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         }
                         if (!patient.Neurologic.Equals(null))
                         {
-                            if (patient.Neurologic.Equals(curr.Neurologic))
+                            if (patient.Neurologic.Equals(curr.Neurologic))//Substring this
                             {
                                 similarity += (1 * (wNeuro / 100));
                                 record[12] = '1';
@@ -278,7 +284,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         }
                         if (!patient.Exercize.Equals(null))
                         {
-                            if (patient.Exercize.Equals(curr.Exercize))
+                            if (patient.Exercize.Equals(curr.Exercize))//ASA variable 
                             {
                                 similarity += (1 * (wExer / 100));
                                 record[13] = '1';
@@ -286,12 +292,22 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         }
                         if (!patient.Diet.Equals(null))
                         {
-                            if (patient.Diet.Equals(curr.Diet))
+                            if (patient.Diet.Equals(curr.Diet))//BMI Variable
                             {
                                 similarity += (1 * (wDiet / 100));
                                 record[14] = '1';
                             }
                         }
+                        //Need Symptoms 
+                       
+
+                        //Need Health Factors
+
+
+                        //Need Family History
+
+
+                        //Need Other Meds
                     } catch (NullReferenceException e) { }
                 }
                 if (similarity > targetSimilarity)

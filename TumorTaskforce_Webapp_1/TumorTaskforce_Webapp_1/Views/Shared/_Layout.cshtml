@@ -16,12 +16,17 @@
     <div class="container">
         <nav class="navbar navbar-expand-sm nav-link bg-faded">
 
-            <div class="navbar-header pull-left">
+            <div class="navbar-header pull-left" style="width:35%" id="LOGO-DESKTOP">
                 <a class="navbar-brand" href="@Url.Action("Index", "Home")">
-                    <img src="~/Images/dark_logo_transparent.png" alt="Site Logo" style="height:45px; width: 365px" />
+                    <img src="~/Images/dark_logo_transparent.png" alt="Site Logo" style="height:auto; width: 100%" />
                 </a>
             </div>
-         
+            <div class="navbar-header pull-left" style="width:80%" id="LOGO-MOBILE">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <img src="~/Images/dark_logo_transparent.png" alt="Site Logo" style="height:auto; width: 90%" />
+                </a>
+            </div>
+
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -33,42 +38,42 @@
                 <ul class="navbar-nav">
 
                     @if (User.Identity.IsAuthenticated)
-            {
-                var user = User.Identity;
-                ApplicationDbContext context = new ApplicationDbContext();
-                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-                var s = UserManager.GetRoles(user.GetUserId());
-                if (s[0].ToString() == "Admin")
-                {
-                    <li class="nav-item" style="margin-left:10px;margin-right:10px;">
-                        @Html.ActionLink("Home", "Index", "Home")
-                    </li>
-                    <li class="nav-item" style="margin-left:10px;margin-right:10px;">
-                        @Html.ActionLink("Patients", "Index", "Patients")
-                    </li>
-                    <li class="nav-item" style="margin-left:10px;margin-right:10px;">
-                        @Html.ActionLink("Compare", "Create", "Patients", new { isCompare = true }, null)
-                    </li>
-                    <li class="nav-item" style="margin-left:10px;margin-right:10px;">
-                        @Html.ActionLink("Manage", "Manage", "Home")
-                    </li>
-        }
-        else
-        {
-            <li class="nav-item" style="margin-left:10px;margin-right:10px;">
-                @Html.ActionLink("Home", "Index", "Home")
-            </li>
-            <li class="nav-item" style="margin-left:10px;margin-right:10px;">
-                @Html.ActionLink("Compare", "Create", "Patients", new { isCompare = true }, null)
-            </li>
-}
-}
-else
-{
-        <li class="nav-item" style="margin-left:10px;margin-right:10px;">
-            @Html.ActionLink("Home", "Index", "Home")
-        </li>
-}
+                    {
+                        var user = User.Identity;
+                        ApplicationDbContext context = new ApplicationDbContext();
+                        var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                        var s = UserManager.GetRoles(user.GetUserId());
+                        if (s[0].ToString() == "Admin")
+                        {
+                            <li class="nav-item" style="margin-left:10px;margin-right:10px;">
+                                @Html.ActionLink("Home", "Index", "Home")
+                            </li>
+                            <li class="nav-item" style="margin-left:10px;margin-right:10px;">
+                                @Html.ActionLink("Patients", "Index", "Patients")
+                            </li>
+                            <li class="nav-item" style="margin-left:10px;margin-right:10px;">
+                                @Html.ActionLink("Compare", "Create", "Patients", new { isCompare = true }, null)
+                            </li>
+                            <li class="nav-item" style="margin-left:10px;margin-right:10px;">
+                                @Html.ActionLink("Manage", "Manage", "Home")
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item" style="margin-left:10px;margin-right:10px;">
+                                @Html.ActionLink("Home", "Index", "Home")
+                            </li>
+                            <li class="nav-item" style="margin-left:10px;margin-right:10px;">
+                                @Html.ActionLink("Compare", "Create", "Patients", new { isCompare = true }, null)
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="nav-item" style="margin-left:10px;margin-right:10px;">
+                            @Html.ActionLink("Home", "Index", "Home")
+                        </li>
+                    }
 
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -93,3 +98,16 @@ else
         background: #89cdce;
     }
 </style>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        if ($(window).width() < 575) {
+            $("#LOGO-DESKTOP").hide();
+        }
+        else {
+            $("#LOGO-MOBILE").hide();
+        }
+    });
+</script>
