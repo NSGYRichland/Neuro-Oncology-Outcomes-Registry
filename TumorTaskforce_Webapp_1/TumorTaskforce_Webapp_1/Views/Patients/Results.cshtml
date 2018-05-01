@@ -15,27 +15,27 @@
 
 @{
     ViewBag.Title = "Results";
-    int sIndex = Model.comparisonResults.IndexOf('|');
-    int lIndex = Model.comparisonResults.LastIndexOf('|');
-    char[] count = new char[sIndex];
-    char[] targetCount = new char[((lIndex-1)-sIndex)];
-    Model.comparisonResults.CopyTo(0, count, 0, sIndex);
+    int sIndex = Model.comparisonResults.IndexOf('|');//Find first index of parce variable |
+    int lIndex = Model.comparisonResults.LastIndexOf('|');//Find last parse varible | 
+    char[] count = new char[sIndex];//create a char[] for the Database size data within comparisonResults 
+    char[] targetCount = new char[((lIndex-1)-sIndex)];//The second is for the most similar Patient ID saved in ComparisonResults 
+    Model.comparisonResults.CopyTo(0, count, 0, sIndex);//Use copyTo, to copy correct indexes to these respective character arrays 
     Model.comparisonResults.CopyTo(sIndex + 1, targetCount, 0, ((lIndex - 1) - sIndex));
-    string str = new string(count);
-    string Tstr = new string(targetCount);
-    int arraySize = int.Parse(str);
-    int targetID = int.Parse(Tstr);
-    int[] dataArray = new int[arraySize * 2];
+    string str = new string(count);//cast character array into string 
+    string Tstr = new string(targetCount);//cast character array into string 
+    int arraySize = int.Parse(str);//Parse string into an integer 
+    int targetID = int.Parse(Tstr);//Parse string into an integer 
+    //int[] dataArray = new int[arraySize * 2];
     //dataArray = ViewBag.SimData as int[];
-    int targetSim = 0;
-    for(int i = 0; i < ViewBag.SimData.Length; i+=2)
+    int targetSim = 0;//Use the PatientID to find the most similar patients Similairty by parsting through the SimilarityData added to Viewbag
+    for(int i = 0; i < ViewBag.SimData.Length; i+=2)//Id's are only in even number index's 
     {
         if(ViewBag.SimData[i] == targetID)
         {
-            targetSim = i;
+            targetSim = i;//found the ID
         }
     }
-    targetSim = ViewBag.SimData[targetSim + 1];
+    targetSim = ViewBag.SimData[targetSim + 1];//That patients ID is directly in the next index. 
 }
 
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
@@ -91,11 +91,11 @@
 			],
             "dataProvider": [
 				{
-                    "category": "Patient " + @targetID,
+                    "category": "Patient " + @targetID,//Dynamically put all that info into the graph 
                     "column-1": @targetSim
 				},
 				{
-                    "category": "Patient " + @ViewBag.SimData[2],
+                    "category": "Patient " + @ViewBag.SimData[2],//Display a couple more patients for s good graph 
                     "column-1": @ViewBag.SimData[3]
 				},
 				{
@@ -124,7 +124,7 @@
                 },
                 {
                     "category": "Patient " + @ViewBag.SimData[16],
-                    "column-1": @ViewBag.SimData[17] //Just first 7 patients for now but is dynamic
+                    "column-1": @ViewBag.SimData[17]
                 }
 			]
 		}

@@ -133,7 +133,6 @@ namespace TumorTaskforce_Webapp_1.Controllers
 
         public ActionResult Results(int? id)
         {
-            //string[] TargetData = new string[3];//Idea for moving data 
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -154,8 +153,8 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 + wNeuro + wExer + wDiet + wDeath);//General Similarity Max, we will add to soon for multi-input variables
             string simData = "";
 
-            string[] muscString = null;
-            string[] respString = null;
+            string[] muscString = null;//These Variables must be parsed, so I initialize these 
+            string[] respString = null;//here for later use
             string[] neuroString = null;
             string[] cardString = null;
 
@@ -186,11 +185,11 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 }
                 else simMax -= wResp;
             }
-            catch (NullReferenceException e) { simMax -= wResp; }
+            catch (NullReferenceException e) { simMax -= wResp; }//I subtract from the max if the variable is null not too
 
             try
             {
-                if (!patient.Neurologic.Equals(null))
+                if (!patient.Neurologic.Equals(null))//I do this for all var that use this parsed string method 
                 {
                     neuroString = patient.Neurologic.Split(',');
                     if (patient.Neurologic.Contains(','))
@@ -216,37 +215,35 @@ namespace TumorTaskforce_Webapp_1.Controllers
             }
             catch (NullReferenceException e) { simMax -= wCardio; }
 
-            simMax += (patient.SymptomsPivots.Count * wSym);
+            simMax += (patient.SymptomsPivots.Count * wSym);//I also need to do this for every pivot variable to look at
             simMax += (patient.HealthFactorsPivots.Count * wHF);
             simMax += (patient.OtherMedsPivots.Count * wMeds);
             simMax += (patient.FamilyHistoryPivots.Count * wFH);
 
 
-            simMax /= 100;
-            //ALGORITHM SHOULD GO HERE
-            //MAKE SURE TO ONLY COMPARE AGAINST PATIENTS WHERE isCompare == false
+            simMax /= 100;// dividing by 100 gives me that max similarity a any patient could have with our compare patient that I used to find percent similar. 
 
             Patient target = new Patient();//target variable keeps most recent "similar patient" during search
             float targetSimilarity = 0;//updated variable that hold most "similar" variable
             int currEffect = 0, targetEffect = 0, count = 0; bool surgery = false;
             char[] targetRecord = { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };//this is a primitive testing variable that I made to make sure its recording everything
-                                                                                                                               // correctly. im going to comment these out for now
-            foreach (var curr in db.Patients)
+
+            foreach (var curr in db.Patients)//Foreach goes though each patient in the database 
             {
-                float similarity = 0;
-                char[] record = { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+                float similarity = 0;//use to hold how many variables were found similar 
+                char[] record = { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };//record keeping 
 
 
-                if (patient.patientID == curr.patientID || curr.isCompare == true)
+                if (patient.patientID == curr.patientID || curr.isCompare == true)//skips the patient if it finds itself
                 {
                     continue;
                 }
                 else
                 {
-                    if (patient.Sex.Equals(curr.Sex))
+                    if (patient.Sex.Equals(curr.Sex))//start comparing variable 
                     {
-                        similarity += (1 * (wSex / 100));
-                        record[0] = '1';
+                        similarity += (1 * (wSex / 100));//Add to similarity (1 * the weight) 
+                        record[0] = '1';//record keeping
                     }
                     if (patient.Age == curr.Age)
                     {
@@ -260,7 +257,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     }
 
 
-                    int pVol = ((int)patient.TumorHeight) * (int)(patient.TumorLength) * (int)(patient.TumorWidth);
+                    int pVol = ((int)patient.TumorHeight) * (int)(patient.TumorLength) * (int)(patient.TumorWidth);//The surgery algorithm uses Vol not size so calculate here
                     int cVol = ((int)curr.TumorHeight) * (int)(curr.TumorLength) * (int)(curr.TumorWidth);
 
                     try
@@ -271,7 +268,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                             record[8] = '1';
                         }
                     }
-                    catch (NullReferenceException e) { }
+                    catch (NullReferenceException e) { }//try catch blocks in case thesee are null 
 
                     try
                     {
@@ -292,7 +289,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         {
                             if (var.PossibleTreatment.Name.Equals("Surgery"))
                             {
-                                surgery = true;
+                                surgery = true;//this variable gets set true if the vol is same with curr patient & the location is same & That other patient had surgery
                             }
                         }
                     }
@@ -309,7 +306,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
 
                     try
                     {
-                        if (patient.TumorLocation.Equals(curr.TumorLocation))
+                        if (patient.TumorLocation.Equals(curr.TumorLocation))//tumor location is also calculated along with the rest of the variables 
                         {
                             similarity += (1 * (wLoca / 100));
                             record[11] = '1';
@@ -333,18 +330,32 @@ namespace TumorTaskforce_Webapp_1.Controllers
 
                     try
                     {
-                        if (!respString.Equals(null) && !curr.Respiratory.Equals(null))
+                        if (!respString.Equals(null) && !curr.Respiratory.Equals(null))//Multi-strign variables are a little more complicated
                         {
                             int cord = 0;//This variable will adjust as we go for how many variables were similar for our record. 
-                            if (respString.Length > 1)
+                            if (respString.Length > 1)//if arr length is larger than one need to iterate through each one 
                             {
-                                string[] tString = curr.Respiratory.Split(',');
-                                foreach (var i in respString)
+                                if (curr.Respiratory.Contains(','))
                                 {
-                                    if (tString.Contains(i))
+                                    string[] tString = curr.Respiratory.Split(',');//split curr patients variable as well
+                                    foreach (var i in respString)
                                     {
-                                        similarity += (1 * (wResp / 100));
-                                        cord++;
+                                        if (tString.Contains(i))
+                                        {
+                                            similarity += (1 * (wResp / 100));
+                                            cord++;//record keeping 
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (var i in respString)
+                                    {
+                                        if (i.Equals(curr.Respiratory))//Broke for duplicate 
+                                        {
+                                            similarity += (1 * (wResp / 100));
+                                            cord++;
+                                        }
                                     }
                                 }
                             }
@@ -352,27 +363,18 @@ namespace TumorTaskforce_Webapp_1.Controllers
                             {
                                 if (curr.Respiratory.Contains(patient.Respiratory))//Race Variable
                                 {
-                                    similarity += (1 * (wResp / 100));
+                                    similarity += (1 * (wResp / 100));//again for if curr is complex 
                                     cord = 1;
                                 }
                             }
-                            record[12] = (char)cord;
+                            record[12] = (char)cord;//record keeping 
                         }
                     }
                     catch (NullReferenceException e) { }
 
-                    /*if (!patient.Respiratory.Equals(null))
-                    {
-                        if (patient.Respiratory.Equals(curr.Respiratory))//Substring this 
-                        {
-                            similarity += (1 * (wResp / 100));
-                            record[12] = '1';
-                        }
-                    }*/
-
                     try
                     {
-                        if (!cardString.Equals(null) && !curr.Cardiovascular.Equals(null))
+                        if (!cardString.Equals(null) && !curr.Cardiovascular.Equals(null))//Do the same for all multi-string variables 
                         {
                             int cord = 0;//This variable will adjust as we go for how many variables were similar for our record. 
                             if (cardString.Length > 1)
@@ -403,7 +405,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                             }
                             else
                             {
-                                if (curr.Cardiovascular.Contains(patient.Cardiovascular))//Race Variable
+                                if (curr.Cardiovascular.Contains(patient.Cardiovascular))
                                 {
                                     similarity += (1 * (wCardio / 100));
                                     cord = 1;
@@ -414,14 +416,6 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     }
                     catch (NullReferenceException e) { }
 
-                    /*if (!patient.Cardiovascular.Equals(null))
-                    {
-                        if (patient.Cardiovascular.Equals(curr.Cardiovascular))//Substring this 
-                        {
-                            similarity += (1 * (wCardio / 100));
-                            record[13] = '1';
-                        }
-                    }*/
                     try
                     {
 
@@ -469,7 +463,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                             }
                             else
                             {
-                                if (curr.Musculoskeletal.Contains(patient.Musculoskeletal))//Race Variable
+                                if (curr.Musculoskeletal.Contains(patient.Musculoskeletal))
                                 {
                                     similarity += (1 * (wMusc / 100));
                                     cord = 1;
@@ -479,15 +473,6 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         }
                     }
                     catch (NullReferenceException e) { }
-
-                    /* if (!patient.Musculoskeletal.Equals(null))
-                     {
-                         if (patient.Musculoskeletal.Equals(curr.Musculoskeletal))//Substring this
-                         {
-                             similarity += (1 * (wMusc / 100));
-                             record[10] = '1';
-                         }
-                     }*/
 
                     try
                     {
@@ -535,7 +520,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                             }
                             else
                             {
-                                if (curr.Neurologic.Contains(patient.Neurologic))//Race Variable
+                                if (curr.Neurologic.Contains(patient.Neurologic))
                                 {
                                     similarity += (1 * (wNeuro / 100));
                                     cord = 1;
@@ -545,15 +530,6 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         }
                     }
                     catch (NullReferenceException e) { }
-
-                    /*if (!patient.Neurologic.Equals(null))
-                    {
-                        if (patient.Neurologic.Equals(curr.Neurologic))//Substring this
-                        {
-                            similarity += (1 * (wNeuro / 100));
-                            record[12] = '1';
-                        }
-                    }*/
 
                     try
                     {
@@ -580,13 +556,14 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         }
                     }
                     catch (NullReferenceException e) { }
-                    //Need Symptoms
-                    try
+
+
+                    try//Complex pivot variables need to be iterated though as well
                     {
-                        int cord = 0; 
+                        int cord = 0; //use same record system because its possible for more than one and I want to be able to check that 
                         foreach(var i in patient.SymptomsPivots)
                         {
-                            foreach(var j in curr.SymptomsPivots)
+                            foreach(var j in curr.SymptomsPivots)//2 foreach statments parse though both patients at the same time.
                             {
                                 if (i.PossibleSymptom.Name.Equals(j.PossibleSymptom.Name))
                                 {
@@ -595,13 +572,12 @@ namespace TumorTaskforce_Webapp_1.Controllers
                                 }
                             }
                         }
-                        record[16] = (char)cord;
+                        record[16] = (char)cord;//record keeping 
 
                     } catch (NullReferenceException e) { }
 
 
-                    //Need Health Factors
-                    try
+                    try//Same for all Complex Pivot variables 
                     {
                         int cord = 0;
                         foreach (var i in patient.HealthFactorsPivots)
@@ -621,7 +597,6 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     catch (NullReferenceException e) { }
 
 
-                    //Need Other Meds
                     try
                     {
                         int cord = 0;
@@ -642,7 +617,6 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     catch (NullReferenceException e) { }
                 }
 
-                //Family History
                 try
                 {
                     int cord = 0;
@@ -662,13 +636,13 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 }
                 catch (NullReferenceException e) { }
 
-                if (similarity > targetSimilarity)
+                if (similarity > targetSimilarity)//Now check similarity that was calculated against current most similar 
                 {
-                    target = curr;
+                    target = curr;//if greater change mostSimilar varibles to this curr patient 
                     targetSimilarity = similarity;
                     targetRecord = record;
                 }
-                else if (similarity == targetSimilarity)
+                else if (similarity == targetSimilarity)//they are equal add up their treatments effectivness's and give the win to the more effective one
                 {
                     currEffect = 0;
                     targetEffect = 0;
@@ -686,37 +660,38 @@ namespace TumorTaskforce_Webapp_1.Controllers
                         targetRecord = record;
                     }
                 }
-                int simResult = (int)Math.Round((similarity / simMax) * 100, 0);
-                simData += (curr.patientID + "," + simResult + ",");
-                count++;
+                int simResult = (int)Math.Round((similarity / simMax) * 100, 0);//% similar is  (Similarity / Max Similarity possible) * 100... I use math round for clean numbesr 
+                simData += (curr.patientID + "," + simResult + ",");//add the currentPatientID and similarity to a string parsed by commas 
+                count++;//Keep a count of how many patients in database 
             }
-            string[] TargetData = simData.Split(',');
-            Array.Reverse(TargetData);
-            TargetData = TargetData.Skip(1).ToArray();
-            Array.Reverse(TargetData);
-            int[] Data = new int[count * 2];
-            int c = 0;
-            foreach (string x in TargetData)
+            string[] TargetData = simData.Split(',');//take the similarityData string and split it into an array of strings 
+            Array.Reverse(TargetData);//because of the way I make the simData string there leaves a null index at the end. Reverse the Array
+            TargetData = TargetData.Skip(1).ToArray();//Delete the null index
+            Array.Reverse(TargetData);//Reverse the Array leaving us with an Array of ID's followed by Similarities 
+            int[] Data = new int[count * 2];// Create an integer array to cast TargetData into 
+            int c = 0;//iterative var
+            foreach (string x in TargetData)//Iterate through each ID and Similarity in TargetData, Parse that to an appropriate varible type (int) and save accordingly in Data[]
             {
-                int m = 69;
+                int m = 69;// if error
                 int.TryParse(x, out m);
                 Data[c] = m;
                 c++;
             }
 
 
-            string str2 = new string(targetRecord);
-            patient.comparisonResults = (count + "|" + target.patientID + "| ");// + str2 + " | ");
+                //string str2 = new string(targetRecord);
+            patient.comparisonResults = (count + "|" + target.patientID + "| ");//Add this data to CompareResults to be able to use it in the Results page before ViewBag
+            //ViewBag will need a size for the Array to be accessible easily from the resutls page
 
-            if (surgery == true)
+            if (surgery == true)//Is surgery was found to be true add surgery to suggested treatments 
             {
                 patient.comparisonResults += "Surgery, ";
             }
-            foreach (TreatmentsPivot var in target.TreatmentsPivots)
+            foreach (TreatmentsPivot var in target.TreatmentsPivots)//Add the most similar patients treatments to suggested treaments variable 
             {
 
                 string str;
-                if (var.PossibleTreatment.Name.Equals("Drug"))
+                if (var.PossibleTreatment.Name.Equals("Drug"))//if Drug name is specified in notes, make it pretty 
                 {
                     try
                     {
@@ -725,7 +700,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                     }
                     catch (NullReferenceException e) { }
                 }
-                else if (var.PossibleTreatment.Name.Equals("Surgery"))
+                else if (var.PossibleTreatment.Name.Equals("Surgery"))//Skip surgery so there arnt any duplicates 
                 {
                     continue;
                 }
@@ -749,11 +724,11 @@ namespace TumorTaskforce_Webapp_1.Controllers
             ViewBag.SimData = Data;
             int a = patient.comparisonResults.LastIndexOf('|') + 1;
             var temp = patient.comparisonResults.Substring(a);
-            if (temp.Equals(" ") || temp.Equals(null))
+            if (temp.Equals(" ") || temp.Equals(null))//If  surgery was false and no other treatments where found, then we can't accutally suggest any treatments 
             {
                 temp = "No Treatments to recommend, most similar patient had only treatments not applicable...";
             }
-            ViewBag.CompResults = temp.Substring(0, temp.Length - 2);
+            ViewBag.CompResults = temp.Substring(0, temp.Length - 2);//Send Comparison results to Viewbag
             return View(patient);
         }
         
