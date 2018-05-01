@@ -1085,7 +1085,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 var array = p.Respiratory.Split(',');
                 for (int i = 0; i < array.Length; i++)
                 {
-                    if (list.Where((item) => item.Text == array[i]).Count() < 1)
+                    if (list.Where((item) => item.Text == array[i]).Count() < 1 && array[i] != "")
                     {
                         SelectListItem sli = new SelectListItem
                         {
@@ -1106,7 +1106,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 var array = p.Cardiovascular.Split(',');
                 for (int i = 0; i < array.Length; i++)
                 {
-                    if (list.Where((item) => item.Text == array[i]).Count() < 1)
+                    if (list.Where((item) => item.Text == array[i]).Count() < 1 && array[i] != "")
                     {
                         SelectListItem sli = new SelectListItem
                         {
@@ -1157,7 +1157,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 var array = p.Neurologic.Split(',');
                 for (int i = 0; i < array.Length; i++)
                 {
-                    if (list.Where((item) => item.Text == array[i]).Count() < 1)
+                    if (list.Where((item) => item.Text == array[i]).Count() < 1 && array[i] != "")
                     {
                         SelectListItem sli = new SelectListItem
                         {
@@ -1213,7 +1213,7 @@ namespace TumorTaskforce_Webapp_1.Controllers
                 var array = p.Musculoskeletal.Split(',');
                 for (int i = 0; i < array.Length; i++)
                 {
-                    if (list.Where((item) => item.Text == array[i]).Count() < 1)
+                    if (list.Where((item) => item.Text == array[i]).Count() < 1 && array[i]!="")
                     {
                         SelectListItem sli = new SelectListItem
                         {
