@@ -28,22 +28,12 @@
                 @Html.HiddenFor(model => model.isCompare)
                 @Html.HiddenFor(model => model.comparisonResults)
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4" id="MobilePage1">
                         <div class="form-group">
                             @Html.LabelFor(model => model.Sex, "Sex", htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-10">
                                 @Html.DropDownList("Sex", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Married, htmlAttributes: new { @class = "control-label col-md-6" })
-                            <div class="col-md-10">
-                                <div class="checkbox">
-                                    @Html.EditorFor(model => model.Married)
-                                    @Html.ValidationMessageFor(model => model.Married, "", new { @class = "text-danger" })
-                                </div>
                             </div>
                         </div>
 
@@ -55,6 +45,57 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Integumentary, "Race", htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("Integumentary", null, htmlAttributes: new { @class = "form-control" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Married, "Deceased", htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.Married)
+                                    @Html.ValidationMessageFor(model => model.Married, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Diet, "BMI", htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("Diet", null, htmlAttributes: new { @class = "form-control" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Exercize, "ASA", htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("Exercize", null, htmlAttributes: new { @class = "form-control" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Gastrointestinal, "CCI", htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("Gastrointestinal", null, htmlAttributes: new { @class = "form-control" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Constitutional, "KPS", htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("Constitutional", null, htmlAttributes: new { @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" id="MobilePage2">
                         <div class="form-group">
                             @Html.LabelFor(model => model.HistologicalClassification, "Classification", htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-10">
@@ -103,39 +144,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <h5>
-                            @Html.LabelFor(model => model.TumorLocation, "Review of Systems", htmlAttributes: new { @class = "control-label col-md-9" })
-                        </h5>
-                        <h6>
-                            &emsp; Use 'Ctrl' to multi-select.<hr />
-                        </h6>
-                        <div class="form-group">
-                            <b>
-                                @Html.LabelFor(model => model.Constitutional, htmlAttributes: new { @class = "control-label col-md-6" })
-                            </b>
-                            <div class="col-md-12">
-                                @Html.EditorFor(model => model.Constitutional, new { htmlAttributes = new { @class = "hiddenConstitutional", @style = "display:none" } })
-                                @Html.ListBox("Constitutional", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Constitutional, "", new { @class = "text-danger" })
-                                <div class="row">
-                                    <div class="col-1">
-                                        Other:
-                                    </div><div class="col-1"></div>
-                                    <div>
-                                        <input type="text" id="ConstitutionalOther" style="width:150px" />
-                                    </div>
-                                    <div>
-                                        <input type="button" style="float:left" id="ConstitutionalOtherAdd" value="Add" />
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="col-md-4" id="MobilePage3">
+                        <div>
+                            <h6>
+                                Review of Systems - 'Ctrl' to multi-select
+                            </h6>
                         </div>
-                        <hr />
                         <div class="form-group">
-                            <b>
-                                @Html.LabelFor(model => model.Respiratory, htmlAttributes: new { @class = "control-label col-md-6" })
-                            </b>
+                            @Html.LabelFor(model => model.Respiratory, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-12">
                                 @Html.EditorFor(model => model.Respiratory, new { htmlAttributes = new { @class = "hiddenRespiratory", @style = "display:none" } })
                                 @Html.ListBox("Respiratory", null, htmlAttributes: new { @class = "form-control" })
@@ -155,9 +171,7 @@
                         </div>
                         <hr />
                         <div class="form-group">
-                            <b>
-                                @Html.LabelFor(model => model.Cardiovascular, htmlAttributes: new { @class = "control-label col-md-6" })
-                            </b>
+                            @Html.LabelFor(model => model.Cardiovascular, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-12">
                                 @Html.EditorFor(model => model.Cardiovascular, new { htmlAttributes = new { @class = "hiddenCardiovascular", @style = "display:none" } })
                                 @Html.ListBox("Cardiovascular", null, htmlAttributes: new { @class = "form-control" })
@@ -177,32 +191,7 @@
                         </div>
                         <hr />
                         <div class="form-group">
-                            <b>
-                                @Html.LabelFor(model => model.Gastrointestinal, htmlAttributes: new { @class = "control-label col-md-6" })
-                            </b>
-                            <div class="col-md-12">
-                                @Html.EditorFor(model => model.Gastrointestinal, new { htmlAttributes = new { @class = "hiddenGastrointestinal", @style = "display:none" } })
-                                @Html.ListBox("Gastrointestinal", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Gastrointestinal, "", new { @class = "text-danger" })
-                                <div class="row">
-                                    <div class="col-1">
-                                        Other:
-                                    </div><div class="col-1"></div>
-                                    <div>
-                                        <input type="text" id="GastrointestinalOther" style="width:150px" />
-                                    </div>
-                                    <div>
-                                        <input type="button" style="float:left" id="GastrointestinalOtherAdd" value="Add" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <b>
-                                @Html.LabelFor(model => model.Musculoskeletal, htmlAttributes: new { @class = "control-label col-md-6" })
-                            </b>
+                            @Html.LabelFor(model => model.Musculoskeletal, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-12">
                                 @Html.EditorFor(model => model.Musculoskeletal, new { htmlAttributes = new { @class = "hiddenMusculoskeletal", @style = "display:none" } })
                                 @Html.ListBox("Musculoskeletal", null, htmlAttributes: new { @class = "form-control" })
@@ -222,31 +211,7 @@
                         </div>
                         <hr />
                         <div class="form-group">
-                            <b>
-                                @Html.LabelFor(model => model.Integumentary, htmlAttributes: new { @class = "control-label col-md-6" })
-                            </b>
-                            <div class="col-md-12">
-                                @Html.EditorFor(model => model.Integumentary, new { htmlAttributes = new { @class = "hiddenIntegumentary", @style = "display:none" } })
-                                @Html.ListBox("Integumentary", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Integumentary, "", new { @class = "text-danger" })
-                                <div class="row">
-                                    <div class="col-1">
-                                        Other:
-                                    </div><div class="col-1"></div>
-                                    <div>
-                                        <input type="text" id="IntegumentaryOther" style="width:150px" />
-                                    </div>
-                                    <div>
-                                        <input type="button" style="float:left" id="IntegumentaryOtherAdd" value="Add" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="form-group">
-                            <b>
-                                @Html.LabelFor(model => model.Neurologic, htmlAttributes: new { @class = "control-label col-md-6" })
-                            </b>
+                            @Html.LabelFor(model => model.Neurologic, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="col-md-12">
                                 @Html.EditorFor(model => model.Neurologic, new { htmlAttributes = new { @class = "hiddenNeurologic", @style = "display:none" } })
                                 @Html.ListBox("Neurologic", null, htmlAttributes: new { @class = "form-control" })
@@ -260,50 +225,6 @@
                                     </div>
                                     <div>
                                         <input type="button" style="float:left" id="NeurologicOtherAdd" value="Add" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="form-group">
-                            <b>
-                                @Html.LabelFor(model => model.Exercize, htmlAttributes: new { @class = "control-label col-md-6" })
-                            </b>
-                            <div class="col-md-12">
-                                @Html.EditorFor(model => model.Exercize, new { htmlAttributes = new { @class = "hiddenExercize", @style = "display:none" } })
-                                @Html.ListBox("Exercize", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Exercize, "", new { @class = "text-danger" })
-                                <div class="row">
-                                    <div class="col-1">
-                                        Other:
-                                    </div><div class="col-1"></div>
-                                    <div>
-                                        <input type="text" id="ExercizeOther" style="width:150px" />
-                                    </div>
-                                    <div>
-                                        <input type="button" style="float:left" id="ExercizeOtherAdd" value="Add" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                        <div class="form-group">
-                            <b>
-                                @Html.LabelFor(model => model.Diet, htmlAttributes: new { @class = "control-label col-md-6" })
-                            </b>
-                            <div class="col-md-12">
-                                @Html.EditorFor(model => model.Diet, new { htmlAttributes = new { @class = "hiddenDiet", @style = "display:none" } })
-                                @Html.ListBox("Diet", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Diet, "", new { @class = "text-danger" })
-                                <div class="row">
-                                    <div class="col-1">
-                                        Other:
-                                    </div><div class="col-1"></div>
-                                    <div>
-                                        <input type="text" id="DietOther" style="width:150px" />
-                                    </div>
-                                    <div>
-                                        <input type="button" style="float:left" id="DietOtherAdd" value="Add" />
                                     </div>
                                 </div>
                             </div>
@@ -365,6 +286,17 @@ else
             $("select[id='Respiratory']").val(curRespiratory.split(","));
             $("select[id='Constitutional']").val(curConstitutional.split(","));
         }
+        //if (isCompare=="False") {
+        //    $(".hiddenDiet").val("");
+        //    $(".hiddenNeurologic").val("");
+        //    $(".hiddenMusculoskeletal").val("");
+        //    $(".hiddenGastrointestinal").val("");
+        //    $(".hiddenCardiovascular").val("");
+        //    $(".hiddenExercize").val("");
+        //    $(".hiddenIntegumentary").val("");
+        //    $(".hiddenRespiratory").val("");
+        //    $(".hiddenConstitutional").val("");
+        //}
     })
     $("#TumorLocation").change(function() {
         console.log($(this).val());

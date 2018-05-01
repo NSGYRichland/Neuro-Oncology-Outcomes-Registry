@@ -15,11 +15,23 @@
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-sm navbar-light bg-faded">
-            @Html.ActionLink("Tumor App", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+            <div class="navbar-header pull-left" style="width:35%" id="LOGO-DESKTOP">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <img src="~/Images/dark_logo_transparent.png" alt="Site Logo" style="height:auto; width: 100%" />
+                </a>
+            </div>
+            <div class="navbar-header pull-left" style="width:80%" id="LOGO-MOBILE">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <img src="~/Images/dark_logo_transparent.png" alt="Site Logo" style="height:auto; width: 90%" />
+                </a>
+            </div>
+
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
+
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -40,7 +52,7 @@
                                 @Html.ActionLink("Patients", "Index", "Patients")
                             </li>
                             <li class="nav-item" style="margin-left:10px;margin-right:10px;">
-                                @Html.ActionLink("Compare", "Create", "Patients",new { isCompare = true },null)
+                                @Html.ActionLink("Compare", "Create", "Patients", new { isCompare = true }, null)
                             </li>
                             <li class="nav-item" style="margin-left:10px;margin-right:10px;">
                                 @Html.ActionLink("Manage", "Manage", "Home")
@@ -59,8 +71,8 @@
                     else
                     {
                         <li class="nav-item" style="margin-left:10px;margin-right:10px;">
-                                @Html.ActionLink("Home", "Index", "Home")
-                            </li>
+                            @Html.ActionLink("Home", "Index", "Home")
+                        </li>
                     }
 
                 </ul>
@@ -86,3 +98,16 @@
         background: #89cdce;
     }
 </style>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        if ($(window).width() < 575) {
+            $("#LOGO-DESKTOP").hide();
+        }
+        else {
+            $("#LOGO-MOBILE").hide();
+        }
+    });
+</script>

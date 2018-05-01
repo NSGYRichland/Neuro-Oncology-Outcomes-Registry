@@ -131,7 +131,7 @@
 			Results:
 		</h4>
 		We recommend the following treatments:
-		@Html.DisplayFor(i => i.comparisonResults)
+		@ViewBag.CompResults
 		@*Chart Printed Out on Results Page Showing the Current Patient's Level of Similarity to Other Patients in the Database*@
 		<div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;"></div>
 
@@ -151,175 +151,160 @@
 
 		@*Data is based on a statistical correlation with: Patient @target.patientID | @targetSimilarity | @targetEffect*@
 		<hr />
-		<div class="row">
-			<div class="col-md-6">
-				<dl class="dl-horizontal">
-					<dt>
-						Patient  Info
-					</dt>
-					<dd>
-						------------------------------
-					</dd>
-					<dt>
-						@Html.DisplayNameFor(model => model.Sex)
-					</dt>
+        <div class="row">
+            <div class="col-md-4">
+                <b>Patient Info</b>
+                @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Sex)
+                    </dt>
 
-					<dd>
-						@Html.DisplayFor(model => model.Sex)
-					</dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Sex)
+                    </dd>
 
-					<dt>
-						@Html.DisplayNameFor(model => model.Married)
-					</dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Age)
+                    </dt>
 
-					<dd>
-						@Html.DisplayFor(model => model.Married)
-					</dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Age)
+                    </dd>
 
-					<dt>
-						@Html.DisplayNameFor(model => model.Age)
-					</dt>
+                    <dt>
+                        Race
+                    </dt>
 
-					<dd>
-						@Html.DisplayFor(model => model.Age)
-					</dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Integumentary)
+                    </dd>
 
-					<dt>
-						Classification
-					</dt>
+                    <dt>
+                        Deceased
+                    </dt>
 
-					<dd>
-						@Html.DisplayFor(model => model.HistologicalClassification)
-					</dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Married)
+                    </dd>
 
-					<dt>
-						Grade (WHO)
-					</dt>
+                    <dt>
+                        BMI
+                    </dt>
 
-					<dd>
-						@Html.DisplayFor(model => model.HistologicalGrade)
-					</dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Diet)
+                    </dd>
 
-					<dt>
-						Tumor Size (WxHxL)
-					</dt>
+                    <dt>
+                        ASA
+                    </dt>
 
-					<dd>
-						@Html.DisplayFor(model => model.TumorWidth)
-						x
-						@Html.DisplayFor(model => model.TumorHeight)
-						x
-						@Html.DisplayFor(model => model.TumorLength)
-					</dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Exercize)
+                    </dd>
 
-					@*<dt>
-							@Html.DisplayNameFor(model => model.TumorHeight)
-						</dt>
+                    <dt>
+                        CCI
+                    </dt>
 
-						<dd>
-							@Html.DisplayFor(model => model.TumorHeight)
-						</dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Gastrointestinal)
+                    </dd>
 
-						<dt>
-							@Html.DisplayNameFor(model => model.TumorLength)
-						</dt>
+                    <dt>
+                        KPS
+                    </dt>
 
-						<dd>
-							@Html.DisplayFor(model => model.TumorLength)
-						</dd>*@
+                    <dd>
+                        @Html.DisplayFor(model => model.Constitutional)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <b>Tumor Info</b>
+                @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        Classification
+                    </dt>
 
-					<dt>
-						Location
-					</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.HistologicalClassification)
+                    </dd>
 
-					<dd>
-						@Html.DisplayFor(model => model.TumorLocation)
-					</dd>
-				</dl>
-			</div>
-			<div class="col-md-6">
-				<dl class="dl-horizontal">
-					<dt>
-						Review of Systems
-					</dt>
-					<dd>
-						------------------------------
-					</dd>
-					<dt>
-						@Html.DisplayNameFor(model => model.Constitutional)
-					</dt>
+                    <dt>
+                        Grade (WHO)
+                    </dt>
 
-					<dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.HistologicalGrade)
+                    </dd>
 
-						@Html.DisplayFor(model => model.Constitutional)
-					</dd>
+                    <dt>
+                        Tumor Size (WxHxL)
+                    </dt>
 
-					<dt>
-						@Html.DisplayNameFor(model => model.Respiratory)
-					</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TumorWidth)
+                        x
+                        @Html.DisplayFor(model => model.TumorHeight)
+                        x
+                        @Html.DisplayFor(model => model.TumorLength)
+                    </dd>
 
-					<dd>
-						@Html.DisplayFor(model => model.Respiratory)
-					</dd>
+                    <dt>
+                        Location
+                    </dt>
 
-					<dt>
-						@Html.DisplayNameFor(model => model.Cardiovascular)
-					</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TumorLocation)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <b>Review of Systems</b>
+                @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
+                <hr />
+                <dl class="dl-horizontal">
 
-					<dd>
-						@Html.DisplayFor(model => model.Cardiovascular)
-					</dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Respiratory)
+                    </dt>
 
-					<dt>
-						@Html.DisplayNameFor(model => model.Gastrointestinal)
-					</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Respiratory)
+                    </dd>
 
-					<dd>
-						@Html.DisplayFor(model => model.Gastrointestinal)
-					</dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Cardiovascular)
+                    </dt>
 
-					<dt>
-						@Html.DisplayNameFor(model => model.Musculoskeletal)
-					</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Cardiovascular)
+                    </dd>
 
-					<dd>
-						@Html.DisplayFor(model => model.Musculoskeletal)
-					</dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Musculoskeletal)
+                    </dt>
 
-					<dt>
-						@Html.DisplayNameFor(model => model.Integumentary)
-					</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Musculoskeletal)
+                    </dd>
 
-					<dd>
-						@Html.DisplayFor(model => model.Integumentary)
-					</dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Neurologic)
+                    </dt>
 
-					<dt>
-						@Html.DisplayNameFor(model => model.Neurologic)
-					</dt>
-
-					<dd>
-						@Html.DisplayFor(model => model.Neurologic)
-					</dd>
-
-					<dt>
-						Exercise
-					</dt>
-
-					<dd>
-						@Html.DisplayFor(model => model.Exercize)
-					</dd>
-
-					<dt>
-						@Html.DisplayNameFor(model => model.Diet)
-					</dt>
-
-					<dd>
-						@Html.DisplayFor(model => model.Diet)
-					</dd>
-				</dl>
-			</div>
-		</div>
+                    <dd>
+                        @Html.DisplayFor(model => model.Neurologic)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <hr />
 		<dl class="dl-horizontal">
 			<dt>
 				Symptoms

@@ -2,7 +2,9 @@
 
 
 @{
-    ViewBag.Title = "Comparison Patients";
+                /**/
+
+                ViewBag.Title = "Comparison Patients";
 }
 
 <div class="jumbotron">
@@ -16,41 +18,45 @@
     {
 
         <h2>Comparison Patients created by All Users</h2>
-
+        @Html.ActionLink("Compare New", "Create", new { isCompare = true })
         using (Html.BeginForm("CompIndex", "Patients", FormMethod.Get,
                     new { @class = "Search-form" }))
         {
+            <h4>
+                Search for patient(s)
+            </h4>
             <div class="row">
-                <div class="col-md-5">
+                <div class="form-inline" style="margin:4px 30px 2px 40px;">
                     <p>
-                        @Html.ActionLink("Compare New", "Create", new { isCompare = true })
+                        ID: <br />@Html.TextBox("q")
                     </p>
                 </div>
-                <div class="col-md-4">
-                    <div id="txtBox">
-                        @Html.Label("Search for Patients")
-                        <input type="text" name="q" />
-                    </div>
+                <div class="form-inline" style="margin:4px 30px 2px 4px;">
+                    <p>
+                        Sex: <br />@Html.DropDownList("sex")
+                    </p>
                 </div>
-                <div class="col-md-2">
-                    <div id="radioList">
-                        @Html.RadioButton("SearchType", "0", true)
-                        @Html.Label("ID")
-                        @*@Html.RadioButton("SearchType", "1")
-                            @Html.Label("Age")*@
-                        @*@Html.RadioButton("SearchType", "2", true)
-                            @Html.Label("Sex")*@
-                        @Html.RadioButton("SearchType", "3")
-                        @Html.Label("Classification")
-
-                    </div>
+                <div class="form-inline" style="margin:4px 30px 2px 4px;">
+                    <p>
+                        Classification: <br />@Html.DropDownList("clss")
+                    </p>
                 </div>
-                <div class="col-md-1">
+                <div class="form-inline" style="margin:4px 30px 2px 4px;">
+                    <p>
+                        Location: <br />@Html.DropDownList("tumLoc")
+                    </p>
+                </div>
+                <div class="form-inline" style="margin:4px 30px 2px 4px;">
+                    <p>
+                        Grade: <br />@Html.DropDownList("grade")
+                    </p>
+                </div>
+                <div class="form-inline">
+                    <br />
                     <div id="buttonSearch">
                         <input type="submit" value="Search" id="buttonSubmit" />
                     </div>
                 </div>
-
             </div>
 
         }
@@ -100,9 +106,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Sex)
                     </th>
-                    <th>
+                    @*<th>
                         @Html.DisplayNameFor(model => model.Married)
-                    </th>
+                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.Age)
                     </th>
@@ -133,9 +139,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Sex)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.Married)
-                        </td>
+                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.Age)
                         </td>

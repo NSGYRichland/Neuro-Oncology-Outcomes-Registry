@@ -25,32 +25,32 @@
                Search for patient(s)
             </h4>
             <div class="row">
-                <div class="col-md-2">
+                <div class="form-inline" style="margin:4px 30px 2px 40px;">
                     <p>
-                        ID: @Html.TextBox("q")
+                        ID: <br />@Html.TextBox("q")
                     </p>
                 </div>
-                <div class="col-md-2">
+                <div class="form-inline" style="margin:4px 30px 2px 4px;">
                     <p>
-                        Sex: @Html.TextBox("sex")
+                        Sex: <br />@Html.DropDownList("sex", "Any")
                     </p>
                 </div>
-                <div class="col-md-2">
+                <div class="form-inline" style="margin:4px 30px 2px 4px;">
                     <p>
-                        Classification: @Html.TextBox("clss")
+                        Classification: <br />@Html.DropDownList("clss", "Any")
                     </p>
                 </div>
-                <div class="col-md-2">
+                <div class="form-inline" style="margin:4px 30px 2px 4px;">
                     <p>
-                        Location: @Html.TextBox("tumLoc")
+                        Location: <br />@Html.DropDownList("tumLoc", "Any")
                     </p>
                 </div>
-                <div class="col-md-2">
+                <div class="form-inline" style="margin:4px 30px 2px 4px;">
                     <p>
-                        Grade: @Html.TextBox("grade")
+                        Grade: <br />@Html.DropDownList("grade", "Any")
                     </p>
                 </div>
-                <div class="col-md-1">
+                <div class="form-inline">
                     <br />
                     <div id="buttonSearch">
                         <input type="submit" value="Search" id="buttonSubmit" />
@@ -72,9 +72,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Sex)
                     </th>
-                    <th>
+                    @*<th>
                         @Html.DisplayNameFor(model => model.Married)
-                    </th>
+                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.Age)
                     </th>
@@ -102,9 +102,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Sex)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.Married)
-                        </td>
+                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.Age)
                         </td>
@@ -126,7 +126,7 @@
                         </td>
                         <td>
                             @*@Html.ActionLink("Edit", "Edit", new { id=item.patientID }) |*@
-                            @Html.ActionLink("View Patient", "Details", new { id = item.patientID }) |
+                            @Html.ActionLink("View", "Details", new { id = item.patientID }) |
                             @Html.ActionLink("Delete", "Delete", new { id = item.patientID })
 
                         </td>

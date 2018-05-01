@@ -21,7 +21,7 @@
                 <hr />
                 <div class="row">
                     <div class="col-md-4">
-                        <b>General Info</b>
+                        <b>Patient Info</b>
                         @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
                         <hr />
                         <dl class="dl-horizontal">
@@ -34,14 +34,6 @@
                             </dd>
 
                             <dt>
-                                @Html.DisplayNameFor(model => model.Married)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Married)
-                            </dd>
-
-                            <dt>
                                 @Html.DisplayNameFor(model => model.Age)
                             </dt>
 
@@ -49,6 +41,60 @@
                                 @Html.DisplayFor(model => model.Age)
                             </dd>
 
+                            <dt>
+                                Race
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Integumentary)
+                            </dd>
+
+                            <dt>
+                                Deceased
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Married)
+                            </dd>
+
+                            <dt>
+                                BMI
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Diet)
+                            </dd>
+
+                            <dt>
+                                ASA
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Exercize)
+                            </dd>
+
+                            <dt>
+                                CCI
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Gastrointestinal)
+                            </dd>
+
+                            <dt>
+                                KPS
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Constitutional)
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-4">
+                        <b>Tumor Info</b>
+                        @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
+                        <hr />
+                        <dl class="dl-horizontal">
                             <dt>
                                 Classification
                             </dt>
@@ -77,22 +123,6 @@
                                 @Html.DisplayFor(model => model.TumorLength)
                             </dd>
 
-                            @*<dt>
-                @Html.DisplayNameFor(model => model.TumorHeight)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TumorHeight)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.TumorLength)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TumorLength)
-            </dd>*@
-
                             <dt>
                                 Location
                             </dt>
@@ -102,18 +132,11 @@
                             </dd>
                         </dl>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <b>Review of Systems</b>
                         @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
                         <hr />
                         <dl class="dl-horizontal">
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Constitutional)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Constitutional)
-                            </dd>
 
                             <dt>
                                 @Html.DisplayNameFor(model => model.Respiratory)
@@ -132,27 +155,11 @@
                             </dd>
 
                             <dt>
-                                @Html.DisplayNameFor(model => model.Gastrointestinal)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Gastrointestinal)
-                            </dd>
-
-                            <dt>
                                 @Html.DisplayNameFor(model => model.Musculoskeletal)
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => model.Musculoskeletal)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Integumentary)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Integumentary)
                             </dd>
 
                             <dt>
@@ -162,25 +169,10 @@
                             <dd>
                                 @Html.DisplayFor(model => model.Neurologic)
                             </dd>
-
-                            <dt>
-                                Exercise
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Exercize)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Diet)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Diet)
-                            </dd>
                         </dl>
                     </div>
                 </div>
+                <hr />
                 <dl class="dl-horizontal">
                     <dt>
                         Symptoms
@@ -354,6 +346,7 @@
                     </dd>
                 </dl>
             </div>
+            <hr />
             <p>
                 @Html.ActionLink("Delete Patient", "Delete", new { id = Model.patientID }) |
                 @Html.ActionLink("Back to Patient Directory", "Index")
@@ -406,7 +399,7 @@ else
                 <hr />
                 <div class="row">
                     <div class="col-md-4">
-                        <b>General Info</b>
+                        <b>Patient Info</b>
                         @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
                         <hr />
                         <dl class="dl-horizontal">
@@ -419,14 +412,6 @@ else
                             </dd>
 
                             <dt>
-                                @Html.DisplayNameFor(model => model.Married)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Married)
-                            </dd>
-
-                            <dt>
                                 @Html.DisplayNameFor(model => model.Age)
                             </dt>
 
@@ -434,6 +419,60 @@ else
                                 @Html.DisplayFor(model => model.Age)
                             </dd>
 
+                            <dt>
+                                Race
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Integumentary)
+                            </dd>
+
+                            <dt>
+                                Deceased
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Married)
+                            </dd>
+
+                            <dt>
+                                BMI
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Diet)
+                            </dd>
+
+                            <dt>
+                                ASA
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Exercize)
+                            </dd>
+
+                            <dt>
+                                CCI
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Gastrointestinal)
+                            </dd>
+
+                            <dt>
+                                KPS
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Constitutional)
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-4">
+                        <b>Tumor Info</b>
+                        @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
+                        <hr />
+                        <dl class="dl-horizontal">
                             <dt>
                                 Classification
                             </dt>
@@ -462,22 +501,6 @@ else
                                 @Html.DisplayFor(model => model.TumorLength)
                             </dd>
 
-                            @*<dt>
-                @Html.DisplayNameFor(model => model.TumorHeight)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TumorHeight)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.TumorLength)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TumorLength)
-            </dd>*@
-
                             <dt>
                                 Location
                             </dt>
@@ -487,19 +510,11 @@ else
                             </dd>
                         </dl>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <b>Review of Systems</b>
                         @Html.ActionLink("(Edit)", "Edit", new { id = Model.patientID })
                         <hr />
                         <dl class="dl-horizontal">
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Constitutional)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Constitutional)
-                            </dd>
 
                             <dt>
                                 @Html.DisplayNameFor(model => model.Respiratory)
@@ -518,29 +533,13 @@ else
                             </dd>
 
                             <dt>
-                                @Html.DisplayNameFor(model => model.Gastrointestinal)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Gastrointestinal)
-                            </dd>
-
-                            <dt>
                                 @Html.DisplayNameFor(model => model.Musculoskeletal)
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => model.Musculoskeletal)
                             </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Integumentary)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Integumentary)
-                            </dd>
-
+                            
                             <dt>
                                 @Html.DisplayNameFor(model => model.Neurologic)
                             </dt>
@@ -548,25 +547,10 @@ else
                             <dd>
                                 @Html.DisplayFor(model => model.Neurologic)
                             </dd>
-
-                            <dt>
-                                Exercise
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Exercize)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Diet)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.Diet)
-                            </dd>
                         </dl>
                     </div>
                 </div>
+                <hr />
                 <dl class="dl-horizontal">
                     <dt>
                         Symptoms
@@ -740,9 +724,19 @@ else
                     </dd>
                 </dl>
             </div>
+            <hr />
             <p>
-                @Html.ActionLink("Delete", "Delete", new { id = Model.patientID }) |
-                @Html.ActionLink("Compare Now", "Results", new { id = Model.patientID })
+                @using (Html.BeginForm("Results","Patients", new { id = Model.patientID }))
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Compare Now" class="btn btn-default" /> |
+                    @Html.ActionLink("Delete", "Delete", new { id = Model.patientID })
+                </div>
+                }
+                
+                @*@Html.ActionLink("Compare Now", "Results", new { id = Model.patientID })*@
             </p>
 
 
