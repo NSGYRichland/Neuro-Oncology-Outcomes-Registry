@@ -1,174 +1,124 @@
-﻿using TumorTaskforce_Webapp_1.Controllers;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using TumorTaskforce_Webapp_1.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using System.Runtime.Remoting.Contexts;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Security.Principal;
+using System.Web.Services;
+using Moq;
+using System.Linq.Expressions;
 
 namespace TumorTaskforce_Webapp_1.Controllers.Tests
 {
-    [TestFixture()]
-    public class PatientsControllerTests
+    [TestFixture]
+    public class PatientsControllerTests : Controller
     {
-        
+        patientService _patientService;
+        Mock<IList<Patient>> _patientMock;
 
-        [Test()]
-        public void IndexTest()
+        [TestInitialize]
+        public void Setup()
         {
-            using(var conn = context.NewConnection())
-            {
-                var table = conn.GetSchema("Tables");
-                var tableNames = table.Rows.Cast<System.Data.DataRow>().Select(xe => xe["TABLE_NAME"].ToString).ToArray();
-                Assert.That(tableNames.Contains("NewTable"), Is.True);
-            }
-            string expected = "Index";
-            PatientsController controller = new PatientsController();
-            ViewResult result = controller.Index() as ViewResult;
-            Assert.AreEqual(expected, result.ViewBag.Message);
-            Assert.Fail();
+            _patientMock = new Mock<IList<Patient>>();
+            _patientService = new patientService(_patientMock.Object);
+        }
+        [TestMethod]
+        public void NoReturnWhenNotFound()
+        {
+            var Id = "001";
+            var age = "45";
+            var race = "white";
+            var classification = "tumor";
+            var location = "brain";
+
+            _patientMock.Setup(Returns(new List<Patient>()));
+
+            //Act
+            List<Patient> actual = _patientService.GetPatients(Id, age, race, classification, location);
+
+            NUnit.Framework.Assert.False(actual.Any());
+
+            _patientMock.VerifyAll();
         }
 
-        [Test()]
+        private Expression<Action<IList<Patient>>> Returns(List<Patient> list)
+        {
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void GetIndexTest()
+        {
+            var patientList = new List<Patient>();
+            //Arrange
+            var Id = "001";
+            var age = "45";
+            var race = "white";
+            var classification = "tumor";
+            var location = "brain";
+
+            //Act
+            List<Patient> output = patientService.GetPatient(Id, age, race, classification, location);
+
+            //Assert
+            NUnit.Framework.Assert.IsNotNull(output);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsInstanceOfType(output, typeof(List<Patient>));
+
+            //PatientsController patientController = new PatientsController();
+            //ActionResult result = patientController.Index("a", "lobes", "tumor", "3", "M");
+            //Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            //RedirectToRouteResult routeResult = result as RedirectToRouteResult;
+            //Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(routeResult.RouteValues["action"], "asd");
+        }
+
+        [Test]
         public void CompIndexTest()
         {
-            Assert.Fail();
+            PatientsController patientController = new PatientsController();
+            ActionResult result = patientController.Index("a", "lobes", "tumor", "3", "M");
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
 
-        [Test()]
+        [Test]
         public void ResultsTest()
         {
-            Assert.Fail();
+            throw new NotImplementedException();
         }
 
-        [Test()]
+        [Test]
         public void DetailsTest()
         {
-            Assert.Fail();
+            throw new NotImplementedException();
         }
 
-        [Test()]
+        [Test]
         public void CreateTest()
         {
-            Assert.Fail();
+            throw new NotImplementedException();
         }
 
-        [Test()]
-        public void getSexesTest()
+        private class patientService
         {
-            Assert.Fail();
-        }
+            private IList<Patient> @object;
 
-        [Test()]
-        public void getGradesTest()
-        {
-            Assert.Fail();
-        }
+            public patientService(IList<Patient> @object)
+            {
+                this.@object = @object;
+            }
 
-        [Test()]
-        public void getLocationsTest()
-        {
-            Assert.Fail();
-        }
+            internal static List<Patient> GetPatient(string id, string age, string race, string classification, string location)
+            {
+                throw new NotImplementedException();
+            }
 
-        [Test()]
-        public void getTumorTypesTest()
-        {
-            Assert.Fail();
+            internal List<Patient> GetPatients(string id, string age, string race, string classification, string location)
+            {
+                throw new NotImplementedException();
+            }
         }
-
-        [Test()]
-        public void getDietChoicesTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void getConstitutionalChoicesTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void getRespiratoryChoicesTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void getCardiovascularChoicesTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void getExercizeChoicesTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void getNeurologicChoicesTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void getIntegumentaryChoicesTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void getMusculoskeletalChoicesTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void getGastrointestinalChoicesTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void CreateTest1()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void EditTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void EditTest1()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void DeleteTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void DeleteConfirmedTest()
-        {
-            Assert.Fail();
-        }
-
-        [Test()]
-        public void isAdminUserTest()
-        {
-            Assert.Fail();
-        }
-
-    
     }
 }
