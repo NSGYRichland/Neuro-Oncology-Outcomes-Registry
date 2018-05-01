@@ -14,14 +14,28 @@
 
 
 @{
-	ViewBag.Title = "Results";
-	int sIndex = Model.comparisonResults.IndexOf('|');
-	char[] count = new char[sIndex];
-	Model.comparisonResults.CopyTo(0, count, 0, sIndex);
-	string str = new string(count);
-	int arraySize = int.Parse(str);
-	int[] dataArray = new int[arraySize * 2];
-	dataArray = ViewBag.SimData as int[];
+    ViewBag.Title = "Results";
+    int sIndex = Model.comparisonResults.IndexOf('|');
+    int lIndex = Model.comparisonResults.LastIndexOf('|');
+    char[] count = new char[sIndex];
+    char[] targetCount = new char[((lIndex-1)-sIndex)];
+    Model.comparisonResults.CopyTo(0, count, 0, sIndex);
+    Model.comparisonResults.CopyTo(sIndex + 1, targetCount, 0, ((lIndex - 1) - sIndex));
+    string str = new string(count);
+    string Tstr = new string(targetCount);
+    int arraySize = int.Parse(str);
+    int targetID = int.Parse(Tstr);
+    int[] dataArray = new int[arraySize * 2];
+    //dataArray = ViewBag.SimData as int[];
+    int targetSim = 0;
+    for(int i = 0; i < ViewBag.SimData.Length; i+=2)
+    {
+        if(ViewBag.SimData[i] == targetID)
+        {
+            targetSim = i;
+        }
+    }
+    targetSim = ViewBag.SimData[targetSim + 1];
 }
 
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
@@ -77,8 +91,8 @@
 			],
             "dataProvider": [
 				{
-                    "category": "Patient " + @ViewBag.SimData[0],
-                    "column-1": @ViewBag.SimData[1]
+                    "category": "Patient " + @targetID,
+                    "column-1": @targetSim
 				},
 				{
                     "category": "Patient " + @ViewBag.SimData[2],
