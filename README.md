@@ -15,9 +15,10 @@ The code for the Web App is .NET MVC based and connects to a SQL database hosted
 The Web App is also deployed via Microsoft Azure.
 Simply go to tumor1.azurewebsites.net to access the latest version of the web app.
 
+Agorithm code is under the class named Results within the PatientsController.cs file found in the Controllers file part of the solution.
 
 "TUMOR APP"
-V 0.1
+V 1.0
 
 Features:
 Create, view, and edit patient information, including:
@@ -37,6 +38,7 @@ Get a suggested treatment option
 	Compare a selected patient with other patients
 	Receive a suggested treatment option based on comparison with similar patients.
 
+ 
 
 ## Testing:
 
